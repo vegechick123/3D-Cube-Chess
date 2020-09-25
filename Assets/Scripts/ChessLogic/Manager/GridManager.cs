@@ -6,6 +6,7 @@ using UnityEngine;
 public class GridManager : Manager<GridManager>
 {
     public Vector2Int size;
+    public Grid grid;
     protected GFloor[,] floors;
     protected List<GChess> chesses;
     protected override void Awake()
@@ -62,13 +63,13 @@ public class GridManager : Manager<GridManager>
         }
         floors[floor.location.x, floor.location.y] = null;
     }
-    static public Vector3 GetChessPosition3D(Vector2Int location)
+    public Vector3 GetChessPosition3D(Vector2Int location)
     {
-        return new Vector3(location.x, 1, location.y);
+        return grid.GetCellCenterWorld(new Vector3Int(location.x, location.y, 0)) +new Vector3(0, 0.5f, 0);
     }
-    static public Vector3 GetFloorPosition3D(Vector2Int location)
+    public Vector3 GetFloorPosition3D(Vector2Int location)
     {
-        return new Vector3(location.x, 0f, location.y);
+        return grid.GetCellCenterWorld(new Vector3Int(location.x, location.y,0))- new Vector3(0, 0.5f, 0);
     }
     public NavInfo GetNavInfo(Vector2Int location,int movement)
     {

@@ -57,7 +57,7 @@ public class CMoveComponent : Component
                 path.Enqueue(location);
             }
             state = MoveState.Moving;
-            curTargetPosition= GridManager.GetChessPosition3D(path.Dequeue());
+            curTargetPosition= GridManager.instance.GetChessPosition3D(path.Dequeue());
             return true;
         }
     }
@@ -74,7 +74,7 @@ public class CMoveComponent : Component
             }
             else
             {
-                curTargetPosition = GridManager.GetChessPosition3D(path.Dequeue());
+                curTargetPosition = GridManager.instance.GetChessPosition3D(path.Dequeue());
             }
         }
     }
