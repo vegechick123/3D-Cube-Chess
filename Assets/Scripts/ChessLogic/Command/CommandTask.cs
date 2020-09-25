@@ -2,17 +2,24 @@
 using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class CommandTask<T> : CommandTaskBase
+public class CommandTask : CommandTaskBase
 {
-    protected T task;
-    public CommandTask(GActor obj,T action)
+    protected Delegate task;
+    public CommandTask(GActor obj,Delegate action)
     {
         task = action;
         castObject = obj;
-        types=action.GetType().GetGenericArguments();
+        ParameterInfo[] t= action.GetMethodInfo().GetParameters();
+        types = new Type[t.Length];
+        for(int i=0;i<t.Length;i++)
+        {
+            types[i] = t[i].ParameterType;
+        }
+        //types =action.GetType().GetGenericArguments();
         parameters = new object[types.Length];        
         curID = 0;
         RefreshInputMode();
@@ -20,7 +27,7 @@ public class CommandTask<T> : CommandTaskBase
     override protected void Finish()
     {
         bDone = true;
-        task.GetType().GetMethod("Invoke").Invoke(task, parameters);
+        task.DynamicInvoke(parameters);
         eTaskEnd.Invoke();
         eTaskComplete.Invoke();
     }

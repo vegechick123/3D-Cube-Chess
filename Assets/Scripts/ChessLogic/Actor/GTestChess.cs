@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 public class GTestChess : GChess
 {
-    // Start is called before the first frame update
+
     protected override void Awake()
     {
         base.Awake();
@@ -13,17 +13,23 @@ public class GTestChess : GChess
     protected override void OnSelect()
     {
         base.OnSelect();
-
-
         navComponent.GenNavInfo();
-        GameObject[] gameObjects = UIManager.instance.CreateFloorHUD(navComponent.navInfo.range, new Color(0, 1f, 0, 0.5f));
-        RangeCommand<Action<GFloor>> moveCommand = new RangeCommand<Action<GFloor>>(navComponent.navInfo.range, this, MoveTo);
-        moveCommand.eTaskEnd.AddListener(() =>
-        {
-            foreach (var t in gameObjects)
-                Destroy(t);
-        });
+        MoveCommand moveCommand = new MoveCommand(navComponent.navInfo.range, this, MoveTo);
+        moveCommand.CreateFloorHUD(new Color(0,1,0,0.5f));
         PlayerControlManager.instance.GenMoveCommand(moveCommand);
-
+        ShowUI();
+    }
+    protected override void OnDeselect()
+    {
+        base.OnDeselect();
+        HideUI();
+    }
+    protected void ShowUI()
+    {
+        UIManager.instance.SwitchSkillButton(skills.ToArray());
+    }
+    protected void HideUI()
+    {
+        UIManager.instance.CleanSkillButton();
     }
 }

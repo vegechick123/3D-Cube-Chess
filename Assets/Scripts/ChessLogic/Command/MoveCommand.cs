@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class MoveCommand : RangeCommand<Action<GFloor> >
+public class MoveCommand : RangeCommand
 {
     public MoveCommand(Vector2Int[] _range, GActor obj, Action<GFloor> action) : base(_range,obj, action)
     {

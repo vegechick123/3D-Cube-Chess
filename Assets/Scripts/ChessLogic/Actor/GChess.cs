@@ -7,16 +7,25 @@ public class GChess : GActor
     public int health;
     [HideInInspector]
     public int curHealth;
+
     public int movement;
     [HideInInspector]
     public int curMovement;
 
+    public int teamID;
+
+    [HideInInspector]
+    public List<Skill> skills;
+
     protected CAgentComponent agentComponent;
     protected CNavComponent navComponent;
     protected CMoveComponent moveComponent;
+
     protected override void Awake()
     {
         base.Awake();
+        GameManager.instance.eTurnStart[teamID].AddListener(OnTurnStart);
+        GameManager.instance.eTurnEnd[teamID].AddListener(OnTurnEnd);
         curHealth = health;
         curMovement = movement;
         agentComponent = GetComponent<CAgentComponent>();
@@ -27,12 +36,22 @@ public class GChess : GActor
         }
         navComponent = GetComponent<CNavComponent>();
         moveComponent = GetComponent<CMoveComponent>();
+
+        skills=new List<Skill>(GetComponents<Skill>());
     }
     protected virtual void OnSelect()
     {
 
     }
     protected virtual void OnDeselect()
+    {
+
+    }
+    virtual protected void OnTurnStart()
+    {
+
+    }
+    virtual protected void OnTurnEnd()
     {
 
     }

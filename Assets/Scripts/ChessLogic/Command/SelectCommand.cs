@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
-public class SelectCommand : CommandTask<Action<GChess>>
+public class SelectCommand : CommandTask
 {
     // Start is called before the first frame update
     public SelectCommand(GActor obj, Action<GChess> action) : base(obj, action)

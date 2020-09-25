@@ -10,7 +10,7 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 	public GChess selectedChess;
 
 	protected SelectCommand selectCommand;
-	protected RangeCommand<Action<GFloor>> moveCommand;
+	protected RangeCommand moveCommand;
 	protected CommandTaskBase skillCommand;
 
 	public UnityEvent<GChess> eClickChess = new EventWrapper<GChess>();
@@ -42,8 +42,14 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 		var temp = selectedChess;
 		selectedChess = null;
 		temp.GetComponent<CAgentComponent>().eDeselect.Invoke();
+		TerminateMoveCommand();
 		
 	}
+    protected override void Awake()
+    {
+        base.Awake();
+		eRightMouseClick.AddListener(CancelCurrentCommand);
+    }
     private void Start()
     {
 		selectCommand = new SelectCommand(null, Select);
@@ -54,7 +60,7 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 		RaycastHit hit;
 		// Casts the ray and get the first game object hit
 		bool bHit=Physics.Raycast(ray, out hit);
-		if (Input.GetMouseButton(0)&&bHit)
+		if (Input.GetMouseButtonDown(0)&&bHit)
 		{
 			switch (hit.transform.gameObject.GetComponent<GActor>())
             {
@@ -67,19 +73,19 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 
 			}
 		}
-		if(Input.GetMouseButton(1))
+		if(Input.GetMouseButtonDown(1))
         {
 			eRightMouseClick.Invoke(); 
         }
 	}
 
-	public void GenMoveCommand(RangeCommand<Action<GFloor>> _moveCommand)
+	public void GenMoveCommand(MoveCommand _moveCommand)
     {
 		if (moveCommand != null)
 			moveCommand.Abort();
 		moveCommand = _moveCommand;
-
-		moveCommand.eTaskComplete.AddListener(() => moveCommand = null);
+		
+		moveCommand.eTaskEnd.AddListener(() => moveCommand = null);
 	}
 	protected void TerminateMoveCommand()
     {
@@ -93,23 +99,44 @@ public class PlayerControlManager : Manager<PlayerControlManager>
     {
 		selectCommand.bPaused = true;
 		if (moveCommand != null)
+		{
 			moveCommand.bPaused = true;
-
+			moveCommand.HideFloorHUD();
+		}
 		if(skillCommand!=null)
 			skillCommand.Abort();
+
 		skillCommand = commandTask;
 
-        skillCommand.eTaskComplete.AddListener(() => skillCommand = null);
+        skillCommand.eTaskEnd.AddListener(() => {
+			skillCommand = null;
+			selectCommand.bPaused = false;
+			if (moveCommand != null)
+			{
+				moveCommand.bPaused = false;
+				moveCommand.ShowFloorHUD();
+			}
+		});
     }
 	protected void TerminateSkillCommand()
 	{
 		selectCommand.bPaused = false;
 		if (moveCommand != null)
+		{
 			moveCommand.bPaused = false;
+			moveCommand.ShowFloorHUD();
+		}
+
 
 		if(skillCommand!=null)
 			skillCommand.Abort();
 		skillCommand = null;
 	}
-
+	public void CancelCurrentCommand()
+    {
+		if (skillCommand != null)
+			TerminateSkillCommand();
+		else if (selectedChess != null)
+			DeSelect();
+    }
 }

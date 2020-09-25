@@ -101,4 +101,8 @@ public abstract class CommandTaskBase
         eTaskEnd.Invoke();
     }
     abstract protected void Finish();//完成一次参数收集
+    virtual public void SetPaused(bool t)
+    {
+        bPaused = t;
+    }
 }
