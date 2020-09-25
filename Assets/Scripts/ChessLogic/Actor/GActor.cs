@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class GActor : MonoBehaviour
 {
+    /// <summary>
+    /// 表示Actor在网格中的位置
+    /// 请勿直接更改
+    /// 使用GChes中的MoveTo或MoveToDirectly来修改
+    /// </summary>
     public Vector2Int location;
 
     virtual protected void Awake()

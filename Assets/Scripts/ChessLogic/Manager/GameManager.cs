@@ -11,7 +11,9 @@ public class GameManager : Manager<GameManager>
     [HideInInspector]
     public int curTeam = 0;
     [HideInInspector]
-    public int playerTeam = 0;
+    public int playerTeam = 1;
+    [HideInInspector]
+    public int curRound = 1;
 
     public UnityEvent[] eTurnStart = new UnityEvent[2];
     public UnityEvent[] eTurnEnd = new UnityEvent[2];
@@ -33,6 +35,11 @@ public class GameManager : Manager<GameManager>
     {
         TurnEnd(curTeam);
         curTeam= (curTeam+1)%2;
+        if(curTeam==0)
+        {
+            RoundEnd();
+            RoundStart();
+        }
         TurnStart(curTeam);
     }
     void TurnStart(int teamID)
@@ -45,6 +52,7 @@ public class GameManager : Manager<GameManager>
     }
     void RoundStart()
     {
+        curRound++;
         eRoundStart.Invoke();
     }
     void RoundEnd()

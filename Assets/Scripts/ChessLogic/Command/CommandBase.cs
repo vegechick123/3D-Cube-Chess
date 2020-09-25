@@ -13,7 +13,7 @@ public abstract class CommandTaskBase
     protected int curID;//当前执行到哪个参数了
     protected Type[] types;
     protected object[] parameters;
-
+    protected Func<int, object[], bool> checker;
     //只会在任务成功完成时被调用
     public UnityEvent eTaskComplete= new UnityEvent();
     //会在任务成功完成或调用Abort终止时调用
@@ -26,8 +26,15 @@ public abstract class CommandTaskBase
     protected virtual void SetParameters<T1>(T1 pa) where T1 : GActor
     {
         if (types[curID] != typeof(T1))
+        {
+            Debug.LogError("错误的类型");
             return;
+        }
         if (bPaused)
+            return;
+        object[] temp= (object[])parameters.Clone();
+        temp[curID] = pa;
+        if (checker != null && !checker.Invoke(curID, temp))
             return;
         if (!SetCondition<T1>(pa))
             return;

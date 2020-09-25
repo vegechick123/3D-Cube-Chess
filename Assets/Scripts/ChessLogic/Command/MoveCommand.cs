@@ -15,7 +15,7 @@ public class MoveCommand : RangeCommand
             return false;
         GFloor target = pa as GFloor;
         //判断目标地面上是否已有棋子
-        if (GridManager.instance.GetGChess(target.location))
+        if (GridManager.instance.GetChess(target.location))
             return  false;
         return true;
     }

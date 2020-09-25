@@ -1,0 +1,482 @@
+fileFormatVersion: 2
+guid: cb95beb56b7af6647a834d2c6d88871e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4346244404228752641
+    second: Arrow_0
+  - first:
+      213: -6662812116773042688
+    second: Arrow_1
+  - first:
+      213: -2292719611878453243
+    second: Arrow_2
+  - first:
+      213: 5946551882310926714
+    second: Arrow_3
+  - first:
+      213: 4428292855295335941
+    second: Arrow_4
+  - first:
+      213: -7017944715137372645
+    second: Arrow_5
+  - first:
+      213: -7742078795318259045
+    second: Arrow_6
+  - first:
+      213: 7160053665899228399
+    second: Arrow_7
+  - first:
+      213: 8327645574207038891
+    second: Arrow_8
+  - first:
+      213: -3620160607179217387
+    second: Arrow_9
+  - first:
+      213: -6351641868636779942
+    second: Arrow_10
+  - first:
+      213: -3737462710807726644
+    second: Arrow_11
+  - first:
+      213: -910101355026500098
+    second: Arrow_12
+  - first:
+      213: 2617832774842693864
+    second: Arrow_13
+  - first:
+      213: -7300599428338945963
+    second: Arrow_14
+  - first:
+      213: 3449294172985442408
+    second: Arrow_15
+  - first:
+      213: -6616770949374317070
+    second: Arrow_16
+  - first:
+      213: 545799971500593739
+    second: Arrow_17
+  - first:
+      213: -1437258893911203066
+    second: Arrow_18
+  - first:
+      213: 4484338195737695248
+    second: Arrow_19
+  - first:
+      213: -4358755173793444596
+    second: Arrow_20
+  - first:
+      213: -333576759088200637
+    second: Arrow_21
+  - first:
+      213: -3216254537685777417
+    second: Arrow_22
+  - first:
+      213: -651772780790023600
+    second: Arrow_23
+  - first:
+      213: -6459374443535790010
+    second: Arrow_24
+  - first:
+      213: -2673948891845910814
+    second: Arrow_25
+  - first:
+      213: 3070007573599737742
+    second: Arrow_26
+  - first:
+      213: 4982340601258183261
+    second: Arrow_27
+  - first:
+      213: -5203300647696298615
+    second: Arrow_28
+  - first:
+      213: 4564569839744009359
+    second: Arrow_29
+  - first:
+      213: -6051194304069033820
+    second: Arrow_30
+  - first:
+      213: 2869401789186548915
+    second: Arrow_31
+  - first:
+      213: 826921179728681470
+    second: Arrow_32
+  - first:
+      213: -3839887174020019767
+    second: Arrow_33
+  - first:
+      213: 240816435055464999
+    second: Arrow_34
+  - first:
+      213: 3722574042642185410
+    second: Arrow_35
+  - first:
+      213: 1978828461101257908
+    second: Arrow_36
+  - first:
+      213: 5044008376908224988
+    second: Arrow_37
+  - first:
+      213: -4852934622238121249
+    second: Arrow_38
+  - first:
+      213: -5271827515499467681
+    second: Arrow_39
+  - first:
+      213: 4634270105134798323
+    second: Arrow_40
+  - first:
+      213: 5498689933587437199
+    second: Arrow_41
+  - first:
+      213: -7922102017344930409
+    second: Arrow_42
+  - first:
+      213: -6378973984411167517
+    second: Arrow_43
+  - first:
+      213: -1134908326496948372
+    second: Arrow_44
+  - first:
+      213: -1942409669941125052
+    second: Arrow_45
+  - first:
+      213: -7131501631350726006
+    second: Arrow_46
+  - first:
+      213: -2909520375622044496
+    second: Arrow_47
+  - first:
+      213: -1868156315518812084
+    second: Arrow_48
+  - first:
+      213: -8957870792346074980
+    second: Arrow_49
+  - first:
+      213: 3398833121459629684
+    second: Arrow_50
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 2
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Arrow_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 376
+        width: 200
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffa7ae2edb90fa3c0800000000000000
+      internalID: -4346244404228752641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow_1
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 376
+        width: 200
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 006039e4eafe883a0800000000000000
+      internalID: -6662812116773042688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow_2
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 376
+        width: 200
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 500d96c09af9e20e0800000000000000
+      internalID: -2292719611878453243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 188
+        width: 200
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a71c2974e65668250800000000000000
+      internalID: 5946551882310926714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow_4
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 188
+        width: 200
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50e5749c3e4747d30800000000000000
+      internalID: 4428292855295335941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow_5
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 188
+        width: 200
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1e28e8d6704b9e90800000000000000
+      internalID: -7017944715137372645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 200
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9298fdda5c9e8490800000000000000
+      internalID: -7742078795318259045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow_7
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 200
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fec28a0afde9d5360800000000000000
+      internalID: 7160053665899228399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow_8
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 200
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba5e6f9278db19370800000000000000
+      internalID: 8327645574207038891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: a2994b81e05678d4082efbd79407974b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

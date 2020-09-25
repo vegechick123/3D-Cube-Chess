@@ -25,7 +25,7 @@ public class GridManager : Manager<GridManager>
         else
             return false;
     }
-    public GChess GetGChess(Vector2Int location)
+    public GChess GetChess(Vector2Int location)
     {
         return chesses.Find(x => location == x.location); 
     }

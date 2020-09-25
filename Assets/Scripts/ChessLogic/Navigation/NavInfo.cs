@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class NavInfo
 {
+
     public Vector2Int[] range;
     public int[] prev;
     public NavInfo(Vector2Int[] coveredGround, int[] routinePrev) => (this.range, this.prev) = (coveredGround, routinePrev);

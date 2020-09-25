@@ -7,7 +7,7 @@ public class RangeCommand : CommandTask
     // Start is called before the first frame update
     protected Vector2Int[] range;
     protected GameObject[] floorHUDs;
-    public RangeCommand(Vector2Int[] _range, GActor obj, Delegate action):base(obj, action)
+    public RangeCommand(Vector2Int[] _range, GActor obj, Delegate action,Func<int, object[],bool> _checker=null):base(obj, action,_checker)
     {
         range = _range;
     }

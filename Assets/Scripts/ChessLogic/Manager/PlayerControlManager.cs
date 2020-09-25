@@ -84,8 +84,11 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 		if (moveCommand != null)
 			moveCommand.Abort();
 		moveCommand = _moveCommand;
-		
-		moveCommand.eTaskEnd.AddListener(() => moveCommand = null);
+
+		moveCommand.eTaskComplete.AddListener(() =>
+		{
+			moveCommand = null;
+		});
 	}
 	protected void TerminateMoveCommand()
     {
@@ -108,7 +111,8 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 
 		skillCommand = commandTask;
 
-        skillCommand.eTaskEnd.AddListener(() => {
+		skillCommand.eTaskComplete.AddListener(() =>
+		{
 			skillCommand = null;
 			selectCommand.bPaused = false;
 			if (moveCommand != null)

@@ -9,7 +9,8 @@ using UnityEngine;
 public class CommandTask : CommandTaskBase
 {
     protected Delegate task;
-    public CommandTask(GActor obj,Delegate action)
+
+    public CommandTask(GActor obj,Delegate action,Func<int,object[],bool> _checker=null)
     {
         task = action;
         castObject = obj;
@@ -23,6 +24,7 @@ public class CommandTask : CommandTaskBase
         parameters = new object[types.Length];        
         curID = 0;
         RefreshInputMode();
+        checker = _checker;
     }
     override protected void Finish()
     {

@@ -39,7 +39,7 @@ public class UIManager : Manager<UIManager>
     public GameObject CreatButtonFromSkill(Skill skill)
     {
         GameObject gameObject = Instantiate(prefabSkillButton, skillBar.transform);
-        gameObject.GetComponent<Image>().sprite = skill.sprite;
+        gameObject.GetComponent<Image>().sprite = skill.icon;
         gameObject.GetComponent<Button>().onClick.AddListener(skill.CreateCommand);
         return gameObject;
     }
