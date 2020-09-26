@@ -5,11 +5,11 @@ using UnityEngine.Events;
 
 public class GChess : GActor
 {
-    public int health;
+    public int health=3;
     [HideInInspector]
     public int curHealth;
 
-    public int movement;
+    public int movement=3;
     [HideInInspector]
     public int curMovement;
 
@@ -46,20 +46,36 @@ public class GChess : GActor
     }
     protected virtual void OnSelect()
     {
-
+        if(curMovement>0)
+        {
+            navComponent.GenNavInfo();
+            MoveCommand moveCommand = new MoveCommand(navComponent.navInfo.range, this, MoveTo);
+            moveCommand.CreateFloorHUD(new Color(0, 1, 0, 0.5f));
+            PlayerControlManager.instance.GenMoveCommand(moveCommand);
+        }
+        ShowUI();
     }
     protected virtual void OnDeselect()
     {
-
+        HideUI();
     }
     virtual protected void OnTurnStart()
     {
-
+        curMovement = movement;
     }
     virtual protected void OnTurnEnd()
     {
 
     }
+    protected void ShowUI()
+    {
+        UIManager.instance.SwitchSkillButton(skills.ToArray());
+    }
+    protected void HideUI()
+    {
+        UIManager.instance.CleanSkillButton();
+    }
+    #region 位移相关
     /// <summary>
     /// 向一个方向推动这个Chess,如果遇到障碍物则停下
     /// </summary>
@@ -100,7 +116,9 @@ public class GChess : GActor
         location = destination;
         if(navComponent)
         {
+            
             navComponent.MoveToWtihNavInfo(destination);
+            curMovement = 0;
         }
         else if(moveComponent)
         {
@@ -116,4 +134,5 @@ public class GChess : GActor
         location = destination;
         transform.position = GridManager.instance.GetChessPosition3D(location);
     }
+    #endregion
 }

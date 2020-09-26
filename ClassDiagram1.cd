@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GActor" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABABAAAACAACAAAAAAAAAAAAAAAAQEA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\Actor\GActor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GChess" Collapsed="true">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAZAAgAgEAAAAAIAAAACgAABIAgAAQAAABoIAIEg=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\Actor\GChess.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GFloor" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\Actor\GFloor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAgentComponent" Collapsed="true">
+    <Position X="5.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAIAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\Compoment\CAgentComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMoveComponent" Collapsed="true">
+    <Position X="10" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAACAAABAAEAAQAEABAAgAAAAQA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\Compoment\CMoveComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CNavComponent" Collapsed="true">
+    <Position X="7.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAABAAAAAAAAACAAAAQAgAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\Compoment\CNavComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Component" Collapsed="true">
+    <Position X="7.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAACAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\Compoment\Component.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

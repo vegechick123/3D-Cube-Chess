@@ -23,9 +23,10 @@ public class CNavComponent : Component
     {
         navInfo = GridManager.instance.GetNavInfo(location,curMovement);
     }
-    public void MoveToWtihNavInfo(Vector2Int destination)
+    public int MoveToWtihNavInfo(Vector2Int destination)
     {
         Vector2Int[] path= navInfo.GetPath(destination);
         moveComponent.RequestMove(path);
+        return path.Length;
     }
 }

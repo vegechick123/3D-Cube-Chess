@@ -47,7 +47,6 @@ public class RangeCommand : CommandTask
             Debug.Log("OutRange");
             return false;
         }
-        Debug.Log("InRange");
         return true;
     }
 

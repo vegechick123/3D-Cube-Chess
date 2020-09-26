@@ -710,10 +710,10 @@ GameObject:
   - component: {fileID: 376688950}
   - component: {fileID: 376688949}
   - component: {fileID: 376688948}
+  - component: {fileID: 376688944}
   - component: {fileID: 376688947}
   - component: {fileID: 376688946}
   - component: {fileID: 376688945}
-  - component: {fileID: 376688944}
   m_Layer: 0
   m_Name: TestChess (1)
   m_TagString: Untagged
@@ -730,15 +730,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 376688943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ee7f118d3012a746a633e71593125ac, type: 3}
+  m_Script: {fileID: 11500000, guid: de0c39f59b001b9479b7813ae4fc8b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   location: {x: 1, y: 1}
-  health: 0
+  health: 3
   curHealth: 0
-  movement: 2
+  movement: 3
   curMovement: 0
-  teamID: 0
+  teamID: 1
   skills:
   - {fileID: 11400000, guid: afbc2430eea88ee429ad94c41643ec88, type: 2}
   - {fileID: 11400000, guid: d0b75f7070f663649a1ea2944785c943, type: 2}
@@ -1518,18 +1518,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 973090966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ee7f118d3012a746a633e71593125ac, type: 3}
+  m_Script: {fileID: 11500000, guid: de0c39f59b001b9479b7813ae4fc8b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   location: {x: 0, y: 0}
-  health: 0
+  health: 3
   curHealth: 0
   movement: 3
   curMovement: 0
-  teamID: 0
+  teamID: 1
   skills:
-  - {fileID: 11400000, guid: 0b21ff458eb718640aa506f83ee053e0, type: 2}
   - {fileID: 11400000, guid: ee2f28bc5d3c3fb42af9c134102a47c2, type: 2}
+  - {fileID: 11400000, guid: 0b21ff458eb718640aa506f83ee053e0, type: 2}
 --- !u!136 &973090970
 CapsuleCollider:
   m_ObjectHideFlags: 0

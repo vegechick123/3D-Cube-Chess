@@ -15,6 +15,11 @@ public class GridManager : Manager<GridManager>
         floors = new GFloor[size.x, size.y];
         chesses = new List<GChess>();
     }
+    /// <summary>
+    /// 判断location是否在size的范围内
+    /// </summary>
+    /// <param name="location"></param>
+    /// <returns></returns>
     public bool InRange(Vector2Int location)
     {
         if (0 <= location.x &&
@@ -25,6 +30,11 @@ public class GridManager : Manager<GridManager>
         else
             return false;
     }
+    /// <summary>
+    /// 查询location位置上的chess
+    /// </summary>
+    /// <param name="location"></param>
+    /// <returns></returns>
     public GChess GetChess(Vector2Int location)
     {
         return chesses.Find(x => location == x.location); 
@@ -37,8 +47,12 @@ public class GridManager : Manager<GridManager>
     {
         chesses.Remove(chess);
     }
-    //如果查询位置超出size大小则会数组越界
-    //如果该位置没有GFloor则返回null
+    /// <summary>
+    /// 如果查询位置超出size大小则会数组越界
+    ///如果该位置没有GFloor则返回null
+    /// </summary>
+    /// <param name="location"></param>
+    /// <returns></returns>
     public GFloor GetFloor(Vector2Int location)
     {
         if(!InRange(location))
