@@ -9,7 +9,6 @@ public class GridManager : Manager<GridManager>
     public Grid grid;
     protected GFloor[,] floors;
     protected List<GChess> chesses;
-    public UnityEvent eGridChange=new UnityEvent(); 
     protected override void Awake()
     {
         base.Awake();
@@ -120,7 +119,7 @@ public class GridManager : Manager<GridManager>
 
                 GFloor floor = GetFloor(loc);
                 GChess chess = GetChess(loc);
-                if (!floor || (chess!=null&&chess.teamID==teamID))
+                if (!floor || (chess!=null&&chess.teamID!=teamID))
                 {
                     continue;
                 }

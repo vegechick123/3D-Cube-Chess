@@ -27,7 +27,7 @@ public abstract class PlayerSkill : Skill
         Delegate action = Delegate.CreateDelegate(p, this, methodInfo);
 
         Vector2Int[] range = GetRange();
-        RangeCommand res = new RangeCommand(GetRange(), owner, action, ConditionCheck);
+        RangeCommand res = new RangeCommand(GetRange, owner, action, ConditionCheck);
         res.CreateFloorHUD(new Color(1, 0, 0, 0.5f));
         PlayerControlManager.instance.PreemptSkillCommand(res);
         return;

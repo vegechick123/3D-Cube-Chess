@@ -21,7 +21,7 @@ public class CNavComponent : Component
     }
     public void GenNavInfo()
     {
-        navInfo = GridManager.instance.GetNavInfo(location,curMovement);
+        navInfo = GridManager.instance.GetNavInfo(location,curMovement,(actor as GChess).teamID);
     }
     public Vector2Int[] GetMoveRange()
     {

@@ -4,16 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+/// <summary>
+/// 控制游戏流程的单例类
+/// </summary>
 public class GameManager : Manager<GameManager>
 {
-    // Start is called before the first frame update
+    
     [NonSerialized]
     public int teamCount = 2;
     [NonSerialized]
     public int playerTeam = 1;
     [NonSerialized]
     public int curRound = 0;
-
+    //游戏回合流程的事件分发
     public UnityEvent eRoundStart = new UnityEvent();
     public UnityEvent eRoundEnd = new UnityEvent();
     public UnityEvent eGameStart = new UnityEvent();
@@ -26,18 +29,18 @@ public class GameManager : Manager<GameManager>
     {
         GameStart();
     }
-    void GameStart()
+    protected void GameStart()
     {
         eGameStart.Invoke();
         RoundStart();
     }
-    void RoundStart()
+    protected void RoundStart()
     {
         curRound++;
         eRoundStart.Invoke();
         AIPreTurnStart();
     }
-    public void AIPreTurnStart ()
+    protected void AIPreTurnStart ()
     {
         AIManager.instance.PreTurn();
     }
@@ -47,15 +50,16 @@ public class GameManager : Manager<GameManager>
         PlayerTurnStart();    
     }
 
-    public void PlayerTurnStart()
+    protected void PlayerTurnStart()
     {
 
     }
     public void PlayerTurnEnd()
     {
-
+        PlayerControlManager.instance.DeSelect();
+        AIPostTurnStart();
     }
-    public void AIPostTurnStart()
+    protected void AIPostTurnStart()
     {
         AIManager.instance.PostTurn();
     }

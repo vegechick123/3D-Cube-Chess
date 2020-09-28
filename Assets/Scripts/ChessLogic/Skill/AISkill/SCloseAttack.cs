@@ -11,12 +11,18 @@ public class SCloseAttack : AISkill
     {
         return GetRangeWithLength(1);
     }
-    protected override void Decide(GChess target)
+    public override void Decide(GChess target)
     {
         direction = target.location-owner.location;
     }
-    protected override void Perform()
+    public override void Perform()
     {
-        throw new System.NotImplementedException();
+        GChess chess = GridManager.instance.GetChess(owner.location + direction);
+        if(chess!=null)
+        chess.PushToward(direction,1);
+    }
+    public override Vector2Int[] GetAffectRange()
+    {
+        return new Vector2Int[] { direction + owner.location };
     }
 }

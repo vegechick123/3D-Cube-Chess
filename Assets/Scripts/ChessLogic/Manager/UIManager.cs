@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class UIManager : Manager<UIManager>
@@ -12,8 +13,8 @@ public class UIManager : Manager<UIManager>
     [NonSerialized]
     public GameObject[] skillButtons;
     public GameObject skillBar;
+    public UnityEvent eRefreshFloorHUD = new UnityEvent();
 
-       
     public GameObject[] CreateFloorHUD(Vector2Int[] location, Color color)
     {
         GameObject[] gameObject = new GameObject[location.Length];
@@ -32,6 +33,7 @@ public class UIManager : Manager<UIManager>
 
     public void CleanSkillButton()
     {
+        if(skillButtons!=null)
         foreach(GameObject gameObject in skillButtons)
         {
             Destroy(gameObject);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SocialPlatforms;
 
 public class GChess : GActor
 {
@@ -60,7 +61,9 @@ public class GChess : GActor
         Vector2Int destination = location;
         for(int i=0;i<distance;i++)
         {
-            if (GridManager.instance.GetChess(destination + direction))
+            Vector2Int curLocation = destination + direction;
+            if (GridManager.instance.GetChess(curLocation)
+                ||!GridManager.instance.InRange(curLocation))
             {
                 break;
             }

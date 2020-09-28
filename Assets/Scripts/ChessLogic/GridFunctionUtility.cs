@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -38,6 +39,19 @@ static class GridFunctionUtility
                 return true;
         }
         return false;
+    }
+    public static void DestoryAll(this GameObject[] gameObjects)
+    {
+        foreach (var t in gameObjects)
+        {
+            GameObject.Destroy(t);
+        }
+    }
+    public static IEnumerator InvokeAfter(Action task, float time)
+    {
+        yield return new WaitForSeconds(time);
+        task();
+
     }
 }
 

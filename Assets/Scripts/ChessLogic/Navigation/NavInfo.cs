@@ -2,12 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// 这是存储寻路信息的类
+/// 你可以从中得到能到达的移动范围以及相应的路径
+/// </summary>
 public class NavInfo
 {
 
     public Vector2Int[] range;
-    public int[] prev;
+    private int[] prev;
     public NavInfo(Vector2Int[] coveredGround, int[] routinePrev) => (this.range, this.prev) = (coveredGround, routinePrev);
     public Vector2Int[] GetPath(Vector2Int destination)
     {

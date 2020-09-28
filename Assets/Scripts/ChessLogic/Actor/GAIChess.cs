@@ -8,6 +8,12 @@ public class GAIChess : GChess
     protected override void Awake()
     {
         base.Awake();
-        skill.owner=this;
+        skill = Instantiate(skill);
+        skill.owner = this;
+    }
+    protected void OnDestroy()
+    {
+        Destroy(skill);
+        skill = null;
     }
 }

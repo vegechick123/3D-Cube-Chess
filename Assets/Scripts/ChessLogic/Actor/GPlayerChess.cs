@@ -15,9 +15,10 @@ public class GPlayerChess : GChess
             agentComponent.eSelect.AddListener(OnSelect);
             agentComponent.eDeselect.AddListener(OnDeselect);
         }
-        foreach (var skill in skills)
+        for( int i=0;i<skills.Count; i++)
         {
-            skill.owner = this;
+            skills[i] = Instantiate(skills[i]) as PlayerSkill;
+            skills[i].owner = this;
         }
     }
     protected virtual void OnSelect()
@@ -25,7 +26,7 @@ public class GPlayerChess : GChess
         if (curMovement > 0)
         {
             navComponent.GenNavInfo();
-            MoveCommand moveCommand = new MoveCommand(navComponent.navInfo.range, this, MoveTo);
+            MoveCommand moveCommand = new MoveCommand(navComponent.GetMoveRange, this, MoveTo);
             moveCommand.CreateFloorHUD(new Color(0, 1, 0, 0.5f));
             PlayerControlManager.instance.GenMoveCommand(moveCommand);
         }
@@ -42,5 +43,13 @@ public class GPlayerChess : GChess
     protected void HideUI()
     {
         UIManager.instance.CleanSkillButton();
+    }
+    protected void OnDestroy()
+    {
+        for (int i = 0; i < skills.Count; i++)
+        {
+            Destroy(skills[i]);
+            skills[i] = null;
+        }
     }
 }

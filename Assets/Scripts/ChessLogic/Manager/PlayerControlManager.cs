@@ -11,7 +11,7 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 
 	protected SelectCommand selectCommand;
 	protected RangeCommand moveCommand;
-	protected CommandTaskBase skillCommand;
+	protected CommandTask skillCommand;
 
 	public UnityEvent<GChess> eClickChess = new EventWrapper<GChess>();
 	public UnityEvent<GFloor> eClickFloor = new EventWrapper<GFloor>();
@@ -88,6 +88,7 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 		moveCommand.eTaskComplete.AddListener(() =>
 		{
 			moveCommand = null;
+			UIManager.instance.eRefreshFloorHUD.Invoke();
 		});
 	}
 	protected void TerminateMoveCommand()
@@ -98,7 +99,7 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 	}
 
 
-	public void PreemptSkillCommand(CommandTaskBase commandTask)
+	public void PreemptSkillCommand(CommandTask commandTask)
     {
 		selectCommand.bPaused = true;
 		if (moveCommand != null)
@@ -120,6 +121,7 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 				moveCommand.bPaused = false;
 				moveCommand.ShowFloorHUD();
 			}
+			UIManager.instance.eRefreshFloorHUD.Invoke();
 		});
     }
 	protected void TerminateSkillCommand()
