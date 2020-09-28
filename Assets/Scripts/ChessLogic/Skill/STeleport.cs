@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Teleport", menuName = "Skills/Teleport")]
-public class STeleport : Skill
+public class STeleport : PlayerSkill
 {
     public int length = 3;
     public void Cast(GChess chess,GFloor floor)

@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class GridManager : Manager<GridManager>
 {
     public Vector2Int size;
     public Grid grid;
     protected GFloor[,] floors;
     protected List<GChess> chesses;
+    public UnityEvent eGridChange=new UnityEvent(); 
     protected override void Awake()
     {
         base.Awake();
@@ -38,6 +39,10 @@ public class GridManager : Manager<GridManager>
     public GChess GetChess(Vector2Int location)
     {
         return chesses.Find(x => location == x.location); 
+    }
+    public GChess[] GetChesses(int teamID)
+    {
+        return chesses.FindAll(x => x.teamID == teamID).ToArray();
     }
     public void AddChess(GChess chess)
     {
@@ -85,7 +90,7 @@ public class GridManager : Manager<GridManager>
     {
         return grid.GetCellCenterWorld(new Vector3Int(location.x, location.y,0))- new Vector3(0, 0.5f, 0);
     }
-    public NavInfo GetNavInfo(Vector2Int location,int movement)
+    public NavInfo GetNavInfo(Vector2Int location,int movement,int teamID=-1)
     {
         Queue<ValueTuple<UnityEngine.Vector2Int, int, int>> queue = new Queue<ValueTuple<UnityEngine.Vector2Int, int, int>>();
         Queue<Vector2Int> res = new Queue<Vector2Int>();
@@ -108,17 +113,25 @@ public class GridManager : Manager<GridManager>
             foreach (Vector2Int curDir in dir)
             {
                 Vector2Int loc = node.Item1 + curDir;
+                if (vis.Contains(loc))
+                    continue;
+                else
+                    vis.Add(loc);
+
                 GFloor floor = GetFloor(loc);
-                if (!floor || vis.Contains(loc) || loc == location)
+                GChess chess = GetChess(loc);
+                if (!floor || (chess!=null&&chess.teamID==teamID))
                 {
                     continue;
                 }
                 else
                 {
-                    vis.Add(loc);
                     queue.Enqueue((loc, node.Item2 - 1, res.Count));
-                    res.Enqueue(loc);
-                    prev.Enqueue(node.Item3);
+                    if (!chess)
+                    {
+                        res.Enqueue(loc);
+                        prev.Enqueue(node.Item3);
+                    }
                 }
             }
         }

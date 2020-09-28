@@ -15,7 +15,7 @@ public class CMoveComponent : Component
     private float limit = 0.01f;
     Queue<Vector2Int> path;
     Vector3 curTargetPosition;
-    UnityEvent eFinishPath = new UnityEvent();
+    public UnityEvent eFinishPath = new UnityEvent();
     private void Update()
     {
         if(state==MoveState.Moving)
@@ -71,6 +71,7 @@ public class CMoveComponent : Component
             {
                 curTargetPosition = transform.position;
                 state = MoveState.Idle;
+                eFinishPath.Invoke();
             }
             else
             {

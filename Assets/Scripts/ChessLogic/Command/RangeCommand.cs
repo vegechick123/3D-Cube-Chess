@@ -7,20 +7,35 @@ public class RangeCommand : CommandTask
     // Start is called before the first frame update
     protected Vector2Int[] range;
     protected GameObject[] floorHUDs;
+    public Func<Vector2Int[]> refreshFunction;
+    private Color color;
     public RangeCommand(Vector2Int[] _range, GActor obj, Delegate action,Func<int, object[],bool> _checker=null):base(obj, action,_checker)
     {
         range = _range;
     }
-    public void CreateFloorHUD(Color color)
+    public void RefreshFloorHUD()
     {
-        floorHUDs = UIManager.instance.CreateFloorHUD(range, color);
-        eTaskEnd.AddListener(()=>
+        if (refreshFunction == null)
+            return;
+        else
         {
-            foreach (var t in floorHUDs)
-            {
-                GameObject.Destroy(t);
-            }
-        });
+            CleanFloorHUD();
+            range = refreshFunction.Invoke();
+            CreateFloorHUD(color);
+        }
+    }
+    public void CreateFloorHUD(Color _color)
+    {
+        color = _color;
+        floorHUDs = UIManager.instance.CreateFloorHUD(range, _color);
+        eTaskEnd.AddListener(CleanFloorHUD);
+    }
+    public void CleanFloorHUD()
+    {
+        foreach (var t in floorHUDs)
+        {
+            GameObject.Destroy(t);
+        }
     }
     public void HideFloorHUD()
     {

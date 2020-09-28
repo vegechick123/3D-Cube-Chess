@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class CommandTask : CommandTaskBase
 {
-    protected Delegate task;
+    
 
     public CommandTask(GActor obj,Delegate action,Func<int,object[],bool> _checker=null)
     {
@@ -25,12 +25,5 @@ public class CommandTask : CommandTaskBase
         curID = 0;
         RefreshInputMode();
         checker = _checker;
-    }
-    override protected void Finish()
-    {
-        bDone = true;
-        task.DynamicInvoke(parameters);
-        eTaskEnd.Invoke();
-        eTaskComplete.Invoke();
     }
 }

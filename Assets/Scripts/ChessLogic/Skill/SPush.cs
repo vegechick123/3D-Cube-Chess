@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Push", menuName = "Skills/Push")]
-public class SPush : Skill
+public class SPush : PlayerSkill
 {
     public Vector2Int direction;
     public int distance=1;

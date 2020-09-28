@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +9,7 @@ public class UIManager : Manager<UIManager>
     public GameObject prefabFloorHDU;
 
     public GameObject prefabSkillButton;
-
+    [NonSerialized]
     public GameObject[] skillButtons;
     public GameObject skillBar;
 
@@ -36,14 +37,14 @@ public class UIManager : Manager<UIManager>
             Destroy(gameObject);
         }
     }
-    public GameObject CreatButtonFromSkill(Skill skill)
+    public GameObject CreatButtonFromSkill(PlayerSkill skill)
     {
         GameObject gameObject = Instantiate(prefabSkillButton, skillBar.transform);
         gameObject.GetComponent<Image>().sprite = skill.icon;
         gameObject.GetComponent<Button>().onClick.AddListener(skill.CreateCommand);
         return gameObject;
     }
-    public GameObject[] CreatButtonFromSkill(Skill[] skills)
+    public GameObject[] CreatButtonFromSkill(PlayerSkill[] skills)
     {
         GameObject[] gameObjects = new GameObject[skills.Length];
         for(int i=0;i< skills.Length;i++)
@@ -52,7 +53,7 @@ public class UIManager : Manager<UIManager>
         }
         return gameObjects;
     }
-    public void SwitchSkillButton(Skill[] skills)
+    public void SwitchSkillButton(PlayerSkill[] skills)
     {
         CleanSkillButton();
         skillButtons = CreatButtonFromSkill(skills);

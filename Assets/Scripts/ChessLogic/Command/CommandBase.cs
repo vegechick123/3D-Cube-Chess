@@ -8,7 +8,7 @@ public abstract class CommandTaskBase
 {
     public bool bPaused;
     public bool bDone;//终结
-
+    protected Delegate task;
     protected GActor castObject;
     protected int curID;//当前执行到哪个参数了
     protected Type[] types;
@@ -103,11 +103,23 @@ public abstract class CommandTaskBase
     }
     virtual public void Abort()
     {
+        OnTaskEnd();
+    }
+    virtual protected void OnTaskEnd()
+    {
         bDone = true;
         RemoveListener(curID);
         eTaskEnd.Invoke();
     }
-    abstract protected void Finish();//完成一次参数收集
+    /// <summary>
+    /// 完成一次参数收集
+    /// </summary>
+    virtual protected void Finish()
+    {
+        task.DynamicInvoke(parameters);
+        eTaskComplete.Invoke();
+        OnTaskEnd();
+    }
     virtual public void SetPaused(bool t)
     {
         bPaused = t;

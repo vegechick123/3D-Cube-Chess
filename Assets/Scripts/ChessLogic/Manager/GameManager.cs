@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,17 +7,13 @@ using UnityEngine.Events;
 public class GameManager : Manager<GameManager>
 {
     // Start is called before the first frame update
-    [HideInInspector]
+    [NonSerialized]
     public int teamCount = 2;
-    [HideInInspector]
-    public int curTeam = 0;
-    [HideInInspector]
+    [NonSerialized]
     public int playerTeam = 1;
-    [HideInInspector]
-    public int curRound = 1;
+    [NonSerialized]
+    public int curRound = 0;
 
-    public UnityEvent[] eTurnStart = new UnityEvent[2];
-    public UnityEvent[] eTurnEnd = new UnityEvent[2];
     public UnityEvent eRoundStart = new UnityEvent();
     public UnityEvent eRoundEnd = new UnityEvent();
     public UnityEvent eGameStart = new UnityEvent();
@@ -24,45 +21,55 @@ public class GameManager : Manager<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        for(int i=0;i<teamCount;i++)
-        {
-            eTurnStart[i] = new UnityEvent();
-            eTurnEnd[i] = new UnityEvent();
-        }
     }
-
-    public void NextTurn()
+    public void Start()
     {
-        TurnEnd(curTeam);
-        curTeam= (curTeam+1)%2;
-        if(curTeam==0)
-        {
-            RoundEnd();
-            RoundStart();
-        }
-        TurnStart(curTeam);
+        GameStart();
     }
-    void TurnStart(int teamID)
+    void GameStart()
     {
-        eTurnStart[teamID].Invoke();
-    }
-    void TurnEnd(int teamID)
-    {
-        eTurnEnd[teamID].Invoke();
+        eGameStart.Invoke();
+        RoundStart();
     }
     void RoundStart()
     {
         curRound++;
         eRoundStart.Invoke();
+        AIPreTurnStart();
+    }
+    public void AIPreTurnStart ()
+    {
+        AIManager.instance.PreTurn();
+    }
+
+    public void AIPreTurnEnd()
+    {
+        PlayerTurnStart();    
+    }
+
+    public void PlayerTurnStart()
+    {
+
+    }
+    public void PlayerTurnEnd()
+    {
+
+    }
+    public void AIPostTurnStart()
+    {
+        AIManager.instance.PostTurn();
+    }
+
+    public void AIPostTurnEnd()
+    {
+        RoundEnd();
     }
     void RoundEnd()
     {
         eRoundEnd.Invoke();
+        RoundStart();
     }
-    void GameStart()
-    {
-        eGameStart.Invoke();
-    }
+
     void GameEnd()
     {
         eGameEnd.Invoke();

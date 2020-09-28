@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 //
-[RequireComponent(typeof(GChess))]
+[RequireComponent(typeof(GPlayerChess))]
 public class CAgentComponent : Component
 {
     bool bSelected { get { return PlayerControlManager.instance.selectedChess == actor; } }

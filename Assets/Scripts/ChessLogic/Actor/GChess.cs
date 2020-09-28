@@ -15,66 +15,40 @@ public class GChess : GActor
 
     public int teamID;
 
-    public List<Skill> skills;
-
     protected UnityEvent eLocationChange= new UnityEvent();
     protected UnityEvent eMovementChange = new UnityEvent();
-    protected CAgentComponent agentComponent;
-    protected CNavComponent navComponent;
-    protected CMoveComponent moveComponent;
+    [HideInInspector]
+    public CNavComponent navComponent;
+    [HideInInspector]
+    public CMoveComponent moveComponent;
 
     protected override void Awake()
     {
         base.Awake();
-        GameManager.instance.eTurnStart[teamID].AddListener(OnTurnStart);
-        GameManager.instance.eTurnEnd[teamID].AddListener(OnTurnEnd);
-        curHealth = health;
-        curMovement = movement;
-        agentComponent = GetComponent<CAgentComponent>();
-        if(agentComponent)
-        {
-            agentComponent.eSelect.AddListener(OnSelect);
-            agentComponent.eDeselect.AddListener(OnDeselect);
-        }
+        
+        GameManager.instance.eRoundStart.AddListener(OnRoundStart);
+        GameManager.instance.eRoundEnd.AddListener(OnRoundEnd);
         navComponent = GetComponent<CNavComponent>();
         moveComponent = GetComponent<CMoveComponent>();
         GridManager.instance.AddChess(this);
-        foreach(var skill in skills)
-        {
-            skill.owner = this;
-        }
+        
     }
-    protected virtual void OnSelect()
+    protected override void OnGameStart()
     {
-        if(curMovement>0)
-        {
-            navComponent.GenNavInfo();
-            MoveCommand moveCommand = new MoveCommand(navComponent.navInfo.range, this, MoveTo);
-            moveCommand.CreateFloorHUD(new Color(0, 1, 0, 0.5f));
-            PlayerControlManager.instance.GenMoveCommand(moveCommand);
-        }
-        ShowUI();
+        base.OnGameStart();
+        OnBirth();
     }
-    protected virtual void OnDeselect()
+    protected virtual void OnBirth()
     {
-        HideUI();
-    }
-    virtual protected void OnTurnStart()
-    {
+        curHealth = health;
         curMovement = movement;
     }
-    virtual protected void OnTurnEnd()
-    {
-
+    
+    override protected void OnRoundStart()
+    { 
+        curMovement = movement;
     }
-    protected void ShowUI()
-    {
-        UIManager.instance.SwitchSkillButton(skills.ToArray());
-    }
-    protected void HideUI()
-    {
-        UIManager.instance.CleanSkillButton();
-    }
+    
     #region 位移相关
     /// <summary>
     /// 向一个方向推动这个Chess,如果遇到障碍物则停下
@@ -113,6 +87,7 @@ public class GChess : GActor
     }
     public void MoveTo(Vector2Int destination)
     {
+        navComponent.GenNavInfo();
         location = destination;
         if(navComponent)
         {
