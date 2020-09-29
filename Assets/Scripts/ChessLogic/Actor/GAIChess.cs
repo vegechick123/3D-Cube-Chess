@@ -11,9 +11,10 @@ public class GAIChess : GChess
         skill = Instantiate(skill);
         skill.owner = this;
     }
-    protected void OnDestroy()
-    {
+    protected override void OnDestroy()
+    {        
         Destroy(skill);
         skill = null;
+        base.OnDestroy();
     }
 }

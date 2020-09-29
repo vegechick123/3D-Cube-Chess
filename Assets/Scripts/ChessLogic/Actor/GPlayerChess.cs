@@ -44,12 +44,13 @@ public class GPlayerChess : GChess
     {
         UIManager.instance.CleanSkillButton();
     }
-    protected void OnDestroy()
+    protected override void OnDestroy()
     {
         for (int i = 0; i < skills.Count; i++)
         {
             Destroy(skills[i]);
             skills[i] = null;
         }
+        base.OnDestroy();
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Authentication.ExtendedProtection;
+using UnityEditor.MemoryProfiler;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SocialPlatforms;
@@ -8,7 +10,7 @@ public class GChess : GActor
 {
     public int health=3;
     [HideInInspector]
-    public int curHealth;
+    public int curHealth { get; protected set; }
 
     public int movement=3;
     [HideInInspector]
@@ -49,7 +51,28 @@ public class GChess : GActor
     { 
         curMovement = movement;
     }
-    
+    public void Recover(int value)
+    {
+        curHealth += value;
+        curHealth = Mathf.Min(curHealth, health);
+    }
+    public void Damage(int value)
+    {
+        curHealth -= value;
+        if(curHealth<=0)
+        {
+            Die();
+        }
+    }
+    public void Die()
+    {
+        Destroy(this);
+    }
+    protected virtual void OnDestroy()
+    {
+        GridManager.instance.RemoveChess(this);
+
+    }
     #region 位移相关
     /// <summary>
     /// 向一个方向推动这个Chess,如果遇到障碍物则停下
@@ -113,4 +136,5 @@ public class GChess : GActor
         transform.position = GridManager.instance.GetChessPosition3D(location);
     }
     #endregion
+
 }

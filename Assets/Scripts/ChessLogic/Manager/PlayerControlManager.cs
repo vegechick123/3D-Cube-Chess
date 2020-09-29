@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-
+/// <summary>
+/// 用以
+/// </summary>
 public class PlayerControlManager : Manager<PlayerControlManager>
 {
 	public GChess selectedChess;
