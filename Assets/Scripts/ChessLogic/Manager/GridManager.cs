@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -83,7 +84,7 @@ public class GridManager : Manager<GridManager>
     }
     public Vector3 GetChessPosition3D(Vector2Int location)
     {
-        return grid.GetCellCenterWorld(new Vector3Int(location.x, location.y, 0)) +new Vector3(0, 0.5f, 0);
+        return grid.GetCellCenterWorld(new Vector3Int(location.x, location.y, 0)) +new Vector3(0, 0, 0);
     }
     public Vector3 GetFloorPosition3D(Vector2Int location)
     {
@@ -94,13 +95,14 @@ public class GridManager : Manager<GridManager>
         Queue<ValueTuple<UnityEngine.Vector2Int, int, int>> queue = new Queue<ValueTuple<UnityEngine.Vector2Int, int, int>>();
         Queue<Vector2Int> res = new Queue<Vector2Int>();
         Queue<int> prev = new Queue<int>();
+        Queue<bool> occupy=new Queue<bool>();
         Vector2Int[] dir = new Vector2Int[] { new Vector2Int(0, 1), new Vector2Int(1, 0), new Vector2Int(0, -1), new Vector2Int(-1, 0) };
 
 
         queue.Enqueue((location, movement, 0));
         res.Enqueue(location);
         prev.Enqueue(-1);
-
+        occupy.Enqueue(true);
 
         HashSet<Vector2Int> vis = new HashSet<Vector2Int>();
         vis.Add(location);
@@ -125,16 +127,21 @@ public class GridManager : Manager<GridManager>
                 }
                 else
                 {
-                    queue.Enqueue((loc, node.Item2 - 1, res.Count));
+                    queue.Enqueue((loc, node.Item2 - 1, res.Count));                 
+                    res.Enqueue(loc);
+                    prev.Enqueue(node.Item3);
                     if (!chess)
                     {
-                        res.Enqueue(loc);
-                        prev.Enqueue(node.Item3);
+                        occupy.Enqueue(false);
+                    }
+                    else
+                    {
+                        occupy.Enqueue(true);
                     }
                 }
             }
         }
-        return new NavInfo(res.ToArray(), prev.ToArray());
+        return new NavInfo(res.ToArray(), prev.ToArray(),occupy.ToArray());
     }
 
 }

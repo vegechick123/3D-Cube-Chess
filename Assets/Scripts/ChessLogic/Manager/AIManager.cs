@@ -40,13 +40,14 @@ public class AIManager : Manager<AIManager>
             AI.PerformSkill();
             yield return null;//技能释放完成后继续执行
         }
-        GameManager.instance.AIPostTurnEnd();
+        StartCoroutine(GridFunctionUtility.InvokeAfter(GameManager.instance.AIPostTurnEnd, 1f));
     }
     /// <summary>
     /// 执行下一步
     /// </summary>
     public void MoveNext()
     {
+        //Debug.Log("Next");
         coroutine.MoveNext();
     }
 }

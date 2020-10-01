@@ -28,7 +28,7 @@ public abstract class PlayerSkill : Skill
 
         Vector2Int[] range = GetRange();
         RangeCommand res = new RangeCommand(GetRange, owner, action, ConditionCheck);
-        res.CreateFloorHUD(new Color(1, 0, 0, 0.5f));
+        res.CreateFloorHUD(new Color(1, 1, 0, 0.8f));
         PlayerControlManager.instance.PreemptSkillCommand(res);
         return;
     }

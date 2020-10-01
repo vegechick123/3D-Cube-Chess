@@ -23,10 +23,23 @@ public class CNavComponent : Component
     {
         navInfo = GridManager.instance.GetNavInfo(location,curMovement,(actor as GChess).teamID);
     }
+    /// <summary>
+    /// 为不包括队友所占格子的移动范围
+    /// </summary>
+    /// <returns></returns>
     public Vector2Int[] GetMoveRange()
     {
         GenNavInfo();
         return navInfo.range;
+    }
+    /// <summary>
+    /// 包括队友所占格子的移动范围
+    /// </summary>
+    /// <returns></returns>
+    public Vector2Int[] GetMoveRangeWithoutOccupy()
+    {
+        GenNavInfo();
+        return navInfo.GetRangeWithoutOccupy();
     }
     public int MoveToWtihNavInfo(Vector2Int destination)
     {

@@ -11,7 +11,8 @@ public class NavInfo
 
     public Vector2Int[] range;
     private int[] prev;
-    public NavInfo(Vector2Int[] coveredGround, int[] routinePrev) => (this.range, this.prev) = (coveredGround, routinePrev);
+    private bool[] occupy;
+    public NavInfo(Vector2Int[] coveredGround, int[] routinePrev,bool[] occupy) => (this.range, this.prev,this.occupy) = (coveredGround, routinePrev, occupy);
     public Vector2Int[] GetPath(Vector2Int destination)
     {
         Queue<Vector2Int> queue = new Queue<Vector2Int>();
@@ -26,5 +27,15 @@ public class NavInfo
         Vector2Int[] res = queue.ToArray();
         Array.Reverse(res);
         return res;
+    }
+    public Vector2Int[] GetRangeWithoutOccupy()
+    {
+        Queue<Vector2Int> res = new Queue<Vector2Int>();
+        for (int i = 0; i < range.Length;i++)
+        {
+            if (!occupy[i])
+                res.Enqueue(range[i]);
+        }
+        return res.ToArray();
     }
 }

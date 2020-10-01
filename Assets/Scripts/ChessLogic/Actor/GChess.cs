@@ -104,21 +104,24 @@ public class GChess : GActor
     /// <param name="destination">终点</param>
     public void MoveToDirectly(Vector2Int destination)
     {
-        location = destination;
+        Debug.Log("MoveToDirectly " + destination);
         moveComponent.RequestMove(new Vector2Int[] { destination});
+        location = destination;
     }
     public void MoveTo(GFloor floor)
     {
+
         MoveTo(floor.location);
     }
     public void MoveTo(Vector2Int destination)
     {
-        navComponent.GenNavInfo();
-        location = destination;
+        Debug.Log("MoveTo " + destination);
+        navComponent.GenNavInfo();  
         if(navComponent)
         {
             
             navComponent.MoveToWtihNavInfo(destination);
+            location = destination;
             curMovement = 0;
         }
         else if(moveComponent)

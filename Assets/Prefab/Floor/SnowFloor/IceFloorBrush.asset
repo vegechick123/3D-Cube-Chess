@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ce9a5f8703613b4ab3fc2180db70ece, type: 3}
-  m_Name: WaterFloorBrush
+  m_Name: IceFloorBrush
   m_EditorClassIdentifier: 
   m_Cells:
   - m_Tile: {fileID: 0}
@@ -36,5 +36,12 @@ MonoBehaviour:
   m_Pivot: {x: 0, y: 0, z: 0}
   m_CanChangeZPosition: 0
   m_Anchor: {x: 0.5, y: 0.5, z: 0}
-  m_Prefab: {fileID: 5794505919719767578, guid: 1ceee373d0b01bd439ec9afd82f7f3b2,
-    type: 3}
+  m_Prefabs:
+  - {fileID: 3867374241662248124, guid: aecba622dc2cb194f9117d42a2c68844, type: 3}
+  - {fileID: 1920154821116777279, guid: 6cf1155c51c26b54dbe86c919be0968f, type: 3}
+  - {fileID: 7378766593559087161, guid: 76df451245f29f94b91027ac33e47342, type: 3}
+  m_PerlinScale: 0.5
+  probability:
+  - 0.5
+  - 0.1
+  - 0.4

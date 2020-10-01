@@ -14,9 +14,9 @@ public class CMoveComponent : Component
     public float speed = 1f;
     private float limit = 0.01f;
     Queue<Vector2Int> path;
-    Vector3 curTargetPosition;
+    protected Vector3 curTargetPosition;
     public UnityEvent eFinishPath = new UnityEvent();
-    private void Update()
+    protected virtual void Update()
     {
         if(state==MoveState.Moving)
         {
@@ -43,7 +43,7 @@ public class CMoveComponent : Component
        
         
     }
-    public bool RequestMove(Vector2Int[] pathArr)
+    virtual public bool RequestMove(Vector2Int[] pathArr)
     {
         if (state != MoveState.Idle)
         {
@@ -54,29 +54,52 @@ public class CMoveComponent : Component
             path = new Queue<Vector2Int>();
             foreach (var location in pathArr)
             {
+                if (location == actor.location)
+                    continue;
                 path.Enqueue(location);
+            }
+            if (path.Count == 0)
+            {
+                StartCoroutine(GridFunctionUtility.InvokeAfter(eFinishPath.Invoke, 1f));
+                return false;
+            }
+            else
+            {
+                string s=System.String.Empty;
+                Vector2Int[] t = path.ToArray();
+                foreach(var p in t)
+                {
+                    s += p.ToString();
+                }
+                Debug.Log("The Path is" + s);
             }
             state = MoveState.Moving;
             curTargetPosition= GridManager.instance.GetChessPosition3D(path.Dequeue());
             return true;
         }
     }
-    void UpdateCurTargetPosition()
+    protected bool NextPosition()
+    {
+        //达到最终终点
+        if (path.Count == 0)
+        {
+            curTargetPosition = transform.position;
+            state = MoveState.Idle;
+            eFinishPath.Invoke();
+            return false;
+        }
+        else
+        {
+            curTargetPosition = GridManager.instance.GetChessPosition3D(path.Dequeue());
+            return true;
+        }
+    }
+    protected virtual void UpdateCurTargetPosition()
     {
         //到达当前的目标位置
         if ((transform.position-curTargetPosition).magnitude<limit)
         {
-            //达到最终终点
-            if(path.Count==0)
-            {
-                curTargetPosition = transform.position;
-                state = MoveState.Idle;
-                eFinishPath.Invoke();
-            }
-            else
-            {
-                curTargetPosition = GridManager.instance.GetChessPosition3D(path.Dequeue());
-            }
+            NextPosition();
         }
     }
 }

@@ -10,18 +10,18 @@ namespace UnityEditor.Tilemaps
     [CustomGridBrush(false, true, false, "Prefab Random Brush")]
     public class PrefabRandomBrush : BasePrefabBrush
     {
-        private const float k_PerlinOffset = 100000f;
+        protected const float k_PerlinOffset = 100000f;
 
         #pragma warning disable 0649
         /// <summary>
         /// The selection of Prefabs to paint from
         /// </summary>
-        [SerializeField] GameObject[] m_Prefabs;
+        [SerializeField] protected GameObject[] m_Prefabs;
 
         /// <summary>
         /// Factor for distribution of choice of Prefabs to paint
         /// </summary>
-        [SerializeField] float m_PerlinScale = 0.5f;
+        [SerializeField] protected float m_PerlinScale = 0.5f;
         #pragma warning restore 0649
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace UnityEditor.Tilemaps
             }
         }
 
-        private static float GetPerlinValue(Vector3Int position, float scale, float offset)
+        protected static float GetPerlinValue(Vector3Int position, float scale, float offset)
         {
             return Mathf.PerlinNoise((position.x + offset)*scale, (position.y + offset)*scale);
         }

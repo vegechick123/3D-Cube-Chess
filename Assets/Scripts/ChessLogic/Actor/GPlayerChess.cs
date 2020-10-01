@@ -27,7 +27,7 @@ public class GPlayerChess : GChess
         {
             navComponent.GenNavInfo();
             MoveCommand moveCommand = new MoveCommand(navComponent.GetMoveRange, this, MoveTo);
-            moveCommand.CreateFloorHUD(new Color(0, 1, 0, 0.5f));
+            moveCommand.CreateFloorHUD(new Color(0, 1, 0, 0.8f));
             PlayerControlManager.instance.GenMoveCommand(moveCommand);
         }
         ShowUI();

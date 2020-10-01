@@ -27,7 +27,7 @@ public class CAICompoment : Component
         target = null;
         desination = AIChess.location;
         AIChess.navComponent.GenNavInfo();
-        Vector2Int[] moveRange = AIChess.navComponent.navInfo.range;
+        Vector2Int[] moveRange = AIChess.navComponent.GetMoveRangeWithoutOccupy();
         System.Random r = new System.Random();
         moveRange = moveRange.OrderBy(x => r.Next()).ToArray();
         var originLocation = AIChess.location;
@@ -67,8 +67,10 @@ public class CAICompoment : Component
     /// </summary>
     public void PrepareSkill()
     {
-        if(target!=null)
-            floorHUD = new FloorHUD(GetSkill().GetAffectRange, new Color(0, 0, 1, 0.5f));
+        if (target != null)
+            floorHUD = new FloorHUD(GetSkill().GetAffectRange, new Color(1, 0, 0, 0.8f));
+        else
+            Debug.Log("Target Miss");
         StartCoroutine(GridFunctionUtility.InvokeAfter(AIManager.instance.MoveNext, 0.5f));
     }
     /// <summary>
@@ -76,10 +78,16 @@ public class CAICompoment : Component
     /// </summary>
     public void PerformSkill()
     {
-        floorHUD.Release();
-        floorHUD = null;
-        AIChess.skill.Perform();
-        StartCoroutine(GridFunctionUtility.InvokeAfter(AIManager.instance.MoveNext, 0.5f));
+        if(floorHUD!=null)
+        {
+            floorHUD.Release();
+            floorHUD = null;
+        }
+        if (target != null)
+        {
+            AIChess.skill.Perform();
+        }
+        StartCoroutine(GridFunctionUtility.InvokeAfter(AIManager.instance.MoveNext, 1f));
     }
     protected AISkill GetSkill()
     {
@@ -87,7 +95,8 @@ public class CAICompoment : Component
     }
     private void OnDestroy()
     {
-        floorHUD.Release();
+        if(floorHUD!=null)
+            floorHUD.Release();
         floorHUD = null;
     }
 }
