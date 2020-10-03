@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-//
-[RequireComponent(typeof(GPlayerChess))]
 public class CAgentComponent : Component
 {
     bool bSelected { get { return PlayerControlManager.instance.selectedChess == actor; } }

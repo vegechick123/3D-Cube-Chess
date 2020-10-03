@@ -61,12 +61,13 @@ public class GChess : GActor
         curHealth -= value;
         if(curHealth<=0)
         {
-            Die();
+            DieImmediately();
         }
     }
-    public void Die()
+    public void DieImmediately()
     {
-        Destroy(this);
+        gameObject.SetActive(false);
+        //Destroy(gameObject,0.01f);
     }
     protected virtual void OnDestroy()
     {
@@ -107,6 +108,7 @@ public class GChess : GActor
         Debug.Log("MoveToDirectly " + destination);
         moveComponent.RequestMove(new Vector2Int[] { destination});
         location = destination;
+        moveComponent.eFinishPath.AddListener(EnterLocation);
     }
     public void MoveTo(GFloor floor)
     {
@@ -119,7 +121,7 @@ public class GChess : GActor
         navComponent.GenNavInfo();  
         if(navComponent)
         {
-            
+            moveComponent.eFinishPath.AddListener(EnterLocation);
             navComponent.MoveToWtihNavInfo(destination);
             location = destination;
             curMovement = 0;
@@ -137,6 +139,12 @@ public class GChess : GActor
     {
         location = destination;
         transform.position = GridManager.instance.GetChessPosition3D(location);
+        GridManager.instance.GetFloor(location).OnChessEnter(this);
+    }
+    public void EnterLocation()
+    {
+        GridManager.instance.GetFloor(location).OnChessEnter(this);
+        moveComponent.eFinishPath.RemoveListener(EnterLocation);
     }
     #endregion
 

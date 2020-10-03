@@ -13,4 +13,8 @@ public class GFloor : GActor
     {
         GridManager.instance.AddFloor(this);
     }
+    public virtual void OnChessEnter(GChess chess)
+    {
+        Debug.Log("Chess Enter" + location);
+    }
 }

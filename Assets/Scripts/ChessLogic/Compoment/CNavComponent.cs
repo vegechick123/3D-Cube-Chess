@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-[RequireComponent(typeof(CMoveComponent), typeof(GChess))]
 public class CNavComponent : Component
 {
     [HideInInspector]
