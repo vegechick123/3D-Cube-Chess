@@ -53,5 +53,9 @@ static class GridFunctionUtility
         task();
 
     }
+    public static GameObject CreateParticleAt(GameObject prefab,GActor actor)
+    {
+        return GameObject.Instantiate(prefab, actor.transform.position, prefab.transform.rotation, null);
+    }
 }
 

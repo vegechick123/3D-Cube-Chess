@@ -18,7 +18,6 @@ public class MoveAni : StateMachineBehaviour
     {
 
         var particle=GameObject.Instantiate(prefabParticle,animator.transform.position,prefabParticle.transform.rotation);
-        Destroy(particle, 1);
         CAnimationMoveComponent t = animator.GetComponentInParent<CAnimationMoveComponent>();
         t.OneMoveComplete();
     }

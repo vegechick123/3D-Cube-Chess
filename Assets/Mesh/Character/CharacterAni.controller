@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7f006586637b64f9dcd106a02b2cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabParticle: {fileID: 7626863233938880488, guid: 8277774494f426a44ae364b9218b2ab4,
+  prefabParticle: {fileID: 7626863233938880488, guid: 70956ea112c7b73429121e3196842dee,
     type: 3}
 --- !u!1102 &7747712584004013138
 AnimatorState:

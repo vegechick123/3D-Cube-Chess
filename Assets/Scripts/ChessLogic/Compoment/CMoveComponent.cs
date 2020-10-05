@@ -15,6 +15,7 @@ public class CMoveComponent : Component
     private float limit = 0.01f;
     Queue<Vector2Int> path;
     protected Vector3 curTargetPosition;
+    [HideInInspector]
     public UnityEvent eFinishPath = new UnityEvent();
     protected virtual void Update()
     {
