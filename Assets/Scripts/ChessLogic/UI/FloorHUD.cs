@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class FloorHUD
+public class FloorHUD : IChessUI
 {
     Func<Vector2Int[]> GetRange;
     GameObject[] rangeObject;
