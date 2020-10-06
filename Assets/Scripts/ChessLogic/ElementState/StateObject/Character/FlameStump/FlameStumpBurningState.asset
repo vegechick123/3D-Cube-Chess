@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f491f0f1bfd9cd499355d4b4ff86e03, type: 3}
-  m_Name: FrozenState
+  m_Script: {fileID: 11500000, guid: ab608a1b6c58d1842a361aa9ec11c137, type: 3}
+  m_Name: FlameStumpBurningState
   m_EditorClassIdentifier: 
-  prefabEnterParticle: {fileID: 4898306076701040203, guid: bb94e0effad1f394a888bbe809e13560,
-    type: 3}
+  prefabEnterParticle: {fileID: 0}
   prefabExitParticle: {fileID: 0}
-  prefabPersistentParticle: {fileID: 0}
-  snowMaterial: {fileID: 2100000, guid: 2116271a197ef25478bbf76a8f262035, type: 2}
+  prefabPersistentParticle: {fileID: 7626863233938880488, guid: 8277774494f426a44ae364b9218b2ab4,
+    type: 3}
+  disableParticle: 0

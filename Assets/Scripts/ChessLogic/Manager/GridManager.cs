@@ -8,6 +8,7 @@ public class GridManager : Manager<GridManager>
 {
     public Vector2Int size;
     public Grid grid;
+    public Transform floorTransform;
     protected GFloor[,] floors;
     protected List<GChess> chesses;
     protected override void Awake()
@@ -142,6 +143,69 @@ public class GridManager : Manager<GridManager>
             }
         }
         return new NavInfo(res.ToArray(), prev.ToArray(),occupy.ToArray());
+    }
+    public Vector2Int[] GetCircleRange(Vector2Int origin, int radius)
+    {
+        Queue<Vector2Int> res = new Queue<Vector2Int>();
+        Vector2Int[] dir = new Vector2Int[4];
+        dir[0] = new Vector2Int(1, 1);
+        dir[1] = new Vector2Int(1, -1);
+        dir[2] = new Vector2Int(-1, 1);
+        dir[3] = new Vector2Int(-1, -1);
+        for (int x = 0; x <= radius; x++)
+            for (int y = 0; x + y <= radius; y++)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    if (x == 0 && y == 0 && i >= 1)
+                    {
+                        break;
+                    }
+                    if (x == 0 && i >= 2)
+                    {
+                        break;
+                    }
+                    if (y == 0 && (i == 1 || i == 3))
+                    {
+                        continue;
+                    }
+
+                    Vector2Int loc = new Vector2Int(x, y) * dir[i] + origin;
+                    if (InRange(loc))
+                        res.Enqueue(loc);
+                }
+            }
+        return res.ToArray();
+    }
+    public Vector2Int[] GetRayRange(Vector2Int origin)
+    {
+        Queue<Vector2Int> res = new Queue<Vector2Int>();
+        Vector2Int[] dir = new Vector2Int[4];
+        dir[0] = new Vector2Int(1, 1);
+        dir[1] = new Vector2Int(1, -1);
+        dir[2] = new Vector2Int(-1, 1);
+        dir[3] = new Vector2Int(-1, -1);
+        for(int i=0;i<4;i++)
+        {
+            for(int d=1;;d++)
+            {
+                Vector2Int nowpos = d * dir[i] + origin;
+                if (!InRange(nowpos) || GetChess(nowpos))
+                {
+                    break;
+                }
+                else
+                    res.Enqueue(nowpos);
+            }
+        }
+        return res.ToArray();
+    }
+    public GChess InstansiateChessAt(GameObject prefab,Vector2Int location)
+    {
+        var res = Instantiate(prefab, floorTransform);
+        res.transform.position = GridManager.instance.GetChessPosition3D(location);
+        res.GetComponent<GChess>().OnGameStart();
+        return res.GetComponent<GChess>();
     }
 
 }

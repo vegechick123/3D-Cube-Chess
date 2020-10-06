@@ -6,14 +6,13 @@ using UnityEngine;
 public enum Element
 {
     Fire,
-    Water,
     Ice
 }
 public enum ElementState
 {
     Burning,
     Normal,
-    Wet,
+    Cold,
     Frozen
 }
 public class CElementComponent : Component
@@ -23,16 +22,21 @@ public class CElementComponent : Component
 
     public ElementStateBase BurningState;
     public ElementStateBase NormalState;
-    public ElementStateBase WetState;
+    public ElementStateBase ColdState;
     public ElementStateBase FrozenState;
     public ElementState state = ElementState.Normal;
     protected ElementStateBase curStateObject;
     protected override void Awake()
     {
         base.Awake();
+    }
+    public override void OnGameStart()
+    {
         curStateObject = GetNewStateObject(state);
         curStateObject.Init(actor, this);
+        curStateObject.disableParticle = true;
         curStateObject.Enter();
+        curStateObject.disableParticle = false;
     }
     public virtual void OnHitElement(Element element)
     {
@@ -40,7 +44,7 @@ public class CElementComponent : Component
     }
     public virtual void SwitchState(ElementState newState)
     {
-        Debug.Log("ElementState:"+newState);
+        Debug.Log("Enter to ElementState:"+newState);
         state = newState;
         curStateObject.Exit();
         curStateObject = GetNewStateObject(state);
@@ -55,8 +59,8 @@ public class CElementComponent : Component
                 return Instantiate<ElementStateBase>(BurningState);                
             case ElementState.Normal:
                 return Instantiate<ElementStateBase>(NormalState);
-            case ElementState.Wet:
-                return Instantiate<ElementStateBase>(WetState);
+            case ElementState.Cold:
+                return Instantiate<ElementStateBase>(ColdState);
             case ElementState.Frozen:
                 return Instantiate<ElementStateBase>(FrozenState);
             default:

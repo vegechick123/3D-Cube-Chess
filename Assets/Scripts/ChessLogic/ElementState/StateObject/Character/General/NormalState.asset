@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ce04af6ffb4d324c9e20ae621ce8218, type: 3}
-  m_Name: BurningState
+  m_Script: {fileID: 11500000, guid: f8a066671c6bb2d409ece13b1392dd32, type: 3}
+  m_Name: NormalState
   m_EditorClassIdentifier: 
   prefabEnterParticle: {fileID: 0}
   prefabExitParticle: {fileID: 0}
-  prefabPersistentParticle: {fileID: 7626863233938880488, guid: 8277774494f426a44ae364b9218b2ab4,
-    type: 3}
+  prefabPersistentParticle: {fileID: 0}
+  disableParticle: 0

@@ -20,6 +20,9 @@ public class AIManager : Manager<AIManager>
     {
         foreach (var AI in AIs)
         {
+            GChess chess=AI.actor as GChess;
+            if (chess.unableAct)
+                continue;
             AI.Visit();
             AI.PerformMove();
             yield return null;//移动完成后继续执行

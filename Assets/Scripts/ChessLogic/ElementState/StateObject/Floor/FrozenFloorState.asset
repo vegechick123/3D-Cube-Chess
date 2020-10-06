@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf5fd0726a8f2d146b07c304c884b997, type: 3}
-  m_Name: WetState
+  m_Script: {fileID: 11500000, guid: 297608413b590a8479119e653ad24f51, type: 3}
+  m_Name: FrozenFloorState
   m_EditorClassIdentifier: 
-  prefabEnterParticle: {fileID: 0}
-  prefabExitParticle: {fileID: 0}
-  prefabPersistentParticle: {fileID: 7626863233938880488, guid: 84f4f77801b46834d8de3b1dca89f75e,
+  prefabEnterParticle: {fileID: 4898306076701040203, guid: bb94e0effad1f394a888bbe809e13560,
     type: 3}
+  prefabExitParticle: {fileID: 0}
+  prefabPersistentParticle: {fileID: 0}

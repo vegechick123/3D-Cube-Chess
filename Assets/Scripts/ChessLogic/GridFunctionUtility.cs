@@ -40,6 +40,7 @@ static class GridFunctionUtility
         }
         return false;
     }
+
     public static void DestoryAll(this GameObject[] gameObjects)
     {
         foreach (var t in gameObjects)

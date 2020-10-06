@@ -51,9 +51,6 @@ public class PlayerControlManager : Manager<PlayerControlManager>
     {
         base.Awake();
 		eRightMouseClick.AddListener(CancelCurrentCommand);
-    }
-    private void Start()
-    {
 		selectCommand = new SelectCommand(null, Select);
 	}
     private void Update()

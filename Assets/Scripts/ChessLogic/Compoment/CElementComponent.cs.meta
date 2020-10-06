@@ -7,7 +7,7 @@ MonoImporter:
   - actor: {instanceID: 0}
   - BurningState: {fileID: 11400000, guid: 85dc8f9b3d5a08b4d9044dd37bb81d59, type: 2}
   - NormalState: {fileID: 11400000, guid: a67a031cbeb472a4aa64265ec211713a, type: 2}
-  - WetState: {fileID: 11400000, guid: 09663489e01488549a3bac78a62dfeab, type: 2}
+  - ColdState: {fileID: 11400000, guid: 09663489e01488549a3bac78a62dfeab, type: 2}
   - FrozenState: {fileID: 11400000, guid: e7256f7b7b884c64d9dcc4335eb5f1e0, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f491f0f1bfd9cd499355d4b4ff86e03, type: 3}
+  m_Name: FrozenState
+  m_EditorClassIdentifier: 
+  prefabEnterParticle: {fileID: 4898306076701040203, guid: bb94e0effad1f394a888bbe809e13560,
+    type: 3}
+  prefabExitParticle: {fileID: 0}
+  prefabPersistentParticle: {fileID: 0}
+  disableParticle: 0
+  snowMaterial: {fileID: 2100000, guid: 2116271a197ef25478bbf76a8f262035, type: 2}

@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8a066671c6bb2d409ece13b1392dd32, type: 3}
-  m_Name: NormalState
+  m_Script: {fileID: 11500000, guid: 63144d7f96a24ec409135ae8fa42c744, type: 3}
+  m_Name: AliveFloorState
   m_EditorClassIdentifier: 
   prefabEnterParticle: {fileID: 0}
   prefabExitParticle: {fileID: 0}
   prefabPersistentParticle: {fileID: 0}
+  disableParticle: 0
+  grassFloor: {fileID: -2432090755550338912, guid: ec12e4728fc5ae146b55a387c8f4ebb0,
+    type: 3}

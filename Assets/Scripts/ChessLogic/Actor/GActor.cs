@@ -11,7 +11,9 @@ public abstract class GActor : MonoBehaviour
     /// </summary>
     public Vector2Int location;
     [HideInInspector]
-    public Renderer render;
+    public MeshRenderer render;
+    [HideInInspector]
+    public MeshFilter meshFilter;
     [HideInInspector]
     public Material originMaterial;
     [HideInInspector]
@@ -19,16 +21,20 @@ public abstract class GActor : MonoBehaviour
     virtual protected void Awake()
     {
         //注册事件
-        GameManager.instance.eRoundStart.AddListener(OnGameStart);
-        GameManager.instance.eRoundEnd.AddListener(OnGameEnd);
+        GameManager.instance.eRoundStart.AddListener(OnRoundStart);
+        GameManager.instance.eRoundEnd.AddListener(OnRoundEnd);
         GameManager.instance.eGameStart.AddListener(OnGameStart);
         GameManager.instance.eGameEnd.AddListener(OnGameEnd);
-        render = GetComponent<Renderer>();
+        render = GetComponent<MeshRenderer>();
         if(render==null)
         {
-            render = GetComponentInChildren<Renderer>();
+            render = GetComponentInChildren<MeshRenderer>();
+            
         }
+        meshFilter = render.GetComponent<MeshFilter>();
+
         elementComponent = GetComponent<CElementComponent>();
+
         originMaterial = render.material;
     }
     public virtual void ElementReaction(Element element)
@@ -46,9 +52,14 @@ public abstract class GActor : MonoBehaviour
     {
 
     }
-    virtual protected void OnGameStart()
+    virtual public void OnGameStart()
     {
-
+        var arr = GetComponents<Component>();
+        foreach(Component c in arr)
+        {
+            c.OnGameStart();
+        }
+        
     }
     virtual protected void OnGameEnd()
     {

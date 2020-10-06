@@ -5,11 +5,11 @@ public class ElementStateBase : ScriptableObject
 {
     protected GActor owner;
     protected CElementComponent stateMachine;
-    //爆发性粒子，默认会在10秒后销毁
     public GameObject prefabEnterParticle;
     public GameObject prefabExitParticle;
     public GameObject prefabPersistentParticle;
-
+    [HideInInspector]
+    public bool disableParticle;
     private GameObject persistentParticle;
     public virtual void Init(GActor owner, CElementComponent stateMachine)
     {
@@ -18,9 +18,9 @@ public class ElementStateBase : ScriptableObject
     }
     public virtual void Enter()
     {
-        if (prefabEnterParticle != null)
+        if (prefabEnterParticle != null&&!disableParticle)
         {
-            var t =GridFunctionUtility.CreateParticleAt(prefabEnterParticle,owner);
+            GridFunctionUtility.CreateParticleAt(prefabEnterParticle,owner);
         }
         if (prefabPersistentParticle != null)
         {
@@ -36,7 +36,7 @@ public class ElementStateBase : ScriptableObject
     {
         if (prefabExitParticle != null)
         {
-            var t = GridFunctionUtility.CreateParticleAt(prefabExitParticle, owner);
+            GridFunctionUtility.CreateParticleAt(prefabExitParticle, owner);
         }
         if (persistentParticle!= null)
         {

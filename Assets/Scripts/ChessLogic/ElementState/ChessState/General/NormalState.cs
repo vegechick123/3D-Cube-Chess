@@ -5,13 +5,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NormalState", menuName = "ElementState/NormalState")]
 public class NormalState : ElementStateBase
 {
+    public override void Enter()
+    {
+        base.Enter();
+        owner.render.material = owner.originMaterial;
+    }
     public override void OnHitElement(Element element)
     {
         base.OnHitElement(element);
         switch (element)
         {
-            case Element.Water:
-                stateMachine.SwitchState(ElementState.Wet);
+            case Element.Ice:
+                stateMachine.SwitchState(ElementState.Cold);
                 break;
             case Element.Fire:
                 stateMachine.SwitchState(ElementState.Burning);

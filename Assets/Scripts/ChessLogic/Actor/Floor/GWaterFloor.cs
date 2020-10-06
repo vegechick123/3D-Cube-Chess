@@ -9,7 +9,6 @@ public class GWaterFloor : GFloor
     {
         base.OnChessEnter(chess);
         chess.DieImmediately();
-        var particle = GameObject.Instantiate(prefabFoam, GridManager.instance.GetChessPosition3D(location), prefabFoam.transform.rotation); ;
-        Destroy(particle, 1);
+        var particle = GameObject.Instantiate(prefabFoam, GridManager.instance.GetChessPosition3D(location), prefabFoam.transform.rotation);
     }
 }

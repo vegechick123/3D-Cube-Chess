@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BurningState", menuName = "ElementState/BurningState")]
-public class BurningState : ElementStateBase
+[CreateAssetMenu(fileName = "WetState", menuName = "ElementState/WetState")]
+public class ColdState : ElementStateBase
 {
     public override void OnHitElement(Element element)
     {
         base.OnHitElement(element);
         switch (element)
         {
-            case Element.Water:
-            case Element.Ice:
+            case Element.Fire:
                 stateMachine.SwitchState(ElementState.Normal);
+                break;
+            case Element.Ice:
+                stateMachine.SwitchState(ElementState.Frozen);
                 break;
             default:
                 break;

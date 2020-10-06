@@ -8,6 +8,10 @@ using UnityEngine.SocialPlatforms;
 
 public class GChess : GActor
 {
+    //无法行动
+    [HideInInspector]
+    public bool unableAct;
+
     public int health=3;
     [HideInInspector]
     public int curHealth { get; protected set; }
@@ -36,7 +40,7 @@ public class GChess : GActor
         GridManager.instance.AddChess(this);
         
     }
-    protected override void OnGameStart()
+    public override void OnGameStart()
     {
         base.OnGameStart();
         OnBirth();

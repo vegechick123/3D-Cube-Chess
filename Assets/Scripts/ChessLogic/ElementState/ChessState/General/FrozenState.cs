@@ -9,6 +9,9 @@ public class FrozenState : ElementStateBase
     {
         base.Enter();
         owner.render.material= snowMaterial;
+        owner.render.GetComponent<Animator>().speed = 0;
+        GChess chess = (owner as GChess);
+        chess.unableAct = true;
     }
     public override void OnHitElement(Element element)
     {
@@ -24,7 +27,9 @@ public class FrozenState : ElementStateBase
     }
     public override void Exit()
     {
-        owner.render.material = owner.originMaterial;
+        GChess chess = (owner as GChess);
+        chess.unableAct = false;
+        owner.render.GetComponent<Animator>().speed = 1;
         base.Exit();
     }
 }

@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 8714642836675817612}
   - component: {fileID: 8714642836675817618}
   - component: {fileID: 5790514922615186940}
+  - component: {fileID: 8418600207926531034}
   m_Layer: 0
   m_Name: 'AIChess '
   m_TagString: Untagged
@@ -162,6 +163,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   location: {x: 2, y: 2}
+  render: {fileID: 0}
+  originMaterial: {fileID: 0}
+  unableAct: 0
   health: 3
   movement: 3
   curMovement: 0
@@ -215,3 +219,21 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   animator: {fileID: 0}
+--- !u!114 &8418600207926531034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8714642836675817610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4799f45da862beb49b8a0c1194288633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actor: {fileID: 0}
+  BurningState: {fileID: 11400000, guid: 85dc8f9b3d5a08b4d9044dd37bb81d59, type: 2}
+  NormalState: {fileID: 11400000, guid: a67a031cbeb472a4aa64265ec211713a, type: 2}
+  ColdState: {fileID: 11400000, guid: 09663489e01488549a3bac78a62dfeab, type: 2}
+  FrozenState: {fileID: 11400000, guid: e7256f7b7b884c64d9dcc4335eb5f1e0, type: 2}
+  state: 1

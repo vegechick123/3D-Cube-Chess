@@ -2,6 +2,7 @@
 {
     Properties 
     {
+        _MainTex("Texture",2D)="white"{}
         _Color ("Color",Color)=(1,1,1,0.5)
     }
 
@@ -24,6 +25,7 @@
 
                 struct appdata_t {
                     float4 vertex : POSITION;
+                    float2 uv :TEXCOORD;
                     UNITY_VERTEX_INPUT_INSTANCE_ID
                 };
 
@@ -34,7 +36,7 @@
                 };
 
                 fixed4 _Color;
-
+                sampler2D _MainTex;
                 v2f vert (appdata_t v)
                 {
                     v2f o;
