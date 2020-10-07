@@ -8,7 +8,8 @@ public class FrozenState : ElementStateBase
     public override void Enter()
     {
         base.Enter();
-        owner.render.material= snowMaterial;
+        owner.render.material.SetColor("_Color", Color.white);
+        owner.render.material.SetFloat("_Blend", 1f);
         owner.render.GetComponent<Animator>().speed = 0;
         GChess chess = (owner as GChess);
         chess.unableAct = true;

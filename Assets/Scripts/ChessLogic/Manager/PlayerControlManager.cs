@@ -36,6 +36,15 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 		selectedChess = target;
 		selectedChess.GetComponent<CAgentComponent>().eSelect.Invoke();
 	}
+	public void PlayerTurnEnter()
+    {
+		selectCommand.bPaused = false;
+	}
+	public void PlayerTurnExit()
+	{
+		DeSelect();
+		selectCommand.bPaused = true;
+	}
 	//取消选中
 	public void DeSelect()
 	{
@@ -52,6 +61,7 @@ public class PlayerControlManager : Manager<PlayerControlManager>
         base.Awake();
 		eRightMouseClick.AddListener(CancelCurrentCommand);
 		selectCommand = new SelectCommand(null, Select);
+		selectCommand.bPaused = true;
 	}
     private void Update()
     {

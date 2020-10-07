@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GActor : MonoBehaviour
+public abstract class GActor : MonoBehaviour,IGetInfo
 {
     /// <summary>
     /// 表示Actor在网格中的位置
@@ -18,6 +18,9 @@ public abstract class GActor : MonoBehaviour
     public Material originMaterial;
     [HideInInspector]
     protected CElementComponent elementComponent;
+    public string title;
+    public string info;
+
     virtual protected void Awake()
     {
         //注册事件
@@ -64,5 +67,15 @@ public abstract class GActor : MonoBehaviour
     virtual protected void OnGameEnd()
     {
 
+    }
+
+    public string GetTitle()
+    {
+        return "Title";
+    }
+
+    public string GetInfo()
+    {
+        return "Info";
     }
 }

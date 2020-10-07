@@ -204,8 +204,11 @@ public class GridManager : Manager<GridManager>
     {
         var res = Instantiate(prefab, floorTransform);
         res.transform.position = GridManager.instance.GetChessPosition3D(location);
-        res.GetComponent<GChess>().OnGameStart();
-        return res.GetComponent<GChess>();
+        GChess chess = res.GetComponent<GChess>();
+        chess.location = location;
+        chess.OnGameStart();
+        chess.render.GetComponent<Animator>().Play("Birth");
+        return chess;
     }
 
 }

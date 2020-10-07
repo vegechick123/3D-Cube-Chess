@@ -15,3 +15,5 @@ MonoBehaviour:
   owner: {fileID: 0}
   icon: {fileID: 7160053665899228399, guid: cb95beb56b7af6647a834d2c6d88871e, type: 3}
   length: 2
+  prefabtest: {fileID: 8714642836675817610, guid: 5b44f9dc04bbba44084b0c2c25cbfb2d,
+    type: 3}

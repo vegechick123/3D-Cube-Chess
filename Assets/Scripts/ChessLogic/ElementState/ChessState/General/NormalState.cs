@@ -8,7 +8,8 @@ public class NormalState : ElementStateBase
     public override void Enter()
     {
         base.Enter();
-        owner.render.material = owner.originMaterial;
+        owner.render.material.SetColor("_Color", Color.white);
+        owner.render.material.SetFloat("_Blend", 0f);
     }
     public override void OnHitElement(Element element)
     {

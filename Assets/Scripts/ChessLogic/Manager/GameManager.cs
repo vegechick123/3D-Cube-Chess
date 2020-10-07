@@ -52,11 +52,11 @@ public class GameManager : Manager<GameManager>
 
     protected void PlayerTurnStart()
     {
-
+        PlayerControlManager.instance.PlayerTurnEnter();
     }
     public void PlayerTurnEnd()
     {
-        PlayerControlManager.instance.DeSelect();
+        PlayerControlManager.instance.PlayerTurnExit();
         AIPostTurnStart();
     }
     protected void AIPostTurnStart()

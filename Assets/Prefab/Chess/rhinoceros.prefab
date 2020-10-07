@@ -65,6 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   location: {x: 0, y: 0}
   render: {fileID: 0}
+  meshFilter: {fileID: 0}
   originMaterial: {fileID: 0}
   unableAct: 0
   health: 3
@@ -227,6 +228,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b35e092c2f94b324eaff8953e1afd00f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5dc8dac3fa411da4f83b1f57063253be, type: 2}
     - target: {fileID: -5754084199372789682, guid: b35e092c2f94b324eaff8953e1afd00f,
         type: 3}
       propertyPath: m_Mesh
