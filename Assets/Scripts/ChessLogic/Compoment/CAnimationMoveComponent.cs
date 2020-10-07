@@ -1,13 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.PackageManager.Requests;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CAnimationMoveComponent : CMoveComponent
 {
     [HideInInspector]
     public Animator animator;
     private GameObject animObject;
+    [NonSerialized]
+    protected bool useAnimation = true;
     protected override void Awake()
     {
         base.Awake();
@@ -16,7 +20,8 @@ public class CAnimationMoveComponent : CMoveComponent
     }
     protected override void Update()
     {
-        //base.Update();
+        if(!useAnimation)
+            base.Update();
     }
     public override bool RequestMove(Vector2Int[] pathArr)
     {
@@ -29,6 +34,20 @@ public class CAnimationMoveComponent : CMoveComponent
                 transform.rotation = Quaternion.LookRotation(dir.normalized, Vector3.up);
         }
         return res;
+    }
+    public override bool RequestDirectMove(Vector2Int destination)
+    {
+        useAnimation = false;
+        eFinishPath.AddListener(() => useAnimation = true);
+        UnityAction t = null;
+        t = () =>
+        {
+            useAnimation = true;
+            eFinishPath.RemoveListener(t);
+        };
+        //UnityEvent.Action t = () => { useAnimation = true;eFinishPath.RemoveListener(t); };
+        eFinishPath.RemoveListener(t);
+        return base.RequestMove(new Vector2Int[] {destination});
     }
     public void OneMoveComplete()
     {

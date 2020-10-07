@@ -45,5 +45,8 @@ public class ElementStateBase : ScriptableObject
             persistentParticle = null;
         }
     }
-
+    public virtual int ProcessDamage(Element element,int damage)
+    {
+        return damage;
+    }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Security.Authentication.ExtendedProtection;
 using UnityEditor.MemoryProfiler;
@@ -13,7 +14,7 @@ public class GChess : GActor
     public bool unableAct;
 
     public int health=3;
-    [HideInInspector]
+    //[HideInInspector]
     public int curHealth { get; protected set; }
 
     public int movement=3;
@@ -60,6 +61,19 @@ public class GChess : GActor
         curHealth += value;
         curHealth = Mathf.Min(curHealth, health);
     }
+    public void ElementDamage(Element element,int damage)
+    {
+        if (elementComponent)
+        {
+            damage = elementComponent.ProcessDamage(element,damage);
+            Damage(damage);
+            elementComponent.OnHitElement(element);
+        }
+        else
+        {
+            Damage(damage);
+        }
+    }
     public void Damage(int value)
     {
         curHealth -= value;
@@ -71,7 +85,7 @@ public class GChess : GActor
     public void DieImmediately()
     {
         gameObject.SetActive(false);
-        //Destroy(gameObject,0.01f);
+        Destroy(gameObject,0.5f);
     }
     protected virtual void OnDestroy()
     {
@@ -110,13 +124,12 @@ public class GChess : GActor
     public void MoveToDirectly(Vector2Int destination)
     {
         Debug.Log("MoveToDirectly " + destination);
-        moveComponent.RequestMove(new Vector2Int[] { destination});
+        moveComponent.RequestDirectMove(destination);
         location = destination;
         moveComponent.eFinishPath.AddListener(EnterLocation);
     }
     public void MoveTo(GFloor floor)
     {
-
         MoveTo(floor.location);
     }
     public void MoveTo(Vector2Int destination)

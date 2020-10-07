@@ -39,7 +39,7 @@ public class GridManager : Manager<GridManager>
     /// <returns></returns>
     public GChess GetChess(Vector2Int location)
     {
-        return chesses.Find(x => location == x.location); 
+        return chesses.Find(x => location == x.location);
     }
     public GChess[] GetChesses(int teamID)
     {
@@ -61,19 +61,19 @@ public class GridManager : Manager<GridManager>
     /// <returns></returns>
     public GFloor GetFloor(Vector2Int location)
     {
-        if(!InRange(location))
+        if (!InRange(location))
         {
             return null;
         }
-        return floors[location.x,location.y];
+        return floors[location.x, location.y];
     }
     public void AddFloor(GFloor floor)
     {
-        if(floors[floor.location.x, floor.location.y]!=null)
+        if (floors[floor.location.x, floor.location.y] != null)
         {
             Debug.LogError("同一位置多个Floor");
         }
-        floors[floor.location.x, floor.location.y]=floor;
+        floors[floor.location.x, floor.location.y] = floor;
     }
     public void RemoveFloor(GFloor floor)
     {
@@ -85,18 +85,18 @@ public class GridManager : Manager<GridManager>
     }
     public Vector3 GetChessPosition3D(Vector2Int location)
     {
-        return grid.GetCellCenterWorld(new Vector3Int(location.x, location.y, 0)) +new Vector3(0, 0, 0);
+        return grid.GetCellCenterWorld(new Vector3Int(location.x, location.y, 0)) + new Vector3(0, 0, 0);
     }
     public Vector3 GetFloorPosition3D(Vector2Int location)
     {
-        return grid.GetCellCenterWorld(new Vector3Int(location.x, location.y,0))- new Vector3(0, 0.5f, 0);
+        return grid.GetCellCenterWorld(new Vector3Int(location.x, location.y, 0)) - new Vector3(0, 0.5f, 0);
     }
-    public NavInfo GetNavInfo(Vector2Int location,int movement,int teamID=-1)
+    public NavInfo GetNavInfo(Vector2Int location, int movement, int teamID = -1)
     {
         Queue<ValueTuple<UnityEngine.Vector2Int, int, int>> queue = new Queue<ValueTuple<UnityEngine.Vector2Int, int, int>>();
         Queue<Vector2Int> res = new Queue<Vector2Int>();
         Queue<int> prev = new Queue<int>();
-        Queue<bool> occupy=new Queue<bool>();
+        Queue<bool> occupy = new Queue<bool>();
         Vector2Int[] dir = new Vector2Int[] { new Vector2Int(0, 1), new Vector2Int(1, 0), new Vector2Int(0, -1), new Vector2Int(-1, 0) };
 
 
@@ -122,13 +122,13 @@ public class GridManager : Manager<GridManager>
 
                 GFloor floor = GetFloor(loc);
                 GChess chess = GetChess(loc);
-                if (!floor || (chess!=null&&chess.teamID!=teamID))
+                if (!floor || (chess != null && chess.teamID != teamID))
                 {
                     continue;
                 }
                 else
                 {
-                    queue.Enqueue((loc, node.Item2 - 1, res.Count));                 
+                    queue.Enqueue((loc, node.Item2 - 1, res.Count));
                     res.Enqueue(loc);
                     prev.Enqueue(node.Item3);
                     if (!chess)
@@ -142,7 +142,7 @@ public class GridManager : Manager<GridManager>
                 }
             }
         }
-        return new NavInfo(res.ToArray(), prev.ToArray(),occupy.ToArray());
+        return new NavInfo(res.ToArray(), prev.ToArray(), occupy.ToArray());
     }
     public Vector2Int[] GetCircleRange(Vector2Int origin, int radius)
     {
@@ -177,30 +177,45 @@ public class GridManager : Manager<GridManager>
             }
         return res.ToArray();
     }
-    public Vector2Int[] GetRayRange(Vector2Int origin)
+    public Vector2Int[] GetFourRayRange(Vector2Int origin,int maxLength)
     {
         Queue<Vector2Int> res = new Queue<Vector2Int>();
         Vector2Int[] dir = new Vector2Int[4];
-        dir[0] = new Vector2Int(1, 1);
-        dir[1] = new Vector2Int(1, -1);
-        dir[2] = new Vector2Int(-1, 1);
-        dir[3] = new Vector2Int(-1, -1);
-        for(int i=0;i<4;i++)
+        dir[0] = new Vector2Int(1, 0);
+        dir[1] = new Vector2Int(-1, 0);
+        dir[2] = new Vector2Int(0, 1);
+        dir[3] = new Vector2Int(0, -1);
+        for (int i = 0; i < 4; i++)
         {
-            for(int d=1;;d++)
+            Vector2Int[] temp = GetOneRayRange(origin, dir[i],maxLength);
+            foreach (Vector2Int t in temp)
             {
-                Vector2Int nowpos = d * dir[i] + origin;
-                if (!InRange(nowpos) || GetChess(nowpos))
-                {
-                    break;
-                }
-                else
-                    res.Enqueue(nowpos);
+                res.Enqueue(t);
             }
         }
         return res.ToArray();
     }
-    public GChess InstansiateChessAt(GameObject prefab,Vector2Int location)
+    public Vector2Int[] GetOneRayRange(Vector2Int origin, Vector2Int dir, int maxLength)
+    {
+        Queue<Vector2Int> res = new Queue<Vector2Int>();
+        for (int d = 1; d<=maxLength; d++)
+        {
+            Vector2Int nowpos = d * dir + origin;
+            GChess t = GetChess(nowpos);
+            if (!InRange(nowpos) ||t!=null)
+            {
+                if(t!=null)
+                {
+                    res.Enqueue(nowpos);
+                }
+                break;
+            }
+            else
+                res.Enqueue(nowpos);
+        }
+        return res.ToArray();
+    }
+    public GChess InstansiateChessAt(GameObject prefab, Vector2Int location)
     {
         var res = Instantiate(prefab, floorTransform);
         res.transform.position = GridManager.instance.GetChessPosition3D(location);

@@ -60,4 +60,18 @@ public class UIManager : Manager<UIManager>
         CleanSkillButton();
         skillButtons = CreatButtonFromSkill(skills);
     }
+    public void DisableSkillButton()
+    {
+        foreach(GameObject t in skillButtons)
+        {
+            t.GetComponent<Button>().interactable = false;
+        }
+    }
+    public void ActiveSkillButton()
+    {
+        foreach (GameObject t in skillButtons)
+        {
+            t.GetComponent<Button>().interactable = true;
+        }
+    }
 }

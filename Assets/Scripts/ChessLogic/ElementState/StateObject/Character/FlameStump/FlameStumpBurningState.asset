@@ -15,6 +15,6 @@ MonoBehaviour:
   prefabEnterParticle: {fileID: 7250412730907975987, guid: 5cfe79246d0fafa45bd6d549f089ec65,
     type: 3}
   prefabExitParticle: {fileID: 0}
-  prefabPersistentParticle: {fileID: 7626863233938880488, guid: 8277774494f426a44ae364b9218b2ab4,
+  prefabPersistentParticle: {fileID: 7626863233938880488, guid: bda4ef69d7364dc489b2bc500123e2c8,
     type: 3}
   disableParticle: 0

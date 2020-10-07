@@ -23,7 +23,7 @@ public class GPlayerChess : GChess
     }
     protected virtual void OnSelect()
     {
-        if (curMovement > 0)
+        if (curMovement > 0&&!unableAct)
         {
             navComponent.GenNavInfo();
             MoveCommand moveCommand = new MoveCommand(navComponent.GetMoveRange, this, MoveTo);
@@ -31,6 +31,8 @@ public class GPlayerChess : GChess
             PlayerControlManager.instance.GenMoveCommand(moveCommand);
         }
         ShowUI();
+        if (unableAct)
+            UIManager.instance.DisableSkillButton();
     }
     protected virtual void OnDeselect()
     {

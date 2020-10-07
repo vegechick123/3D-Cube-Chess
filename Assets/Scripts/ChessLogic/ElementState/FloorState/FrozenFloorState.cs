@@ -24,5 +24,12 @@ public class FrozenFloorState: ElementStateBase
     {
         base.Exit();
     }
+    public override int ProcessDamage(Element element, int damage)
+    {
+        if (element == Element.Fire)
+            return 0;
+        else
+            return damage;
+    }
 }
 

@@ -79,6 +79,10 @@ public class CMoveComponent : Component
             return true;
         }
     }
+    virtual public bool RequestDirectMove(Vector2Int destination)
+    {
+        return RequestMove(new Vector2Int[] { destination});
+    }
     protected bool NextPosition()
     {
         //达到最终终点

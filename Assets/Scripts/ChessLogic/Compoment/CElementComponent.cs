@@ -6,7 +6,8 @@ using UnityEngine;
 public enum Element
 {
     Fire,
-    Ice
+    Ice,
+    None
 }
 public enum ElementState
 {
@@ -41,6 +42,10 @@ public class CElementComponent : Component
     public virtual void OnHitElement(Element element)
     {
         curStateObject.OnHitElement(element);
+    }
+    public virtual int ProcessDamage(Element element, int damage)
+    {
+        return curStateObject.ProcessDamage(element,damage);
     }
     public virtual void SwitchState(ElementState newState)
     {
