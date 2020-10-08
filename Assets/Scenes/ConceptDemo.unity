@@ -2393,6 +2393,12 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9062127573002030759, guid: 8fe2e4b0e90cf0a4a8c37cf41f42851c,
+        type: 3}
+      propertyPath: prefabHealthBar
+      value: 
+      objectReference: {fileID: 2138914560124234569, guid: f35b7ac6d97dc384a8b072ee6eb8e091,
+        type: 3}
     - target: {fileID: 9062127573283725505, guid: 8fe2e4b0e90cf0a4a8c37cf41f42851c,
         type: 3}
       propertyPath: m_LocalRotation.x

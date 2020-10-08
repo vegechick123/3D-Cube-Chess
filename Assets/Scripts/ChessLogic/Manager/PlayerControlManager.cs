@@ -17,6 +17,8 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 
 	public UnityEvent<GChess> eClickChess = new EventWrapper<GChess>();
 	public UnityEvent<GFloor> eClickFloor = new EventWrapper<GFloor>();
+	public UnityEvent<Vector2Int> eOverTile = new EventWrapper<Vector2Int>();
+	Vector2Int curTile= Vector2Int.down;
 	public UnityEvent eRightMouseClick = new UnityEvent();
 	//尝试选中target
 	public bool TrySelect(GChess target)
@@ -69,9 +71,27 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 		RaycastHit hit;
 		// Casts the ray and get the first game object hit
 		bool bHit=Physics.Raycast(ray, out hit);
+
+		GActor hitResult = null;
+		if(bHit)
+        {
+			hitResult = hit.transform.gameObject.GetComponent<GActor>();
+		}
+		Vector2Int hitTile=new Vector2Int(0,-1);
+		if(hitResult)
+        {
+			hitTile = hitResult.location;
+        }
+		if(hitTile!=curTile)
+        {
+			curTile = hitTile;
+			eOverTile.Invoke(hitTile);
+			//Debug.Log(hitTile);
+        }
+		
 		if (Input.GetMouseButtonDown(0)&&bHit)
 		{
-			switch (hit.transform.gameObject.GetComponent<GActor>())
+			switch (hitResult)
             {
 				case GChess chess:
 					eClickChess.Invoke(chess);

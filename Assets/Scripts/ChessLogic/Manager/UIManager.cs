@@ -16,7 +16,23 @@ public class UIManager : Manager<UIManager>
     public GameObject[] skillButtons;
     public GameObject skillBar;
     public UnityEvent eRefreshFloorHUD = new UnityEvent();
-
+    protected override void Awake()
+    {
+        base.Awake();
+        PlayerControlManager.instance.eOverTile.AddListener(OverTile);
+    }
+    void OverTile(Vector2Int location)
+    {
+        //鼠标不在一个Tile上的话location的值为（0，-1）
+        if(location==Vector2Int.down)
+        {
+            Debug.Log("Mouse on nothing");
+        }
+        else
+        {
+            Debug.Log("Mouse On" + location);
+        }
+    }
     public GameObject[] CreateFloorHUD(Vector2Int[] location, Color color)
     {
         GameObject[] gameObject = new GameObject[location.Length];
@@ -84,4 +100,5 @@ public class UIManager : Manager<UIManager>
             t.GetComponent<Button>().interactable = true;
         }
     }
+
 }

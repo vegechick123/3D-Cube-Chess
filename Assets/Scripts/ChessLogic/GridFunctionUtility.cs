@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
+//using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -68,6 +69,10 @@ static class GridFunctionUtility
             return Vector2Int.zero;
         }
         return new Vector2Int(x, y);
+    }
+    public static Vector3 Divide(this Vector3 a, Vector3 b)
+    {
+        return new Vector3(a.x/b.x, a.y / b.y, a.z / b.z);
     }
 
     public static void DestoryAll(this GameObject[] gameObjects)

@@ -83,7 +83,8 @@ public class GChess : GActor
     }
     protected virtual void OnDestroy()
     {
-        GridManager.instance.RemoveChess(this);
+        if(GridManager.instance)
+            GridManager.instance.RemoveChess(this);
 
     }
     #region 位移相关

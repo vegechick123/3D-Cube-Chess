@@ -31,7 +31,8 @@ public class FloorHUD : IChessUI
     public void Release()
     {
         bReleased = true;
-        UIManager.instance.eRefreshFloorHUD.RemoveListener(Refresh);
+        if(UIManager.instance)
+            UIManager.instance.eRefreshFloorHUD.RemoveListener(Refresh);
         rangeObject.DestoryAll();
     }
     public void Hide()
