@@ -1,39 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Internal;
+using System;
 
 public class HealthBar:IChessUI
 {
     // Start is called before the first frame update
-    
     bool bReleased;
-    GChess owner;
-    GameObject[] blood;
+    GChess owner;  
+    public GameObject healthBarObject;
     public HealthBar(GChess chess)
     {
-        owner=chess;
-        for (int i = 0; i < owner.health; i++)
-        {
-            //GameObject.Instantiate()
-        }
-
-       Refresh();
+        
+        owner =chess;
+        healthBarObject = UIManager.instance.CreateHealthBar(chess);
+        Refresh();
         //FloorHUD res = new FloorHUD();
     }
     public void Refresh()
     {
-        int health = owner.curHealth;
-        for (int i = 0; i < health; i++)
-            blood[i].SetActive(false);
+        healthBarObject.GetComponent<GetImage>().Refresh();
     }
     public void Release()
     {
+        bReleased = true;
+        GameObject.Destroy(healthBarObject);
     }
     public void Hide()
     {
+        healthBarObject.SetActive(false);//maxBlood
     }
     public void Show()
     {
-
+        healthBarObject.SetActive(true);//maxBlood
     }
 }

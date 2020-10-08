@@ -8,8 +8,10 @@ using UnityEngine.UI;
 public class UIManager : Manager<UIManager>
 {
     public GameObject prefabFloorHDU;
-
+    public GameObject prefabHealthBar;
     public GameObject prefabSkillButton;
+    public GameObject prefabImage;
+
     [NonSerialized]
     public GameObject[] skillButtons;
     public GameObject skillBar;
@@ -30,7 +32,15 @@ public class UIManager : Manager<UIManager>
         gameObject.GetComponent<MeshRenderer>().material.SetColor("_Color", color);
         return gameObject;
     }
+    public GameObject CreateHealthBar(GChess chess)
+    {
+        
+        GameObject gameObject = GameObject.Instantiate(prefabHealthBar,chess.render.transform);
+        gameObject.GetComponent<GetImage>().Init(chess);
 
+        return gameObject;
+    }
+   
     public void CleanSkillButton()
     {
         if(skillButtons!=null)
