@@ -12,7 +12,7 @@ public class FrozenState : ElementStateBase
         owner.render.material.SetFloat("_Blend", 1f);
         owner.render.GetComponent<Animator>().speed = 0;
         GChess chess = (owner as GChess);
-        chess.unableAct = true;
+        chess.DisableAction();
     }
     public override void OnHitElement(Element element)
     {
@@ -29,7 +29,7 @@ public class FrozenState : ElementStateBase
     public override void Exit()
     {
         GChess chess = (owner as GChess);
-        chess.unableAct = false;
+        chess.ActiveAction();
         owner.render.GetComponent<Animator>().speed = 1;
         base.Exit();
     }

@@ -93,6 +93,15 @@ public class CAICompoment : Component
     {
         return (actor as GAIChess).skill;
     }
+    public void CancelSkill()
+    {
+        if (floorHUD!=null)
+        {
+            floorHUD.Release();
+            floorHUD = null;
+        }
+        target = null;
+    }
     private void OnDestroy()
     {
         if(floorHUD!=null)

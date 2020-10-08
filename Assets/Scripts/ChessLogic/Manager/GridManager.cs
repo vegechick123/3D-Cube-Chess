@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 public class GridManager : Manager<GridManager>
@@ -44,6 +45,10 @@ public class GridManager : Manager<GridManager>
     public GChess[] GetChesses(int teamID)
     {
         return chesses.FindAll(x => x.teamID == teamID).ToArray();
+    }
+    public GChess[] GetChessesInRange(Vector2Int[] range)
+    {
+        return chesses.FindAll(x=>range.Contains(x.location)).ToArray();
     }
     public void AddChess(GChess chess)
     {

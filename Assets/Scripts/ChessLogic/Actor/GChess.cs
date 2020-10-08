@@ -1,29 +1,23 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Authentication.ExtendedProtection;
-using UnityEditor.MemoryProfiler;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SocialPlatforms;
 
 public class GChess : GActor
 {
     //无法行动
     [HideInInspector]
-    public bool unableAct;
+    public bool unableAct { get; protected set; }
 
-    public int health=3;
+    public int health = 3;
     //[HideInInspector]
     public int curHealth { get; protected set; }
 
-    public int movement=3;
+    public int movement = 3;
     [HideInInspector]
     public int curMovement;
 
     public int teamID;
 
-    protected UnityEvent eLocationChange= new UnityEvent();
+    protected UnityEvent eLocationChange = new UnityEvent();
     protected UnityEvent eMovementChange = new UnityEvent();
     [HideInInspector]
     public CNavComponent navComponent;
@@ -33,13 +27,13 @@ public class GChess : GActor
     protected override void Awake()
     {
         base.Awake();
-        
+
         GameManager.instance.eRoundStart.AddListener(OnRoundStart);
         GameManager.instance.eRoundEnd.AddListener(OnRoundEnd);
         navComponent = GetComponent<CNavComponent>();
         moveComponent = GetComponent<CMoveComponent>();
         GridManager.instance.AddChess(this);
-        
+
     }
     public override void OnGameStart()
     {
@@ -51,9 +45,9 @@ public class GChess : GActor
         curHealth = health;
         curMovement = movement;
     }
-    
+
     override protected void OnRoundStart()
-    { 
+    {
         curMovement = movement;
     }
     public void Recover(int value)
@@ -61,11 +55,11 @@ public class GChess : GActor
         curHealth += value;
         curHealth = Mathf.Min(curHealth, health);
     }
-    public void ElementDamage(Element element,int damage)
+    public void ElementDamage(Element element, int damage)
     {
         if (elementComponent)
         {
-            damage = elementComponent.ProcessDamage(element,damage);
+            damage = elementComponent.ProcessDamage(element, damage);
             Damage(damage);
             elementComponent.OnHitElement(element);
         }
@@ -77,7 +71,7 @@ public class GChess : GActor
     public void Damage(int value)
     {
         curHealth -= value;
-        if(curHealth<=0)
+        if (curHealth <= 0)
         {
             DieImmediately();
         }
@@ -85,7 +79,7 @@ public class GChess : GActor
     public void DieImmediately()
     {
         gameObject.SetActive(false);
-        Destroy(gameObject,0.5f);
+        Destroy(gameObject, 0.5f);
     }
     protected virtual void OnDestroy()
     {
@@ -98,14 +92,14 @@ public class GChess : GActor
     /// </summary>
     /// <param name="direction">方向，请保证是单位向量</param>
     /// <param name="distance">推动的距离</param>
-    public void PushToward(Vector2Int direction,int distance)
+    public void PushToward(Vector2Int direction, int distance)
     {
         Vector2Int destination = location;
-        for(int i=0;i<distance;i++)
+        for (int i = 0; i < distance; i++)
         {
             Vector2Int curLocation = destination + direction;
             if (GridManager.instance.GetChess(curLocation)
-                ||!GridManager.instance.InRange(curLocation))
+                || !GridManager.instance.InRange(curLocation))
             {
                 break;
             }
@@ -135,15 +129,15 @@ public class GChess : GActor
     public void MoveTo(Vector2Int destination)
     {
         Debug.Log("MoveTo " + destination);
-        navComponent.GenNavInfo();  
-        if(navComponent)
+        navComponent.GenNavInfo();
+        if (navComponent)
         {
             moveComponent.eFinishPath.AddListener(EnterLocation);
             navComponent.MoveToWtihNavInfo(destination);
             location = destination;
             curMovement = 0;
         }
-        else if(moveComponent)
+        else if (moveComponent)
         {
             Debug.LogError("Move To without navComponent");
         }
@@ -164,5 +158,13 @@ public class GChess : GActor
         moveComponent.eFinishPath.RemoveListener(EnterLocation);
     }
     #endregion
+    public virtual void DisableAction()
+    {
+        unableAct = true;
+    }
+    public virtual void ActiveAction()
+    {
+        unableAct = false;
+    }
 
 }
