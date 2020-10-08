@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 8714642836675817618}
   - component: {fileID: 5790514922615186940}
   - component: {fileID: 8418600207926531034}
+  - component: {fileID: 8622012460223552250}
   m_Layer: 0
   m_Name: 'AIChess '
   m_TagString: Untagged
@@ -166,6 +167,8 @@ MonoBehaviour:
   render: {fileID: 0}
   meshFilter: {fileID: 0}
   originMaterial: {fileID: 0}
+  title: 
+  info: 
   unableAct: 0
   health: 3
   movement: 3
@@ -238,3 +241,15 @@ MonoBehaviour:
   ColdState: {fileID: 11400000, guid: 09663489e01488549a3bac78a62dfeab, type: 2}
   FrozenState: {fileID: 11400000, guid: e7256f7b7b884c64d9dcc4335eb5f1e0, type: 2}
   state: 1
+--- !u!114 &8622012460223552250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8714642836675817610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd0898fcd5a28c49940dd76529321bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

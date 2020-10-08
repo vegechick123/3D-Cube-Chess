@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Security.Authentication.ExtendedProtection;
 using UnityEditor.MemoryProfiler;
@@ -149,6 +150,11 @@ public class GChess : GActor
     {
         GridManager.instance.GetFloor(location).OnChessEnter(this);
         moveComponent.eFinishPath.RemoveListener(EnterLocation);
+    }
+
+    public static implicit operator ScaleMode(GChess v)
+    {
+        throw new NotImplementedException();
     }
     #endregion
 
