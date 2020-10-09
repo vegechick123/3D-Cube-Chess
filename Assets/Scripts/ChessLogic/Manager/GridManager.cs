@@ -10,7 +10,7 @@ public class GridManager : Manager<GridManager>
 {
     public Vector2Int size;
     public Grid grid;
-    public Transform floorTransform;
+    public Transform chessContainer;
     protected GFloor[,] floors;
     protected List<GChess> chesses;
     protected override void Awake()
@@ -223,7 +223,7 @@ public class GridManager : Manager<GridManager>
     }
     public GChess InstansiateChessAt(GameObject prefab, Vector2Int location)
     {
-        var res = Instantiate(prefab, floorTransform);
+        var res = Instantiate(prefab, chessContainer);
         res.transform.position = GridManager.instance.GetChessPosition3D(location);
         GChess chess = res.GetComponent<GChess>();
         chess.location = location;

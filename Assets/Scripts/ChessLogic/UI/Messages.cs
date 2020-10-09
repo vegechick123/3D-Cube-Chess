@@ -18,24 +18,4 @@ public class Messages :MonoBehaviour
         //messageBoxObject
     }
 
-    public void Refresh()
-    {
-       
-    }
-    public void Release()
-    {
-        bReleased = true;
-        UIManager.instance.eRefreshFloorHUD.RemoveListener(Refresh);
-        //GameObject.Destroy(Message);
-        //Message2.DestoryAll();
-       
-    }
-    public void Hide()
-    {
-    }
-    public void Show()
-    {
-
-    }
-
 }

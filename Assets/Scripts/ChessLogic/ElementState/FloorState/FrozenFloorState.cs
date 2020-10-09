@@ -11,6 +11,7 @@ public class FrozenFloorState: ElementStateBase
     public override void OnHitElement(Element element)
     {
         base.OnHitElement(element);
+        return;
         switch (element)
         {
             case Element.Fire:
