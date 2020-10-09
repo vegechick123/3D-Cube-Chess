@@ -8,11 +8,63 @@ public class UIManager : Manager<UIManager>
     public GameObject prefabFloorHDU;
 
     public GameObject prefabSkillButton;
+<<<<<<< Updated upstream
 
     public GameObject[] skillButtons;
     public GameObject skillBar;
 
        
+=======
+    public GameObject prefabImage;
+    public GameObject prefabMessage;
+    [NonSerialized]
+    public GameObject[] skillButtons;
+    public GameObject skillBar;
+    public UnityEvent eRefreshFloorHUD = new UnityEvent();
+    public Transform panelContainer;
+    protected List<GameObject> alivePanels=new List<GameObject>();
+    protected override void Awake()
+    {
+        base.Awake();
+        PlayerControlManager.instance.eOverTile.AddListener(OverTile);
+        
+    }
+    void OverTile(Vector2Int location)
+    {
+
+        //鼠标不在一个Tile上的话location的值为（0，-1）
+        if(location==Vector2Int.down)
+        {
+            Debug.Log("Mouse on nothing");
+        }
+        else
+        {
+            Debug.Log("Mouse On" + location);
+           
+        }
+        CreateMessage(location);
+    }
+    public GameObject CreateMessage(Vector2Int location)
+    {
+        GChess t = GridManager.instance.GetChess(location);
+        GFloor f= GridManager.instance.GetFloor(location);
+        foreach(GameObject temp in alivePanels)
+        {
+            Destroy(temp);
+        }
+        alivePanels.Clear();
+        GameObject gameObject = GameObject.Instantiate(prefabMessage,panelContainer);
+        alivePanels.Add(gameObject);
+        if (location == Vector2Int.down)
+            Destroy(gameObject);
+        if (t != null)
+        {
+            gameObject.GetComponent<Messages>().Init(t);
+        }
+       
+         return gameObject;
+    }
+>>>>>>> Stashed changes
     public GameObject[] CreateFloorHUD(Vector2Int[] location, Color color)
     {
         GameObject[] gameObject = new GameObject[location.Length];
