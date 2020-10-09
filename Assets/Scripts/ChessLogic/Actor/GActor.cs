@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GActor : MonoBehaviour,IGetInfo
+public abstract class GActor : MonoBehaviour, IGetInfo
 {
     /// <summary>
     /// 表示Actor在网格中的位置
@@ -29,10 +29,10 @@ public abstract class GActor : MonoBehaviour,IGetInfo
         GameManager.instance.eGameStart.AddListener(OnGameStart);
         GameManager.instance.eGameEnd.AddListener(OnGameEnd);
         render = GetComponent<MeshRenderer>();
-        if(render==null)
+        if (render == null)
         {
             render = GetComponentInChildren<MeshRenderer>();
-            
+
         }
         meshFilter = render.GetComponent<MeshFilter>();
 
@@ -42,7 +42,7 @@ public abstract class GActor : MonoBehaviour,IGetInfo
     }
     public virtual void ElementReaction(Element element)
     {
-        if(elementComponent)
+        if (elementComponent)
         {
             elementComponent.OnHitElement(element);
         }
@@ -58,11 +58,11 @@ public abstract class GActor : MonoBehaviour,IGetInfo
     virtual public void OnGameStart()
     {
         var arr = GetComponents<Component>();
-        foreach(Component c in arr)
+        foreach (Component c in arr)
         {
             c.OnGameStart();
         }
-        
+
     }
     virtual protected void OnGameEnd()
     {
@@ -77,5 +77,14 @@ public abstract class GActor : MonoBehaviour,IGetInfo
     public string GetInfo()
     {
         return "Info";
+    }
+    public void OnValidate()
+    {
+        if (GridManager.instance != null)
+        {
+            Vector3 position = GridManager.instance.GetFloorPosition3D(location);
+            transform.position = new Vector3(position.x, transform.position.y, position.z);
+        }
+
     }
 }

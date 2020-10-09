@@ -68,7 +68,10 @@ public class CAICompoment : Component
     public void PrepareSkill()
     {
         if (target != null)
+        {
+            (actor as GChess).FaceToward((target.location - actor.location).Normalized());
             floorHUD = new FloorHUD(GetSkill().GetAffectRange, new Color(1, 0, 0, 0.8f));
+        }
         else
             Debug.Log("Target Miss");
         StartCoroutine(GridFunctionUtility.InvokeAfter(AIManager.instance.MoveNext, 0.5f));

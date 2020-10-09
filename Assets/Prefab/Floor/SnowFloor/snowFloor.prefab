@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4433733748461419789}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -49,6 +49,8 @@ MonoBehaviour:
   render: {fileID: 0}
   meshFilter: {fileID: 0}
   originMaterial: {fileID: 0}
+  title: 
+  info: 
 --- !u!65 &6559753714414813673
 BoxCollider:
   m_ObjectHideFlags: 0

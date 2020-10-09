@@ -167,5 +167,13 @@ public class GChess : GActor
     {
         unableAct = false;
     }
+    public void FaceToward(Vector3 dir)
+    {
+        transform.rotation = Quaternion.LookRotation(dir.normalized, Vector3.up);
+    }
+    public void FaceToward(Vector2Int dir)
+    {
+        FaceToward(new Vector3(dir.x,0,dir.y));
+    }
 
 }
