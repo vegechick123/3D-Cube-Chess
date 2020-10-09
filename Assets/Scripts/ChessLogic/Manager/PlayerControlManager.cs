@@ -86,8 +86,7 @@ public class PlayerControlManager : Manager<PlayerControlManager>
         {
 			curTile = hitTile;
 			eOverTile.Invoke(hitTile);
-			//Debug.Log(hitTile);
-        }
+		}
 		
 		if (Input.GetMouseButtonDown(0)&&bHit)
 		{

@@ -30,8 +30,8 @@ public class CAnimationMoveComponent : CMoveComponent
         {
             animator.Play("Move");
             Vector3 dir = curTargetPosition - transform.position;
-            if(dir.magnitude>0.01)
-                transform.rotation = Quaternion.LookRotation(dir.normalized, Vector3.up);
+            if (dir.magnitude > 0.01)
+                (actor as GChess).FaceToward(dir);
         }
         return res;
     }
@@ -45,7 +45,7 @@ public class CAnimationMoveComponent : CMoveComponent
             useAnimation = true;
             eFinishPath.RemoveListener(t);
         };
-        //UnityEvent.Action t = () => { useAnimation = true;eFinishPath.RemoveListener(t); };
+        
         eFinishPath.RemoveListener(t);
         return base.RequestMove(new Vector2Int[] {destination});
     }

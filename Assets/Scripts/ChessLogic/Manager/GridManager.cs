@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+[ExecuteInEditMode]
 public class GridManager : Manager<GridManager>
 {
     public Vector2Int size;
