@@ -87,11 +87,11 @@ namespace UnityTemplateProjects
             Vector3 direction = new Vector3();
             if (Input.GetKey(KeyCode.W))
             {
-                direction += Vector3.forward;
+                direction += Vector3.up;
             }
             if (Input.GetKey(KeyCode.S))
             {
-                direction += Vector3.back;
+                direction += Vector3.down;
             }
             if (Input.GetKey(KeyCode.A))
             {
