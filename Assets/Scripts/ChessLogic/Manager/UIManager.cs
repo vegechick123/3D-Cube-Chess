@@ -17,43 +17,71 @@ public class UIManager : Manager<UIManager>
     [NonSerialized]
     public GameObject[] skillButtons;
     public GameObject skillBar;
+    public GameObject prefabTempertureMonitor;
+    public TempertureMonitor[,] tempertureMonitors;
     public UnityEvent eRefreshFloorHUD = new UnityEvent();
     public Transform panelContainer;
-    protected List<GameObject> alivePanels=new List<GameObject>();
+    protected List<GameObject> alivePanels = new List<GameObject>();
     protected override void Awake()
     {
         base.Awake();
         PlayerControlManager.instance.eOverTile.AddListener(OverTile);
+    }
+    private void Start()
+    {
+        InitTempertureMonitor();
+    }
+    void InitTempertureMonitor()
+    {
+        tempertureMonitors = new TempertureMonitor[GridManager.instance.size.x, GridManager.instance.size.y];
+        for (int i = 0; i < GridManager.instance.size.x; i++)
+        {
+            for (int j = 0; j < GridManager.instance.size.y; j++)
+            {
+                GFloor target = GridManager.instance.GetFloor(new Vector2Int(i, j));
+                if (target == null) Debug.LogError(new Vector2Int(i, j));
+                tempertureMonitors[i, j] = Instantiate(prefabTempertureMonitor, target.transform).GetComponent<TempertureMonitor>();
+                tempertureMonitors[i, j].gameObject.SetActive(false);
+            }
+        }
+    }
+    public void ShowTemperture()
+    {
 
+        for (int i = 0; i < tempertureMonitors.GetLength(0); i++)
+            for (int j = 0; j < tempertureMonitors.GetLength(1); j++)
+            {
+                var t = tempertureMonitors[i, j];
+                t.gameObject.SetActive(true);
+                t.Init(TempertureManager.instance.GetTempatureAt(new Vector2Int(i, j)));
+        }
+    }
+    public void HideTemperture()
+    {
+
+        for (int i = 0; i < tempertureMonitors.GetLength(0); i++)
+            for (int j = 0; j < tempertureMonitors.GetLength(1); j++)
+            {
+                var t = tempertureMonitors[i, j];
+                t.gameObject.SetActive(false);
+                //t.Init(TempertureManager.instance.GetTempatureAt(new Vector2Int(i, j)));
+            }
     }
 
     void OverTile(Vector2Int location)
     {
-
-
-        //鼠标不在一个Tile上的话location的值为（0，-1）
-        if(location==Vector2Int.down)
-        {
-            Debug.Log("Mouse on nothing");
-        }
-        else
-        {
-            Debug.Log("Mouse On" + location);
-
-           
-        }
         CreateMessage(location);
     }
     public GameObject CreateMessage(Vector2Int location)
     {
         GChess t = GridManager.instance.GetChess(location);
-        GFloor f= GridManager.instance.GetFloor(location);
-        foreach(GameObject temp in alivePanels)
+        GFloor f = GridManager.instance.GetFloor(location);
+        foreach (GameObject temp in alivePanels)
         {
             Destroy(temp);
         }
         alivePanels.Clear();
-        GameObject gameObject = GameObject.Instantiate(prefabMessage,panelContainer);
+        GameObject gameObject = GameObject.Instantiate(prefabMessage, panelContainer);
         alivePanels.Add(gameObject);
         if (location == Vector2Int.down)
             Destroy(gameObject);
@@ -61,41 +89,41 @@ public class UIManager : Manager<UIManager>
         {
             gameObject.GetComponent<Messages>().Init(t);
         }
-       
-         return gameObject;
+
+        return gameObject;
     }
 
     public GameObject[] CreateFloorHUD(Vector2Int[] location, Color color)
     {
         GameObject[] gameObject = new GameObject[location.Length];
-        for(int i=0;i<location.Length;i++)
+        for (int i = 0; i < location.Length; i++)
         {
             gameObject[i] = CreateFloorHUD(location[i], color);
         }
         return gameObject;
     }
-    public GameObject CreateFloorHUD(Vector2Int location,Color color)
+    public GameObject CreateFloorHUD(Vector2Int location, Color color)
     {
-        GameObject gameObject= GameObject.Instantiate(prefabFloorHDU, GridManager.instance.GetFloorPosition3D(location) + new Vector3(0, 0.51f, 0),Quaternion.identity);
+        GameObject gameObject = GameObject.Instantiate(prefabFloorHDU, GridManager.instance.GetFloorPosition3D(location) + new Vector3(0, 0.51f, 0), Quaternion.identity);
         gameObject.GetComponent<MeshRenderer>().material.SetColor("_Color", color);
         return gameObject;
     }
     public GameObject CreateHealthBar(GChess chess)
     {
-        
-        GameObject gameObject = GameObject.Instantiate(prefabHealthBar,chess.render.transform);
+
+        GameObject gameObject = GameObject.Instantiate(prefabHealthBar, chess.render.transform);
         gameObject.GetComponent<GetImage>().Init(chess);
 
         return gameObject;
     }
-   
+
     public void CleanSkillButton()
     {
-        if(skillButtons!=null)
-        foreach(GameObject gameObject in skillButtons)
-        {
-            Destroy(gameObject);
-        }
+        if (skillButtons != null)
+            foreach (GameObject gameObject in skillButtons)
+            {
+                Destroy(gameObject);
+            }
     }
     public GameObject CreatButtonFromSkill(PlayerSkill skill)
     {
@@ -107,7 +135,7 @@ public class UIManager : Manager<UIManager>
     public GameObject[] CreatButtonFromSkill(PlayerSkill[] skills)
     {
         GameObject[] gameObjects = new GameObject[skills.Length];
-        for(int i=0;i< skills.Length;i++)
+        for (int i = 0; i < skills.Length; i++)
         {
             gameObjects[i] = CreatButtonFromSkill(skills[i]);
         }
@@ -120,7 +148,7 @@ public class UIManager : Manager<UIManager>
     }
     public void DisableSkillButton()
     {
-        foreach(GameObject t in skillButtons)
+        foreach (GameObject t in skillButtons)
         {
             t.GetComponent<Button>().interactable = false;
         }

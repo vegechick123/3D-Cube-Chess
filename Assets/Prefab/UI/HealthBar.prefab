@@ -114,9 +114,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138914560124234569}
-  m_LocalRotation: {x: 0.060087156, y: 0.8857576, z: 0.11976672, w: -0.444386}
+  m_LocalRotation: {x: 0.10922085, y: 0.88180065, z: 0.2506074, w: -0.38431033}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 2138914560479264773}
   - {fileID: 2138914560992483638}
@@ -138,8 +138,8 @@ MonoBehaviour:
   prefabImage: {fileID: 3992963152474904336, guid: 52f12c0660fd8d84cb571cb1ef651578,
     type: 3}
   bloodContainer: {fileID: 2138914560783839007}
-  bloodFramework: {fileID: 0}
-  blood: []
+  bloodFramework: {fileID: 2138914560068065354}
+  width: 0.5
 --- !u!114 &5262331946306459954
 MonoBehaviour:
   m_ObjectHideFlags: 0

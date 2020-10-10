@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 /// <summary>
 /// 用以
@@ -20,6 +21,7 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 	public UnityEvent<Vector2Int> eOverTile = new EventWrapper<Vector2Int>();
 	Vector2Int curTile= Vector2Int.down;
 	public UnityEvent eRightMouseClick = new UnityEvent();
+	public Button turnEndButton;
 	//尝试选中target
 	public bool TrySelect(GChess target)
 	{
@@ -41,9 +43,11 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 	public void PlayerTurnEnter()
     {
 		selectCommand.bPaused = false;
+		turnEndButton.interactable = true;
 	}
 	public void PlayerTurnExit()
 	{
+		turnEndButton.interactable = false;
 		DeSelect();
 		selectCommand.bPaused = true;
 	}
@@ -150,6 +154,8 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 				moveCommand.ShowFloorHUD();
 			}
 			UIManager.instance.eRefreshFloorHUD.Invoke();
+			selectedChess.hasActed = true;
+			DeSelect();
 		});
     }
 	protected void TerminateSkillCommand()

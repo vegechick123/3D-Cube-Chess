@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "FlameStumpBurningState", menuName = "ElementState/Character/FlameStump/FlameStumpBurningState")]
@@ -9,6 +10,8 @@ public class FlameStumpBurningState : ElementStateBase
 {
     [NonSerialized]
     protected int radius = 2;
+    public int coreTemperture = 3;
+    private CHeatSource heatSource;
     public override void Enter()
     {
         base.Enter();
@@ -25,6 +28,8 @@ public class FlameStumpBurningState : ElementStateBase
                 chess.ElementReaction(Element.Fire);
             }
         }
+        heatSource=owner.gameObject.AddComponent<CHeatSource>();
+        heatSource.coreTempature = coreTemperture;        
     }
     public override void OnHitElement(Element element)
     {
@@ -37,5 +42,10 @@ public class FlameStumpBurningState : ElementStateBase
             default:
                 break;
         }
+    }
+    public override void Exit()
+    {
+        base.Exit();
+        Destroy(heatSource);
     }
 }

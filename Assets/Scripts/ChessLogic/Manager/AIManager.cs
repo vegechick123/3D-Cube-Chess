@@ -10,7 +10,14 @@ public class AIManager : Manager<AIManager>
 {
     [HideInInspector]
     public List<CAICompoment> AIs = new List<CAICompoment>();
+    private EnemySpawn enemySpawn;
     private IEnumerator coroutine;//用于异步的协程
+    public GameObject curAI;
+    protected override void Awake()
+    {
+        base.Awake();
+        enemySpawn = GetComponent<EnemySpawn>();
+    }
     public void PreTurn()
     {
         coroutine = PreTurnAIExcute();
@@ -23,12 +30,14 @@ public class AIManager : Manager<AIManager>
             GChess chess=AI.actor as GChess;
             if (chess.unableAct)
                 continue;
+            curAI = AI.gameObject;
             AI.Visit();
             AI.PerformMove();
             yield return null;//移动完成后继续执行
             AI.PrepareSkill();
             yield return null;//准备完成后继续执行
         }
+        enemySpawn.SpawnEnemy();
         GameManager.instance.AIPreTurnEnd();
     }
     public void PostTurn()

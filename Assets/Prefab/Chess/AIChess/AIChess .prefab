@@ -166,6 +166,7 @@ MonoBehaviour:
   render: {fileID: 0}
   meshFilter: {fileID: 0}
   originMaterial: {fileID: 0}
+  elementComponent: {fileID: 0}
   title: 
   info: 
   health: 3
@@ -174,6 +175,8 @@ MonoBehaviour:
   teamID: 0
   navComponent: {fileID: 0}
   moveComponent: {fileID: 0}
+  immuniateEnvironmentColdness: 1
+  melt: 1
   skill: {fileID: 11400000, guid: 0420491c75df51b40b7c2ffed7f8a96d, type: 2}
 --- !u!114 &8714642836675817612
 MonoBehaviour:
@@ -235,7 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actor: {fileID: 0}
   BurningState: {fileID: 11400000, guid: 85dc8f9b3d5a08b4d9044dd37bb81d59, type: 2}
-  NormalState: {fileID: 11400000, guid: a67a031cbeb472a4aa64265ec211713a, type: 2}
+  NormalState: {fileID: 11400000, guid: c914b73ead9b1634591709bc4cce8319, type: 2}
   ColdState: {fileID: 11400000, guid: 09663489e01488549a3bac78a62dfeab, type: 2}
   FrozenState: {fileID: 11400000, guid: e7256f7b7b884c64d9dcc4335eb5f1e0, type: 2}
   state: 1

@@ -42,30 +42,36 @@ public class GameManager : Manager<GameManager>
     }
     protected void AIPreTurnStart ()
     {
+        Debug.Log("GameState:AIPreTurnStart");
         AIManager.instance.PreTurn();
     }
 
     public void AIPreTurnEnd()
     {
+        Debug.Log("GameState:AIPreTurnEnd");
         PlayerTurnStart();    
     }
 
     protected void PlayerTurnStart()
     {
+        Debug.Log("GameState:PlayerTurnStart");
         PlayerControlManager.instance.PlayerTurnEnter();
     }
     public void PlayerTurnEnd()
     {
+        Debug.Log("GameState:PlayerTurnEnd");
         PlayerControlManager.instance.PlayerTurnExit();
         AIPostTurnStart();
     }
     protected void AIPostTurnStart()
     {
+        Debug.Log("GameState:AIPostTurnStart");
         AIManager.instance.PostTurn();
     }
 
     public void AIPostTurnEnd()
     {
+        Debug.Log("GameState:AIPostTurnEnd");
         RoundEnd();
     }
     void RoundEnd()

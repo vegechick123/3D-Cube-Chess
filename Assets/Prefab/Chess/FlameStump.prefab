@@ -146,17 +146,19 @@ MonoBehaviour:
   render: {fileID: 0}
   meshFilter: {fileID: 0}
   originMaterial: {fileID: 0}
+  elementComponent: {fileID: 0}
   title: 
   info: 
   health: 3
-  movement: 3
+  movement: 0
   curMovement: 0
   teamID: 1
   navComponent: {fileID: 0}
   moveComponent: {fileID: 0}
+  immuniateEnvironmentColdness: 1
+  melt: 0
   skills:
   - {fileID: 11400000, guid: ee2f28bc5d3c3fb42af9c134102a47c2, type: 2}
-  - {fileID: 11400000, guid: 0b21ff458eb718640aa506f83ee053e0, type: 2}
 --- !u!114 &6460747280885505439
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NormalState", menuName = "ElementState/NormalState")]
 public class NormalState : ElementStateBase
 {
+    public bool frozenHitIce;
     public override void Enter()
     {
         base.Enter();
@@ -17,7 +18,12 @@ public class NormalState : ElementStateBase
         switch (element)
         {
             case Element.Ice:
-                stateMachine.SwitchState(ElementState.Cold);
+                if(frozenHitIce)
+                {
+                    stateMachine.SwitchState(ElementState.Frozen);
+                }
+                else
+                 stateMachine.SwitchState(ElementState.Cold);
                 break;
             case Element.Fire:
                 stateMachine.SwitchState(ElementState.Burning);

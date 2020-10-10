@@ -16,3 +16,4 @@ MonoBehaviour:
   prefabExitParticle: {fileID: 0}
   prefabPersistentParticle: {fileID: 0}
   disableParticle: 0
+  frozenHitIce: 1

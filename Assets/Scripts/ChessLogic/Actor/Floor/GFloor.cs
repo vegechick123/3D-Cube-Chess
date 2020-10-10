@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GFloor : GActor
 {
+    public bool transitable=true;
     protected override void Awake()
     {
         base.Awake();

@@ -6,8 +6,8 @@ public class GChess : GActor
     //无法行动
     [HideInInspector]
     public bool unableAct { get; protected set; }
-
-    public int health = 3;
+    public bool hasActed=false;
+public int health = 3;
     //[HideInInspector]
     public int curHealth { get; protected set; }
 
@@ -24,16 +24,18 @@ public class GChess : GActor
     [HideInInspector]
     public CMoveComponent moveComponent;
 
+    public HealthBar healthBar;
+    public bool immuniateEnvironmentColdness;
+    public bool melt;
+
     protected override void Awake()
     {
         base.Awake();
 
-        GameManager.instance.eRoundStart.AddListener(OnRoundStart);
-        GameManager.instance.eRoundEnd.AddListener(OnRoundEnd);
         navComponent = GetComponent<CNavComponent>();
         moveComponent = GetComponent<CMoveComponent>();
         GridManager.instance.AddChess(this);
-
+        healthBar = new HealthBar(this);
     }
     public override void OnGameStart()
     {
@@ -44,11 +46,27 @@ public class GChess : GActor
     {
         curHealth = health;
         curMovement = movement;
+        healthBar.Refresh();
     }
 
     override protected void OnRoundStart()
     {
         curMovement = movement;
+        hasActed = false;
+    }
+    protected override void OnRoundEnd()
+    {
+        base.OnRoundEnd();
+        int t=TempertureManager.instance.GetTempatureAt(location);
+        if(t<0)
+        {
+            if(!immuniateEnvironmentColdness)
+                ElementReaction(Element.Ice);
+        }  
+        else if(t>0)
+        {
+            ElementReaction(Element.Fire);
+        }
     }
     public void Recover(int value)
     {
@@ -59,7 +77,7 @@ public class GChess : GActor
     {
         if (elementComponent)
         {
-            damage = elementComponent.ProcessDamage(element, damage);
+            //damage = elementComponent.ProcessDamage(element, damage);
             Damage(damage);
             elementComponent.OnHitElement(element);
         }
@@ -75,6 +93,7 @@ public class GChess : GActor
         {
             DieImmediately();
         }
+        healthBar.Refresh();
     }
     public void DieImmediately()
     {
@@ -166,6 +185,12 @@ public class GChess : GActor
     public virtual void ActiveAction()
     {
         unableAct = false;
+    }
+    public override void ElementReaction(Element element)
+    {
+        base.ElementReaction(element);
+        if (melt&&element == Element.Fire)
+            Damage(1);
     }
     public void FaceToward(Vector3 dir)
     {

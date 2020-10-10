@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd480d52388481b4aba21ae894ee80ee, type: 3}
-  m_Name: PushRight
+  m_Script: {fileID: 11500000, guid: f8a066671c6bb2d409ece13b1392dd32, type: 3}
+  m_Name: ToFrozenNormalState
   m_EditorClassIdentifier: 
-  owner: {fileID: 0}
-  icon: {fileID: -6662812116773042688, guid: cb95beb56b7af6647a834d2c6d88871e, type: 3}
-  direction: {x: -1, y: 0}
-  distance: 1
-  length: 3
+  prefabEnterParticle: {fileID: 0}
+  prefabExitParticle: {fileID: 0}
+  prefabPersistentParticle: {fileID: 0}
+  disableParticle: 0
+  frozenHitIce: 1

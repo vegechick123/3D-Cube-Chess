@@ -17,7 +17,7 @@ public abstract class GActor : MonoBehaviour, IGetInfo
     [HideInInspector]
     public Material originMaterial;
     [HideInInspector]
-    protected CElementComponent elementComponent;
+    public CElementComponent elementComponent;
     public string title;
     public string info;
 

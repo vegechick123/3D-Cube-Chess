@@ -93,6 +93,16 @@ public class GridManager : Manager<GridManager>
     {
         return grid.GetCellCenterWorld(new Vector3Int(location.x, location.y, 0)) + new Vector3(0, 0, 0);
     }
+    public bool CheckTransitability(Vector2Int location)
+    {
+        if (!InRange(location))
+            return false;
+        if(GetChess(location)||!GetFloor(location).transitable)
+        {
+            return false;
+        }
+        return true;
+    }
     public Vector3 GetFloorPosition3D(Vector2Int location)
     {
         return grid.GetCellCenterWorld(new Vector3Int(location.x, location.y, 0)) - new Vector3(0, 0.5f, 0);
@@ -127,8 +137,8 @@ public class GridManager : Manager<GridManager>
                     vis.Add(loc);
 
                 GFloor floor = GetFloor(loc);
-                GChess chess = GetChess(loc);
-                if (!floor || (chess != null && chess.teamID != teamID))
+               // GChess chess = GetChess(loc);
+                if (!floor || !CheckTransitability(loc))
                 {
                     continue;
                 }
@@ -137,14 +147,15 @@ public class GridManager : Manager<GridManager>
                     queue.Enqueue((loc, node.Item2 - 1, res.Count));
                     res.Enqueue(loc);
                     prev.Enqueue(node.Item3);
-                    if (!chess)
-                    {
-                        occupy.Enqueue(false);
-                    }
-                    else
-                    {
-                        occupy.Enqueue(true);
-                    }
+                    occupy.Enqueue(false);
+                    //if (!chess)
+                    //{
+                    //    occupy.Enqueue(false);
+                    //}
+                    //else
+                    //{
+                    //    occupy.Enqueue(true);
+                    //}
                 }
             }
         }

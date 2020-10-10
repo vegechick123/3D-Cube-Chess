@@ -38,6 +38,10 @@ public class CAICompoment : Component
             foreach (GChess curTarget in targets)
                 if (AIChess.skill.GetRange().InRange(curTarget.location))
                 {
+                    if(curTarget.elementComponent.state==ElementState.Frozen)
+                    {
+                        continue;
+                    }
                     target = curTarget;
                     desination = location;
                     break;
@@ -50,9 +54,19 @@ public class CAICompoment : Component
     /// </summary>
     public void PerformMove()
     {
-        AIChess.moveComponent.eFinishPath.AddListener(MoveComplete);
-        AIChess.MoveTo(desination);
-        AIChess.skill.Decide(target);
+        if (AIChess.location == desination)
+        {
+           StartCoroutine(GridFunctionUtility.InvokeAfter(MoveComplete, 0.5f));
+        }
+        else
+        {
+            AIChess.moveComponent.eFinishPath.AddListener(MoveComplete);
+            if (target != null)
+            {
+                AIChess.MoveTo(desination);
+                AIChess.skill.Decide(target);
+            }
+        }
     }
     /// <summary>
     /// 移动完成的回调函数，通知AIManager进行下一步操作

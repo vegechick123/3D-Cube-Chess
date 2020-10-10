@@ -70,6 +70,10 @@ static class GridFunctionUtility
         }
         return new Vector2Int(x, y);
     }
+    public static int ManhattonDistance(this Vector2Int a,Vector2Int b)
+    {
+        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+    }
     public static Vector3 Divide(this Vector3 a, Vector3 b)
     {
         return new Vector3(a.x/b.x, a.y / b.y, a.z / b.z);
