@@ -178,9 +178,11 @@ MonoBehaviour:
     type: 3}
   prefabFreezenFootBrokenVFX: {fileID: 7626863233938880488, guid: 53cb52ed4d7bd30449b71d5a7c29602c,
     type: 3}
+  prefabWarmVFX: {fileID: 7626863233938880488, guid: 8277774494f426a44ae364b9218b2ab4,
+    type: 3}
   hasActed: 0
   health: 3
-  movement: 3
+  movement: 4
   curMovement: 0
   teamID: 1
   navComponent: {fileID: 0}
@@ -188,6 +190,7 @@ MonoBehaviour:
   deathParticle: {fileID: 0}
   immuniateEnvironmentColdness: 0
   melt: 0
+  countInActiveChess: 1
   skills:
   - {fileID: 11400000, guid: ee2f28bc5d3c3fb42af9c134102a47c2, type: 2}
   - {fileID: 0}

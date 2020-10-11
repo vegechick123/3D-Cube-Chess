@@ -12,7 +12,7 @@ public class AIManager : Manager<AIManager>
     [HideInInspector]
     public List<CAICompoment> AIs = new List<CAICompoment>();
     private EnemySpawn enemySpawn;
-    private IEnumerator coroutine;//用于异步的协程
+
     public GameObject curAI;
     protected override void Awake()
     {
@@ -55,12 +55,5 @@ public class AIManager : Manager<AIManager>
         }
         StartCoroutine(GridFunctionUtility.InvokeAfter(GameManager.instance.AIPostTurnEnd, 1f));
     }
-    /// <summary>
-    /// 执行下一步
-    /// </summary>
-    public void MoveNext()
-    {
-        //Debug.Log("Next");
-        coroutine.MoveNext();
-    }
+    
 }

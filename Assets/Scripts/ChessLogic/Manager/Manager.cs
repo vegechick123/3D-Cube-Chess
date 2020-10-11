@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 public class Manager<T> : MonoBehaviour where T : MonoBehaviour
 {
     public static T instance { get; protected set; }
+    protected IEnumerator coroutine;//用于异步的协程
     virtual protected void Awake()
     {
         if(instance!=null)
@@ -18,5 +20,13 @@ public class Manager<T> : MonoBehaviour where T : MonoBehaviour
     virtual protected void OnDestroy()
     {
         instance = null;
+    }
+    /// <summary>
+    /// 执行下一步
+    /// </summary>
+    public void MoveNext()
+    {
+        //Debug.Log("Next");
+        coroutine.MoveNext();
     }
 }

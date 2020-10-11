@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Boo.Lang;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class GChess : GActor
@@ -11,7 +12,12 @@ public class GChess : GActor
 
 
     public GameObject prefabFreezenFootVFX;
+
     public GameObject prefabFreezenFootBrokenVFX;
+    protected bool warm;
+
+    protected GameObject warmVFX;
+    public GameObject prefabWarmVFX;
     public bool unableAct { get; protected set; }
     public bool hasActed=false;
     public int health = 3;
@@ -36,7 +42,7 @@ public class GChess : GActor
     public HealthBar healthBar;
     public bool immuniateEnvironmentColdness;
     public bool melt;
-
+    public bool countInActiveChess=true;
     protected override void Awake()
     {
         base.Awake();
@@ -208,7 +214,16 @@ public class GChess : GActor
     }
     public override void ElementReaction(Element element)
     {
+        if(element==Element.Ice&&warm)
+        {
+            DeactiveWarm();
+            return;
+        }
         base.ElementReaction(element);
+        if(element==Element.Fire)
+        {
+            DeactiveFreezeFoot();
+        }
         if (melt&&element == Element.Fire)
             Damage(1);
     }
@@ -238,5 +253,37 @@ public class GChess : GActor
             GridFunctionUtility.CreateParticleAt(prefabFreezenFootBrokenVFX, this);
         freezenFootVFX = null;
     }
-
+    public void Warm()
+    {
+        if (warm)
+            return;
+        if (prefabWarmVFX != null)
+        {
+            warmVFX = GridFunctionUtility.CreateParticleAt(prefabWarmVFX, this);
+            warmVFX.transform.parent = render.transform;
+        }
+        warm = true;
+    }
+    public void DeactiveWarm()
+    {
+        if (!warm)
+            return;
+        warm = false;
+        if(warmVFX!=null)
+        Destroy(warmVFX);
+        warmVFX = null;
+        
+    }
+    public List<IGetInfo> GetInfos()
+    {
+        List<IGetInfo> list = new List<IGetInfo>();
+        list.Add(this);
+        if (freezeFoot)
+            list.Add(new Information("冻足", "脚被冻住了，无法自己移动，通过强制位移和高温可以解除"));
+        if(warm)
+            list.Add(new Information("温暖", "抵抗下一次受到的低温"));
+        if (elementComponent.state==ElementState.Frozen)
+            list.Add(new Information("冰冻", "无法行动，可通过高温解除"));
+        return list;
+    }
 }

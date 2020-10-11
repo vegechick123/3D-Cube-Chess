@@ -28,7 +28,7 @@ public class NormalState : ElementStateBase
                 break;
             case Element.Fire:
                 if(burningHitFire)
-                stateMachine.SwitchState(ElementState.Burning);
+                    stateMachine.SwitchState(ElementState.Burning);
                 break;
             default:
                 break;

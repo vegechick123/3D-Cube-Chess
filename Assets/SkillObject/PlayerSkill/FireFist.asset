@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: FireFist
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  title: "\u708E\u62F3"
+  info: "\u5411\u76EE\u6807\u65BD\u52A0\u9AD8\u6E29\uFF0C\u5E76\u671D\u8FD9\u4E2A\u65B9\u5411\u63A8\u52A8\u654C\u4EBA"
   icon: {fileID: -2292719611878453243, guid: cb95beb56b7af6647a834d2c6d88871e, type: 3}
   distance: 1
   length: 1

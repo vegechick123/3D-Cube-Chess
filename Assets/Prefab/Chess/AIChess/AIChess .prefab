@@ -174,9 +174,11 @@ MonoBehaviour:
   title: 
   info: 
   freezeFoot: 0
+  prefabFreezenFootVFX: {fileID: 0}
+  prefabFreezenFootBrokenVFX: {fileID: 0}
   hasActed: 0
-  health: 3
-  movement: 7
+  health: 2
+  movement: 5
   curMovement: 0
   teamID: 0
   navComponent: {fileID: 0}

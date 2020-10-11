@@ -25,7 +25,7 @@ public class SCloseAttack : AISkill
     {
         GChess chess = GridManager.instance.GetChess(owner.location + direction);
         if(chess!=null)
-            chess.PushToward(direction,1);
+            chess.ElementReaction(Element.Ice);
     }
     
     public override Vector2Int[] GetAffectRange()

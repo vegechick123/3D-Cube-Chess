@@ -23,6 +23,9 @@ public class GameManager : Manager<GameManager>
     public UnityEvent eGameStart = new UnityEvent();
     public UnityEvent eGameEnd = new UnityEvent();
     public GameObject winUI;
+    public ParticleSystem snowWeatherParticle;
+    public Color BrightColor;
+    public Light sun;
     protected override void Awake()
     {
         base.Awake();
@@ -52,9 +55,18 @@ public class GameManager : Manager<GameManager>
     {
         Debug.Log("GameState:AIPreTurnEnd");
 
-        PlayerTurnStart();    
+        EnvironmentPreTurnStart();    
     }
+    protected void EnvironmentPreTurnStart()
+    {
+        //Debug.Log("GameState:PlayerTurnStart");
+        EnvironmentManager.instance.PreTurn();
 
+    }
+    public void EnvironmentPreTurnEnd()
+    {
+        PlayerTurnStart();        
+    }
     protected void PlayerTurnStart()
     {
         Debug.Log("GameState:PlayerTurnStart");
@@ -65,6 +77,14 @@ public class GameManager : Manager<GameManager>
         Debug.Log("GameState:PlayerTurnEnd");
         PlayerControlManager.instance.PlayerTurnExit();
         ePlayerTurnEnd.Invoke();
+        EnvironmentPostTurnStart();
+    }
+    protected void EnvironmentPostTurnStart()
+    {
+        EnvironmentManager.instance.PostTurn();
+    }
+    public void EnvironmentPostTurnEnd()
+    {
         AIPostTurnStart();
     }
     protected void AIPostTurnStart()
@@ -83,9 +103,24 @@ public class GameManager : Manager<GameManager>
         eRoundEnd.Invoke();
         RoundStart();
     }
-    void GameWin()
+    public void GameWin()
     {
         winUI.SetActive(true);
+        snowWeatherParticle.Stop();
+        StartCoroutine(WatherClear());
+    }
+    IEnumerator WatherClear()
+    {
+        Color originColor = Camera.main.backgroundColor;
+        float originLight = sun.intensity;
+        float t = 0;
+        while(t<3)
+        {
+            Camera.main.backgroundColor = Color.Lerp(originColor, BrightColor,t);
+            sun.intensity = Mathf.Lerp(originLight, 1.6f, t);
+            t += Time.deltaTime / 3;
+            yield return null;
+        }
     }
     void GameEnd()
     {

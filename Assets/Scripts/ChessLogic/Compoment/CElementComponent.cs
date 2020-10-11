@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UnityEngine;
+using UnityEngine.Events;
+
 public enum Element
 {
     Fire,
@@ -27,6 +29,7 @@ public class CElementComponent : Component
     public ElementStateBase FrozenState;
     public ElementState state = ElementState.Normal;
     protected ElementStateBase curStateObject;
+    public UnityEvent<ElementState> eStateEnter = new EventWrapper<ElementState>();
     protected override void Awake()
     {
         base.Awake();
@@ -55,6 +58,7 @@ public class CElementComponent : Component
         curStateObject = GetNewStateObject(state);
         curStateObject.Init(actor, this);
         curStateObject.Enter();
+        eStateEnter.Invoke(newState);
     }
     protected ElementStateBase GetNewStateObject(ElementState newState)
     {

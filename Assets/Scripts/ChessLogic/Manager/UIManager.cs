@@ -65,7 +65,6 @@ public class UIManager : Manager<UIManager>
             {
                 var t = tempertureMonitors[i, j];
                 t.gameObject.SetActive(false);
-                //t.Init(TempertureManager.instance.GetTempatureAt(new Vector2Int(i, j)));
             }
     }
 
@@ -74,7 +73,7 @@ public class UIManager : Manager<UIManager>
         GChess t = GridManager.instance.GetChess(location);
         var list = new List<IGetInfo>();
         if (t != null)
-            list.Add(t);
+            list.AddRange(t.GetInfos());
         list.AddRange(GridManager.instance.GetEnvironmentInformation(location));
         CreateMessage(list);
     }
@@ -90,7 +89,7 @@ public class UIManager : Manager<UIManager>
         {
             GameObject gameObject = GameObject.Instantiate(prefabMessage, panelContainer);
             alivePanels.Add(gameObject);
-            gameObject.GetComponent<Messages>().Init(info);
+            gameObject.GetComponent<Messages>().Init(info);            
         }
 
         return gameObject;
@@ -133,6 +132,7 @@ public class UIManager : Manager<UIManager>
         GameObject gameObject = Instantiate(prefabSkillButton, skillBar.transform);
         gameObject.GetComponent<Image>().sprite = skill.icon;
         gameObject.GetComponent<Button>().onClick.AddListener(skill.CreateCommand);
+        gameObject.GetComponent<SkillButton>().skill = skill;
         return gameObject;
     }
     public GameObject[] CreatButtonFromSkill(PlayerSkill[] skills)

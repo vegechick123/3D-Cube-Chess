@@ -4,43 +4,67 @@ using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 public class EnemySpawn : MonoBehaviour
 {
-    public int maxEnemyNum=5;
+    public int maxEnemyOverNum=5;
     public int num = 2;
     public int spawnDistance=3;
-    public GameObject prefabEnemy;
+    public GameObject[] prefabEnemy;
+    [SerializeField] protected float[] probability;
     public void SpawnEnemy()
     {
-        int minY = 100,maxY=0;
-        GChess[] targets = GridManager.instance.GetChesses(1);
-        foreach(var t in targets)
-        {
-            if (t.elementComponent.state == ElementState.Frozen)
-                continue;
-            minY = Mathf.Min(minY, t.location.y);
-            maxY = Mathf.Max(minY, t.location.y);
-        }
-        if(maxY<minY)
-        {
-            return;
-        }
-        Vector2Int leftButtom=new Vector2Int(0,minY-spawnDistance),rightTop=new Vector2Int(GridManager.instance.size.x, maxY+spawnDistance);
+        Vector2Int yRange = GridFunctionUtility.GetPlayerChessyRange();
+        yRange.x = Mathf.Max(0, yRange.x - spawnDistance);
+        yRange.y = Mathf.Min(GridManager.instance.size.y-1, yRange.y + spawnDistance);
+        
         int cntNum = AIManager.instance.AIs.Count;
-        int spawnnum = Mathf.Min(num,maxEnemyNum-cntNum);
+        foreach(CAICompoment t in AIManager.instance.AIs)
+        {
+            if (t.actor.elementComponent.state == ElementState.Frozen)
+                cntNum--;
+        }
+        int maxEnemyNum = maxEnemyOverNum + GridManager.instance.GetPlayerActiveChesses().Count;
+        int spawnnum = Mathf.Min(num, maxEnemyNum - cntNum);
+        
         for (int i=0;i<spawnnum;i++)
         {
-            Vector2Int targetLocation = GetValidLocation(leftButtom, rightTop);
-            GridManager.instance.InstansiateChessAt(prefabEnemy,targetLocation);
+                      
+            Vector2Int targetLocation = GetValidLocation(yRange);
+            GridManager.instance.InstansiateChessAt(ChooseRandomEnemy(),targetLocation);
         }
 
     }
-    Vector2Int GetValidLocation(Vector2Int leftButtom, Vector2Int rightTop)
+    GameObject ChooseRandomEnemy()
+    {
+        System.Random random = new System.Random();
+        int index = 0;
+        if (probability.Length == prefabEnemy.Length)
+        {
+            float rand = (float)random.NextDouble();
+            float sum = 0;
+            foreach (float x in probability)
+            {
+                sum += x;
+            }
+            rand *= sum;
+            sum = 0;
+            for (int i = 0; i < probability.Length; i++)
+            {
+                sum += probability[i];
+                if (rand < sum)
+                {
+                    index = i;
+                    break;
+                }
+            }
+        }
+        return prefabEnemy[index];
+    }
+    Vector2Int GetValidLocation(Vector2Int yRange)
     {        
         Vector2Int t = new Vector2Int();
         do
         {
-            t = GridFunctionUtility.GetRandomLocation(leftButtom,rightTop);
+            t = GridFunctionUtility.GetRandomLocation(yRange);
         } while (!GridManager.instance.CheckTransitability(t));
         return t;
     }
-    
 }

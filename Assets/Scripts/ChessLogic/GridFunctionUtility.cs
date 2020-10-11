@@ -102,6 +102,31 @@ static class GridFunctionUtility
     {
         return GameObject.Instantiate(prefab, actor.transform.position + prefab.transform.position, prefab.transform.rotation, null);
     }
+    public static GameObject CreateParticleAt(GameObject prefab, Vector2Int location)
+    {
+        return GameObject.Instantiate(prefab, GridManager.instance.GetChessPosition3D(location) + prefab.transform.position, prefab.transform.rotation, null);
+    }
+    public static Vector2Int GetPlayerChessyRange()
+    {
+        int minY = 100, maxY = 0;
+        GChess[] targets = GridManager.instance.GetChesses(1);
+        foreach (var t in targets)
+        {
+            if (t.elementComponent.state == ElementState.Frozen)
+                continue;
+            minY = Mathf.Min(minY, t.location.y);
+            maxY = Mathf.Max(minY, t.location.y);
+        }
+        if (maxY < minY)
+        {
+            maxY = minY = -1;
+        }
+        return new Vector2Int(minY, maxY);
+    }
+    public static Vector2Int GetRandomLocation(Vector2Int yRange)
+    {
+        return GetRandomLocation(new Vector2Int(0,yRange.x), new Vector2Int(GridManager.instance.size.x-1, yRange.y));
+    }
     public static Vector2Int GetRandomLocation(Vector2Int leftButtom, Vector2Int rightTop)
     {
         System.Random random = new System.Random();

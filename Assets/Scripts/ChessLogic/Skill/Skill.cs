@@ -6,8 +6,8 @@ public abstract class Skill: ScriptableObject,IGetInfo
 {
     [HideInInspector]
     public GChess owner;
-    string title;
-    string info;
+    public string title;
+    public string info;
     public string GetInfo()
     {
         return info;
