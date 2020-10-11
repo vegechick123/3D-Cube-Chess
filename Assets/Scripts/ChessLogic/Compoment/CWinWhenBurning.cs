@@ -5,8 +5,9 @@ using UnityEngine;
 public class CWinWhenBurning : Component
 {
     // Start is called before the first frame update
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         GetComponent<CElementComponent>().eStateEnter.AddListener(state =>
         {
             if (state == ElementState.Burning)

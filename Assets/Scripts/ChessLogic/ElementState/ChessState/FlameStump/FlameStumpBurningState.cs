@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "FlameStumpBurningState", menuName = "ElementState/Character/FlameStump/FlameStumpBurningState")]

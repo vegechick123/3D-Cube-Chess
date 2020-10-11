@@ -171,11 +171,12 @@ MonoBehaviour:
     type: 3}
   iceParticle: {fileID: 4898306076701040203, guid: bb94e0effad1f394a888bbe809e13560,
     type: 3}
-  title: 
-  info: 
+  title: "\u96EA\u4EBA"
+  info: "\u8FD1\u6218\u653B\u51FB\uFF0C\u4F1A\u5728\u53D1\u8D77\u653B\u51FB\u524D\u963B\u6B62\u76EE\u6807\u79FB\u52A8"
   freezeFoot: 0
   prefabFreezenFootVFX: {fileID: 0}
   prefabFreezenFootBrokenVFX: {fileID: 0}
+  prefabWarmVFX: {fileID: 0}
   hasActed: 0
   health: 2
   movement: 5
@@ -187,6 +188,7 @@ MonoBehaviour:
     type: 3}
   immuniateEnvironmentColdness: 1
   melt: 1
+  countInActiveChess: 1
   skill: {fileID: 11400000, guid: 0420491c75df51b40b7c2ffed7f8a96d, type: 2}
 --- !u!114 &8714642836675817612
 MonoBehaviour:
