@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab608a1b6c58d1842a361aa9ec11c137, type: 3}
   m_Name: FlameStumpBurningState
   m_EditorClassIdentifier: 
-  prefabEnterParticle: {fileID: 7250412730907975987, guid: 5cfe79246d0fafa45bd6d549f089ec65,
-    type: 3}
+  prefabEnterParticle: {fileID: 0}
   prefabExitParticle: {fileID: 0}
   prefabPersistentParticle: {fileID: 7626863233938880488, guid: bda4ef69d7364dc489b2bc500123e2c8,
     type: 3}
   disableParticle: 0
+  coreTemperture: 4

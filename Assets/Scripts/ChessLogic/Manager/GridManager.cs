@@ -242,5 +242,28 @@ public class GridManager : Manager<GridManager>
         chess.render.GetComponent<Animator>().Play("Birth");
         return chess;
     }
+    public List<Information> GetEnvironmentInformation(Vector2Int location)
+    {
+
+        List<Information> list = new List<Information>();
+        if (location == Vector2Int.down)
+            return list;
+        int t = TempertureManager.instance.GetTempatureAt(location);
+        string info = string.Empty;
+        if(t>0)
+        {
+            info = "留在这里的角色会受到温暖";
+        }
+        else if(t==0)
+        {
+            info = "温度正好";
+        }
+        else
+        {
+            info = "留在这里的角色会受到寒冷";
+        }
+        list.Add(new Information("温度：" + t, info));
+        return list;
+    }
 
 }

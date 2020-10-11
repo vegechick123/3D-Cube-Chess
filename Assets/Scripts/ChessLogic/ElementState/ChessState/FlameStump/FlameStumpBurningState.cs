@@ -15,19 +15,19 @@ public class FlameStumpBurningState : ElementStateBase
     public override void Enter()
     {
         base.Enter();
-        Vector2Int[] Range = GridManager.instance.GetCircleRange(owner.location,radius);
-        foreach(Vector2Int position in Range)
-        {
-            GridManager.instance.GetFloor(position).ElementReaction(Element.Fire);
-        }
-        GChess[] chesses = GridManager.instance.GetChessesInRange(Range);
-        foreach (GChess chess in chesses)
-        {
-            if(chess!=owner)
-            {
-                chess.ElementReaction(Element.Fire);
-            }
-        }
+        //Vector2Int[] Range = GridManager.instance.GetCircleRange(owner.location,radius);
+        //foreach(Vector2Int position in Range)
+        //{
+        //    GridManager.instance.GetFloor(position).ElementReaction(Element.Fire);
+        //}
+        //GChess[] chesses = GridManager.instance.GetChessesInRange(Range);
+        //foreach (GChess chess in chesses)
+        //{
+        //    if(chess!=owner)
+        //    {
+        //        chess.ElementReaction(Element.Fire);
+        //    }
+        //}
         heatSource=owner.gameObject.AddComponent<CHeatSource>();
         heatSource.coreTempature = coreTemperture;        
     }

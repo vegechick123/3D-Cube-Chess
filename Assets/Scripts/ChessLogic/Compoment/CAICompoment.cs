@@ -85,6 +85,7 @@ public class CAICompoment : Component
         {
             (actor as GChess).FaceToward((target.location - actor.location).Normalized());
             floorHUD = new FloorHUD(GetSkill().GetAffectRange, new Color(1, 0, 0, 0.8f));
+            AIChess.skill.PreCast();
         }
         else
             Debug.Log("Target Miss");
@@ -121,7 +122,10 @@ public class CAICompoment : Component
     }
     private void OnDestroy()
     {
-        if(floorHUD!=null)
+        Debug.Log(gameObject + "AIDestory");
+        if(AIManager.instance)
+            AIManager.instance.AIs.Remove(this);
+        if (floorHUD!=null)
             floorHUD.Release();
         floorHUD = null;
     }

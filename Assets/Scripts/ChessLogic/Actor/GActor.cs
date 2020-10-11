@@ -18,6 +18,9 @@ public abstract class GActor : MonoBehaviour, IGetInfo
     public Material originMaterial;
     [HideInInspector]
     public CElementComponent elementComponent;
+
+    public GameObject fireParticle;
+    public GameObject iceParticle;
     public string title;
     public string info;
 
@@ -26,6 +29,7 @@ public abstract class GActor : MonoBehaviour, IGetInfo
         //注册事件
         GameManager.instance.eRoundStart.AddListener(OnRoundStart);
         GameManager.instance.eRoundEnd.AddListener(OnRoundEnd);
+        GameManager.instance.ePlayerTurnEnd.AddListener(OnPlayerTurnEnd);
         GameManager.instance.eGameStart.AddListener(OnGameStart);
         GameManager.instance.eGameEnd.AddListener(OnGameEnd);
         render = GetComponent<MeshRenderer>();
@@ -44,10 +48,32 @@ public abstract class GActor : MonoBehaviour, IGetInfo
     {
         if (elementComponent)
         {
+            switch (element)
+            {
+                case Element.Fire:
+                    if (iceParticle != null)
+                    {
+                        GridFunctionUtility.CreateParticleAt(fireParticle, this);
+                    }
+                    break;
+                case Element.Ice:
+                    if (iceParticle != null)
+                    {
+                        GridFunctionUtility.CreateParticleAt(iceParticle, this);
+                    }
+                    break;
+                    
+                default:
+                    break;
+            }
             elementComponent.OnHitElement(element);
         }
     }
     virtual protected void OnRoundStart()
+    {
+
+    }
+    virtual protected void OnPlayerTurnEnd()
     {
 
     }
@@ -71,12 +97,12 @@ public abstract class GActor : MonoBehaviour, IGetInfo
 
     public string GetTitle()
     {
-        return "Title";
+        return title;
     }
 
     public string GetInfo()
     {
-        return "Info";
+        return info;
     }
     public void OnValidate()
     {

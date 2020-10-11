@@ -19,6 +19,10 @@ public abstract class AISkill : Skill
     /// </summary>
     /// <param name="target">CAIComponent选中的目标</param>
     public abstract void Decide(GChess target);
+    public virtual void PreCast()
+    {
+
+    }
     /// <summary>
     /// 根据Decide函数设定的值进行行动
     /// </summary>

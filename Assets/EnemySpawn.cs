@@ -4,6 +4,7 @@ using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 public class EnemySpawn : MonoBehaviour
 {
+    public int maxEnemyNum=5;
     public int num = 2;
     public int spawnDistance=3;
     public GameObject prefabEnemy;
@@ -15,15 +16,17 @@ public class EnemySpawn : MonoBehaviour
         {
             if (t.elementComponent.state == ElementState.Frozen)
                 continue;
-            minY = Mathf.Min(minY, t.location.y-spawnDistance);
-            maxY = Mathf.Max(minY, t.location.y+spawnDistance);
+            minY = Mathf.Min(minY, t.location.y);
+            maxY = Mathf.Max(minY, t.location.y);
         }
         if(maxY<minY)
         {
             return;
         }
-        Vector2Int leftButtom=new Vector2Int(0,minY),rightTop=new Vector2Int(GridManager.instance.size.x, maxY);
-        for (int i=0;i<num;i++)
+        Vector2Int leftButtom=new Vector2Int(0,minY-spawnDistance),rightTop=new Vector2Int(GridManager.instance.size.x, maxY+spawnDistance);
+        int cntNum = AIManager.instance.AIs.Count;
+        int spawnnum = Mathf.Min(num,maxEnemyNum-cntNum);
+        for (int i=0;i<spawnnum;i++)
         {
             Vector2Int targetLocation = GetValidLocation(leftButtom, rightTop);
             GridManager.instance.InstansiateChessAt(prefabEnemy,targetLocation);
@@ -31,13 +34,11 @@ public class EnemySpawn : MonoBehaviour
 
     }
     Vector2Int GetValidLocation(Vector2Int leftButtom, Vector2Int rightTop)
-    {
-        System.Random random = new System.Random();
+    {        
         Vector2Int t = new Vector2Int();
         do
         {
-            t.y = random.Next(leftButtom.y, rightTop.y);
-            t.x = random.Next(leftButtom.x, rightTop.x);
+            t = GridFunctionUtility.GetRandomLocation(leftButtom,rightTop);
         } while (!GridManager.instance.CheckTransitability(t));
         return t;
     }

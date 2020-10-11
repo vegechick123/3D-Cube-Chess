@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -70,24 +71,26 @@ public class UIManager : Manager<UIManager>
 
     void OverTile(Vector2Int location)
     {
-        CreateMessage(location);
-    }
-    public GameObject CreateMessage(Vector2Int location)
-    {
         GChess t = GridManager.instance.GetChess(location);
-        GFloor f = GridManager.instance.GetFloor(location);
+        var list = new List<IGetInfo>();
+        if (t != null)
+            list.Add(t);
+        list.AddRange(GridManager.instance.GetEnvironmentInformation(location));
+        CreateMessage(list);
+    }
+    public GameObject CreateMessage(List<IGetInfo> infos)
+    {
+        //GChess t = GridManager.instance.GetChess(location);
         foreach (GameObject temp in alivePanels)
         {
             Destroy(temp);
         }
         alivePanels.Clear();
-        GameObject gameObject = GameObject.Instantiate(prefabMessage, panelContainer);
-        alivePanels.Add(gameObject);
-        if (location == Vector2Int.down)
-            Destroy(gameObject);
-        if (t != null)
+        foreach (IGetInfo info in infos)
         {
-            gameObject.GetComponent<Messages>().Init(t);
+            GameObject gameObject = GameObject.Instantiate(prefabMessage, panelContainer);
+            alivePanels.Add(gameObject);
+            gameObject.GetComponent<Messages>().Init(info);
         }
 
         return gameObject;

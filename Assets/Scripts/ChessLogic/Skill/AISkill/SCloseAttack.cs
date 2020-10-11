@@ -15,12 +15,19 @@ public class SCloseAttack : AISkill
     {
         direction = target.location-owner.location;
     }
+    public override void PreCast()
+    {
+        GChess chess = GridManager.instance.GetChess(owner.location + direction);
+        if (chess != null)
+            chess.FreezeFoot();
+    }
     public override void Perform()
     {
         GChess chess = GridManager.instance.GetChess(owner.location + direction);
         if(chess!=null)
-        chess.PushToward(direction,1);
+            chess.PushToward(direction,1);
     }
+    
     public override Vector2Int[] GetAffectRange()
     {
         return new Vector2Int[] { direction + owner.location };

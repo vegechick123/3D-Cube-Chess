@@ -6,6 +6,7 @@ using UnityEngine;
 public class NormalState : ElementStateBase
 {
     public bool frozenHitIce;
+    public bool burningHitFire=true;
     public override void Enter()
     {
         base.Enter();
@@ -26,6 +27,7 @@ public class NormalState : ElementStateBase
                  stateMachine.SwitchState(ElementState.Cold);
                 break;
             case Element.Fire:
+                if(burningHitFire)
                 stateMachine.SwitchState(ElementState.Burning);
                 break;
             default:

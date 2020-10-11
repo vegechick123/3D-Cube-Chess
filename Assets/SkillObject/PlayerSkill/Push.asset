@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   icon: {fileID: -2292719611878453243, guid: cb95beb56b7af6647a834d2c6d88871e, type: 3}
-  distance: 1
+  distance: 2
   length: 1
+  element: 2

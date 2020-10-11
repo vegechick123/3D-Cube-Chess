@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using UnityEngine;
 /// <summary>
 /// 管理AI的单例类

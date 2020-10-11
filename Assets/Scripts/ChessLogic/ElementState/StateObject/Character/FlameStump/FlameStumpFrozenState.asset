@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc81694c16fc96d448801dbb1a5712b1, type: 3}
   m_Name: FlameStumpFrozenState
   m_EditorClassIdentifier: 
-  prefabEnterParticle: {fileID: 4898306076701040203, guid: bb94e0effad1f394a888bbe809e13560,
-    type: 3}
+  prefabEnterParticle: {fileID: 0}
   prefabExitParticle: {fileID: 0}
   prefabPersistentParticle: {fileID: 0}
   disableParticle: 0

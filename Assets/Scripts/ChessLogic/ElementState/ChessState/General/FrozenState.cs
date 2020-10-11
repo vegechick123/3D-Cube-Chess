@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FrozenState", menuName = "ElementState/FrozenState")]
 public class FrozenState : ElementStateBase
 {
-    public Material snowMaterial;
+    //public Material snowMaterial;
     public override void Enter()
     {
         base.Enter();

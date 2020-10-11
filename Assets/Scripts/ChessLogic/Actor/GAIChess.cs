@@ -12,6 +12,7 @@ public class GAIChess : GChess
         aiCompoment = GetComponent<CAICompoment>();
         skill = Instantiate(skill);
         skill.owner = this;
+        healthBar.Show();
     }
     protected override void OnDestroy()
     {        

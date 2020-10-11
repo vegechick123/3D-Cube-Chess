@@ -5,9 +5,16 @@ public class GChess : GActor
 {
     //无法行动
     [HideInInspector]
+    public bool freezeFoot=false;
+
+    protected GameObject freezenFootVFX;
+
+
+    public GameObject prefabFreezenFootVFX;
+    public GameObject prefabFreezenFootBrokenVFX;
     public bool unableAct { get; protected set; }
     public bool hasActed=false;
-public int health = 3;
+    public int health = 3;
     //[HideInInspector]
     public int curHealth { get; protected set; }
 
@@ -24,6 +31,8 @@ public int health = 3;
     [HideInInspector]
     public CMoveComponent moveComponent;
 
+
+    public GameObject deathParticle;
     public HealthBar healthBar;
     public bool immuniateEnvironmentColdness;
     public bool melt;
@@ -36,6 +45,7 @@ public int health = 3;
         moveComponent = GetComponent<CMoveComponent>();
         GridManager.instance.AddChess(this);
         healthBar = new HealthBar(this);
+        healthBar.Hide();
     }
     public override void OnGameStart()
     {
@@ -54,19 +64,20 @@ public int health = 3;
         curMovement = movement;
         hasActed = false;
     }
-    protected override void OnRoundEnd()
+    protected override void OnPlayerTurnEnd()
     {
-        base.OnRoundEnd();
-        int t=TempertureManager.instance.GetTempatureAt(location);
-        if(t<0)
+        base.OnPlayerTurnEnd();
+        int t = TempertureManager.instance.GetTempatureAt(location);
+        if (t < 0)
         {
-            if(!immuniateEnvironmentColdness)
+            if (!immuniateEnvironmentColdness)
                 ElementReaction(Element.Ice);
-        }  
-        else if(t>0)
+        }
+        else if (t > 0)
         {
             ElementReaction(Element.Fire);
         }
+        DeactiveFreezeFoot();
     }
     public void Recover(int value)
     {
@@ -97,8 +108,11 @@ public int health = 3;
     }
     public void DieImmediately()
     {
+        Debug.Log("Chess:" + gameObject + "Die");
         gameObject.SetActive(false);
-        Destroy(gameObject, 0.5f);
+        if (deathParticle != null)
+            GridFunctionUtility.CreateParticleAt(deathParticle,this);
+        Destroy(gameObject);
     }
     protected virtual void OnDestroy()
     {
@@ -118,9 +132,14 @@ public int health = 3;
         for (int i = 0; i < distance; i++)
         {
             Vector2Int curLocation = destination + direction;
-            if (GridManager.instance.GetChess(curLocation)
-                || !GridManager.instance.InRange(curLocation))
+            GChess t = GridManager.instance.GetChess(curLocation);
+            if (t|| !GridManager.instance.InRange(curLocation))
             {
+                //if(t)
+                //{
+                //    t.PushToward(direction, distance - i);
+                //}
+                //destination.x
                 break;
             }
             else
@@ -130,6 +149,7 @@ public int health = 3;
 
         }
         MoveToDirectly(destination);
+        DeactiveFreezeFoot();
     }
     /// <summary>
     /// 不通过寻路径直走向终点
@@ -199,6 +219,24 @@ public int health = 3;
     public void FaceToward(Vector2Int dir)
     {
         FaceToward(new Vector3(dir.x,0,dir.y));
+    }
+    public void FreezeFoot()
+    {
+        if (freezeFoot)
+            return;
+        if(prefabFreezenFootVFX!=null)
+            freezenFootVFX = GridFunctionUtility.CreateParticleAt(prefabFreezenFootVFX, this);
+        freezeFoot = true;
+    }
+    public void DeactiveFreezeFoot()
+    {
+        if (!freezeFoot)
+            return;
+        freezeFoot = false;
+        Destroy(freezenFootVFX);
+        if(prefabFreezenFootBrokenVFX!=null)
+            GridFunctionUtility.CreateParticleAt(prefabFreezenFootBrokenVFX, this);
+        freezenFootVFX = null;
     }
 
 }
