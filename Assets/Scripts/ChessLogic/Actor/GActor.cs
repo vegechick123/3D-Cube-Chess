@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public abstract class GActor : MonoBehaviour, IGetInfo
 {
     /// <summary>
@@ -18,12 +18,12 @@ public abstract class GActor : MonoBehaviour, IGetInfo
     public Material originMaterial;
     [HideInInspector]
     public CElementComponent elementComponent;
-
+    public UnityEvent<Element> eElementReaction = new EventWrapper<Element>();
     public GameObject fireParticle;
     public GameObject iceParticle;
     public string title;
     public string info;
-
+    
     virtual protected void Awake()
     {
         //注册事件
@@ -67,6 +67,7 @@ public abstract class GActor : MonoBehaviour, IGetInfo
                     break;
             }
             elementComponent.OnHitElement(element);
+            eElementReaction.Invoke(element);
         }
     }
     virtual protected void OnRoundStart()

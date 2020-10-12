@@ -194,7 +194,7 @@ public class GridManager : Manager<GridManager>
             }
         return res.ToArray();
     }
-    public Vector2Int[] GetFourRayRange(Vector2Int origin,int maxLength)
+    public Vector2Int[] GetFourRayRange(Vector2Int origin,int maxLength,int beginDistance=1)
     {
         Queue<Vector2Int> res = new Queue<Vector2Int>();
         Vector2Int[] dir = new Vector2Int[4];
@@ -204,7 +204,7 @@ public class GridManager : Manager<GridManager>
         dir[3] = new Vector2Int(0, -1);
         for (int i = 0; i < 4; i++)
         {
-            Vector2Int[] temp = GetOneRayRange(origin, dir[i],maxLength);
+            Vector2Int[] temp = GetOneRayRange(origin, dir[i],maxLength,beginDistance);
             foreach (Vector2Int t in temp)
             {
                 res.Enqueue(t);
@@ -212,7 +212,7 @@ public class GridManager : Manager<GridManager>
         }
         return res.ToArray();
     }
-    public Vector2Int[] GetOneRayRange(Vector2Int origin, Vector2Int dir, int maxLength)
+    public Vector2Int[] GetOneRayRange(Vector2Int origin, Vector2Int dir, int maxLength, int beginDistance = 1)
     {
         Queue<Vector2Int> res = new Queue<Vector2Int>();
         for (int d = 1; d<=maxLength; d++)
@@ -221,7 +221,7 @@ public class GridManager : Manager<GridManager>
             GChess t = GetChess(nowpos);
             if (!InRange(nowpos) ||t!=null)
             {
-                if(t!=null)
+                if(t!=null&&d>=beginDistance)
                 {
                     res.Enqueue(nowpos);
                 }
@@ -252,7 +252,7 @@ public class GridManager : Manager<GridManager>
         string info = string.Empty;
         if(t>0)
         {
-            info = "留在这里的角色会受到温暖";
+            info = "留在这里的角色会受到高温";
         }
         else if(t==0)
         {
@@ -260,7 +260,7 @@ public class GridManager : Manager<GridManager>
         }
         else
         {
-            info = "留在这里的角色会受到寒冷";
+            info = "留在这里的角色会受到低温";
         }
         list.Add(new Information("温度：" + t, info));
         list.AddRange(EnvironmentManager.instance.GetInfos(location));

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 public class Manager<T> : MonoBehaviour where T : MonoBehaviour
 {
@@ -28,5 +29,20 @@ public class Manager<T> : MonoBehaviour where T : MonoBehaviour
     {
         //Debug.Log("Next");
         coroutine.MoveNext();
+        if(coroutine.Current!=null)
+        {
+            object t = coroutine.Current;
+            switch (t)
+            {
+                case float t1:
+                    this.InvokeAfter(MoveNext, t1);
+                break;
+                case Func<IEnumerator> f:
+                    MoveNext();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

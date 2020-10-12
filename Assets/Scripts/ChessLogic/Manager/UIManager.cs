@@ -23,6 +23,7 @@ public class UIManager : Manager<UIManager>
     public UnityEvent eRefreshFloorHUD = new UnityEvent();
     public Transform panelContainer;
     protected List<GameObject> alivePanels = new List<GameObject>();
+    protected GameObject overTileFloorHUD;
     protected override void Awake()
     {
         base.Awake();
@@ -67,9 +68,16 @@ public class UIManager : Manager<UIManager>
                 t.gameObject.SetActive(false);
             }
     }
-
+    
     void OverTile(Vector2Int location)
     {
+        if (overTileFloorHUD != null)
+            Destroy(overTileFloorHUD);
+        if(location!=Vector2Int.down)
+        {
+            overTileFloorHUD = CreateFloorHUD(location, Color.yellow);
+        }
+
         GChess t = GridManager.instance.GetChess(location);
         var list = new List<IGetInfo>();
         if (t != null)

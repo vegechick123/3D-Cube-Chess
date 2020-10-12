@@ -68,7 +68,7 @@ public class EnvironmentManager : Manager<EnvironmentManager>
         List<IGetInfo> list= new List<IGetInfo>();
         if(stormLocation.Contains(location))
         {
-            list.Add(new Information("冰风暴","留在这里的任何角色都会受到寒冷"));
+            list.Add(new Information("冰风暴","留在这里的任何角色都会受到低温"));
         }
         return list;
     }

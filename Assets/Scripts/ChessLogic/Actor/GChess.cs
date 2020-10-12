@@ -7,7 +7,8 @@ public class GChess : GActor
     //无法行动
     [HideInInspector]
     public bool freezeFoot=false;
-
+    [HideInInspector]
+    public UnityEvent eFreezeFootBroken = new UnityEvent();
     protected GameObject freezenFootVFX;
 
 
@@ -31,6 +32,7 @@ public class GChess : GActor
     public int teamID;
 
     protected UnityEvent eLocationChange = new UnityEvent();
+    public UnityEvent eBePush = new UnityEvent();
     protected UnityEvent eMovementChange = new UnityEvent();
     [HideInInspector]
     public CNavComponent navComponent;
@@ -154,6 +156,7 @@ public class GChess : GActor
             }
 
         }
+        eBePush.Invoke();
         MoveToDirectly(destination);
         DeactiveFreezeFoot();
     }
@@ -247,6 +250,7 @@ public class GChess : GActor
     {
         if (!freezeFoot)
             return;
+        eFreezeFootBroken.Invoke();
         freezeFoot = false;
         Destroy(freezenFootVFX);
         if(prefabFreezenFootBrokenVFX!=null)
@@ -279,7 +283,7 @@ public class GChess : GActor
         List<IGetInfo> list = new List<IGetInfo>();
         list.Add(this);
         if (freezeFoot)
-            list.Add(new Information("冻足", "脚被冻住了，无法自己移动，通过强制位移和高温可以解除"));
+            list.Add(new Information("冻足", "脚被冻住，无法自己移动\n当自己或攻击发起者受到高温可以解除"));
         if(warm)
             list.Add(new Information("温暖", "抵抗下一次受到的低温"));
         if (elementComponent.state==ElementState.Frozen)

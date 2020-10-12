@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "CloseAttack", menuName = "Skills/AISkill/CloseAttack")]
 public class SCloseAttack : AISkill
@@ -18,7 +20,29 @@ public class SCloseAttack : AISkill
     {
         GChess chess = GridManager.instance.GetChess(owner.location + direction);
         if (chess != null)
+        {
             chess.FreezeFoot();
+            UnityAction a; UnityAction<Element> b;
+            a = () =>
+              {
+                  chess.DeactiveFreezeFoot();
+              };
+            b = (element) =>
+              {
+                  if (element == Element.Fire)
+                  {
+                      chess.DeactiveFreezeFoot();
+                  };
+              };
+            owner.eBePush.AddListener(a);
+            owner.eElementReaction.AddListener(b);
+            chess.eFreezeFootBroken.AddListener(() =>
+            {
+                owner.eBePush.RemoveListener(a);
+                owner.eElementReaction.RemoveListener(b);
+            });
+            
+        }
     }
     public override void Perform()
     {

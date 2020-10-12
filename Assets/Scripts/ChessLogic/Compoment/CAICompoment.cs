@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.Events;
 /// <summary>
 /// 这是用附加在GAIChess上的决策组件
 /// 它根据Chess的移动范围以及技能的释放范围决定两件事，1.在这个回合移动到哪里，2.以哪个Chess作为技能目标
@@ -125,8 +126,6 @@ public class CAICompoment : Component
         Debug.Log(gameObject + "AIDestory");
         if(AIManager.instance)
             AIManager.instance.AIs.Remove(this);
-        if (floorHUD!=null)
-            floorHUD.Release();
-        floorHUD = null;
+        CancelSkill();
     }
 }

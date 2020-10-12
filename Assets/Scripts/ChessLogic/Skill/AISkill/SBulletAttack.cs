@@ -8,11 +8,12 @@ public class SBulletAttack : AISkill
 {
     public int maxLength=3;
     public int damage;
+    public int beginDistance = 1;
     public Element element;
     protected Vector2Int direction;
     public override Vector2Int[] GetRange()
     {
-        return GridManager.instance.GetFourRayRange(owner.location, maxLength);
+        return GridManager.instance.GetFourRayRange(owner.location, maxLength,beginDistance);
     }
     public override void Decide(GChess target)
     {
