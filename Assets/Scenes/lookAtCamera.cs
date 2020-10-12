@@ -8,14 +8,6 @@ using UnityEngine;
 public class lookAtCamera : MonoBehaviour
 {
     public bool IsStopInSceneView = false;
-    void OnDrawGizmos()
-    {
-        if (IsStopInSceneView == false && Application.isPlaying == false && SceneView.currentDrawingSceneView.camera != null)
-        {
-            Rot(SceneView.currentDrawingSceneView.camera.
-                transform);
-        }
-    }
 
     void Update()
     {

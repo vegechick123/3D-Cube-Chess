@@ -166,14 +166,29 @@ MonoBehaviour:
   render: {fileID: 0}
   meshFilter: {fileID: 0}
   originMaterial: {fileID: 0}
-  title: 
-  info: 
-  health: 3
-  movement: 3
+  elementComponent: {fileID: 0}
+  fireParticle: {fileID: 7250412730907975987, guid: 5cfe79246d0fafa45bd6d549f089ec65,
+    type: 3}
+  iceParticle: {fileID: 4898306076701040203, guid: bb94e0effad1f394a888bbe809e13560,
+    type: 3}
+  title: "\u96EA\u4EBA"
+  info: "\u8FD1\u6218\u653B\u51FB\uFF0C\u4F1A\u5728\u53D1\u8D77\u653B\u51FB\u524D\u963B\u6B62\u76EE\u6807\u79FB\u52A8"
+  freezeFoot: 0
+  prefabFreezenFootVFX: {fileID: 0}
+  prefabFreezenFootBrokenVFX: {fileID: 0}
+  prefabWarmVFX: {fileID: 0}
+  hasActed: 0
+  health: 2
+  movement: 5
   curMovement: 0
   teamID: 0
   navComponent: {fileID: 0}
   moveComponent: {fileID: 0}
+  deathParticle: {fileID: 7626863233938880488, guid: 53cb52ed4d7bd30449b71d5a7c29602c,
+    type: 3}
+  immuniateEnvironmentColdness: 1
+  melt: 1
+  countInActiveChess: 1
   skill: {fileID: 11400000, guid: 0420491c75df51b40b7c2ffed7f8a96d, type: 2}
 --- !u!114 &8714642836675817612
 MonoBehaviour:
@@ -234,8 +249,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actor: {fileID: 0}
-  BurningState: {fileID: 11400000, guid: 85dc8f9b3d5a08b4d9044dd37bb81d59, type: 2}
-  NormalState: {fileID: 11400000, guid: a67a031cbeb472a4aa64265ec211713a, type: 2}
+  BurningState: {fileID: 0}
+  NormalState: {fileID: 11400000, guid: 4380615ddcd777940986061903ac7dae, type: 2}
   ColdState: {fileID: 11400000, guid: 09663489e01488549a3bac78a62dfeab, type: 2}
   FrozenState: {fileID: 11400000, guid: e7256f7b7b884c64d9dcc4335eb5f1e0, type: 2}
   state: 1

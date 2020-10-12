@@ -72,7 +72,7 @@ public class CMoveComponent : Component
                 {
                     s += p.ToString();
                 }
-                Debug.Log("The Path is" + s);
+
             }
             state = MoveState.Moving;
             curTargetPosition= GridManager.instance.GetChessPosition3D(path.Dequeue());

@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: IceBulletAttack
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  maxLength: 3
+  title: 
+  info: 
+  maxLength: 7
   damage: 1
+  beginDistance: 2
   element: 1

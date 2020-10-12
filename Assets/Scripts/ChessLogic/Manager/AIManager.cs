@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using UnityEngine;
 /// <summary>
 /// 管理AI的单例类
@@ -10,7 +11,14 @@ public class AIManager : Manager<AIManager>
 {
     [HideInInspector]
     public List<CAICompoment> AIs = new List<CAICompoment>();
-    private IEnumerator coroutine;//用于异步的协程
+    private EnemySpawnManager enemySpawn;
+
+    public GameObject curAI;
+    protected override void Awake()
+    {
+        base.Awake();
+        enemySpawn = GetComponent<EnemySpawnManager>();
+    }
     public void PreTurn()
     {
         coroutine = PreTurnAIExcute();
@@ -23,11 +31,20 @@ public class AIManager : Manager<AIManager>
             GChess chess=AI.actor as GChess;
             if (chess.unableAct)
                 continue;
+            curAI = AI.gameObject;
             AI.Visit();
+            var t=UIManager.instance.CreateFloorHUD(AI.actor.location, Color.yellow);
+            yield return 1f;
+            Destroy(t);
             AI.PerformMove();
             yield return null;//移动完成后继续执行
             AI.PrepareSkill();
             yield return null;//准备完成后继续执行
+        }
+        IEnumerator spawnCor = enemySpawn.SpawnEnemy();
+        while(spawnCor.MoveNext())
+        {
+            yield return spawnCor.Current;
         }
         GameManager.instance.AIPreTurnEnd();
     }
@@ -40,17 +57,12 @@ public class AIManager : Manager<AIManager>
     {
         foreach (var AI in AIs)
         {
+            GameObject t = UIManager.instance.CreateFloorHUD(AI.location, Color.yellow);
             AI.PerformSkill();
             yield return null;//技能释放完成后继续执行
+            Destroy(t);
         }
-        StartCoroutine(GridFunctionUtility.InvokeAfter(GameManager.instance.AIPostTurnEnd, 1f));
+        this.InvokeAfter(GameManager.instance.AIPostTurnEnd, 1f);
     }
-    /// <summary>
-    /// 执行下一步
-    /// </summary>
-    public void MoveNext()
-    {
-        //Debug.Log("Next");
-        coroutine.MoveNext();
-    }
+    
 }

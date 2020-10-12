@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.Events;
 /// <summary>
 /// 这是用附加在GAIChess上的决策组件
 /// 它根据Chess的移动范围以及技能的释放范围决定两件事，1.在这个回合移动到哪里，2.以哪个Chess作为技能目标
@@ -38,6 +39,10 @@ public class CAICompoment : Component
             foreach (GChess curTarget in targets)
                 if (AIChess.skill.GetRange().InRange(curTarget.location))
                 {
+                    if(curTarget.elementComponent.state==ElementState.Frozen)
+                    {
+                        continue;
+                    }
                     target = curTarget;
                     desination = location;
                     break;
@@ -50,9 +55,19 @@ public class CAICompoment : Component
     /// </summary>
     public void PerformMove()
     {
-        AIChess.moveComponent.eFinishPath.AddListener(MoveComplete);
-        AIChess.MoveTo(desination);
-        AIChess.skill.Decide(target);
+        if (AIChess.location == desination)
+        {
+           StartCoroutine(GridFunctionUtility.InvokeAfter(MoveComplete, 0.5f));
+        }
+        else
+        {
+            AIChess.moveComponent.eFinishPath.AddListener(MoveComplete);
+            if (target != null)
+            {
+                AIChess.MoveTo(desination);
+                AIChess.skill.Decide(target);
+            }
+        }
     }
     /// <summary>
     /// 移动完成的回调函数，通知AIManager进行下一步操作
@@ -71,6 +86,7 @@ public class CAICompoment : Component
         {
             (actor as GChess).FaceToward((target.location - actor.location).Normalized());
             floorHUD = new FloorHUD(GetSkill().GetAffectRange, new Color(1, 0, 0, 0.8f));
+            AIChess.skill.PreCast();
         }
         else
             Debug.Log("Target Miss");
@@ -107,8 +123,9 @@ public class CAICompoment : Component
     }
     private void OnDestroy()
     {
-        if(floorHUD!=null)
-            floorHUD.Release();
-        floorHUD = null;
+        Debug.Log(gameObject + "AIDestory");
+        if(AIManager.instance)
+            AIManager.instance.AIs.Remove(this);
+        CancelSkill();
     }
 }

@@ -9,22 +9,26 @@ public class FlameStumpBurningState : ElementStateBase
 {
     [NonSerialized]
     protected int radius = 2;
+    public int coreTemperture = 3;
+    private CHeatSource heatSource;
     public override void Enter()
     {
         base.Enter();
-        Vector2Int[] Range = GridManager.instance.GetCircleRange(owner.location,radius);
-        foreach(Vector2Int position in Range)
-        {
-            GridManager.instance.GetFloor(position).ElementReaction(Element.Fire);
-        }
-        GChess[] chesses = GridManager.instance.GetChessesInRange(Range);
-        foreach (GChess chess in chesses)
-        {
-            if(chess!=owner)
-            {
-                chess.ElementReaction(Element.Fire);
-            }
-        }
+        //Vector2Int[] Range = GridManager.instance.GetCircleRange(owner.location,radius);
+        //foreach(Vector2Int position in Range)
+        //{
+        //    GridManager.instance.GetFloor(position).ElementReaction(Element.Fire);
+        //}
+        //GChess[] chesses = GridManager.instance.GetChessesInRange(Range);
+        //foreach (GChess chess in chesses)
+        //{
+        //    if(chess!=owner)
+        //    {
+        //        chess.ElementReaction(Element.Fire);
+        //    }
+        //}
+        heatSource=owner.gameObject.AddComponent<CHeatSource>();
+        heatSource.coreTempature = coreTemperture;        
     }
     public override void OnHitElement(Element element)
     {
@@ -37,5 +41,10 @@ public class FlameStumpBurningState : ElementStateBase
             default:
                 break;
         }
+    }
+    public override void Exit()
+    {
+        base.Exit();
+        Destroy(heatSource);
     }
 }

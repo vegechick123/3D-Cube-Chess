@@ -93,6 +93,16 @@ public class GridManager : Manager<GridManager>
     {
         return grid.GetCellCenterWorld(new Vector3Int(location.x, location.y, 0)) + new Vector3(0, 0, 0);
     }
+    public bool CheckTransitability(Vector2Int location)
+    {
+        if (!InRange(location))
+            return false;
+        if(GetChess(location)||!GetFloor(location).transitable)
+        {
+            return false;
+        }
+        return true;
+    }
     public Vector3 GetFloorPosition3D(Vector2Int location)
     {
         return grid.GetCellCenterWorld(new Vector3Int(location.x, location.y, 0)) - new Vector3(0, 0.5f, 0);
@@ -127,8 +137,8 @@ public class GridManager : Manager<GridManager>
                     vis.Add(loc);
 
                 GFloor floor = GetFloor(loc);
-                GChess chess = GetChess(loc);
-                if (!floor || (chess != null && chess.teamID != teamID))
+               // GChess chess = GetChess(loc);
+                if (!floor || !CheckTransitability(loc))
                 {
                     continue;
                 }
@@ -137,14 +147,15 @@ public class GridManager : Manager<GridManager>
                     queue.Enqueue((loc, node.Item2 - 1, res.Count));
                     res.Enqueue(loc);
                     prev.Enqueue(node.Item3);
-                    if (!chess)
-                    {
-                        occupy.Enqueue(false);
-                    }
-                    else
-                    {
-                        occupy.Enqueue(true);
-                    }
+                    occupy.Enqueue(false);
+                    //if (!chess)
+                    //{
+                    //    occupy.Enqueue(false);
+                    //}
+                    //else
+                    //{
+                    //    occupy.Enqueue(true);
+                    //}
                 }
             }
         }
@@ -183,7 +194,7 @@ public class GridManager : Manager<GridManager>
             }
         return res.ToArray();
     }
-    public Vector2Int[] GetFourRayRange(Vector2Int origin,int maxLength)
+    public Vector2Int[] GetFourRayRange(Vector2Int origin,int maxLength,int beginDistance=1)
     {
         Queue<Vector2Int> res = new Queue<Vector2Int>();
         Vector2Int[] dir = new Vector2Int[4];
@@ -193,7 +204,7 @@ public class GridManager : Manager<GridManager>
         dir[3] = new Vector2Int(0, -1);
         for (int i = 0; i < 4; i++)
         {
-            Vector2Int[] temp = GetOneRayRange(origin, dir[i],maxLength);
+            Vector2Int[] temp = GetOneRayRange(origin, dir[i],maxLength,beginDistance);
             foreach (Vector2Int t in temp)
             {
                 res.Enqueue(t);
@@ -201,7 +212,7 @@ public class GridManager : Manager<GridManager>
         }
         return res.ToArray();
     }
-    public Vector2Int[] GetOneRayRange(Vector2Int origin, Vector2Int dir, int maxLength)
+    public Vector2Int[] GetOneRayRange(Vector2Int origin, Vector2Int dir, int maxLength, int beginDistance = 1)
     {
         Queue<Vector2Int> res = new Queue<Vector2Int>();
         for (int d = 1; d<=maxLength; d++)
@@ -210,7 +221,7 @@ public class GridManager : Manager<GridManager>
             GChess t = GetChess(nowpos);
             if (!InRange(nowpos) ||t!=null)
             {
-                if(t!=null)
+                if(t!=null&&d>=beginDistance)
                 {
                     res.Enqueue(nowpos);
                 }
@@ -230,6 +241,37 @@ public class GridManager : Manager<GridManager>
         chess.OnGameStart();
         chess.render.GetComponent<Animator>().Play("Birth");
         return chess;
+    }
+    public List<IGetInfo> GetEnvironmentInformation(Vector2Int location)
+    {
+
+        List<IGetInfo> list = new List<IGetInfo>();
+        if (location == Vector2Int.down)
+            return list;
+        int t = TempertureManager.instance.GetTempatureAt(location);
+        string info = string.Empty;
+        if(t>0)
+        {
+            info = "留在这里的角色会受到高温";
+        }
+        else if(t==0)
+        {
+            info = "温度正好";
+        }
+        else
+        {
+            info = "留在这里的角色会受到低温";
+        }
+        list.Add(new Information("温度：" + t, info));
+        list.AddRange(EnvironmentManager.instance.GetInfos(location));
+        return list;
+    }
+    public List<GChess> GetPlayerActiveChesses()
+    {
+        return chesses.Where(t =>
+        {
+            return t.elementComponent.state != ElementState.Frozen && t.countInActiveChess&&t.teamID==1;
+        }).ToList();
     }
 
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public abstract class GActor : MonoBehaviour, IGetInfo
 {
     /// <summary>
@@ -17,15 +17,19 @@ public abstract class GActor : MonoBehaviour, IGetInfo
     [HideInInspector]
     public Material originMaterial;
     [HideInInspector]
-    protected CElementComponent elementComponent;
+    public CElementComponent elementComponent;
+    public UnityEvent<Element> eElementReaction = new EventWrapper<Element>();
+    public GameObject fireParticle;
+    public GameObject iceParticle;
     public string title;
     public string info;
-
+    
     virtual protected void Awake()
     {
         //注册事件
         GameManager.instance.eRoundStart.AddListener(OnRoundStart);
         GameManager.instance.eRoundEnd.AddListener(OnRoundEnd);
+        GameManager.instance.ePlayerTurnEnd.AddListener(OnPlayerTurnEnd);
         GameManager.instance.eGameStart.AddListener(OnGameStart);
         GameManager.instance.eGameEnd.AddListener(OnGameEnd);
         render = GetComponent<MeshRenderer>();
@@ -44,10 +48,33 @@ public abstract class GActor : MonoBehaviour, IGetInfo
     {
         if (elementComponent)
         {
+            switch (element)
+            {
+                case Element.Fire:
+                    if (iceParticle != null)
+                    {
+                        GridFunctionUtility.CreateParticleAt(fireParticle, this);
+                    }
+                    break;
+                case Element.Ice:
+                    if (iceParticle != null)
+                    {
+                        GridFunctionUtility.CreateParticleAt(iceParticle, this);
+                    }
+                    break;
+                    
+                default:
+                    break;
+            }
             elementComponent.OnHitElement(element);
+            eElementReaction.Invoke(element);
         }
     }
     virtual protected void OnRoundStart()
+    {
+
+    }
+    virtual protected void OnPlayerTurnEnd()
     {
 
     }
@@ -71,12 +98,12 @@ public abstract class GActor : MonoBehaviour, IGetInfo
 
     public string GetTitle()
     {
-        return "Title";
+        return title;
     }
 
     public string GetInfo()
     {
-        return "Info";
+        return info;
     }
     public void OnValidate()
     {

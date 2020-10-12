@@ -17,7 +17,7 @@ static class GridFunctionUtility
 /// <returns></returns>
     public static bool InRange(this Vector2Int[] range, Vector2Int location)
     {
-        foreach(var p in range)
+        foreach (var p in range)
         {
             if (p == location)
                 return true;
@@ -31,7 +31,7 @@ static class GridFunctionUtility
     /// <param name="location"></param>
     /// <param name="bias">range整体偏移量</param>
     /// <returns></returns>
-    public static bool InRange(this Vector2Int[] range, Vector2Int location,Vector2Int bias)
+    public static bool InRange(this Vector2Int[] range, Vector2Int location, Vector2Int bias)
     {
         location -= bias;
         foreach (var p in range)
@@ -43,36 +43,40 @@ static class GridFunctionUtility
     }
     public static Vector2Int Normalized(this Vector2Int dir)
     {
-        if(dir==Vector2Int.zero)
+        if (dir == Vector2Int.zero)
         {
             Debug.LogError("传入Zero Vector");
             return dir;
         }
-        int x=0,y=0;
-        if (dir.x==0)
-        {            
+        int x = 0, y = 0;
+        if (dir.x == 0)
+        {
             if (dir.y > 0)
                 y = 1;
             else
                 y = -1;
         }
-       else if(dir.y==0)
+        else if (dir.y == 0)
         {
             if (dir.x > 0)
                 x = 1;
             else
                 x = -1;
         }
-        else 
+        else
         {
-            Debug.LogError("传入不可标准化的Vector"+dir);
+            Debug.LogError("传入不可标准化的Vector" + dir);
             return Vector2Int.zero;
         }
         return new Vector2Int(x, y);
     }
+    public static int ManhattonDistance(this Vector2Int a, Vector2Int b)
+    {
+        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+    }
     public static Vector3 Divide(this Vector3 a, Vector3 b)
     {
-        return new Vector3(a.x/b.x, a.y / b.y, a.z / b.z);
+        return new Vector3(a.x / b.x, a.y / b.y, a.z / b.z);
     }
 
     public static void DestoryAll(this GameObject[] gameObjects)
@@ -82,15 +86,62 @@ static class GridFunctionUtility
             GameObject.Destroy(t);
         }
     }
+    public static void InvokeAfter(this MonoBehaviour target,Action task, float time)
+    {
+        target.StartCoroutine(InvokeAfter(task, time));
+    }
     public static IEnumerator InvokeAfter(Action task, float time)
     {
         yield return new WaitForSeconds(time);
         task();
 
     }
-    public static GameObject CreateParticleAt(GameObject prefab,GActor actor)
+    public static void InvokeNextFrame(this MonoBehaviour target, Action task)
     {
-        return GameObject.Instantiate(prefab, actor.transform.position+prefab.transform.position, prefab.transform.rotation, null);
+        target.StartCoroutine(InvokeNextFrame(task));
+    }
+    public static IEnumerator InvokeNextFrame(Action task)
+    {
+        yield return null;
+        task();
+
+    }
+    public static GameObject CreateParticleAt(GameObject prefab, GActor actor)
+    {
+        return GameObject.Instantiate(prefab, actor.transform.position + prefab.transform.position, prefab.transform.rotation, null);
+    }
+    public static GameObject CreateParticleAt(GameObject prefab, Vector2Int location)
+    {
+        return GameObject.Instantiate(prefab, GridManager.instance.GetChessPosition3D(location) + prefab.transform.position, prefab.transform.rotation, null);
+    }
+    public static Vector2Int GetPlayerChessyRange()
+    {
+        int minY = 100, maxY = 0;
+        GChess[] targets = GridManager.instance.GetChesses(1);
+        foreach (var t in targets)
+        {
+            if (t.elementComponent.state == ElementState.Frozen)
+                continue;
+            minY = Mathf.Min(minY, t.location.y);
+            maxY = Mathf.Max(minY, t.location.y);
+        }
+        if (maxY < minY)
+        {
+            maxY = minY = -1;
+        }
+        return new Vector2Int(minY, maxY);
+    }
+    public static Vector2Int GetRandomLocation(Vector2Int yRange)
+    {
+        return GetRandomLocation(new Vector2Int(0,yRange.x), new Vector2Int(GridManager.instance.size.x-1, yRange.y));
+    }
+    public static Vector2Int GetRandomLocation(Vector2Int leftButtom, Vector2Int rightTop)
+    {
+        System.Random random = new System.Random();
+        Vector2Int t = new Vector2Int();
+        t.y = random.Next(leftButtom.y, rightTop.y);
+        t.x = random.Next(leftButtom.x, rightTop.x);
+        return t;
     }
 }
 

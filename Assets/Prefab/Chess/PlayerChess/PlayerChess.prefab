@@ -166,17 +166,34 @@ MonoBehaviour:
   render: {fileID: 0}
   meshFilter: {fileID: 0}
   originMaterial: {fileID: 0}
+  elementComponent: {fileID: 0}
+  fireParticle: {fileID: 7250412730907975987, guid: 5cfe79246d0fafa45bd6d549f089ec65,
+    type: 3}
+  iceParticle: {fileID: 4898306076701040203, guid: bb94e0effad1f394a888bbe809e13560,
+    type: 3}
   title: 
   info: 
+  freezeFoot: 0
+  prefabFreezenFootVFX: {fileID: 6647800468150081859, guid: 182a20edaafcbcd4990cae16eec25bd4,
+    type: 3}
+  prefabFreezenFootBrokenVFX: {fileID: 7626863233938880488, guid: 53cb52ed4d7bd30449b71d5a7c29602c,
+    type: 3}
+  prefabWarmVFX: {fileID: 7626863233938880488, guid: 8277774494f426a44ae364b9218b2ab4,
+    type: 3}
+  hasActed: 0
   health: 3
-  movement: 3
+  movement: 4
   curMovement: 0
   teamID: 1
   navComponent: {fileID: 0}
   moveComponent: {fileID: 0}
+  deathParticle: {fileID: 0}
+  immuniateEnvironmentColdness: 0
+  melt: 0
+  countInActiveChess: 1
   skills:
   - {fileID: 11400000, guid: ee2f28bc5d3c3fb42af9c134102a47c2, type: 2}
-  - {fileID: 11400000, guid: 0b21ff458eb718640aa506f83ee053e0, type: 2}
+  - {fileID: 0}
 --- !u!114 &6460747280885505439
 MonoBehaviour:
   m_ObjectHideFlags: 0

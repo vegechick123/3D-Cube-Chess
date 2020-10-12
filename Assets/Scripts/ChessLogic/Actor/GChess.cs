@@ -1,12 +1,26 @@
-﻿using UnityEngine;
+﻿using Boo.Lang;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class GChess : GActor
 {
     //无法行动
     [HideInInspector]
-    public bool unableAct { get; protected set; }
+    public bool freezeFoot=false;
+    [HideInInspector]
+    public UnityEvent eFreezeFootBroken = new UnityEvent();
+    protected GameObject freezenFootVFX;
 
+
+    public GameObject prefabFreezenFootVFX;
+
+    public GameObject prefabFreezenFootBrokenVFX;
+    protected bool warm;
+
+    protected GameObject warmVFX;
+    public GameObject prefabWarmVFX;
+    public bool unableAct { get; protected set; }
+    public bool hasActed=false;
     public int health = 3;
     //[HideInInspector]
     public int curHealth { get; protected set; }
@@ -18,22 +32,28 @@ public class GChess : GActor
     public int teamID;
 
     protected UnityEvent eLocationChange = new UnityEvent();
+    public UnityEvent eBePush = new UnityEvent();
     protected UnityEvent eMovementChange = new UnityEvent();
     [HideInInspector]
     public CNavComponent navComponent;
     [HideInInspector]
     public CMoveComponent moveComponent;
 
+
+    public GameObject deathParticle;
+    public HealthBar healthBar;
+    public bool immuniateEnvironmentColdness;
+    public bool melt;
+    public bool countInActiveChess=true;
     protected override void Awake()
     {
         base.Awake();
 
-        GameManager.instance.eRoundStart.AddListener(OnRoundStart);
-        GameManager.instance.eRoundEnd.AddListener(OnRoundEnd);
         navComponent = GetComponent<CNavComponent>();
         moveComponent = GetComponent<CMoveComponent>();
         GridManager.instance.AddChess(this);
-
+        healthBar = new HealthBar(this);
+        healthBar.Hide();
     }
     public override void OnGameStart()
     {
@@ -44,11 +64,28 @@ public class GChess : GActor
     {
         curHealth = health;
         curMovement = movement;
+        healthBar.Refresh();
     }
 
     override protected void OnRoundStart()
     {
         curMovement = movement;
+        hasActed = false;
+    }
+    protected override void OnPlayerTurnEnd()
+    {
+        base.OnPlayerTurnEnd();
+        int t = TempertureManager.instance.GetTempatureAt(location);
+        if (t < 0)
+        {
+            if (!immuniateEnvironmentColdness)
+                ElementReaction(Element.Ice);
+        }
+        else if (t > 0)
+        {
+            ElementReaction(Element.Fire);
+        }
+        DeactiveFreezeFoot();
     }
     public void Recover(int value)
     {
@@ -59,7 +96,7 @@ public class GChess : GActor
     {
         if (elementComponent)
         {
-            damage = elementComponent.ProcessDamage(element, damage);
+            //damage = elementComponent.ProcessDamage(element, damage);
             Damage(damage);
             elementComponent.OnHitElement(element);
         }
@@ -75,11 +112,15 @@ public class GChess : GActor
         {
             DieImmediately();
         }
+        healthBar.Refresh();
     }
     public void DieImmediately()
     {
+        Debug.Log("Chess:" + gameObject + "Die");
         gameObject.SetActive(false);
-        Destroy(gameObject, 0.5f);
+        if (deathParticle != null)
+            GridFunctionUtility.CreateParticleAt(deathParticle,this);
+        Destroy(gameObject);
     }
     protected virtual void OnDestroy()
     {
@@ -99,9 +140,14 @@ public class GChess : GActor
         for (int i = 0; i < distance; i++)
         {
             Vector2Int curLocation = destination + direction;
-            if (GridManager.instance.GetChess(curLocation)
-                || !GridManager.instance.InRange(curLocation))
+            GChess t = GridManager.instance.GetChess(curLocation);
+            if (t|| !GridManager.instance.InRange(curLocation))
             {
+                //if(t)
+                //{
+                //    t.PushToward(direction, distance - i);
+                //}
+                //destination.x
                 break;
             }
             else
@@ -110,7 +156,9 @@ public class GChess : GActor
             }
 
         }
+        eBePush.Invoke();
         MoveToDirectly(destination);
+        DeactiveFreezeFoot();
     }
     /// <summary>
     /// 不通过寻路径直走向终点
@@ -167,6 +215,21 @@ public class GChess : GActor
     {
         unableAct = false;
     }
+    public override void ElementReaction(Element element)
+    {
+        if(element==Element.Ice&&warm)
+        {
+            DeactiveWarm();
+            return;
+        }
+        base.ElementReaction(element);
+        if(element==Element.Fire)
+        {
+            DeactiveFreezeFoot();
+        }
+        if (melt&&element == Element.Fire)
+            Damage(1);
+    }
     public void FaceToward(Vector3 dir)
     {
         transform.rotation = Quaternion.LookRotation(dir.normalized, Vector3.up);
@@ -175,5 +238,56 @@ public class GChess : GActor
     {
         FaceToward(new Vector3(dir.x,0,dir.y));
     }
-
+    public void FreezeFoot()
+    {
+        if (freezeFoot)
+            return;
+        if(prefabFreezenFootVFX!=null)
+            freezenFootVFX = GridFunctionUtility.CreateParticleAt(prefabFreezenFootVFX, this);
+        freezeFoot = true;
+    }
+    public void DeactiveFreezeFoot()
+    {
+        if (!freezeFoot)
+            return;
+        eFreezeFootBroken.Invoke();
+        freezeFoot = false;
+        Destroy(freezenFootVFX);
+        if(prefabFreezenFootBrokenVFX!=null)
+            GridFunctionUtility.CreateParticleAt(prefabFreezenFootBrokenVFX, this);
+        freezenFootVFX = null;
+    }
+    public void Warm()
+    {
+        if (warm)
+            return;
+        if (prefabWarmVFX != null)
+        {
+            warmVFX = GridFunctionUtility.CreateParticleAt(prefabWarmVFX, this);
+            warmVFX.transform.parent = render.transform;
+        }
+        warm = true;
+    }
+    public void DeactiveWarm()
+    {
+        if (!warm)
+            return;
+        warm = false;
+        if(warmVFX!=null)
+        Destroy(warmVFX);
+        warmVFX = null;
+        
+    }
+    public List<IGetInfo> GetInfos()
+    {
+        List<IGetInfo> list = new List<IGetInfo>();
+        list.Add(this);
+        if (freezeFoot)
+            list.Add(new Information("冻足", "脚被冻住，无法自己移动\n当自己或攻击发起者受到高温可以解除"));
+        if(warm)
+            list.Add(new Information("温暖", "抵抗下一次受到的低温"));
+        if (elementComponent.state==ElementState.Frozen)
+            list.Add(new Information("冰冻", "无法行动，可通过高温解除"));
+        return list;
+    }
 }

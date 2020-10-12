@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f491f0f1bfd9cd499355d4b4ff86e03, type: 3}
   m_Name: FrozenState
   m_EditorClassIdentifier: 
-  prefabEnterParticle: {fileID: 4898306076701040203, guid: bb94e0effad1f394a888bbe809e13560,
+  prefabEnterParticle: {fileID: 0}
+  prefabExitParticle: {fileID: 7626863233938880488, guid: 53cb52ed4d7bd30449b71d5a7c29602c,
     type: 3}
-  prefabExitParticle: {fileID: 0}
   prefabPersistentParticle: {fileID: 0}
   disableParticle: 0
-  snowMaterial: {fileID: 2100000, guid: 2116271a197ef25478bbf76a8f262035, type: 2}
