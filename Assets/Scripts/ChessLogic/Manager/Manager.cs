@@ -15,11 +15,13 @@ public class Manager<T> : MonoBehaviour where T : MonoBehaviour
         else
         {
             instance = this as T;
+            Debug.Log("ManagerCreate:" + this.GetType());
         }
-
+        
     }
     virtual protected void OnDestroy()
     {
+        Debug.Log("ManagerDestory:" + this.GetType());
         instance = null;
     }
     /// <summary>

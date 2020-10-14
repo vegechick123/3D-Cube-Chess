@@ -79,7 +79,7 @@ PrefabInstance:
     - target: {fileID: 4433733748461419777, guid: 80f79acd801d5274ebd243e216898377,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.22549315
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4433733748461419777, guid: 80f79acd801d5274ebd243e216898377,
         type: 3}
@@ -89,7 +89,7 @@ PrefabInstance:
     - target: {fileID: 4433733748461419777, guid: 80f79acd801d5274ebd243e216898377,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.08438327
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4433733748461419777, guid: 80f79acd801d5274ebd243e216898377,
         type: 3}
@@ -134,7 +134,7 @@ PrefabInstance:
     - target: {fileID: 4433733748461419789, guid: 80f79acd801d5274ebd243e216898377,
         type: 3}
       propertyPath: m_Name
-      value: snowFloor3 Variant
+      value: snowFloor3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80f79acd801d5274ebd243e216898377, type: 3}

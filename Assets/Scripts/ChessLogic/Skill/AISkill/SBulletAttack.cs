@@ -23,11 +23,15 @@ public class SBulletAttack : AISkill
     }
     public override void Perform()
     {
+        base.Perform();
         Vector2Int[] range = GetAffectRange();
         Vector2Int targetPosition = range[range.Length-1];
         GChess chess = GridManager.instance.GetChess(targetPosition);
         if (chess != null)
-            chess.ElementReaction(element);
+        {
+            chess.ElementReaction(element);            
+        }
+        skillVFX.Cast(owner.location,targetPosition);
     }
     public override Vector2Int[] GetAffectRange()
     {

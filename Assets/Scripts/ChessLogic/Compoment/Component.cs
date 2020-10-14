@@ -12,6 +12,9 @@ public class Component : MonoBehaviour
     {
         actor = GetComponent<GActor>();
     }
+    virtual public void OnGameAwake()
+    {
+    }
     virtual public void OnGameStart()
     {
     }

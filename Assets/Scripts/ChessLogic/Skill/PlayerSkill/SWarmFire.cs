@@ -13,6 +13,7 @@ public class SWarmFire: PlayerSkill
     }
     public void Cast(GChess chess)
     {
+        skillVFX.Cast(owner.location, chess.location);
         chess.ElementReaction(Element.Fire);
         chess.Warm();
     }

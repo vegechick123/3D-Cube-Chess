@@ -46,6 +46,7 @@ public class SCloseAttack : AISkill
     }
     public override void Perform()
     {
+        base.Perform();
         GChess chess = GridManager.instance.GetChess(owner.location + direction);
         if(chess!=null)
             chess.ElementReaction(Element.Ice);

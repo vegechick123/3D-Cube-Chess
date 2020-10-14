@@ -34,7 +34,7 @@ public class CElementComponent : Component
     {
         base.Awake();
     }
-    public override void OnGameStart()
+    public override void OnGameAwake()
     {
         curStateObject = GetNewStateObject(state);
         curStateObject.Init(actor, this);

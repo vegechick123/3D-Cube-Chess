@@ -30,6 +30,7 @@ public abstract class GActor : MonoBehaviour, IGetInfo
         GameManager.instance.eRoundStart.AddListener(OnRoundStart);
         GameManager.instance.eRoundEnd.AddListener(OnRoundEnd);
         GameManager.instance.ePlayerTurnEnd.AddListener(OnPlayerTurnEnd);
+        GameManager.instance.eGameAwake.AddListener(OnGameAwake);
         GameManager.instance.eGameStart.AddListener(OnGameStart);
         GameManager.instance.eGameEnd.AddListener(OnGameEnd);
         render = GetComponent<MeshRenderer>();
@@ -80,6 +81,15 @@ public abstract class GActor : MonoBehaviour, IGetInfo
     }
     virtual protected void OnRoundEnd()
     {
+
+    }
+    virtual public void OnGameAwake()
+    {
+        var arr = GetComponents<Component>();
+        foreach (Component c in arr)
+        {
+            c.OnGameAwake();
+        }
 
     }
     virtual public void OnGameStart()

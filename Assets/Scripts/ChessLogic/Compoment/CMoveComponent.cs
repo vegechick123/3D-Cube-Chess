@@ -61,7 +61,7 @@ public class CMoveComponent : Component
             }
             if (path.Count == 0)
             {
-                StartCoroutine(GridFunctionUtility.InvokeAfter(eFinishPath.Invoke, 1f));
+                this.InvokeAfter(eFinishPath.Invoke, 1f);
                 return false;
             }
             else

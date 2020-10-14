@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 
 static class GridFunctionUtility
 {/// <summary>
@@ -78,7 +79,21 @@ static class GridFunctionUtility
     {
         return new Vector3(a.x / b.x, a.y / b.y, a.z / b.z);
     }
-
+    /// <summary>
+    /// 添加只会被调用一次的函数    
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="t"></param>
+    public static void AddListenerForOnce(this UnityEvent a, Action t)
+    {
+        UnityAction p = null;
+        p = () =>
+          {
+              t();
+              a.RemoveListener(p);
+          };
+        a.AddListener(p);
+    }
     public static void DestoryAll(this GameObject[] gameObjects)
     {
         foreach (var t in gameObjects)
@@ -143,5 +158,6 @@ static class GridFunctionUtility
         t.x = random.Next(leftButtom.x, rightTop.x);
         return t;
     }
+
 }
 

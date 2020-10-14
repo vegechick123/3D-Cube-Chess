@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
@@ -26,5 +27,11 @@ public abstract class AISkill : Skill
     /// <summary>
     /// 根据Decide函数设定的值进行行动
     /// </summary>
-    public abstract void Perform();
+    public virtual void Perform()
+    {
+        if (skillVFX != null)
+            skillVFX.eHit.AddListenerForOnce(AIManager.instance.MoveNext);
+        else
+            owner.InvokeAfter(AIManager.instance.MoveNext, 1.0f);
+    }
 }

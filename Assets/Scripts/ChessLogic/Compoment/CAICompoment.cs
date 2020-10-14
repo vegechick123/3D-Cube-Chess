@@ -106,7 +106,10 @@ public class CAICompoment : Component
         {
             AIChess.skill.Perform();
         }
-        StartCoroutine(GridFunctionUtility.InvokeAfter(AIManager.instance.MoveNext, 1f));
+        else
+        {
+            this.InvokeAfter(AIManager.instance.MoveNext, 1f);
+        }
     }
     protected AISkill GetSkill()
     {

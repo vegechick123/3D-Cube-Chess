@@ -238,6 +238,7 @@ public class GridManager : Manager<GridManager>
         res.transform.position = GridManager.instance.GetChessPosition3D(location);
         GChess chess = res.GetComponent<GChess>();
         chess.location = location;
+        chess.OnGameAwake();
         chess.OnGameStart();
         chess.render.GetComponent<Animator>().Play("Birth");
         return chess;

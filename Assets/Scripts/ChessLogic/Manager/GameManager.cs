@@ -17,25 +17,36 @@ public class GameManager : Manager<GameManager>
     [NonSerialized]
     public int curRound = 0;
     //游戏回合流程的事件分发
+
     public UnityEvent eRoundStart = new UnityEvent();
     public UnityEvent eRoundEnd = new UnityEvent();
     public UnityEvent ePlayerTurnEnd = new UnityEvent();
+    public UnityEvent eGameAwake = new UnityEvent();
     public UnityEvent eGameStart = new UnityEvent();
     public UnityEvent eGameEnd = new UnityEvent();
+    public GameObject startButton; 
     public GameObject winUI;
     public ParticleSystem snowWeatherParticle;
     public Color BrightColor;
     public Light sun;
+    public bool autoStart = false;
     protected override void Awake()
     {
         base.Awake();
     }
     public void Start()
     {
-        GameStart();
+        GameAwake();
+        if(autoStart)
+            GameStart();
     }
-    protected void GameStart()
+    protected void GameAwake()
     {
+        eGameAwake.Invoke();
+    }
+    public void GameStart()
+    {
+        startButton.SetActive(false);
         eGameStart.Invoke();
         RoundStart();
     }
@@ -67,6 +78,7 @@ public class GameManager : Manager<GameManager>
     {
         PlayerTurnStart();        
     }
+
     protected void PlayerTurnStart()
     {
         Debug.Log("GameState:PlayerTurnStart");
