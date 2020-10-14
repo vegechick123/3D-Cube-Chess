@@ -7,7 +7,7 @@ public class Manager<T> : MonoBehaviour where T : MonoBehaviour
     protected IEnumerator coroutine;//用于异步的协程
     virtual protected void Awake()
     {
-        if(instance!=null)
+        if (instance != null)
         {
             Debug.LogError("存在多个相同的Manager类：" + this.GetType());
             Destroy(this);
@@ -17,7 +17,7 @@ public class Manager<T> : MonoBehaviour where T : MonoBehaviour
             instance = this as T;
             Debug.Log("ManagerCreate:" + this.GetType());
         }
-        
+
     }
     virtual protected void OnDestroy()
     {
@@ -30,20 +30,22 @@ public class Manager<T> : MonoBehaviour where T : MonoBehaviour
     public void MoveNext()
     {
         //Debug.Log("Next");
-        coroutine.MoveNext();
-        if(coroutine.Current!=null)
+        if (coroutine.MoveNext())
         {
-            object t = coroutine.Current;
-            switch (t)
+            if (coroutine.Current != null)
             {
-                case float t1:
-                    this.InvokeAfter(MoveNext, t1);
-                break;
-                case Func<IEnumerator> f:
-                    MoveNext();
-                    break;
-                default:
-                    break;
+                object t = coroutine.Current;
+                switch (t)
+                {
+                    case float t1:
+                        this.InvokeAfter(MoveNext, t1);
+                        break;
+                    case Func<IEnumerator> f:
+                        MoveNext();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }

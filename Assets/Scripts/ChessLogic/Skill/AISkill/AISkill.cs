@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 /// <summary>
 /// 这是所有AI技能的基类
 /// 所有的AI技能都应当是非指向性技能
@@ -29,9 +30,14 @@ public abstract class AISkill : Skill
     /// </summary>
     public virtual void Perform()
     {
+        
+    }
+    public override void TakeEffect(UnityAction task, Vector2Int origin, Vector2Int destination)
+    {
         if (skillVFX != null)
             skillVFX.eHit.AddListenerForOnce(AIManager.instance.MoveNext);
         else
             owner.InvokeAfter(AIManager.instance.MoveNext, 1.0f);
+        base.TakeEffect(task, origin, destination);
     }
 }

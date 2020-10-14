@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public abstract class Skill: ScriptableObject,IGetInfo
 {
     [HideInInspector]
@@ -16,11 +17,23 @@ public abstract class Skill: ScriptableObject,IGetInfo
 
     public abstract Vector2Int[] GetRange();
 
+    //protected abstract (Vector2Int, Vector2Int) GetVFXLocation();
     public string GetTitle()
     {
        return title;
     }
-
+    public virtual void TakeEffect(UnityAction task,Vector2Int origin,Vector2Int destination)
+    {
+        if(skillVFX!=null)
+        {
+            skillVFX.eHit.AddListenerForOnce(task);
+            skillVFX.Cast(origin, destination);
+        }
+        else
+        {
+            task();
+        }
+    }
     protected Vector2Int[] GetRangeWithLength(int length)
     {
         return GridManager.instance.GetCircleRange(owner.location,length);

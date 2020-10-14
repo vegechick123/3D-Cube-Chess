@@ -84,14 +84,14 @@ static class GridFunctionUtility
     /// </summary>
     /// <param name="a"></param>
     /// <param name="t"></param>
-    public static void AddListenerForOnce(this UnityEvent a, Action t)
+    public static void AddListenerForOnce(this UnityEvent a, UnityAction t)
     {
         UnityAction p = null;
         p = () =>
-          {
-              t();
-              a.RemoveListener(p);
-          };
+        {
+            t();
+            a.RemoveListener(p);
+        };
         a.AddListener(p);
     }
     public static void DestoryAll(this GameObject[] gameObjects)

@@ -90,7 +90,7 @@ public class CAICompoment : Component
         }
         else
             Debug.Log("Target Miss");
-        StartCoroutine(GridFunctionUtility.InvokeAfter(AIManager.instance.MoveNext, 0.5f));
+        this.InvokeAfter(AIManager.instance.MoveNext, 0.5f);
     }
     /// <summary>
     /// 释放技能

@@ -6,14 +6,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BulletAttack", menuName = "Skills/AISkill/BulletAttack")]
 public class SBulletAttack : AISkill
 {
-    public int maxLength=3;
+    public int maxLength = 3;
     public int damage;
     public int beginDistance = 1;
     public Element element;
     protected Vector2Int direction;
     public override Vector2Int[] GetRange()
     {
-        return GridManager.instance.GetFourRayRange(owner.location, maxLength,beginDistance);
+        return GridManager.instance.GetFourRayRange(owner.location, maxLength, beginDistance);
     }
     public override void Decide(GChess target)
     {
@@ -25,14 +25,18 @@ public class SBulletAttack : AISkill
     {
         base.Perform();
         Vector2Int[] range = GetAffectRange();
-        Vector2Int targetPosition = range[range.Length-1];
-        GChess chess = GridManager.instance.GetChess(targetPosition);
-        if (chess != null)
+        Vector2Int targetPosition = range[range.Length - 1];
+        TakeEffect(() =>
         {
-            chess.ElementReaction(element);            
+            GChess chess = GridManager.instance.GetChess(targetPosition);
+            if (chess != null)
+            {
+                chess.ElementReaction(element);
+            }
         }
-        skillVFX.Cast(owner.location,targetPosition);
+        , owner.location, targetPosition);
     }
+
     public override Vector2Int[] GetAffectRange()
     {
         return GridManager.instance.GetOneRayRange(owner.location, direction, maxLength);
