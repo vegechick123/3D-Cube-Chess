@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 6460747280885505433}
   - component: {fileID: 692677325199323230}
   - component: {fileID: 2705273894603116935}
+  - component: {fileID: 6401638338488556242}
   m_Layer: 0
   m_Name: PlayerChess
   m_TagString: Untagged
@@ -174,6 +175,9 @@ MonoBehaviour:
   title: 
   info: 
   freezeFoot: 0
+  eFreezeFootBroken:
+    m_PersistentCalls:
+      m_Calls: []
   prefabFreezenFootVFX: {fileID: 6647800468150081859, guid: 182a20edaafcbcd4990cae16eec25bd4,
     type: 3}
   prefabFreezenFootBrokenVFX: {fileID: 7626863233938880488, guid: 53cb52ed4d7bd30449b71d5a7c29602c,
@@ -185,6 +189,9 @@ MonoBehaviour:
   movement: 4
   curMovement: 0
   teamID: 1
+  eBePush:
+    m_PersistentCalls:
+      m_Calls: []
   navComponent: {fileID: 0}
   moveComponent: {fileID: 0}
   deathParticle: {fileID: 0}
@@ -264,3 +271,21 @@ MonoBehaviour:
   ColdState: {fileID: 11400000, guid: 09663489e01488549a3bac78a62dfeab, type: 2}
   FrozenState: {fileID: 11400000, guid: e7256f7b7b884c64d9dcc4335eb5f1e0, type: 2}
   state: 1
+--- !u!114 &6401638338488556242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6460747280885505425}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.96559095, b: 0, a: 1}
+  outlineWidth: 8
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

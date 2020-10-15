@@ -21,7 +21,7 @@ public class UIManager : Manager<UIManager>
     public GameObject prefabTempertureMonitor;
     public TempertureMonitor[,] tempertureMonitors;
     public UnityEvent eRefreshFloorHUD = new UnityEvent();
-    public Transform panelContainer;
+    public Transform panelContainer; 
     protected List<GameObject> alivePanels = new List<GameObject>();
     protected GameObject overTileFloorHUD;
     protected override void Awake()
@@ -172,4 +172,12 @@ public class UIManager : Manager<UIManager>
         }
     }
 
+    public string GetHighTempertureRichText()
+    {
+        return "<color=orange>高温</color>";
+    }
+    public string GetLowTempertureRichText()
+    {
+        return "<color=cyan>低温</color>";
+    }
 }

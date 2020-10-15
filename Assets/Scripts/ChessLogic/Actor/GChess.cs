@@ -283,11 +283,11 @@ public class GChess : GActor
         List<IGetInfo> list = new List<IGetInfo>();
         list.Add(this);
         if (freezeFoot)
-            list.Add(new Information("冻足", "脚被冻住，无法自己移动\n当自己或攻击发起者受到高温可以解除"));
+            list.Add(new Information("冻足", "脚被冻住，无法自己移动\n当自己或攻击发起者受到"+UIManager.instance.GetHighTempertureRichText()+"可以解除"));
         if(warm)
-            list.Add(new Information("温暖", "抵抗下一次受到的低温"));
+            list.Add(new Information("温暖", "抵抗下一次受到的"+UIManager.instance.GetLowTempertureRichText()));
         if (elementComponent.state==ElementState.Frozen)
-            list.Add(new Information("冰冻", "无法行动，可通过高温解除"));
+            list.Add(new Information("冰冻", "无法行动，可通过"+UIManager.instance.GetHighTempertureRichText()+"解除"));
         return list;
     }
 }

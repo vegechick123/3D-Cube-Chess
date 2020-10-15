@@ -17,7 +17,8 @@ public class BeginPannel : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
-            startButton.SetActive(true);
+            //startButton.SetActive(true);
+            GameManager.instance.GameStart();
         }
     }
 }

@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 8714642836675817618}
   - component: {fileID: 5790514922615186940}
   - component: {fileID: 8418600207926531034}
+  - component: {fileID: -4054101956480028014}
   m_Layer: 0
   m_Name: 'AIChess '
   m_TagString: Untagged
@@ -174,6 +175,9 @@ MonoBehaviour:
   title: "\u96EA\u4EBA"
   info: "\u8FD1\u6218\u653B\u51FB\uFF0C\u4F1A\u5728\u53D1\u8D77\u653B\u51FB\u524D\u963B\u6B62\u76EE\u6807\u79FB\u52A8"
   freezeFoot: 0
+  eFreezeFootBroken:
+    m_PersistentCalls:
+      m_Calls: []
   prefabFreezenFootVFX: {fileID: 0}
   prefabFreezenFootBrokenVFX: {fileID: 0}
   prefabWarmVFX: {fileID: 0}
@@ -182,6 +186,9 @@ MonoBehaviour:
   movement: 5
   curMovement: 0
   teamID: 0
+  eBePush:
+    m_PersistentCalls:
+      m_Calls: []
   navComponent: {fileID: 0}
   moveComponent: {fileID: 0}
   deathParticle: {fileID: 7626863233938880488, guid: 53cb52ed4d7bd30449b71d5a7c29602c,
@@ -254,3 +261,21 @@ MonoBehaviour:
   ColdState: {fileID: 11400000, guid: 09663489e01488549a3bac78a62dfeab, type: 2}
   FrozenState: {fileID: 11400000, guid: e7256f7b7b884c64d9dcc4335eb5f1e0, type: 2}
   state: 1
+--- !u!114 &-4054101956480028014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8714642836675817610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.19320267, b: 0, a: 1}
+  outlineWidth: 8
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
