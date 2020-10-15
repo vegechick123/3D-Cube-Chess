@@ -23,6 +23,7 @@ public class UIManager : Manager<UIManager>
     public UnityEvent eRefreshFloorHUD = new UnityEvent();
     public Transform panelContainer; 
     protected List<GameObject> alivePanels = new List<GameObject>();
+    protected Outline aliveOutline;
     protected GameObject overTileFloorHUD;
     protected override void Awake()
     {
@@ -73,6 +74,11 @@ public class UIManager : Manager<UIManager>
     {
         if (overTileFloorHUD != null)
             Destroy(overTileFloorHUD);
+        if(aliveOutline!=null)
+        {
+            aliveOutline.RemoveReference();
+            aliveOutline = null;
+        }
         if(location!=Vector2Int.down)
         {
             overTileFloorHUD = CreateFloorHUD(location, Color.yellow);
@@ -81,7 +87,11 @@ public class UIManager : Manager<UIManager>
         GChess t = GridManager.instance.GetChess(location);
         var list = new List<IGetInfo>();
         if (t != null)
+        {
             list.AddRange(t.GetInfos());
+            aliveOutline =t.outline;
+            aliveOutline.AddReference();
+        }
         list.AddRange(GridManager.instance.GetEnvironmentInformation(location));
         CreateMessage(list);
     }

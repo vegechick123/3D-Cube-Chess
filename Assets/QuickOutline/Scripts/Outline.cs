@@ -8,12 +8,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using UnityEngine;
 
 [DisallowMultipleComponent]
 
-public class Outline : MonoBehaviour {
+public class Outline : MonoBehaviour,IReferenceCount
+{
   private static HashSet<Mesh> registeredMeshes = new HashSet<Mesh>();
 
   public enum Mode {
@@ -274,4 +276,22 @@ public class Outline : MonoBehaviour {
         break;
     }
   }
+    int count = 0;
+    public void AddReference()
+    {
+        count++;
+        if (!enabled)
+            enabled = true;
+    }
+
+    public void RemoveReference()
+    {
+        count--;
+        if (count==0)
+            enabled = false;
+        else if(count<0)
+        {
+            Debug.LogError("ReferenceCount<0");
+        }
+    }
 }

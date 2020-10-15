@@ -38,7 +38,8 @@ public class GChess : GActor
     public CNavComponent navComponent;
     [HideInInspector]
     public CMoveComponent moveComponent;
-
+    [HideInInspector]
+    public Outline outline;
 
     public GameObject deathParticle;
     public HealthBar healthBar;
@@ -51,6 +52,7 @@ public class GChess : GActor
 
         navComponent = GetComponent<CNavComponent>();
         moveComponent = GetComponent<CMoveComponent>();
+        outline = GetComponent<Outline>();
         GridManager.instance.AddChess(this);
         healthBar = new HealthBar(this);
         healthBar.Hide();
@@ -143,11 +145,7 @@ public class GChess : GActor
             GChess t = GridManager.instance.GetChess(curLocation);
             if (t|| !GridManager.instance.InRange(curLocation))
             {
-                //if(t)
-                //{
-                //    t.PushToward(direction, distance - i);
-                //}
-                //destination.x
+
                 break;
             }
             else
@@ -289,5 +287,13 @@ public class GChess : GActor
         if (elementComponent.state==ElementState.Frozen)
             list.Add(new Information("冰冻", "无法行动，可通过"+UIManager.instance.GetHighTempertureRichText()+"解除"));
         return list;
+    }
+    public virtual void MouseEnter()
+    {
+        outline.enabled = true;
+    }
+    public virtual void MouseExit()
+    {
+        outline.enabled = false;
     }
 }

@@ -57,10 +57,13 @@ public class AIManager : Manager<AIManager>
     {
         foreach (var AI in AIs)
         {
+            if ((AI.actor as GChess).unableAct)
+                continue;
             GameObject t = UIManager.instance.CreateFloorHUD(AI.location, Color.yellow);
             AI.PerformSkill();
             yield return null;//技能释放完成后继续执行
             Destroy(t);
+            yield return 0.5f;
         }
         this.InvokeAfter(GameManager.instance.AIPostTurnEnd, 1f);
     }
