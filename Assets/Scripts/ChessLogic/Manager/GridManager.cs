@@ -47,6 +47,16 @@ public class GridManager : Manager<GridManager>
     {
         return chesses.FindAll(x => x.teamID == teamID).ToArray();
     }
+    public bool CheckAllPlayerFrozen()
+    {
+        GChess[] temp = GetChesses(GameManager.instance.playerTeam);
+        foreach(GChess t in temp)
+        {
+            if(t.elementComponent.state!=ElementState.Frozen)
+                return false;
+        }
+        return true;
+    }
     public GChess[] GetChessesInRange(Vector2Int[] range)
     {
         return chesses.FindAll(x=>range.Contains(x.location)).ToArray();

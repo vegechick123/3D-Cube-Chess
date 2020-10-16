@@ -20,9 +20,12 @@ public class GameManager : Manager<GameManager>
 
     public UnityEvent eRoundStart = new UnityEvent();
     public UnityEvent eRoundEnd = new UnityEvent();
-    public UnityEvent ePlayerTurnEnd = new UnityEvent();
+    public UnityEvent ePlayerTurnBegin = new UnityEvent();
+    public UnityEvent ePlayerTurnEnd = new UnityEvent();    
     public UnityEvent eGameAwake = new UnityEvent();
     public UnityEvent eGameStart = new UnityEvent();
+    public UnityEvent eGameWin = new UnityEvent();
+    public UnityEvent eGameLose = new UnityEvent();
     public UnityEvent eGameEnd = new UnityEvent();
     public GameObject startButton; 
     public GameObject winUI;
@@ -82,6 +85,7 @@ public class GameManager : Manager<GameManager>
     protected void PlayerTurnStart()
     {
         Debug.Log("GameState:PlayerTurnStart");
+        ePlayerTurnBegin.Invoke();
         PlayerControlManager.instance.PlayerTurnEnter();
     }
     public void PlayerTurnEnd()
@@ -120,6 +124,14 @@ public class GameManager : Manager<GameManager>
         winUI.SetActive(true);
         snowWeatherParticle.Stop();
         StartCoroutine(WatherClear());
+        eGameWin.Invoke();
+        GameEnd();
+    }
+    public void GameLose()
+    {
+        eGameLose.Invoke();
+        Debug.Log("You Lose");
+        GameEnd();
     }
     IEnumerator WatherClear()
     {

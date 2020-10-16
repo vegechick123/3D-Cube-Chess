@@ -3563,6 +3563,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hintUIBefore: {fileID: 1542972631}
   hintUIAfter: {fileID: 659344096}
+--- !u!114 &1575927983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575927970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bb1486d25ad704abda5a1fd37d42cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1601116244 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5867549102815994140, guid: aca21efe1cd19b649b42f1ca4b2655dc,
