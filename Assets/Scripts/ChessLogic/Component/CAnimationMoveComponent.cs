@@ -34,19 +34,20 @@ public class CAnimationMoveComponent : CMoveComponent
         }
         return res;
     }
-    public override bool RequestDirectMove(Vector2Int destination)
+    protected void DisableAnimationOnce()
     {
         useAnimation = false;
-        eFinishPath.AddListener(() => useAnimation = true);
-        UnityAction t = null;
-        t = () =>
-        {
-            useAnimation = true;
-            eFinishPath.RemoveListener(t);
-        };
-        
-        eFinishPath.RemoveListener(t);
+        eFinishPath.AddListenerForOnce(() => useAnimation = true);
+    }
+    public override bool RequestDirectMove(Vector2Int destination)
+    {
+        DisableAnimationOnce();
         return base.RequestMove(new Vector2Int[] {destination});
+    }
+    public override bool RequestJumpMove(Vector2Int destination)
+    {
+        DisableAnimationOnce();
+        return base.RequestJumpMove(destination);
     }
     public void OneMoveComplete()
     {

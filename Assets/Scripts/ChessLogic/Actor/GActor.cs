@@ -29,7 +29,7 @@ public abstract class GActor : MonoBehaviour, IGetInfo
         //注册事件
         GameManager.instance.eRoundStart.AddListener(OnRoundStart);
         GameManager.instance.eRoundEnd.AddListener(OnRoundEnd);
-        GameManager.instance.ePlayerTurnEnd.AddListener(OnPlayerTurnEnd);
+        //GameManager.instance.ePlayerTurnEnd.AddListener(OnPlayerTurnEnd);
         GameManager.instance.eGameAwake.AddListener(OnGameAwake);
         GameManager.instance.eGameStart.AddListener(OnGameStart);
         GameManager.instance.eGameEnd.AddListener(OnGameEnd);
@@ -75,7 +75,7 @@ public abstract class GActor : MonoBehaviour, IGetInfo
     {
 
     }
-    virtual protected void OnPlayerTurnEnd()
+    virtual public void OnPlayerTurnEnd()
     {
 
     }

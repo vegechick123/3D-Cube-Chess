@@ -5119,7 +5119,7 @@ PrefabInstance:
     - target: {fileID: 3905244508938335398, guid: 8fe2e4b0e90cf0a4a8c37cf41f42851c,
         type: 3}
       propertyPath: maxEnemyOverNum
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4285201786467132987, guid: 8fe2e4b0e90cf0a4a8c37cf41f42851c,
         type: 3}

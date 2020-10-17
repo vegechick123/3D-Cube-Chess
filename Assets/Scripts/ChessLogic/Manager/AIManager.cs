@@ -57,7 +57,7 @@ public class AIManager : Manager<AIManager>
     {
         foreach (var AI in AIs)
         {
-            if ((AI.actor as GChess).unableAct)
+            if ((AI.actor as GChess).unableAct||AI.target==null)
                 continue;
             GameObject t = UIManager.instance.CreateFloorHUD(AI.location, Color.yellow);
             AI.PerformSkill();

@@ -34,11 +34,11 @@ public class SCloseAttack : AISkill
                       chess.DeactiveFreezeFoot();
                   };
               };
-            owner.eBePush.AddListener(a);
+            owner.eBeForceMove.AddListener(a);
             owner.eElementReaction.AddListener(b);
             chess.eFreezeFootBroken.AddListener(() =>
             {
-                owner.eBePush.RemoveListener(a);
+                owner.eBeForceMove.RemoveListener(a);
                 owner.eElementReaction.RemoveListener(b);
             });
             

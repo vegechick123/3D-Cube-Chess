@@ -8,29 +8,37 @@ public class CMoveComponent : Component
     public enum MoveState
     {
         Idle,
-        Moving
+        Moving,
+        Throwing
     }
     public MoveState state { get; private set; }
     public float speed = 1f;
-    private float limit = 0.01f;
-    Queue<Vector2Int> path;
-    protected Vector3 curTargetPosition;
+    private float limit = 0.1f;
+    Queue<Vector2Int> path= new Queue<Vector2Int>();
+    protected Vector3 lastPositon;
+    private Vector3 m_curTargetPosition;
+    protected Vector3 curTargetPosition { get { return m_curTargetPosition; } set { lastPositon = transform.position; m_curTargetPosition = value; } }
+
     [HideInInspector]
     public UnityEvent eFinishPath = new UnityEvent();
+    private float curTime = 0f;
     protected virtual void Update()
     {
-        if(state==MoveState.Moving)
+        if (state != MoveState.Idle)
         {
+            curTime += Time.deltaTime;
             UpdateCurTargetPosition();
             if (state == MoveState.Moving)
-            MoveForward(Time.deltaTime);
+                MoveForward(Time.deltaTime);
+            else if (state == MoveState.Throwing)
+                MoveAlong(curTime);
         }
 
     }
     private void MoveForward(float deltaTime)
     {
-       Vector3 vec= curTargetPosition -transform.position;
-        float maxDistance = deltaTime*speed;
+        Vector3 vec = curTargetPosition - transform.position;
+        float maxDistance = deltaTime * speed;
         //进行移动
         if (vec.magnitude < maxDistance)
         {
@@ -41,8 +49,15 @@ public class CMoveComponent : Component
             Vector3 dir = vec.normalized;
             transform.position += dir * maxDistance;
         }
-       
-        
+    }
+    void MoveAlong(float t)
+    {
+        //t *= speed/2;
+        t *= 1.5f;
+        float height = 3;
+        Vector3 targetPosition = Vector3.Lerp(lastPositon, curTargetPosition, t);
+        targetPosition.y = height*2*t * (1-t) + curTargetPosition.y;
+        transform.position = targetPosition;
     }
     virtual public bool RequestMove(Vector2Int[] pathArr)
     {
@@ -64,30 +79,39 @@ public class CMoveComponent : Component
                 this.InvokeAfter(eFinishPath.Invoke, 1f);
                 return false;
             }
-            else
-            {
-                string s=System.String.Empty;
-                Vector2Int[] t = path.ToArray();
-                foreach(var p in t)
-                {
-                    s += p.ToString();
-                }
 
-            }
             state = MoveState.Moving;
-            curTargetPosition= GridManager.instance.GetChessPosition3D(path.Dequeue());
+            curTargetPosition = GridManager.instance.GetChessPosition3D(path.Dequeue());
             return true;
         }
     }
     virtual public bool RequestDirectMove(Vector2Int destination)
     {
-        return RequestMove(new Vector2Int[] { destination});
+        return RequestMove(new Vector2Int[] { destination });
+    }
+    virtual public bool RequestJumpMove(Vector2Int destination)
+    {
+        if (state != MoveState.Idle)
+        {
+            return false;
+        }
+        else
+        {
+            curTime = 0f;
+            state = MoveState.Throwing;
+            curTargetPosition = GridManager.instance.GetChessPosition3D(destination);
+            lastPositon = transform.position;
+            return true;
+        }
     }
     protected bool NextPosition()
     {
+        curTime = 0;
+        transform.position = curTargetPosition;
         //达到最终终点
         if (path.Count == 0)
         {
+            lastPositon = curTargetPosition;
             curTargetPosition = transform.position;
             state = MoveState.Idle;
             eFinishPath.Invoke();
@@ -102,7 +126,7 @@ public class CMoveComponent : Component
     protected virtual void UpdateCurTargetPosition()
     {
         //到达当前的目标位置
-        if ((transform.position-curTargetPosition).magnitude<limit)
+        if ((transform.position - curTargetPosition).magnitude < limit)
         {
             NextPosition();
         }

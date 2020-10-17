@@ -32,7 +32,7 @@ public class GChess : GActor
     public int teamID;
 
     protected UnityEvent eLocationChange = new UnityEvent();
-    public UnityEvent eBePush = new UnityEvent();
+    public UnityEvent eBeForceMove = new UnityEvent();
     protected UnityEvent eMovementChange = new UnityEvent();
     [HideInInspector]
     public CNavComponent navComponent;
@@ -74,19 +74,9 @@ public class GChess : GActor
         curMovement = movement;
         hasActed = false;
     }
-    protected override void OnPlayerTurnEnd()
+    public override void OnPlayerTurnEnd()
     {
         base.OnPlayerTurnEnd();
-        int t = TempertureManager.instance.GetTempatureAt(location);
-        if (t < 0)
-        {
-            if (!immuniateEnvironmentColdness)
-                ElementReaction(Element.Ice);
-        }
-        else if (t > 0)
-        {
-            ElementReaction(Element.Fire);
-        }
         DeactiveFreezeFoot();
     }
     public void Recover(int value)
@@ -99,12 +89,14 @@ public class GChess : GActor
         if (elementComponent)
         {
             //damage = elementComponent.ProcessDamage(element, damage);
-            Damage(damage);
-            elementComponent.OnHitElement(element);
+            if(melt)
+                Damage(damage);
+            ElementReaction(element);
         }
         else
         {
-            Damage(damage);
+            if (melt)
+                Damage(damage);
         }
     }
     public void Damage(int value)
@@ -154,8 +146,17 @@ public class GChess : GActor
             }
 
         }
-        eBePush.Invoke();
+        eBeForceMove.Invoke();
         MoveToDirectly(destination);
+        DeactiveFreezeFoot();
+    }
+    public void ThrowTo(Vector2Int destination)
+    {
+        eBeForceMove.Invoke();
+        Debug.Log("ThrowTo" + destination);
+        moveComponent.RequestJumpMove(destination);
+        location = destination;
+        moveComponent.eFinishPath.AddListener(EnterLocation);
         DeactiveFreezeFoot();
     }
     /// <summary>

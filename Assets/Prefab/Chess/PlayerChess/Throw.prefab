@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 6460747280885505425, guid: b93baae7903a93f4d87114df18e59318,
         type: 3}
       propertyPath: m_Name
-      value: Rhinocerosp
+      value: Throw
       objectReference: {fileID: 0}
     - target: {fileID: 6460747280885505434, guid: b93baae7903a93f4d87114df18e59318,
         type: 3}
@@ -92,6 +92,12 @@ PrefabInstance:
       propertyPath: info
       value: "\u53EF\u4EE5\u63A8\u52A8\u7269\u4F53"
       objectReference: {fileID: 0}
+    - target: {fileID: 6460747280885505438, guid: b93baae7903a93f4d87114df18e59318,
+        type: 3}
+      propertyPath: skills.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: a44a56cef30df8e41bbc49515b00e6b8,
+        type: 2}
     - target: {fileID: 7928023411131777125, guid: b93baae7903a93f4d87114df18e59318,
         type: 3}
       propertyPath: m_Mesh

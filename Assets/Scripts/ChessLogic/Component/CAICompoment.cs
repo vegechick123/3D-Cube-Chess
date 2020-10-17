@@ -12,7 +12,7 @@ using UnityEngine.Events;
 public class CAICompoment : Component
 {
     protected GAIChess AIChess { get { return actor as GAIChess; } }
-    protected GChess target;//目标Chess
+    public GChess target;//目标Chess
     protected Vector2Int desination;//目标移动位置
     protected FloorHUD floorHUD;//用以显示AI技能的影响范围
     protected override void Awake()

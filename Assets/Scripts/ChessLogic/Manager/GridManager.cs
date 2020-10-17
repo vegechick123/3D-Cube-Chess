@@ -47,6 +47,10 @@ public class GridManager : Manager<GridManager>
     {
         return chesses.FindAll(x => x.teamID == teamID).ToArray();
     }
+    public GChess[] GetChesses()
+    {
+        return chesses.ToArray();
+    }
     public bool CheckAllPlayerFrozen()
     {
         GChess[] temp = GetChesses(GameManager.instance.playerTeam);
@@ -263,7 +267,13 @@ public class GridManager : Manager<GridManager>
         string info = string.Empty;
         if(t>0)
         {
-            info = "留在这里的角色会受到"+UIManager.instance.GetHighTempertureRichText();
+            info = "留在这里的角色会受到";
+            if (t >= 2)
+            {
+                info += t;
+                info += "点";
+            }
+            info += UIManager.instance.GetHighTempertureRichText();
         }
         else if(t==0)
         {
@@ -271,7 +281,7 @@ public class GridManager : Manager<GridManager>
         }
         else
         {
-            info = "留在这里的角色会受到"+ UIManager.instance.GetLowTempertureRichText();
+            info = "留在这里的角色会受到" +UIManager.instance.GetLowTempertureRichText();
         }
         list.Add(new Information("温度：" + t, info));
         list.AddRange(EnvironmentManager.instance.GetInfos(location));

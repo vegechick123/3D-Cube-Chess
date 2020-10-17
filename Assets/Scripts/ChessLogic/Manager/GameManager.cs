@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boo.Lang.Runtime.DynamicDispatching;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using UnityEngine.Events;
 /// </summary>
 public class GameManager : Manager<GameManager>
 {
-    
+
     [NonSerialized]
     public int teamCount = 2;
     [NonSerialized]
@@ -21,13 +22,13 @@ public class GameManager : Manager<GameManager>
     public UnityEvent eRoundStart = new UnityEvent();
     public UnityEvent eRoundEnd = new UnityEvent();
     public UnityEvent ePlayerTurnBegin = new UnityEvent();
-    public UnityEvent ePlayerTurnEnd = new UnityEvent();    
+    public UnityEvent ePlayerTurnEnd = new UnityEvent();
     public UnityEvent eGameAwake = new UnityEvent();
     public UnityEvent eGameStart = new UnityEvent();
     public UnityEvent eGameWin = new UnityEvent();
     public UnityEvent eGameLose = new UnityEvent();
     public UnityEvent eGameEnd = new UnityEvent();
-    public GameObject startButton; 
+    public GameObject startButton;
     public GameObject winUI;
     public ParticleSystem snowWeatherParticle;
     public Color BrightColor;
@@ -40,7 +41,7 @@ public class GameManager : Manager<GameManager>
     public void Start()
     {
         GameAwake();
-        if(autoStart)
+        if (autoStart)
             GameStart();
     }
     protected void GameAwake()
@@ -59,7 +60,7 @@ public class GameManager : Manager<GameManager>
         eRoundStart.Invoke();
         AIPreTurnStart();
     }
-    protected void AIPreTurnStart ()
+    protected void AIPreTurnStart()
     {
         Debug.Log("GameState:AIPreTurnStart");
         StartCoroutine(GridFunctionUtility.InvokeNextFrame(AIManager.instance.PreTurn));
@@ -69,7 +70,7 @@ public class GameManager : Manager<GameManager>
     {
         Debug.Log("GameState:AIPreTurnEnd");
 
-        EnvironmentPreTurnStart();    
+        EnvironmentPreTurnStart();
     }
     protected void EnvironmentPreTurnStart()
     {
@@ -79,7 +80,7 @@ public class GameManager : Manager<GameManager>
     }
     public void EnvironmentPreTurnEnd()
     {
-        PlayerTurnStart();        
+        PlayerTurnStart();
     }
 
     protected void PlayerTurnStart()
@@ -93,6 +94,30 @@ public class GameManager : Manager<GameManager>
         Debug.Log("GameState:PlayerTurnEnd");
         PlayerControlManager.instance.PlayerTurnExit();
         ePlayerTurnEnd.Invoke();
+        coroutine = PlayerTurnEndCor();
+        MoveNext();
+    }
+    public IEnumerator PlayerTurnEndCor()
+    {
+        GChess[] chesses = GridManager.instance.GetChesses();
+        foreach (GChess chess in chesses)
+        {
+            int t = TempertureManager.instance.GetTempatureAt(chess.location);
+            if (t < 0)
+            {
+                if (!chess.immuniateEnvironmentColdness)
+                {
+                    chess.ElementDamage(Element.Ice, t - 1);
+                    yield return 0.5f;
+                }
+            }
+            else if (t > 0)
+            {
+                chess.ElementDamage(Element.Fire,t-1);
+                yield return 0.5f;
+            }
+            chess.OnPlayerTurnEnd();
+        }
         EnvironmentPostTurnStart();
     }
     protected void EnvironmentPostTurnStart()
@@ -138,9 +163,9 @@ public class GameManager : Manager<GameManager>
         Color originColor = Camera.main.backgroundColor;
         float originLight = sun.intensity;
         float t = 0;
-        while(t<3)
+        while (t < 3)
         {
-            Camera.main.backgroundColor = Color.Lerp(originColor, BrightColor,t);
+            Camera.main.backgroundColor = Color.Lerp(originColor, BrightColor, t);
             sun.intensity = Mathf.Lerp(originLight, 1.6f, t);
             t += Time.deltaTime / 3;
             yield return null;
