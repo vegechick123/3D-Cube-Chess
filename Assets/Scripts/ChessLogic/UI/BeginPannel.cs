@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class BeginPannel : MonoBehaviour
 {
     public GameObject startButton;
+    public bool ignoreLoadScene=false;
     private void Awake()
     {
         startButton.SetActive(false);
@@ -12,7 +13,7 @@ public class BeginPannel : MonoBehaviour
     public void LoadScene(int index)
     {
         int curIndex=SceneManager.GetActiveScene().buildIndex;
-        if(curIndex!=index)
+        if(curIndex!=index&&!ignoreLoadScene)
             SceneManager.LoadScene(index);
         else
         {
