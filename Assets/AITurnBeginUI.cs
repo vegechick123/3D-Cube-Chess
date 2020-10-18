@@ -6,9 +6,8 @@ using UnityEngine.UI;
 public class AITurnBeginUI : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject aiTurnUI;
-    private float alpha = 0.0f;
-    private float alphaSpeed = 2.0f;
+    private  float alpha = 0.0f;
+    public  float alphaSpeed = 2.0f;
     private CanvasGroup cg;
     public void Awake()
     {
