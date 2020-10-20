@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 033698b9bebe5174e89917387dab403f, type: 3}
-  m_Name: NoBulletlShoot
-  m_EditorClassIdentifier: Assembly-CSharp::NoBulletlShoot
-  prefabBeginParticle: {fileID: 7626863233938880488, guid: dd2e841e13312e340901190ecab70a54,
+  m_Name: NoBulletShoot
+  m_EditorClassIdentifier: 
+  prefabBeginParticle: {fileID: 7250412730907975987, guid: 5cfe79246d0fafa45bd6d549f089ec65,
     type: 3}
   prefabEndParticle: {fileID: 7250412730907975987, guid: 5cfe79246d0fafa45bd6d549f089ec65,
     type: 3}
   eHit:
     m_PersistentCalls:
       m_Calls: []
-  time: 0.1

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WarmFire
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  skillVFX: {fileID: 11400000, guid: 577e5fb6bac8fda4ab8b8ff3c1f23ff8, type: 2}
+  skillVFX: {fileID: 11400000, guid: 0e8b20ba78c57494a99f07d1db7e5afe, type: 2}
   title: "\u6E29\u6696\u706B\u7130"
   info: "\u53D1\u5C04\u80FD\u9020\u6210<color=orange>\u9AD8\u6E29</color>\u7684\u98DE\u5F39\uFF0C\u5982\u679C\u51FB\u4E2D\u6211\u65B9\u961F\u53CB\u5219\u5BF9\u5176\u65BD\u52A0<color=red>\u6E29\u6696</color>"
   icon: {fileID: -4346244404228752641, guid: cb95beb56b7af6647a834d2c6d88871e, type: 3}

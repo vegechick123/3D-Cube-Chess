@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: CloseAttack
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  skillVFX: {fileID: 0}
+  title: 
+  info: 
