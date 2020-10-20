@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AITurn : MonoBehaviour
+public class AITurnBeginUI : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject aiTurnUI;
