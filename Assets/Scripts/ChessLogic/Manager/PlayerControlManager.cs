@@ -37,6 +37,8 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 	}
 	public void Select(GChess target)
 	{
+		if (selectedChess != null)
+			DeSelect();
 		selectedChess = target;
 		selectedChess.GetComponent<CAgentComponent>().eSelect.Invoke();
 	}

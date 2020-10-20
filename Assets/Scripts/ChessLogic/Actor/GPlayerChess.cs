@@ -29,17 +29,21 @@ public class GPlayerChess : GChess
             MoveCommand moveCommand = new MoveCommand(navComponent.GetMoveRange, this, MoveTo);
             moveCommand.CreateFloorHUD(new Color(0, 1, 0, 0.8f));
             PlayerControlManager.instance.GenMoveCommand(moveCommand);
+            
         }
+        outline.AddReference();
         ShowUI();
         if (unableAct||hasActed)
             UIManager.instance.DisableSkillButton();
     }
     protected virtual void OnDeselect()
     {
+        outline.RemoveReference();
         HideUI();
     }
     protected void ShowUI()
     {
+        
         UIManager.instance.SwitchSkillButton(skills.ToArray());
     }
     protected void HideUI()

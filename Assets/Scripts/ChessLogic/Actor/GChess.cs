@@ -1,4 +1,4 @@
-﻿using Boo.Lang;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -31,7 +31,7 @@ public class GChess : GActor
 
     public int teamID;
 
-    protected UnityEvent eLocationChange = new UnityEvent();
+    public UnityEvent eLocationChange = new UnityEvent();
     public UnityEvent eBeForceMove = new UnityEvent();
     protected UnityEvent eMovementChange = new UnityEvent();
     [HideInInspector]
@@ -203,6 +203,7 @@ public class GChess : GActor
     public void EnterLocation()
     {
         GridManager.instance.GetFloor(location).OnChessEnter(this);
+        eLocationChange.Invoke();
         moveComponent.eFinishPath.RemoveListener(EnterLocation);
     }
     #endregion
@@ -277,9 +278,10 @@ public class GChess : GActor
         warmVFX = null;
         
     }
-    public List<IGetInfo> GetInfos()
+    override public List<IGetInfo> GetInfos()
     {
         List<IGetInfo> list = new List<IGetInfo>();
+        list.AddRange(base.GetInfos());
         list.Add(this);
         if (freezeFoot)
             list.Add(new Information("冻足", "脚被冻住，无法自己移动\n当自己或攻击发起者受到"+UIManager.instance.GetHighTempertureRichText()+"可以解除"));

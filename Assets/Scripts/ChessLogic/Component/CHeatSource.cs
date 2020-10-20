@@ -11,6 +11,7 @@ public class CHeatSource : Component
     {
         base.Awake();
         TempertureManager.instance.heatSources.Add(this);
+        (actor as GChess).eLocationChange.AddListener(UIManager.instance.RefreshTemperture);
     }
     public int GetTempatureAffect(Vector2Int location)
     {
@@ -21,5 +22,7 @@ public class CHeatSource : Component
     {
         if(TempertureManager.instance!=null)
             TempertureManager.instance.heatSources.Remove(this);
+        if(UIManager.instance!=null)
+            UIManager.instance.RefreshTemperture();
     }
 }

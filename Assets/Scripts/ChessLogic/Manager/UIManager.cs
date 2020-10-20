@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using WebSocketSharp;
 
 public class UIManager : Manager<UIManager>
 {
@@ -18,55 +19,48 @@ public class UIManager : Manager<UIManager>
     [NonSerialized]
     public GameObject[] skillButtons;
     public GameObject skillBar;
-    public GameObject prefabTempertureMonitor;
-    public TempertureMonitor[,] tempertureMonitors;
+    public Gradient tempertureColorGradient;
     public UnityEvent eRefreshFloorHUD = new UnityEvent();
     public Transform panelContainer; 
     protected List<GameObject> alivePanels = new List<GameObject>();
     protected Outline aliveOutline;
     protected GameObject overTileFloorHUD;
+    [NonSerialized]
+    private bool bShowTemperture=false; 
     protected override void Awake()
     {
         base.Awake();
         PlayerControlManager.instance.eOverTile.AddListener(OverTile);
     }
-    private void Start()
+    public void RefreshTemperture()
     {
-        InitTempertureMonitor();
-    }
-    void InitTempertureMonitor()
-    {
-        tempertureMonitors = new TempertureMonitor[GridManager.instance.size.x, GridManager.instance.size.y];
-        for (int i = 0; i < GridManager.instance.size.x; i++)
-        {
-            for (int j = 0; j < GridManager.instance.size.y; j++)
-            {
-                GFloor target = GridManager.instance.GetFloor(new Vector2Int(i, j));
-                if (target == null) Debug.LogError(new Vector2Int(i, j));
-                tempertureMonitors[i, j] = Instantiate(prefabTempertureMonitor, target.transform).GetComponent<TempertureMonitor>();
-                tempertureMonitors[i, j].gameObject.SetActive(false);
-            }
-        }
+        if (bShowTemperture)
+            ShowTemperture();
     }
     public void ShowTemperture()
     {
-
-        for (int i = 0; i < tempertureMonitors.GetLength(0); i++)
-            for (int j = 0; j < tempertureMonitors.GetLength(1); j++)
+        bShowTemperture = true;   
+        for (int i = 0; i < GridManager.instance.size.x; i++)
+            for (int j = 0; j < GridManager.instance.size.y; j++)
             {
-                var t = tempertureMonitors[i, j];
-                t.gameObject.SetActive(true);
-                t.Init(TempertureManager.instance.GetTempatureAt(new Vector2Int(i, j)));
-        }
+                var t = GridManager.instance.GetFloor(new Vector2Int(i, j));
+                if (t == null)
+                    continue;
+                Color c = tempertureColorGradient.colorKeys[TempertureManager.instance.GetTempatureAt(new Vector2Int(i, j))+1].color;
+                t.render.material.SetColor("_Color",c);
+                t.render.material.SetFloat("_Blend", 0.5f);
+            }
     }
     public void HideTemperture()
     {
-
-        for (int i = 0; i < tempertureMonitors.GetLength(0); i++)
-            for (int j = 0; j < tempertureMonitors.GetLength(1); j++)
+        bShowTemperture = false;
+        for (int i = 0; i < GridManager.instance.size.x; i++)
+            for (int j = 0; j < GridManager.instance.size.y; j++)
             {
-                var t = tempertureMonitors[i, j];
-                t.gameObject.SetActive(false);
+                var t = GridManager.instance.GetFloor(new Vector2Int(i, j));
+                //Color c = tempertureColorGradient.colorKeys[TempertureManager.instance.GetTempatureAt(new Vector2Int(i, j)) + 1].color;
+                t.render.material.SetColor("_Color", Color.white);
+                t.render.material.SetFloat("_Blend", 0);
             }
     }
     
@@ -85,12 +79,17 @@ public class UIManager : Manager<UIManager>
         }
 
         GChess t = GridManager.instance.GetChess(location);
+        GFloor f = GridManager.instance.GetFloor(location);
         var list = new List<IGetInfo>();
         if (t != null)
         {
             list.AddRange(t.GetInfos());
             aliveOutline =t.outline;
             aliveOutline.AddReference();
+        }
+        if (f != null)
+        {
+            list.AddRange(f.GetInfos());
         }
         list.AddRange(GridManager.instance.GetEnvironmentInformation(location));
         CreateMessage(list);

@@ -46,5 +46,6 @@ public class FlameStumpBurningState : ElementStateBase
     {
         base.Exit();
         Destroy(heatSource);
+
     }
 }

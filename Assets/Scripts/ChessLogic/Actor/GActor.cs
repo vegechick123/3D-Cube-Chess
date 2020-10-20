@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 public abstract class GActor : MonoBehaviour, IGetInfo
@@ -105,7 +106,12 @@ public abstract class GActor : MonoBehaviour, IGetInfo
     {
 
     }
-
+    virtual public List<IGetInfo> GetInfos()
+    {
+        List<IGetInfo> result = new List<IGetInfo>();
+        result.AddRange(GetComponents<CExtraInformation>());
+        return result;
+    }
     public string GetTitle()
     {
         return title;

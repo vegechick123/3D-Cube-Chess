@@ -336,10 +336,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintUI
       objectReference: {fileID: 0}
+    - target: {fileID: 3066611246128739292, guid: 92986d21e715e9045ad0c0a521df400c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 15.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3066611246128739292, guid: 92986d21e715e9045ad0c0a521df400c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: 8175970469488432390, guid: 92986d21e715e9045ad0c0a521df400c,
         type: 3}
       propertyPath: m_Text
       value: "\u6E29\u5EA6"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8360337983505261329, guid: 92986d21e715e9045ad0c0a521df400c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 68.99999
       objectReference: {fileID: 0}
     - target: {fileID: 9199432638602713412, guid: 92986d21e715e9045ad0c0a521df400c,
         type: 3}
