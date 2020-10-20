@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IceBulletAttack
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  skillVFX: {fileID: 11400000, guid: 577e5fb6bac8fda4ab8b8ff3c1f23ff8, type: 2}
+  skillVFX: {fileID: 11400000, guid: cced2bf9d4f980943b7d3045dfbf0cfa, type: 2}
   title: 
   info: 
   maxLength: 7
