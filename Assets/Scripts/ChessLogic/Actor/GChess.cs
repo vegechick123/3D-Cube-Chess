@@ -137,7 +137,6 @@ public class GChess : GActor
             GChess t = GridManager.instance.GetChess(curLocation);
             if (t|| !GridManager.instance.InRange(curLocation))
             {
-
                 break;
             }
             else

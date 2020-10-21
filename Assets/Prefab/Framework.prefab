@@ -1511,6 +1511,8 @@ MonoBehaviour:
     type: 3}
   prefabSkillButton: {fileID: 5831139469554272609, guid: 9836bfeb2703d584393e230fdb897aac,
     type: 3}
+  prefabFloatText: {fileID: 5573141058737394236, guid: ccdac9b97f418484ab0afb5a8bb3d272,
+    type: 3}
   prefabImage: {fileID: 3992963152474904336, guid: 52f12c0660fd8d84cb571cb1ef651578,
     type: 3}
   prefabMessage: {fileID: 2977903599976896404, guid: 92986d21e715e9045ad0c0a521df400c,
@@ -1549,6 +1551,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   panelContainer: {fileID: 4285201786467132987}
+  mainUICanvans: {fileID: 9062127573679785310}
+  textTags:
+  - tag: 0
+    name: "\u9AD8\u6E29"
+    color: {r: 0.990566, g: 0.57051325, b: 0, a: 1}
+  - tag: 1
+    name: "\u4F4E\u6E29"
+    color: {r: 0, g: 1, b: 1, a: 1}
+  - tag: 2
+    name: "\u6E29\u6696"
+    color: {r: 1, g: 0.020209678, b: 0, a: 1}
 --- !u!114 &9062127573002030760
 MonoBehaviour:
   m_ObjectHideFlags: 0

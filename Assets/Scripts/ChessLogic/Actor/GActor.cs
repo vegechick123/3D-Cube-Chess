@@ -53,12 +53,14 @@ public abstract class GActor : MonoBehaviour, IGetInfo
             switch (element)
             {
                 case Element.Fire:
-                    if (iceParticle != null)
+                    CreateTextOnHead(TextTag.HighTemperture);
+                    if (fireParticle != null)
                     {
                         GridFunctionUtility.CreateParticleAt(fireParticle, this);
                     }
                     break;
                 case Element.Ice:
+                    CreateTextOnHead(TextTag.LowTemperture);
                     if (iceParticle != null)
                     {
                         GridFunctionUtility.CreateParticleAt(iceParticle, this);
@@ -71,6 +73,10 @@ public abstract class GActor : MonoBehaviour, IGetInfo
             elementComponent.OnHitElement(element);
             eElementReaction.Invoke(element);
         }
+    }
+    public void CreateTextOnHead(TextTag tag)
+    {
+        UIManager.instance.CreateFloatText(transform.position+Vector3.up, tag);
     }
     virtual protected void OnRoundStart()
     {

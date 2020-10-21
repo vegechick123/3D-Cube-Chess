@@ -2,31 +2,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using WebSocketSharp;
-
+public enum TextTag
+{
+    HighTemperture,
+    LowTemperture,
+    Warm
+};
 public class UIManager : Manager<UIManager>
 {
     public GameObject prefabFloorHDU;
     public GameObject prefabHealthBar;
     public GameObject prefabSkillButton;
-
+    public GameObject prefabFloatText;
 
     public GameObject prefabImage;
     public GameObject prefabMessage;
     [NonSerialized]
     public GameObject[] skillButtons;
+
     public GameObject skillBar;
     public Gradient tempertureColorGradient;
     public UnityEvent eRefreshFloorHUD = new UnityEvent();
-    public Transform panelContainer; 
+    public Transform panelContainer;
+    public Canvas mainUICanvans;
     protected List<GameObject> alivePanels = new List<GameObject>();
     protected Outline aliveOutline;
     protected GameObject overTileFloorHUD;
     [NonSerialized]
-    private bool bShowTemperture=false; 
+    private bool bShowTemperture = false;
+
+    [SerializeField]
+    public List<TextTagInfo> textTags;
     protected override void Awake()
     {
         base.Awake();
@@ -39,15 +50,19 @@ public class UIManager : Manager<UIManager>
     }
     public void ShowTemperture()
     {
-        bShowTemperture = true;   
+        bShowTemperture = true;
         for (int i = 0; i < GridManager.instance.size.x; i++)
             for (int j = 0; j < GridManager.instance.size.y; j++)
             {
                 var t = GridManager.instance.GetFloor(new Vector2Int(i, j));
                 if (t == null)
                     continue;
-                Color c = tempertureColorGradient.colorKeys[TempertureManager.instance.GetTempatureAt(new Vector2Int(i, j))+1].color;
-                t.render.material.SetColor("_Color",c);
+
+                int tempature = TempertureManager.instance.GetTempatureAt(new Vector2Int(i, j));
+                tempature = Math.Max(tempature, -1);
+                tempature = Math.Min(tempature, tempertureColorGradient.colorKeys.Length - 2);
+                Color c = tempertureColorGradient.colorKeys[tempature + 1].color;
+                t.render.material.SetColor("_Color", c);
                 t.render.material.SetFloat("_Blend", 0.5f);
             }
     }
@@ -63,17 +78,27 @@ public class UIManager : Manager<UIManager>
                 t.render.material.SetFloat("_Blend", 0);
             }
     }
-    
+    public void CreateFloatText(Vector3 position, TextTag tag)
+    {
+        TextTagInfo data= textTags[(int)tag];
+        CreateFloatText(position, data.name, data.color);
+    }
+    public void CreateFloatText(Vector3 position, string text, Color color)
+    {
+        GameObject t = Instantiate(prefabFloatText, position, Quaternion.identity, null);
+        t.GetComponentInChildren<TextMesh>().text = text;
+        t.GetComponentInChildren<TextMesh>().color = color;
+    }
     void OverTile(Vector2Int location)
     {
         if (overTileFloorHUD != null)
             Destroy(overTileFloorHUD);
-        if(aliveOutline!=null)
+        if (aliveOutline != null)
         {
             aliveOutline.RemoveReference();
             aliveOutline = null;
         }
-        if(location!=Vector2Int.down)
+        if (location != Vector2Int.down)
         {
             overTileFloorHUD = CreateFloorHUD(location, Color.yellow);
         }
@@ -84,7 +109,7 @@ public class UIManager : Manager<UIManager>
         if (t != null)
         {
             list.AddRange(t.GetInfos());
-            aliveOutline =t.outline;
+            aliveOutline = t.outline;
             aliveOutline.AddReference();
         }
         if (f != null)
@@ -106,7 +131,7 @@ public class UIManager : Manager<UIManager>
         {
             GameObject gameObject = GameObject.Instantiate(prefabMessage, panelContainer);
             alivePanels.Add(gameObject);
-            gameObject.GetComponent<Messages>().Init(info);            
+            gameObject.GetComponent<Messages>().Init(info);
         }
 
         return gameObject;

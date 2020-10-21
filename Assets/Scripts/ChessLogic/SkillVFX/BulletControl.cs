@@ -23,7 +23,8 @@ public class BulletControl : MonoBehaviour
     void Start()
     {
         SpeedCaculate();
-        GameObject begin = Instantiate(prefabBeginParticle, origin, prefabBeginParticle.transform.rotation);
+        if(prefabBeginParticle)
+            Instantiate(prefabBeginParticle, origin, prefabBeginParticle.transform.rotation);
     }
 
     // Update is called once per frame
@@ -32,9 +33,11 @@ public class BulletControl : MonoBehaviour
         currentTime += Time.deltaTime;
         if (currentTime >= timecost)
         {
-            GameObject end = Instantiate(prefabEndParticle, destination, prefabEndParticle.transform.rotation);
+            if (prefabEndParticle)
+                Instantiate(prefabEndParticle, destination, prefabEndParticle.transform.rotation);
             eHit.Invoke();
-            Destroy(gameObject);
+            gameObject.GetComponent<ParticleSystem>().Stop();
+            Destroy(this);
         }
         transform.position = Position(currentTime);
     }
