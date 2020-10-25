@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: Throw
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  skillVFX: {fileID: 0}
+  skillVFX: {fileID: 11400000, guid: 1d619c1afbfe9e249b36c5e8766fa1e4, type: 2}
   title: "\u6295\u63B7"
   info: "\u5C06\u4E00\u4E2A\u5355\u4F4D\u6295\u63B7\u5230\u53E6\u4E00\u4E2A\u5730\u65B9"
-  icon: {fileID: -7017944715137372645, guid: cb95beb56b7af6647a834d2c6d88871e, type: 3}
+  icon: {fileID: 21300000, guid: 767eb3bed2604f943a0790ae28d33e1f, type: 3}
+  cursorHints:
+  - "\u9009\u4E2D\u8981\u6295\u63B7\u7684<color=yellow>\u89D2\u8272</color>"
+  - "\u9009\u4E2D\u76EE\u6807\u6295\u63B7<color=yellow>\u5730\u70B9</color>"
   distance: 1
   length: 1
   element: 2

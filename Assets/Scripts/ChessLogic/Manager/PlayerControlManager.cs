@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
@@ -10,8 +11,9 @@ using UnityEngine.UI;
 /// </summary>
 public class PlayerControlManager : Manager<PlayerControlManager>
 {
+	[NonSerialized]
 	public GChess selectedChess;
-
+	public AudioClip selectAudio;
 	protected SelectCommand selectCommand;
 	protected RangeCommand moveCommand;
 	protected CommandTask skillCommand;
@@ -22,6 +24,10 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 	Vector2Int curTile= Vector2Int.down;
 	public UnityEvent eRightMouseClick = new UnityEvent();
 	public Button turnEndButton;
+	public Stack<MoveInfo> moveInfoSta=new Stack<MoveInfo>();
+	public Button undoMoveButton;
+	public EventSystem eventSystem;
+	public GraphicRaycaster raycaster;
 	//尝试选中target
 	public bool TrySelect(GChess target)
 	{
@@ -37,6 +43,7 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 	}
 	public void Select(GChess target)
 	{
+		GetComponent<AudioSource>().PlayOneShot(selectAudio, 0.3f);
 		if (selectedChess != null)
 			DeSelect();
 		selectedChess = target;
@@ -77,9 +84,19 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 		RaycastHit hit;
 		// Casts the ray and get the first game object hit
 		bool bHit=Physics.Raycast(ray, out hit);
+		PointerEventData pointerEventData = new PointerEventData(eventSystem);
+		//Set the Pointer Event Position to that of the mouse position
+		pointerEventData.position = Input.mousePosition;
 
+		//Create a list of Raycast Results
+		List<RaycastResult> results = new List<RaycastResult>();
+
+		//Raycast using the Graphics Raycaster and mouse click position
+		raycaster.Raycast(pointerEventData, results);
+
+		bool isInteractingWithUI = results.Count > 0;
 		GActor hitResult = null;
-		if(bHit)
+		if(bHit&&!isInteractingWithUI)
         {
 			hitResult = hit.transform.gameObject.GetComponent<GActor>();
 		}
@@ -133,7 +150,7 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 	}
 
 
-	public void PreemptSkillCommand(CommandTask commandTask)
+	public void PreemptSkillCommand(SkillCommand commandTask)
     {
 		selectCommand.bPaused = true;
 		if (moveCommand != null)
@@ -148,6 +165,7 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 
 		skillCommand.eTaskComplete.AddListener(() =>
 		{
+			ClearMoveInfo();
 			skillCommand = null;
 			selectCommand.bPaused = false;
 			if (moveCommand != null)
@@ -181,4 +199,25 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 		else if (selectedChess != null)
 			DeSelect();
     }
+	public void AddMoveInfo(MoveInfo info)
+    {
+		moveInfoSta.Push(info);
+		undoMoveButton.interactable = true;
+    }
+	public void ClearMoveInfo()
+	{
+		moveInfoSta.Clear();
+		undoMoveButton.interactable = false;
+	}
+	public void CancelMove()
+    {
+		MoveInfo t = moveInfoSta.Pop();
+		t.owner.Teleport(t.origin);
+		t.owner.curMovement = t.owner.movement;
+		t.owner.render.transform.rotation = t.originRotation;
+		t.owner.render.GetComponent<Animator>().Play("Idle");
+		t.owner.AbortMove();
+		if (moveInfoSta.Count==0)
+			undoMoveButton.interactable = false;
+	}
 }

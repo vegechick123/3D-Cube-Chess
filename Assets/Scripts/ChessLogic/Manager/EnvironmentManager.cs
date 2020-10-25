@@ -7,6 +7,10 @@ public class EnvironmentManager : Manager<EnvironmentManager>
     
     public int stormNum;
     public GameObject prefabStorm;
+    public AudioClip stormAudio;
+    public AudioClip stormTakeEffectAudio;
+    [Range(0, 1)]
+    public float stormAudioAmplitude=0.5f;
     public int stormAroundDistance=1;
     List<Vector2Int> stormLocation = new List<Vector2Int>();
     List<GameObject> stormParticle = new List<GameObject>();
@@ -20,6 +24,8 @@ public class EnvironmentManager : Manager<EnvironmentManager>
     }
     IEnumerator PreEnvironmentTurn()
     {
+        if (stormAudio && stormNum > 0)
+            GetComponent<AudioSource>().PlayOneShot(stormAudio, stormAudioAmplitude);
         Vector2Int yRange = GridFunctionUtility.GetPlayerChessyRange();
         yRange.x = Mathf.Max(0, yRange.x - stormAroundDistance);
         yRange.y = Mathf.Min(GridManager.instance.size.y - 1, yRange.y + stormAroundDistance);
@@ -47,6 +53,7 @@ public class EnvironmentManager : Manager<EnvironmentManager>
     }
     IEnumerator PostEnvironmentTurn()
     {
+
         for (int i = 0; i < stormLocation.Count; i++)
         {
             Vector2Int location = stormLocation[i];
@@ -55,6 +62,8 @@ public class EnvironmentManager : Manager<EnvironmentManager>
             {
                 t.ElementReaction(Element.Ice);
             }
+            if(stormTakeEffectAudio!=null)
+                AudioSource.PlayClipAtPoint(stormTakeEffectAudio, GridManager.instance.GetChessPosition3D(location));
             stormParticle[i].GetComponent<MeshRenderer>().material.SetColor("_Color", Color.yellow);
             Destroy(stormParticle[i],1f);
             yield return new WaitForSeconds(1f);

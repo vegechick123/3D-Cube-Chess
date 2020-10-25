@@ -16,13 +16,13 @@ public class SThrow : PlayerSkill
     public void Cast(GChess chess,GFloor floor)
     {
         Vector2Int direction = chess.location - owner.location;
-
+        Vector2Int origin = chess.location;
+        chess.ThrowTo(floor.location);   
         TakeEffect(() =>
         {
-            chess.ThrowTo(floor.location);
             chess.ElementReaction(element);
         },
-        owner.location, chess.location);
+        GridManager.instance.GetFloorPosition3D(origin)+new Vector3(0,0.5f,0), GridManager.instance.GetFloorPosition3D(floor.location) + new Vector3(0, 0.5f, 0));
     }
     public override bool ConditionCheck(int index, object[] parameters)
     {

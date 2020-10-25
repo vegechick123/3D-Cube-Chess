@@ -265,9 +265,10 @@ public class GridManager : Manager<GridManager>
             return list;
         int t = TempertureManager.instance.GetTempatureAt(location);
         string info = string.Empty;
+        info += "回合结束时，";
         if(t>0)
         {
-            info = "留在这里的角色会受到";
+            info += "留在这里的角色会受到";
             if (t >= 2)
             {
                 info += t;
@@ -281,9 +282,9 @@ public class GridManager : Manager<GridManager>
         }
         else
         {
-            info = "留在这里的角色会受到" +UIManager.instance.GetLowTempertureRichText();
+            info += "留在这里的角色会受到" +UIManager.instance.GetLowTempertureRichText();
         }
-        list.Add(new Information("温度：" + t, info));
+        list.Add(new Information("区域温度：" + t, info));
         list.AddRange(EnvironmentManager.instance.GetInfos(location));
         return list;
     }

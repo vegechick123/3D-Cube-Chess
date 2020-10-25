@@ -9,15 +9,12 @@ public class SkillButton : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
     public Skill skill;
 
     public void OnPointerEnter(PointerEventData eventData)
-    {
-        List<IGetInfo> res = new List<IGetInfo>();
-        res.Add(skill);
-        UIManager.instance.CreateMessage(res);
+    {        
+        UIManager.instance.AddExtraMessage(skill);
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        List<IGetInfo> res = new List<IGetInfo>();
-        UIManager.instance.CreateMessage(res);
+        UIManager.instance.RemoveExtraMessage(skill);
     }
 
 }

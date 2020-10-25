@@ -8,6 +8,7 @@ public class EnemySpawnManager : MonoBehaviour
     public int num = 2;
     public int spawnDistance=3;
     public GameObject[] prefabEnemy;
+    public AudioClip enemySpawnAudio;
     [SerializeField] protected float[] probability;
     public IEnumerator SpawnEnemy()
     {
@@ -29,6 +30,7 @@ public class EnemySpawnManager : MonoBehaviour
                       
             Vector2Int targetLocation = GetValidLocation(yRange);
             GridManager.instance.InstansiateChessAt(ChooseRandomEnemy(),targetLocation);
+            AudioSource.PlayClipAtPoint(enemySpawnAudio, GridManager.instance.GetChessPosition3D(targetLocation));
             GameObject t = UIManager.instance.CreateFloorHUD(targetLocation, Color.yellow);
             UIManager.instance.eRefreshFloorHUD.Invoke();
             yield return 1f;

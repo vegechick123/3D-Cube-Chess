@@ -59,5 +59,19 @@ public class GPlayerChess : GChess
         }
         base.OnDestroy();
     }
-
+    public override void MoveTo(Vector2Int destination)
+    {
+        MoveInfo t = new MoveInfo();
+        t.owner = this;
+        t.origin = location;
+        t.originRotation = render.transform.rotation;
+        t.destination = destination;
+        PlayerControlManager.instance.AddMoveInfo(t);
+        base.MoveTo(destination);
+        t.destinationRotation = render.transform.rotation;
+    }
+    public virtual void OnPerformSkill(Skill skill)
+    {
+        PlayerControlManager.instance.ClearMoveInfo();
+    }
 }

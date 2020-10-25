@@ -1,0 +1,1328 @@
+fileFormatVersion: 2
+guid: db71ec65640dcce438b16123a35a646c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2579577302963308911
+    second: pixelTest_0
+  - first:
+      213: 5601581494018628894
+    second: pixelTest_1
+  - first:
+      213: 2089928236710670753
+    second: pixelTest_2
+  - first:
+      213: -1422753655351982868
+    second: pixelTest_3
+  - first:
+      213: 4681538866724049664
+    second: pixelTest_4
+  - first:
+      213: 2444824981593821854
+    second: pixelTest_5
+  - first:
+      213: -4922387386640858548
+    second: pixelTest_6
+  - first:
+      213: -4074353580050222203
+    second: pixelTest_7
+  - first:
+      213: 3882249762951365289
+    second: pixelTest_8
+  - first:
+      213: -3869180894697380100
+    second: pixelTest_9
+  - first:
+      213: 2739525940736806950
+    second: pixelTest_10
+  - first:
+      213: -3454316434311751664
+    second: pixelTest_11
+  - first:
+      213: -8785181070111813119
+    second: pixelTest_12
+  - first:
+      213: 3149075925031394334
+    second: pixelTest_13
+  - first:
+      213: 7748961394037855467
+    second: pixelTest_14
+  - first:
+      213: 9170654331330244334
+    second: pixelTest_15
+  - first:
+      213: -4474935291431877554
+    second: pixelTest_16
+  - first:
+      213: -3714497191617088511
+    second: pixelTest_17
+  - first:
+      213: -1341347506651292305
+    second: pixelTest_18
+  - first:
+      213: 268580230234592731
+    second: pixelTest_19
+  - first:
+      213: 9169058584898674349
+    second: pixelTest_20
+  - first:
+      213: 8325098614424985926
+    second: pixelTest_21
+  - first:
+      213: 8053883181648966417
+    second: pixelTest_22
+  - first:
+      213: 5426223943842119543
+    second: pixelTest_23
+  - first:
+      213: 2478877713797822454
+    second: pixelTest_24
+  - first:
+      213: -400392259478191792
+    second: pixelTest_25
+  - first:
+      213: 1701168613682420040
+    second: pixelTest_26
+  - first:
+      213: 5636211225797788507
+    second: pixelTest_27
+  - first:
+      213: -3134722006972546884
+    second: pixelTest_28
+  - first:
+      213: 4911364274004651535
+    second: pixelTest_29
+  - first:
+      213: -7676481011029834737
+    second: pixelTest_30
+  - first:
+      213: -6293877581229472003
+    second: pixelTest_31
+  - first:
+      213: 5041227172051553229
+    second: pixelTest_32
+  - first:
+      213: 3190418966783498185
+    second: pixelTest_33
+  - first:
+      213: 6202910500431333702
+    second: pixelTest_34
+  - first:
+      213: 5767192193386903424
+    second: pixelTest_35
+  - first:
+      213: -5315491609445337829
+    second: pixelTest_36
+  - first:
+      213: -7314702455810802952
+    second: pixelTest_37
+  - first:
+      213: 8534296544000975623
+    second: pixelTest_38
+  - first:
+      213: -1180233025469262785
+    second: pixelTest_39
+  - first:
+      213: -1531088400871730263
+    second: pixelTest_40
+  - first:
+      213: -2535439203408285901
+    second: pixelTest_41
+  - first:
+      213: -5785272835302114024
+    second: pixelTest_42
+  - first:
+      213: -145348708415920259
+    second: pixelTest_43
+  - first:
+      213: -2426201396515044183
+    second: pixelTest_44
+  - first:
+      213: 4999933552063880852
+    second: pixelTest_45
+  - first:
+      213: -9143433490735679023
+    second: pixelTest_46
+  - first:
+      213: 918641237392892784
+    second: pixelTest_47
+  - first:
+      213: 3888528273301986478
+    second: pixelTest_48
+  - first:
+      213: -6320106741921091045
+    second: pixelTest_49
+  - first:
+      213: 2454496162664321160
+    second: pixelTest_50
+  - first:
+      213: -3090148675948518848
+    second: pixelTest_51
+  - first:
+      213: 112394360720860345
+    second: pixelTest_52
+  - first:
+      213: -6866025183881664399
+    second: pixelTest_53
+  - first:
+      213: 8523110371258889278
+    second: pixelTest_54
+  - first:
+      213: -8227040430914100816
+    second: pixelTest_55
+  - first:
+      213: 5064706065240259667
+    second: pixelTest_56
+  - first:
+      213: 1161213795919955163
+    second: pixelTest_57
+  - first:
+      213: 8481687982101690877
+    second: pixelTest_58
+  - first:
+      213: 6167337590804163809
+    second: pixelTest_59
+  - first:
+      213: 1505580926740672024
+    second: pixelTest_60
+  - first:
+      213: 4656518082756495097
+    second: pixelTest_61
+  - first:
+      213: -4478267777874310766
+    second: pixelTest_62
+  - first:
+      213: 8223608592366419673
+    second: pixelTest_63
+  - first:
+      213: -4146899292273436842
+    second: pixelTest_64
+  - first:
+      213: 631045401659907017
+    second: pixelTest_65
+  - first:
+      213: 1896306665346000283
+    second: pixelTest_66
+  - first:
+      213: -1732708498647250317
+    second: pixelTest_67
+  - first:
+      213: -5270947924417509573
+    second: pixelTest_68
+  - first:
+      213: -7773841068492581301
+    second: pixelTest_69
+  - first:
+      213: 2446674411882792827
+    second: pixelTest_70
+  - first:
+      213: 6647317260268932764
+    second: pixelTest_71
+  - first:
+      213: 8392260854829633135
+    second: pixelTest_72
+  - first:
+      213: 7358913478933975300
+    second: pixelTest_73
+  - first:
+      213: -9110839698440488040
+    second: pixelTest_74
+  - first:
+      213: -6999597401385973183
+    second: pixelTest_75
+  - first:
+      213: -4959754793956095996
+    second: pixelTest_76
+  - first:
+      213: -81456318414490000
+    second: pixelTest_77
+  - first:
+      213: 73874577596279118
+    second: pixelTest_78
+  - first:
+      213: -3081343121698635678
+    second: pixelTest_79
+  - first:
+      213: 7718277628120850794
+    second: pixelTest_80
+  - first:
+      213: -7655720031154276771
+    second: pixelTest_81
+  - first:
+      213: 652981219253628596
+    second: pixelTest_82
+  - first:
+      213: -1892108512884838665
+    second: pixelTest_83
+  - first:
+      213: -7258792544340339802
+    second: pixelTest_84
+  - first:
+      213: 6912909588716264663
+    second: pixelTest_85
+  - first:
+      213: -2299384394152470980
+    second: pixelTest_86
+  - first:
+      213: -242307073457374503
+    second: pixelTest_87
+  - first:
+      213: 2370322176564091324
+    second: pixelTest_88
+  - first:
+      213: 4358617713843185122
+    second: pixelTest_89
+  - first:
+      213: 5378742589258430157
+    second: pixelTest_90
+  - first:
+      213: 3961603738328895010
+    second: pixelTest_91
+  - first:
+      213: -1604462487483621244
+    second: pixelTest_92
+  - first:
+      213: 620840021762705
+    second: pixelTest_93
+  - first:
+      213: 5701118985120786872
+    second: pixelTest_94
+  - first:
+      213: -3360492766334142666
+    second: pixelTest_95
+  - first:
+      213: 7529178593057352280
+    second: pixelTest_96
+  - first:
+      213: 510957616976110447
+    second: pixelTest_97
+  - first:
+      213: 721436457753146609
+    second: pixelTest_98
+  - first:
+      213: 1435416312694611408
+    second: pixelTest_99
+  - first:
+      213: 6231650917979214590
+    second: pixelTest_100
+  - first:
+      213: 8087311891754287027
+    second: pixelTest_101
+  - first:
+      213: 1478307933852034140
+    second: pixelTest_102
+  - first:
+      213: -7543642585299659999
+    second: pixelTest_103
+  - first:
+      213: -7028285431562962146
+    second: pixelTest_104
+  - first:
+      213: 2722894942658150989
+    second: pixelTest_105
+  - first:
+      213: -5122951236553615776
+    second: pixelTest_106
+  - first:
+      213: -2459640361495476162
+    second: pixelTest_107
+  - first:
+      213: -440473757715133779
+    second: pixelTest_108
+  - first:
+      213: 2236359399960289119
+    second: pixelTest_109
+  - first:
+      213: -8230751465904361239
+    second: pixelTest_110
+  - first:
+      213: 4748053451492403357
+    second: pixelTest_111
+  - first:
+      213: -4476644719176742935
+    second: pixelTest_112
+  - first:
+      213: -6303694585017724637
+    second: pixelTest_113
+  - first:
+      213: 173693353593773724
+    second: pixelTest_114
+  - first:
+      213: 4087203457074522227
+    second: pixelTest_115
+  - first:
+      213: 7169096368161974536
+    second: pixelTest_116
+  - first:
+      213: 8523342312958780799
+    second: pixelTest_117
+  - first:
+      213: 7588078524653390078
+    second: pixelTest_118
+  - first:
+      213: -3190025842222084242
+    second: pixelTest_119
+  - first:
+      213: 5059975825673415334
+    second: pixelTest_120
+  - first:
+      213: 850242828321632933
+    second: pixelTest_121
+  - first:
+      213: -6420873812795140929
+    second: pixelTest_122
+  - first:
+      213: 784393851170531902
+    second: pixelTest_123
+  - first:
+      213: 8715759024277659543
+    second: pixelTest_124
+  - first:
+      213: 4356121030372540086
+    second: pixelTest_125
+  - first:
+      213: -1135781330375871051
+    second: pixelTest_126
+  - first:
+      213: 7011069938184248290
+    second: pixelTest_127
+  - first:
+      213: -5777464311258536015
+    second: pixelTest_128
+  - first:
+      213: -6900635378019803869
+    second: pixelTest_129
+  - first:
+      213: -4449452674910580789
+    second: pixelTest_130
+  - first:
+      213: 710773235727815618
+    second: pixelTest_131
+  - first:
+      213: -6811176564395047230
+    second: pixelTest_132
+  - first:
+      213: -1396696195106644382
+    second: pixelTest_133
+  - first:
+      213: -8600468707417470306
+    second: pixelTest_134
+  - first:
+      213: -3092569350216073132
+    second: pixelTest_135
+  - first:
+      213: 8777591481579347915
+    second: pixelTest_136
+  - first:
+      213: -6167495100818405300
+    second: pixelTest_137
+  - first:
+      213: -4865257673415979916
+    second: pixelTest_138
+  - first:
+      213: -668249524198589298
+    second: pixelTest_139
+  - first:
+      213: 5663230283052410730
+    second: pixelTest_140
+  - first:
+      213: -875778144616052157
+    second: pixelTest_141
+  - first:
+      213: -4482278045480675175
+    second: pixelTest_142
+  - first:
+      213: -7467089590135695658
+    second: pixelTest_143
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 2
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: pixelTest_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 672
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19636323c10833cd0800000000000000
+      internalID: -2579577302963308911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 672
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1dd16bb0b0dcbd40800000000000000
+      internalID: 5601581494018628894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 672
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a1b23b88aae00d10800000000000000
+      internalID: 2089928236710670753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 672
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce44bd9a61d514ce0800000000000000
+      internalID: -1422753655351982868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 672
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0039541abca28f040800000000000000
+      internalID: 4681538866724049664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 672
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9296e51e53cde120800000000000000
+      internalID: 2444824981593821854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 544
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c42886470ca20bbb0800000000000000
+      internalID: -4922387386640858548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_7
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 544
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 583f3cb710df477c0800000000000000
+      internalID: -4074353580050222203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 544
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a28f02279580e530800000000000000
+      internalID: 3882249762951365289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_9
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 544
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf6a5dfd978ed4ac0800000000000000
+      internalID: -3869180894697380100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_10
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 544
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 620d5961450c40620800000000000000
+      internalID: 2739525940736806950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_11
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 544
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 018dd07318dcf00d0800000000000000
+      internalID: -3454316434311751664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 416
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 102df74dc54c41680800000000000000
+      internalID: -8785181070111813119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_13
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 416
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1c1b3a8ed3c3bb20800000000000000
+      internalID: 3149075925031394334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_14
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 416
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be497d50557d98b60800000000000000
+      internalID: 7748961394037855467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_15
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 408
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eee26d0b685b44f70800000000000000
+      internalID: 9170654331330244334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_16
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 405
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e440859cf06d5e1c0800000000000000
+      internalID: -4474935291431877554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_17
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 416
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1043a760c74737cc0800000000000000
+      internalID: -3714497191617088511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6d91b9ac83926de0800000000000000
+      internalID: -1341347506651292305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_19
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 230
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd553d0eb403ab300800000000000000
+      internalID: 268580230234592731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_20
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 288
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dae91a5043a0f3f70800000000000000
+      internalID: 9169058584898674349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_21
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 288
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 641e5e0e411b88370800000000000000
+      internalID: 8325098614424985926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_22
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 288
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 113fda8151425cf60800000000000000
+      internalID: 8053883181648966417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_23
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 288
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77fbd647de1dd4b40800000000000000
+      internalID: 5426223943842119543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f73d84a52eb66220800000000000000
+      internalID: 2478877713797822454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_25
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 160
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0518cf28c55817af0800000000000000
+      internalID: -400392259478191792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_26
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 160
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 849959947d3cb9710800000000000000
+      internalID: 1701168613682420040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_27
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 225
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b530fb87f38d73e40800000000000000
+      internalID: 5636211225797788507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_28
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 222
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb04dc071fa3f74d0800000000000000
+      internalID: -3134722006972546884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_29
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 160
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0e679229cba82440800000000000000
+      internalID: 4911364274004651535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0409843139a77590800000000000000
+      internalID: -7676481011029834737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_31
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df6c50fafa7a7a8a0800000000000000
+      internalID: -6293877581229472003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_32
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 32
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcb0e26476906f540800000000000000
+      internalID: 5041227172051553229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_33
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 32
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c79ccf8525a64c20800000000000000
+      internalID: 3190418966783498185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_34
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 32
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64900c75c3a251650800000000000000
+      internalID: 6202910500431333702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixelTest_35
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 32
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0877b367ebe290050800000000000000
+      internalID: 5767192193386903424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

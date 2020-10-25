@@ -10,30 +10,38 @@ using UnityEngine;
 public abstract class PlayerSkill : Skill
 {
     public Sprite icon;
-    
+    public string[] cursorHints;
     public void CreateCommand()
     {
+       
+
+        SkillCommand res = new SkillCommand(this);
+        PlayerControlManager.instance.PreemptSkillCommand(res);
+        return;
+    }
+    public Delegate GetCastAction()
+    {
+        //return null;
         MethodInfo methodInfo = this.GetType().GetMethod("Cast");
 
         if (methodInfo == null)
         {
             Debug.LogError(this.GetType().ToString() + "类没有实现Cast方法");
-            return;
+            return null;
         }
 
         Type[] types = (from parameters in methodInfo.GetParameters()
                         select parameters.ParameterType).ToArray();
         Type p = Expression.GetActionType(types);
         Delegate action = Delegate.CreateDelegate(p, this, methodInfo);
-
-        Vector2Int[] range = GetRange();
-        RangeCommand res = new RangeCommand(GetRange, owner, action, ConditionCheck);
-        res.CreateFloorHUD(new Color(1, 1, 0, 0.8f));
-        PlayerControlManager.instance.PreemptSkillCommand(res);
-        return;
+        return action;
     }
-
-  
+    public string GetCursorHint(int index)
+    {
+        if (index >= cursorHints.Length)
+            return string.Empty;
+        return cursorHints[index]; 
+    }
     /// <summary>
     /// 检测是否接受输入的参数
     /// </summary>

@@ -11,6 +11,7 @@ public class BulletShoot : SkillVFX
 
     public override void Cast(Vector3 origin, Vector3 destination)
     {
+        base.Cast(origin, destination);
         if (isVertical)
         {
             GameObject clone = Instantiate(bullet, origin, bullet.transform.rotation);

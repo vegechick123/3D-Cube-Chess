@@ -5,8 +5,9 @@ using UnityEngine;
 public class MoveAni : StateMachineBehaviour
 {
     public GameObject prefabParticle;
-
-
+    public AudioClip audioClip;
+    [Range(0,1f)]
+    public float amplitude;
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -19,6 +20,8 @@ public class MoveAni : StateMachineBehaviour
 
         var particle=GameObject.Instantiate(prefabParticle,animator.transform.position,prefabParticle.transform.rotation);
         CAnimationMoveComponent t = animator.GetComponentInParent<CAnimationMoveComponent>();
+        if(audioClip)
+            animator.GetComponent<AudioSource>().PlayOneShot(audioClip,amplitude);
         t.OneMoveComplete();
     }
 

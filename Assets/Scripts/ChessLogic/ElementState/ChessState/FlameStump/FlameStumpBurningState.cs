@@ -28,7 +28,8 @@ public class FlameStumpBurningState : ElementStateBase
         //    }
         //}
         heatSource=owner.gameObject.AddComponent<CHeatSource>();
-        heatSource.coreTempature = coreTemperture;        
+        heatSource.coreTempature = coreTemperture;
+        owner.render.GetComponent<AudioSource>().Play();
     }
     public override void OnHitElement(Element element)
     {
@@ -44,6 +45,7 @@ public class FlameStumpBurningState : ElementStateBase
     }
     public override void Exit()
     {
+        owner.render.GetComponent<AudioSource>().Stop(); ;
         base.Exit();
         Destroy(heatSource);
 

@@ -27,6 +27,20 @@ public abstract class Skill: ScriptableObject,IGetInfo
         if(skillVFX!=null)
         {
             skillVFX.eHit.AddListenerForOnce(task);
+
+            skillVFX.Cast(origin, destination);
+        }
+        else
+        {
+            task();
+        }
+    }
+    public virtual void TakeEffect(UnityAction task, Vector3 origin, Vector3 destination)
+    {
+        if (skillVFX != null)
+        {
+            skillVFX.eHit.AddListenerForOnce(task);
+
             skillVFX.Cast(origin, destination);
         }
         else

@@ -67,6 +67,7 @@ namespace UnityTemplateProjects
         public float positionLerpTime = 0.2f;
 
         [Header("Rotation Settings")]
+        public bool enableRotation = false;
         [Tooltip("X = Change in mouse position.\nY = Multiplicative factor for camera rotation.")]
         public AnimationCurve mouseSensitivityCurve = new AnimationCurve(new Keyframe(0f, 0.5f, 0f, 5f), new Keyframe(1f, 2.5f, 0f, 0f));
 
@@ -140,7 +141,7 @@ namespace UnityTemplateProjects
             }
 
             // Rotation
-            if (Input.GetMouseButton(1))
+            if (Input.GetMouseButton(1)&&enableRotation)
             {
                 var mouseMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y") * (invertY ? 1 : -1));
                 

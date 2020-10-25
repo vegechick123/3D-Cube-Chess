@@ -7,6 +7,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4054101956480028014, guid: 5b44f9dc04bbba44084b0c2c25cbfb2d,
+        type: 3}
+      propertyPath: bakeKeys.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4054101956480028014, guid: 5b44f9dc04bbba44084b0c2c25cbfb2d,
+        type: 3}
+      propertyPath: bakeValues.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4054101956480028014, guid: 5b44f9dc04bbba44084b0c2c25cbfb2d,
+        type: 3}
+      propertyPath: precomputeOutline
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1583869180865650447, guid: 5b44f9dc04bbba44084b0c2c25cbfb2d,
         type: 3}
       propertyPath: m_Mesh

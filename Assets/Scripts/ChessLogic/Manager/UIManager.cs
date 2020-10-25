@@ -16,6 +16,7 @@ public enum TextTag
 public class UIManager : Manager<UIManager>
 {
     public GameObject prefabFloorHDU;
+    public GameObject prefabArrowFloorHUD;
     public GameObject prefabHealthBar;
     public GameObject prefabSkillButton;
     public GameObject prefabFloatText;
@@ -30,9 +31,14 @@ public class UIManager : Manager<UIManager>
     public UnityEvent eRefreshFloorHUD = new UnityEvent();
     public Transform panelContainer;
     public Canvas mainUICanvans;
+
+    public MouseFollowText mouseFollowText; 
+
     protected List<GameObject> alivePanels = new List<GameObject>();
+    protected Dictionary<IGetInfo,GameObject> extraPanels = new Dictionary<IGetInfo, GameObject>();
     protected Outline aliveOutline;
     protected GameObject overTileFloorHUD;
+    public AudioClip overTileClip;
     [NonSerialized]
     private bool bShowTemperture = false;
 
@@ -101,6 +107,7 @@ public class UIManager : Manager<UIManager>
         if (location != Vector2Int.down)
         {
             overTileFloorHUD = CreateFloorHUD(location, Color.yellow);
+            GetComponent<AudioSource>().PlayOneShot(overTileClip, 0.01f);
         }
 
         GChess t = GridManager.instance.GetChess(location);
@@ -119,7 +126,7 @@ public class UIManager : Manager<UIManager>
         list.AddRange(GridManager.instance.GetEnvironmentInformation(location));
         CreateMessage(list);
     }
-    public GameObject CreateMessage(List<IGetInfo> infos)
+    public void CreateMessage(List<IGetInfo> infos)
     {
         //GChess t = GridManager.instance.GetChess(location);
         foreach (GameObject temp in alivePanels)
@@ -134,9 +141,18 @@ public class UIManager : Manager<UIManager>
             gameObject.GetComponent<Messages>().Init(info);
         }
 
-        return gameObject;
     }
-
+    public void AddExtraMessage(IGetInfo info)
+    {
+        GameObject gameObject = GameObject.Instantiate(prefabMessage, panelContainer);
+        extraPanels.Add(info,gameObject);
+        gameObject.GetComponent<Messages>().Init(info);
+    }
+    public void RemoveExtraMessage(IGetInfo info)
+    {
+        Destroy(extraPanels[info]);
+        extraPanels.Remove(info);
+    }
     public GameObject[] CreateFloorHUD(Vector2Int[] location, Color color)
     {
         GameObject[] gameObject = new GameObject[location.Length];
@@ -150,6 +166,11 @@ public class UIManager : Manager<UIManager>
     {
         GameObject gameObject = GameObject.Instantiate(prefabFloorHDU, GridManager.instance.GetFloorPosition3D(location) + new Vector3(0, 0.51f, 0), Quaternion.identity);
         gameObject.GetComponent<MeshRenderer>().material.SetColor("_Color", color);
+        return gameObject;
+    }
+    public GameObject CreateArrowFloorHUD(Vector2Int location)
+    {
+        GameObject gameObject = GameObject.Instantiate(prefabArrowFloorHUD, GridManager.instance.GetFloorPosition3D(location) + new Vector3(0, 0.51f, 0), Quaternion.identity);
         return gameObject;
     }
     public GameObject CreateHealthBar(GChess chess)

@@ -173,7 +173,11 @@ public class GChess : GActor
     {
         MoveTo(floor.location);
     }
-    public void MoveTo(Vector2Int destination)
+    public void AbortMove()
+    {
+        moveComponent.AbortMove();
+    }
+    public virtual void MoveTo(Vector2Int destination)
     {
         Debug.Log("MoveTo " + destination);
         navComponent.GenNavInfo();
@@ -203,6 +207,7 @@ public class GChess : GActor
     {
         GridManager.instance.GetFloor(location).OnChessEnter(this);
         eLocationChange.Invoke();
+        UIManager.instance.eRefreshFloorHUD.Invoke();
         moveComponent.eFinishPath.RemoveListener(EnterLocation);
     }
     #endregion
@@ -298,4 +303,5 @@ public class GChess : GActor
     {
         outline.enabled = false;
     }
+
 }

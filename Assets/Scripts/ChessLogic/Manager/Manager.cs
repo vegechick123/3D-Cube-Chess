@@ -29,9 +29,12 @@ public class Manager<T> : MonoBehaviour where T : MonoBehaviour
     /// </summary>
     public void MoveNext()
     {
-        //Debug.Log("Next");
+        if (GameManager.instance.bEnd)
+            return ;
+        
         if (coroutine.MoveNext())
         {
+            
             if (coroutine.Current != null)
             {
                 object t = coroutine.Current;

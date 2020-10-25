@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: WaterAttack
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  skillVFX: {fileID: 0}
+  title: 
+  info: 
   icon: {fileID: 4428292855295335941, guid: cb95beb56b7af6647a834d2c6d88871e, type: 3}
+  cursorHints:
+  - "\u9009\u62E9\u76EE\u6807<color=yellow>\u89D2\u8272</color>"
   length: 3
   element: 1

@@ -18,6 +18,8 @@ public class GameManager : Manager<GameManager>
     [NonSerialized]
     public int curRound = 0;
     //游戏回合流程的事件分发
+    [NonSerialized]
+    public bool bEnd;
 
     public UnityEvent eRoundStart = new UnityEvent();
     public UnityEvent eRoundEnd = new UnityEvent();
@@ -50,6 +52,7 @@ public class GameManager : Manager<GameManager>
     }
     public void GameStart()
     {
+        bEnd = false;
         startButton.SetActive(false);
         eGameStart.Invoke();
         RoundStart();
@@ -173,6 +176,7 @@ public class GameManager : Manager<GameManager>
     }
     void GameEnd()
     {
+        bEnd = true;
         eGameEnd.Invoke();
     }
 

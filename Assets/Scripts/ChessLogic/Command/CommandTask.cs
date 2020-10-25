@@ -22,6 +22,7 @@ public class CommandTask
     protected Type[] types;
     protected object[] parameters;
     protected Func<int, object[], bool> checker;
+    public UnityEvent<int> eOnHandleParameter = new EventWrapper<int>();
     //只会在任务成功完成时被调用
     public UnityEvent eTaskComplete = new UnityEvent();
     //会在任务成功完成或调用Abort终止时调用
@@ -123,6 +124,7 @@ public class CommandTask
         {
             AddListener(curID);
         }
+        eOnHandleParameter.Invoke(curID);
     }
     virtual public void Abort()
     {

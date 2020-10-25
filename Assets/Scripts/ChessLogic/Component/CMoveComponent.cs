@@ -22,6 +22,12 @@ public class CMoveComponent : Component
     [HideInInspector]
     public UnityEvent eFinishPath = new UnityEvent();
     private float curTime = 0f;
+    public void AbortMove()
+    {
+        lastPositon = transform.position;
+        curTargetPosition = transform.position;
+        state = MoveState.Idle;
+    }
     protected virtual void Update()
     {
         if (state != MoveState.Idle)

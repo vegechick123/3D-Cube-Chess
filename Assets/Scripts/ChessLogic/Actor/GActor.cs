@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 using UnityEngine.Events;
 public abstract class GActor : MonoBehaviour, IGetInfo
@@ -21,7 +22,9 @@ public abstract class GActor : MonoBehaviour, IGetInfo
     public CElementComponent elementComponent;
     public UnityEvent<Element> eElementReaction = new EventWrapper<Element>();
     public GameObject fireParticle;
+    public AudioClip fireSoundEffect;
     public GameObject iceParticle;
+    public AudioClip iceSoundEffect;
     public string title;
     public string info;
     
@@ -58,12 +61,20 @@ public abstract class GActor : MonoBehaviour, IGetInfo
                     {
                         GridFunctionUtility.CreateParticleAt(fireParticle, this);
                     }
+                    if(fireSoundEffect!=null)
+                    {
+                        AudioSource.PlayClipAtPoint(fireSoundEffect,transform.position,1f);
+                    }
                     break;
                 case Element.Ice:
                     CreateTextOnHead(TextTag.LowTemperture);
                     if (iceParticle != null)
                     {
                         GridFunctionUtility.CreateParticleAt(iceParticle, this);
+                    }
+                    if (iceSoundEffect != null)
+                    {
+                        render.GetComponent<AudioSource>().PlayOneShot(iceSoundEffect, 0.3f);
                     }
                     break;
                     

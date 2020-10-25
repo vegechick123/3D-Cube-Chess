@@ -8,6 +8,14 @@ public class CreateFloorHUDAtLocation : MonoBehaviour
     public Vector2Int targetLocation;
     public Color color=Color.yellow;
     private GameObject t;
+    private void OnEnable()
+    {
+        Create();
+    }
+    private void OnDisable()
+    {
+        Release();
+    }
     public void Create()
     {
         Vector2Int location;
@@ -15,7 +23,7 @@ public class CreateFloorHUDAtLocation : MonoBehaviour
             location = target.location;
         else
             location = targetLocation;
-        t=UIManager.instance.CreateFloorHUD(location, color);
+        t=UIManager.instance.CreateArrowFloorHUD(location);
     }
     public void Release()
     {
