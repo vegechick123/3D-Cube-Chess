@@ -11,6 +11,7 @@ public class CAnimationMoveComponent : CMoveComponent
     private GameObject animObject;
     [NonSerialized]
     protected bool useAnimation = true;
+    protected bool bAborted=false;
     protected override void Awake()
     {
         base.Awake();
@@ -24,6 +25,7 @@ public class CAnimationMoveComponent : CMoveComponent
     }
     public override bool RequestMove(Vector2Int[] pathArr)
     {
+        bAborted = false;
         bool res = base.RequestMove(pathArr);
         if (res)
         {
@@ -41,16 +43,29 @@ public class CAnimationMoveComponent : CMoveComponent
     }
     public override bool RequestDirectMove(Vector2Int destination)
     {
+        bAborted = false;
         DisableAnimationOnce();
         return base.RequestMove(new Vector2Int[] {destination});
     }
     public override bool RequestJumpMove(Vector2Int destination)
     {
+        bAborted = false;
         DisableAnimationOnce();
         return base.RequestJumpMove(destination);
     }
+    public override void AbortMove()
+    {
+        bAborted = true;
+        animator.Play("Idle");
+        base.AbortMove();
+        
+    }
     public void OneMoveComplete()
     {
+        if(bAborted)
+        {
+            return;
+        }
         transform.position = curTargetPosition;
         if(!NextPosition())
         {

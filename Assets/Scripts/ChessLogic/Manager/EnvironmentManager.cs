@@ -77,7 +77,7 @@ public class EnvironmentManager : Manager<EnvironmentManager>
         List<IGetInfo> list= new List<IGetInfo>();
         if(stormLocation.Contains(location))
         {
-            list.Add(new Information("冰风暴","留在这里的任何角色都会受到"+ UIManager.instance.GetLowTempertureRichText()));
+            list.Add(new Information("冰风暴","回合结束时,留在这里的<color=yellow>任何</color>角色都会受到"+ UIManager.instance.GetLowTempertureRichText()));
         }
         return list;
     }

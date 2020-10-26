@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3985772763110712230}
   - component: {fileID: 2482518679406292183}
   - component: {fileID: 3986919652749528595}
-  - component: {fileID: 2040972194288774173}
   - component: {fileID: 5367647140217927499}
+  - component: {fileID: 2040972194288774173}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -81,7 +81,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!82 &2040972194288774173
+--- !u!82 &5367647140217927499
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,11 +91,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_audioClip: {fileID: 8300000, guid: 60efbaf6a3fb3bb4ebebb475f7df4a54, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.02
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -177,7 +177,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!82 &5367647140217927499
+--- !u!82 &2040972194288774173
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,11 +187,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 60efbaf6a3fb3bb4ebebb475f7df4a54, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 0.025
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -351,7 +351,7 @@ MonoBehaviour:
     type: 3}
   iceSoundEffect: {fileID: 8300000, guid: d9f801a851749384d809b7510f9ff9a6, type: 3}
   title: "\u706B\u70AC\u6811\u6869"
-  info: "\u53D7\u5230,\u70B9\u71C3\u540E\u53EF\u4EE5\u5347\u9AD8\u9644\u8FD1\u7684\u6E29\u5EA6"
+  info: "\u53D7\u5230<color=yellow>\u9AD8\u6E29</color>\u540E\u4F1A\u88AB\u70B9\u71C3\u5347\u9AD8\u9644\u8FD1\u7684\u6E29\u5EA6"
   freezeFoot: 0
   eFreezeFootBroken:
     m_PersistentCalls:

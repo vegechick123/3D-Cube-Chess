@@ -16,13 +16,23 @@ public class BeginPannel : MonoBehaviour
         if (curIndex != index && !ignoreLoadScene)
         {
             Camera.main.GetComponent<Animation>().Play("CameraOut");
-            coroutineProxy.InvokeAfter(()=> { text1.Play(); },3.0f);
-            coroutineProxy.InvokeAfter(()=> { text2.Play(); }, 8.0f);
-            coroutineProxy.InvokeAfter(() => { text3.Play(); }, 9.0f);
-            coroutineProxy.InvokeAfter(() =>
+            if (index == 1)
             {
-                SceneManager.LoadScene(index);
-            }, 13.0f);
+                coroutineProxy.InvokeAfter(() => { text1.Play(); }, 3.0f);
+                coroutineProxy.InvokeAfter(() => { text2.Play(); }, 8.0f);
+                coroutineProxy.InvokeAfter(() => { text3.Play(); }, 9.0f);
+                coroutineProxy.InvokeAfter(() =>
+                {
+                    SceneManager.LoadScene(index);
+                }, 13.0f);
+            }
+            else
+            {
+                coroutineProxy.InvokeAfter(() =>
+                {
+                    SceneManager.LoadScene(index);
+                }, 3.0f);
+            }
         }
        
     }

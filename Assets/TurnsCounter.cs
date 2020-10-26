@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TurnsCounter : MonoBehaviour
 {
     public  Text  roundCounter;
+    public bool reverse;
     public int t = 0;
     public void Awake()
     {
@@ -14,8 +15,10 @@ public class TurnsCounter : MonoBehaviour
     }
     void RoundCounter()
     {
-        t++;
-        Debug.Log(t);
+        if (!reverse)
+            t++;
+        else
+            t--;
         roundCounter.text = t.ToString();
         
     }

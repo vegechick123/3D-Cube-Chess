@@ -30,6 +30,10 @@ public class GameManager : Manager<GameManager>
     public UnityEvent eGameWin = new UnityEvent();
     public UnityEvent eGameLose = new UnityEvent();
     public UnityEvent eGameEnd = new UnityEvent();
+    public AudioClip audioPlayerTurnBegin;
+    public AudioClip audioPlayerTurnEnd;
+    public AudioClip audioGameWin;
+    public AudioClip audioGameEnd;
     public GameObject startButton;
     public GameObject winUI;
     public ParticleSystem snowWeatherParticle;
@@ -88,12 +92,16 @@ public class GameManager : Manager<GameManager>
 
     protected void PlayerTurnStart()
     {
+        if(audioPlayerTurnBegin)
+            AudioSource.PlayClipAtPoint(audioPlayerTurnBegin, transform.position);
         Debug.Log("GameState:PlayerTurnStart");
         ePlayerTurnBegin.Invoke();
         PlayerControlManager.instance.PlayerTurnEnter();
     }
     public void PlayerTurnEnd()
     {
+        if (audioPlayerTurnEnd)
+            AudioSource.PlayClipAtPoint(audioPlayerTurnEnd, transform.position);
         Debug.Log("GameState:PlayerTurnEnd");
         PlayerControlManager.instance.PlayerTurnExit();
         ePlayerTurnEnd.Invoke();
@@ -102,6 +110,7 @@ public class GameManager : Manager<GameManager>
     }
     public IEnumerator PlayerTurnEndCor()
     {
+
         GChess[] chesses = GridManager.instance.GetChesses();
         foreach (GChess chess in chesses)
         {
@@ -149,6 +158,8 @@ public class GameManager : Manager<GameManager>
     }
     public void GameWin()
     {
+        if(audioGameWin)
+            AudioSource.PlayClipAtPoint(audioGameWin, transform.position);
         winUI.SetActive(true);
         snowWeatherParticle.Stop();
         StartCoroutine(WatherClear());
@@ -157,6 +168,8 @@ public class GameManager : Manager<GameManager>
     }
     public void GameLose()
     {
+        if (audioGameEnd)
+            AudioSource.PlayClipAtPoint(audioGameEnd, transform.position);
         eGameLose.Invoke();
         Debug.Log("You Lose");
         GameEnd();
@@ -178,6 +191,7 @@ public class GameManager : Manager<GameManager>
     {
         bEnd = true;
         eGameEnd.Invoke();
+        GetComponent<AudioSource>().Stop();
     }
 
 }

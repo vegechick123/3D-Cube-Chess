@@ -33,4 +33,12 @@ public class GAIChess : GChess
     {
         base.ActiveAction();
     }
+    public override string GetTitle()
+    {
+        string res = "<color=yellow>";
+        res += base.GetTitle();
+        res += "</color>";
+        return res;
+    }
+
 }

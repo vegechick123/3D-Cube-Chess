@@ -14,9 +14,7 @@ public abstract class PlayerSkill : Skill
     public void CreateCommand()
     {
        
-
-        SkillCommand res = new SkillCommand(this);
-        PlayerControlManager.instance.PreemptSkillCommand(res);
+        PlayerControlManager.instance.PreemptSkillCommand(this);
         return;
     }
     public Delegate GetCastAction()

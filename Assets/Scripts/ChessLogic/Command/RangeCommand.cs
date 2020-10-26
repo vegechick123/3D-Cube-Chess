@@ -44,5 +44,9 @@ public class RangeCommand : CommandTask
         }
         return true;
     }
+    public override void Abort()
+    {
+        base.Abort();
+    }
 
 }

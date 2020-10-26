@@ -74,4 +74,11 @@ public class GPlayerChess : GChess
     {
         PlayerControlManager.instance.ClearMoveInfo();
     }
+    public override string GetTitle()
+    {
+        string res= "<color=yellow>";
+        res+=base.GetTitle();
+        res += "</color>";
+        return res;
+    }
 }

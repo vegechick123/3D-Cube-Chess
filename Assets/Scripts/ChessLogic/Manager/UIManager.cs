@@ -107,7 +107,7 @@ public class UIManager : Manager<UIManager>
         if (location != Vector2Int.down)
         {
             overTileFloorHUD = CreateFloorHUD(location, Color.yellow);
-            GetComponent<AudioSource>().PlayOneShot(overTileClip, 0.01f);
+            GetComponent<AudioSource>().PlayOneShot(overTileClip, 0.04f);
         }
 
         GChess t = GridManager.instance.GetChess(location);
@@ -229,10 +229,10 @@ public class UIManager : Manager<UIManager>
 
     public string GetHighTempertureRichText()
     {
-        return "<color=orange>高温</color>";
+        return "<color=yellow>高温</color>";
     }
     public string GetLowTempertureRichText()
     {
-        return "<color=cyan>低温</color>";
+        return "<color=yellow>低温</color>";
     }
 }

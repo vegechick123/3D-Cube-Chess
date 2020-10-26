@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: HorBulletShoot
   m_EditorClassIdentifier: 
   prefabBeginParticle: {fileID: 0}
-  prefabEndParticle: {fileID: 0}
+  prefabEndParticle: {fileID: 4898306076701040203, guid: bb94e0effad1f394a888bbe809e13560,
+    type: 3}
   beginAudio: {fileID: 0}
   endAudio: {fileID: 8300000, guid: 15e9de3e58cdee24cac003ea4cb31a5e, type: 3}
   volume: 0.3

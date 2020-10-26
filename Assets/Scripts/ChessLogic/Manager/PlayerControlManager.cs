@@ -56,6 +56,7 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 	}
 	public void PlayerTurnExit()
 	{
+		ClearMoveInfo();
 		turnEndButton.interactable = false;
 		DeSelect();
 		selectCommand.bPaused = true;
@@ -150,7 +151,7 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 	}
 
 
-	public void PreemptSkillCommand(SkillCommand commandTask)
+	public void PreemptSkillCommand(PlayerSkill skill)
     {
 		selectCommand.bPaused = true;
 		if (moveCommand != null)
@@ -161,7 +162,7 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 		if(skillCommand!=null)
 			skillCommand.Abort();
 
-		skillCommand = commandTask;
+		skillCommand = new SkillCommand(skill);
 
 		skillCommand.eTaskComplete.AddListener(() =>
 		{
@@ -215,7 +216,6 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 		t.owner.Teleport(t.origin);
 		t.owner.curMovement = t.owner.movement;
 		t.owner.render.transform.rotation = t.originRotation;
-		t.owner.render.GetComponent<Animator>().Play("Idle");
 		t.owner.AbortMove();
 		if (moveInfoSta.Count==0)
 			undoMoveButton.interactable = false;

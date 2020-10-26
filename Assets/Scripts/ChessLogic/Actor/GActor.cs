@@ -129,12 +129,12 @@ public abstract class GActor : MonoBehaviour, IGetInfo
         result.AddRange(GetComponents<CExtraInformation>());
         return result;
     }
-    public string GetTitle()
+    public virtual string GetTitle()
     {
         return title;
     }
 
-    public string GetInfo()
+    public virtual string GetInfo()
     {
         return info;
     }

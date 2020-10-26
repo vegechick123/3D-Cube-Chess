@@ -15,7 +15,7 @@ MonoBehaviour:
   owner: {fileID: 0}
   skillVFX: {fileID: 11400000, guid: 50b2c3a75201e0c4eb9a18952a908488, type: 2}
   title: "\u70ED\u98CE"
-  info: "\u5411\u76EE\u6807\u65BD\u52A0<color=orange>\u9AD8\u6E29</color>\uFF0C\u5E76\u671D\u8FD9\u4E2A\u65B9\u5411\u63A8\u52A8\u654C\u4EBA"
+  info: "\u5411\u76EE\u6807\u65BD\u52A0<color=yellow>\u9AD8\u6E29</color>\uFF0C\u5E76\u671D\u8FD9\u4E2A\u65B9\u5411\u63A8\u52A8\u654C\u4EBA"
   icon: {fileID: 21300000, guid: 32829d369c654a9488be3acb14896160, type: 3}
   cursorHints:
   - "\u9009\u62E9\u76EE\u6807<color=yellow>\u89D2\u8272</color>"

@@ -23,50 +23,46 @@ public class Tutorial : MonoBehaviour
         });
 
     }
-    public GameObject moveHintBegin;
-    public GameObject moveHintEnd;
+    public GameObject moveHint;
     public void MoveHint()
     {
-        moveHintBegin.SetActive(true);
+        moveHint.SetActive(true);
         targetPlayerChess.eLocationChange.AddListenerForOnce(() =>
         {
-            moveHintEnd.SetActive(false);
+            moveHint.SetActive(false);
             SkillHint();
         });
     }
-    public GameObject skillHintBegin;
-    public GameObject skillHintEnd;
+    public GameObject skillHint;
     public GChess targetStump; 
     public void SkillHint()
     {
-        skillHintBegin.SetActive(true);
+        skillHint.SetActive(true);
         targetStump.eLocationChange.AddListenerForOnce(() =>
         {
-            skillHintEnd.SetActive(false);
+            skillHint.SetActive(false);
             TempertureHint1();
         });
     }
 
-    public GameObject tempertureHint1Begin;
-    public GameObject tempertureHint1End;
+    public GameObject tempertureHint1;
     public Button tempertureButton;
     public void TempertureHint1()
     {
-        tempertureHint1Begin.SetActive(true);
+        tempertureHint1.SetActive(true);
         tempertureButton.onClick.AddListenerForOnce(() =>
         {
-            tempertureHint1End.SetActive(false);
+            tempertureHint1.SetActive(false);
             TempertureHint2(); 
         });
     }
-    public GameObject tempertureHint2Begin;
-    public GameObject tempertureHint2End;
+    public GameObject tempertureHint2;
     public void TempertureHint2()
     {
-        tempertureHint2Begin.SetActive(true);
+        tempertureHint2.SetActive(true);
         tempertureButton.onClick.AddListenerForOnce(() =>
         {
-            tempertureHint2End.SetActive(false);
+            tempertureHint2.SetActive(false);
             TurnHint();
         });
     }
