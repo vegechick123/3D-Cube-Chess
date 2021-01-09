@@ -20,11 +20,11 @@ public class BeginPannel : MonoBehaviour
             {
                 coroutineProxy.InvokeAfter(() => { text1.Play(); }, 3.0f);
                 coroutineProxy.InvokeAfter(() => { text2.Play(); }, 8.0f);
-                coroutineProxy.InvokeAfter(() => { text3.Play(); }, 9.0f);
+                coroutineProxy.InvokeAfter(() => { text3.Play(); }, 10.0f);
                 coroutineProxy.InvokeAfter(() =>
                 {
                     SceneManager.LoadScene(index);
-                }, 13.0f);
+                }, 14.0f);
             }
             else
             {

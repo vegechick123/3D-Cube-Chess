@@ -28,6 +28,7 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 	public Button undoMoveButton;
 	public EventSystem eventSystem;
 	public GraphicRaycaster raycaster;
+	private PlayerTurn currentPlayerTurn;
 	//尝试选中target
 	public bool TrySelect(GChess target)
 	{
@@ -49,13 +50,16 @@ public class PlayerControlManager : Manager<PlayerControlManager>
 		selectedChess = target;
 		selectedChess.GetComponent<CAgentComponent>().eSelect.Invoke();
 	}
-	public void PlayerTurnEnter()
+	public void PlayerTurnEnter(PlayerTurn playerTurn)
     {
+		currentPlayerTurn = playerTurn;
 		selectCommand.bPaused = false;
 		turnEndButton.interactable = true;
 	}
 	public void PlayerTurnExit()
 	{
+		currentPlayerTurn.EndTurn();
+		currentPlayerTurn = null;
 		ClearMoveInfo();
 		turnEndButton.interactable = false;
 		DeSelect();

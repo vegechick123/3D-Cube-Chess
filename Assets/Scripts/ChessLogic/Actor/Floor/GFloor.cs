@@ -16,6 +16,6 @@ public class GFloor : GActor
     }
     public virtual void OnChessEnter(GChess chess)
     {
-        Debug.Log("Chess Enter" + location);
+        //Debug.Log("Chess Enter" + location);
     }
 }

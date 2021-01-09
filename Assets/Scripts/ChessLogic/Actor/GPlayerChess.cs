@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cysharp.Threading.Tasks;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,7 +30,7 @@ public class GPlayerChess : GChess
             MoveCommand moveCommand = new MoveCommand(navComponent.GetMoveRange, this, MoveTo);
             moveCommand.CreateFloorHUD(new Color(0, 1, 0, 0.8f));
             PlayerControlManager.instance.GenMoveCommand(moveCommand);
-            
+
         }
         outline.AddReference();
         ShowUI();
@@ -59,7 +60,7 @@ public class GPlayerChess : GChess
         }
         base.OnDestroy();
     }
-    public override void MoveTo(Vector2Int destination)
+    async public override UniTask MoveToAsync(Vector2Int destination)
     {
         MoveInfo t = new MoveInfo();
         t.owner = this;
@@ -67,7 +68,7 @@ public class GPlayerChess : GChess
         t.originRotation = render.transform.rotation;
         t.destination = destination;
         PlayerControlManager.instance.AddMoveInfo(t);
-        base.MoveTo(destination);
+        await base.MoveToAsync(destination);
         t.destinationRotation = render.transform.rotation;
     }
     public virtual void OnPerformSkill(Skill skill)

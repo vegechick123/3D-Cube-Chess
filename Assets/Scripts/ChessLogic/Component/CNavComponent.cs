@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,10 +41,11 @@ public class CNavComponent : Component
         GenNavInfo();
         return navInfo.GetRangeWithoutOccupy();
     }
-    public int MoveToWtihNavInfo(Vector2Int destination)
+    async public UniTask<int> MoveToWtihNavInfo(Vector2Int destination)
     {
         Vector2Int[] path= navInfo.GetPath(destination);
-        moveComponent.RequestMove(path);
+        moveComponent.RequestMove(path);        
+        await MyUniTaskExtensions.WaitUntilEvent(moveComponent.eFinishPath);
         return path.Length;
     }
 }

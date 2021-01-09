@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class GChess : GActor
 {
+    //TODO:应当移到别处的元素状态及元素粒子效果
     //无法行动
     [HideInInspector]
     public bool freezeFoot=false;
@@ -128,7 +130,7 @@ public class GChess : GActor
     /// </summary>
     /// <param name="direction">方向，请保证是单位向量</param>
     /// <param name="distance">推动的距离</param>
-    public void PushToward(Vector2Int direction, int distance)
+    async public UniTask PushToward(Vector2Int direction, int distance)
     {
         Vector2Int destination = location;
         for (int i = 0; i < distance; i++)
@@ -146,10 +148,10 @@ public class GChess : GActor
 
         }
         eBeForceMove.Invoke();
-        MoveToDirectly(destination);
+        await MoveToDirectly(destination);
         DeactiveFreezeFoot();
     }
-    public void ThrowTo(Vector2Int destination)
+    async public UniTask ThrowTo(Vector2Int destination)
     {
         eBeForceMove.Invoke();
         Debug.Log("ThrowTo" + destination);
@@ -162,29 +164,29 @@ public class GChess : GActor
     /// 不通过寻路径直走向终点
     /// </summary>
     /// <param name="destination">终点</param>
-    public void MoveToDirectly(Vector2Int destination)
+    async public UniTask MoveToDirectly(Vector2Int destination)
     {
         Debug.Log("MoveToDirectly " + destination);
         moveComponent.RequestDirectMove(destination);
         location = destination;
         moveComponent.eFinishPath.AddListener(EnterLocation);
     }
-    public void MoveTo(GFloor floor)
+    async public UniTask MoveTo(GFloor floor)
     {
-        MoveTo(floor.location);
+        MoveToAsync(floor.location);
     }
     public void AbortMove()
     {
         moveComponent.AbortMove();
     }
-    public virtual void MoveTo(Vector2Int destination)
+    async public virtual UniTask MoveToAsync(Vector2Int destination)
     {
-        Debug.Log("MoveTo " + destination);
+        //Debug.Log("MoveTo " + destination);
         navComponent.GenNavInfo();
         if (navComponent)
         {
             moveComponent.eFinishPath.AddListener(EnterLocation);
-            navComponent.MoveToWtihNavInfo(destination);
+            await navComponent.MoveToWtihNavInfo(destination);
             location = destination;
             curMovement = 0;
         }

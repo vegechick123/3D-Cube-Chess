@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GActor" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEBAgCAQAAAALABAAEACAAKIAAAAEAAQACACAAYwEA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\Actor\GActor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GAIChess" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABABAAQAAEAAAhAAAAAAAAAgAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\Actor\GAIChess.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GChess" Collapsed="true">
+    <Position X="1.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FAgDEqKBgAAFAAAhBIUAiZDAaxBIggiAQACIBIYZBEg=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\Actor\GChess.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GPlayerChess" Collapsed="true">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABARAAwAgAAAAAAAAAAAAAAAAIAAAIAAAAAgAAIEA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\Actor\GPlayerChess.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GFloor" Collapsed="true">
+    <Position X="7.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAACAAAAAAAAAAAAAAAAAAAAAAAgAAAEA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\Actor\Floor\GFloor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GFrozenFloor" Collapsed="true">
+    <Position X="8.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\Actor\Floor\GFrozenFloor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GWaterFloor" Collapsed="true">
+    <Position X="6" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\Actor\Floor\GWaterFloor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommandTask" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAACAECAAQDAAAAAAAAACAAAAIAAAMKAACALACCg=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\Command\CommandTask.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoveCommand" Collapsed="true">
+    <Position X="2.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\Command\MoveCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RangeCommand" Collapsed="true">
+    <Position X="3.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAIAAAAAQgAAAAAAAAAIAgAAAAAEIA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\Command\RangeCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SelectCommand" Collapsed="true">
+    <Position X="0.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAg=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\Command\SelectCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkillCommand" Collapsed="true">
+    <Position X="5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\Command\SkillCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BulletControl" Collapsed="true">
+    <Position X="12.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAAAgAICAAAAAgAAAAAACAAgCAAQCEAAAABgBAAAA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\SkillVFX\BulletControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BulletShoot" Collapsed="true">
+    <Position X="13.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAQAAABAAAgAAAgA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\SkillVFX\BulletShoot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HorizontalBulletControl">
+    <Position X="11" Y="6.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\SkillVFX\HorizontalBulletControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NoBulletShoot" Collapsed="true">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\SkillVFX\NoBulletShoot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkillVFX" Collapsed="true">
+    <Position X="12.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAIAAAAAAAAAAAAAAAAgCIAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\SkillVFX\SkillVFX.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VerticalBulletControl">
+    <Position X="13.25" Y="6.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ChessLogic\SkillVFX\VerticalBulletControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

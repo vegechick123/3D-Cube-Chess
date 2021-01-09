@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,16 +29,8 @@ public abstract class AISkill : Skill
     /// <summary>
     /// 根据Decide函数设定的值进行行动
     /// </summary>
-    public virtual void Perform()
+    async public virtual UniTask Perform()
     {
-        
-    }
-    public override void TakeEffect(UnityAction task, Vector2Int origin, Vector2Int destination)
-    {
-        if (skillVFX != null)
-            skillVFX.eHit.AddListenerForOnce(AIManager.instance.MoveNext);
-        else
-            owner.InvokeAfter(AIManager.instance.MoveNext, 1.0f);
-        base.TakeEffect(task, origin, destination);
+        await MyUniTaskExtensions.WaitUntilEvent(eFinish);
     }
 }

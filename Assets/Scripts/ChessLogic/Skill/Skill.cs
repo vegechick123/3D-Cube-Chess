@@ -8,6 +8,7 @@ public abstract class Skill: ScriptableObject,IGetInfo
     [HideInInspector]
     public GChess owner;
     public SkillVFX skillVFX;
+    protected UnityEvent eFinish=new UnityEvent();
     public string title;
     public string info;
     public string GetInfo()
@@ -24,27 +25,20 @@ public abstract class Skill: ScriptableObject,IGetInfo
     }
     public virtual void TakeEffect(UnityAction task,Vector2Int origin,Vector2Int destination)
     {
-        if(skillVFX!=null)
-        {
-            skillVFX.eHit.AddListenerForOnce(task);
-
-            skillVFX.Cast(origin, destination);
-        }
-        else
-        {
-            task();
-        }
+        TakeEffect(task, GridManager.instance.GetChessPosition3D(origin), GridManager.instance.GetChessPosition3D(destination));
     }
     public virtual void TakeEffect(UnityAction task, Vector3 origin, Vector3 destination)
     {
         if (skillVFX != null)
         {
+            skillVFX.eHit.AddListenerForOnce(eFinish.Invoke);
             skillVFX.eHit.AddListenerForOnce(task);
 
             skillVFX.Cast(origin, destination);
         }
         else
         {
+            eFinish.Invoke();
             task();
         }
     }

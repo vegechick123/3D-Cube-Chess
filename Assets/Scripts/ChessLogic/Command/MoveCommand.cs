@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Cysharp.Threading.Tasks;
+
 public class MoveCommand : RangeCommand
 {
-    public MoveCommand(Func<Vector2Int[]> GetRange, GActor obj, Action<GFloor> action) : base(GetRange,obj, action)
+    public MoveCommand(Func<Vector2Int[]> GetRange, GActor obj, Func<GFloor,UniTask> action) : base(GetRange,obj, action)
     {
         
     }

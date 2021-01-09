@@ -21,10 +21,13 @@ public abstract class GActor : MonoBehaviour, IGetInfo
     [HideInInspector]
     public CElementComponent elementComponent;
     public UnityEvent<Element> eElementReaction = new EventWrapper<Element>();
+    //TODO: 应当移动到ElementComponet的元素粒子效果
     public GameObject fireParticle;
     public AudioClip fireSoundEffect;
     public GameObject iceParticle;
     public AudioClip iceSoundEffect;
+
+
     public string title;
     public string info;
     
@@ -32,8 +35,6 @@ public abstract class GActor : MonoBehaviour, IGetInfo
     {
         //注册事件
         GameManager.instance.eRoundStart.AddListener(OnRoundStart);
-        GameManager.instance.eRoundEnd.AddListener(OnRoundEnd);
-        //GameManager.instance.ePlayerTurnEnd.AddListener(OnPlayerTurnEnd);
         GameManager.instance.eGameAwake.AddListener(OnGameAwake);
         GameManager.instance.eGameStart.AddListener(OnGameStart);
         GameManager.instance.eGameEnd.AddListener(OnGameEnd);
@@ -49,6 +50,7 @@ public abstract class GActor : MonoBehaviour, IGetInfo
 
         originMaterial = render.material;
     }
+    //TODO 把更多逻辑放到ElementComponet里
     public virtual void ElementReaction(Element element)
     {
         if (elementComponent)
@@ -56,7 +58,7 @@ public abstract class GActor : MonoBehaviour, IGetInfo
             switch (element)
             {
                 case Element.Fire:
-                    CreateTextOnHead(TextTag.HighTemperture);
+                    CreateFloatTextOnHead(TextTag.HighTemperture);
                     if (fireParticle != null)
                     {
                         GridFunctionUtility.CreateParticleAt(fireParticle, this);
@@ -67,7 +69,7 @@ public abstract class GActor : MonoBehaviour, IGetInfo
                     }
                     break;
                 case Element.Ice:
-                    CreateTextOnHead(TextTag.LowTemperture);
+                    CreateFloatTextOnHead(TextTag.LowTemperture);
                     if (iceParticle != null)
                     {
                         GridFunctionUtility.CreateParticleAt(iceParticle, this);
@@ -85,7 +87,7 @@ public abstract class GActor : MonoBehaviour, IGetInfo
             eElementReaction.Invoke(element);
         }
     }
-    public void CreateTextOnHead(TextTag tag)
+    public void CreateFloatTextOnHead(TextTag tag)
     {
         UIManager.instance.CreateFloatText(transform.position+Vector3.up, tag);
     }
@@ -94,10 +96,6 @@ public abstract class GActor : MonoBehaviour, IGetInfo
 
     }
     virtual public void OnPlayerTurnEnd()
-    {
-
-    }
-    virtual protected void OnRoundEnd()
     {
 
     }

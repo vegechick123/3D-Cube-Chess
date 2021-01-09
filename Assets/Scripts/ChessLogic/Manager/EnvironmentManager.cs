@@ -49,7 +49,6 @@ public class EnvironmentManager : Manager<EnvironmentManager>
             yield return new WaitForSeconds(1f);
             mat.SetColor("_Color", color);
         }
-        GameManager.instance.EnvironmentPreTurnEnd();
     }
     IEnumerator PostEnvironmentTurn()
     {
@@ -70,7 +69,7 @@ public class EnvironmentManager : Manager<EnvironmentManager>
         }
         stormLocation.Clear();
         stormParticle.Clear();
-        GameManager.instance.EnvironmentPostTurnEnd();
+        //GameManager.instance.EnvironmentPostTurnEnd();
     }
     public List<IGetInfo> GetInfos(Vector2Int location)
     {

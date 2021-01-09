@@ -14,6 +14,7 @@ public class CMoveComponent : Component
     public MoveState state { get; private set; }
     public float speed = 1f;
     private float limit = 0.1f;
+    private float throwTime = 2f / 3;
     Queue<Vector2Int> path= new Queue<Vector2Int>();
     protected Vector3 lastPositon;
     private Vector3 m_curTargetPosition;
@@ -59,7 +60,7 @@ public class CMoveComponent : Component
     void MoveAlong(float t)
     {
         //t *= speed/2;
-        t *= 1.5f;
+        t /= throwTime;
         float height = 3;
         Vector3 targetPosition = Vector3.Lerp(lastPositon, curTargetPosition, t);
         targetPosition.y = height*2*t * (1-t) + curTargetPosition.y;
@@ -132,7 +133,11 @@ public class CMoveComponent : Component
     protected virtual void UpdateCurTargetPosition()
     {
         //到达当前的目标位置
-        if ((transform.position - curTargetPosition).magnitude < limit)
+        if ((transform.position - curTargetPosition).magnitude < limit && state == MoveState.Moving)
+        {
+            NextPosition();
+        }
+        else if (state == MoveState.Throwing&&curTime>throwTime)
         {
             NextPosition();
         }

@@ -4,7 +4,8 @@ using UnityEngine;
 public class Manager<T> : MonoBehaviour where T : MonoBehaviour
 {
     public static T instance { get; protected set; }
-    protected IEnumerator coroutine;//用于异步的协程
+    [Obsolete]
+    protected IEnumerator ObsoleteCoroutine;//用于异步的协程
     virtual protected void Awake()
     {
         if (instance != null)
@@ -23,33 +24,5 @@ public class Manager<T> : MonoBehaviour where T : MonoBehaviour
     {
         Debug.Log("ManagerDestory:" + this.GetType());
         instance = null;
-    }
-    /// <summary>
-    /// 执行下一步
-    /// </summary>
-    public void MoveNext()
-    {
-        if (GameManager.instance.bEnd)
-            return ;
-        
-        if (coroutine.MoveNext())
-        {
-            
-            if (coroutine.Current != null)
-            {
-                object t = coroutine.Current;
-                switch (t)
-                {
-                    case float t1:
-                        this.InvokeAfter(MoveNext, t1);
-                        break;
-                    case Func<IEnumerator> f:
-                        MoveNext();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
     }
 }

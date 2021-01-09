@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System;
 using UnityEngine.Events;
+using Cysharp.Threading.Tasks;
 /// <summary>
 /// 这是用附加在GAIChess上的决策组件
 /// 它根据Chess的移动范围以及技能的释放范围决定两件事，1.在这个回合移动到哪里，2.以哪个Chess作为技能目标
@@ -53,18 +54,17 @@ public class CAICompoment : Component
     /// <summary>
     /// 实施移动，并调用AISkill.Decide
     /// </summary>
-    public void PerformMove()
+    async public UniTask PerformMove()
     {
         if (AIChess.location == desination)
         {
-           StartCoroutine(GridFunctionUtility.InvokeAfter(MoveComplete, 0.5f));
+            return;
         }
         else
         {
-            AIChess.moveComponent.eFinishPath.AddListener(MoveComplete);
             if (target != null)
             {
-                AIChess.MoveTo(desination);
+                await AIChess.MoveToAsync(desination);
                 AIChess.skill.Decide(target);
             }
         }
@@ -72,11 +72,6 @@ public class CAICompoment : Component
     /// <summary>
     /// 移动完成的回调函数，通知AIManager进行下一步操作
     /// </summary>
-    private void MoveComplete()
-    {
-        AIChess.moveComponent.eFinishPath.RemoveListener(MoveComplete);
-        AIManager.instance.MoveNext();
-    }
     /// <summary>
     /// 显示技能范围
     /// </summary>
@@ -90,12 +85,11 @@ public class CAICompoment : Component
         }
         else
             Debug.Log("Target Miss");
-        this.InvokeAfter(AIManager.instance.MoveNext, 0.5f);
     }
     /// <summary>
     /// 释放技能
     /// </summary>
-    public void PerformSkill()
+    async public UniTask PerformSkill()
     {
         if(floorHUD!=null)
         {
@@ -104,12 +98,9 @@ public class CAICompoment : Component
         }
         if (target != null)
         {
-            AIChess.skill.Perform();
+            await AIChess.skill.Perform();
         }
-        else
-        {
-            this.InvokeAfter(AIManager.instance.MoveNext, 1f);
-        }
+        
     }
     protected AISkill GetSkill()
     {

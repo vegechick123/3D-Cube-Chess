@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cysharp.Threading.Tasks;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -21,9 +22,9 @@ public class SBulletAttack : AISkill
         direction = direction.Normalized();
 
     }
-    public override void Perform()
+    async public override UniTask Perform()
     {
-        base.Perform();
+        
         Vector2Int[] range = GetAffectRange();
         Vector2Int targetPosition = range[range.Length - 1];
         TakeEffect(() =>
@@ -35,6 +36,7 @@ public class SBulletAttack : AISkill
             }
         }
         , owner.location, targetPosition);
+        await base.Perform();
     }
 
     public override Vector2Int[] GetAffectRange()

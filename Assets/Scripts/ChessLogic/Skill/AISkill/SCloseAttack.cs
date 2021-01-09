@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,9 +45,9 @@ public class SCloseAttack : AISkill
             
         }
     }
-    public override void Perform()
+    async public override UniTask Perform()
     {
-        base.Perform();
+        
         GChess chess = GridManager.instance.GetChess(owner.location + direction);
         TakeEffect(() =>
         {
@@ -54,6 +55,7 @@ public class SCloseAttack : AISkill
                 chess.ElementReaction(Element.Ice);
         },
         owner.location, owner.location + direction);
+        await base.Perform();
     }
     
     public override Vector2Int[] GetAffectRange()

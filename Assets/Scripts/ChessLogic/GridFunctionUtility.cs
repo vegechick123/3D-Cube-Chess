@@ -101,11 +101,11 @@ static class GridFunctionUtility
             GameObject.Destroy(t);
         }
     }
-    public static void InvokeAfter(this MonoBehaviour target,Action task, float time)
+    public static void InvokeAfter(this MonoBehaviour target,UnityAction task, float time)
     {
         target.StartCoroutine(InvokeAfter(task, time));
     }
-    public static IEnumerator InvokeAfter(Action task, float time)
+    public static IEnumerator InvokeAfter(UnityAction task, float time)
     {
         yield return new WaitForSeconds(time);
         task();
