@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UnityEngine;
 using UnityEngine.Events;
-
+using Ludiq;
+using Bolt;
 public enum Element
 {
     Fire,
@@ -21,59 +22,13 @@ public enum ElementState
 public class CElementComponent : Component
 {
 
-    // Start is called before the first frame update
-
-    public ElementStateBase BurningState;
-    public ElementStateBase NormalState;
-    public ElementStateBase ColdState;
-    public ElementStateBase FrozenState;
-    public ElementState state = ElementState.Normal;
-    protected ElementStateBase curStateObject;
-    public UnityEvent<ElementState> eStateEnter = new EventWrapper<ElementState>();
+    // Start is called before the first frame update    
     protected override void Awake()
     {
-        base.Awake();
-    }
-    public override void OnGameAwake()
-    {
-        curStateObject = GetNewStateObject(state);
-        curStateObject.Init(actor, this);
-        curStateObject.disableParticle = true;
-        curStateObject.Enter();
-        curStateObject.disableParticle = false;
+        base.Awake();        
     }
     public virtual void OnHitElement(Element element)
     {
-        curStateObject.OnHitElement(element);
-    }
-    public virtual int ProcessDamage(Element element, int damage)
-    {
-        return curStateObject.ProcessDamage(element,damage);
-    }
-    public virtual void SwitchState(ElementState newState)
-    {
-        Debug.Log("Enter to ElementState:"+newState);
-        state = newState;
-        curStateObject.Exit();
-        curStateObject = GetNewStateObject(state);
-        curStateObject.Init(actor, this);
-        curStateObject.Enter();
-        eStateEnter.Invoke(newState);
-    }
-    protected ElementStateBase GetNewStateObject(ElementState newState)
-    {
-        switch (newState)
-        {
-            case ElementState.Burning:
-                return Instantiate<ElementStateBase>(BurningState);                
-            case ElementState.Normal:
-                return Instantiate<ElementStateBase>(NormalState);
-            case ElementState.Cold:
-                return Instantiate<ElementStateBase>(ColdState);
-            case ElementState.Frozen:
-                return Instantiate<ElementStateBase>(FrozenState);
-            default:
-                return null;
-        }
+        CustomEvent.Trigger(gameObject, "OnHitElement",element);
     }
 }

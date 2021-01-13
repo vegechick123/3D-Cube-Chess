@@ -48,14 +48,13 @@ public class GChess : GActor
     public bool immuniateEnvironmentColdness;
     public bool melt;
     public bool countInActiveChess=true;
-    protected override void Awake()
+    public override void GAwake()
     {
-        base.Awake();
+        base.GAwake();
 
         navComponent = GetComponent<CNavComponent>();
         moveComponent = GetComponent<CMoveComponent>();
-        outline = GetComponent<Outline>();
-        GridManager.instance.AddChess(this);
+        outline = GetComponent<Outline>();        
         healthBar = new HealthBar(this);
         healthBar.Hide();
     }
@@ -71,15 +70,15 @@ public class GChess : GActor
         healthBar.Refresh();
     }
 
-    override protected void OnRoundStart()
+    public virtual void OnTurnEnter()
     {
         curMovement = movement;
         hasActed = false;
     }
-    public override void OnPlayerTurnEnd()
+    public virtual void OnTurnExit()
     {
-        base.OnPlayerTurnEnd();
-        DeactiveFreezeFoot();
+        curMovement = movement;
+        hasActed = false;
     }
     public void Recover(int value)
     {
@@ -106,23 +105,19 @@ public class GChess : GActor
         curHealth -= value;
         if (curHealth <= 0)
         {
-            DieImmediately();
+            Die();
         }
         healthBar.Refresh();
     }
-    public void DieImmediately()
+    public void Die()
     {
+        render.GetComponent<Animator>().Play("Death");
         Debug.Log("Chess:" + gameObject + "Die");
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
         if (deathParticle != null)
             GridFunctionUtility.CreateParticleAt(deathParticle,this);
-        Destroy(gameObject);
-    }
-    protected virtual void OnDestroy()
-    {
-        if(GridManager.instance)
-            GridManager.instance.RemoveChess(this);
-
+        GridManager.instance.RemoveChess(this);
+        Destroy(gameObject,3f);
     }
     #region 位移相关
     /// <summary>
@@ -130,7 +125,7 @@ public class GChess : GActor
     /// </summary>
     /// <param name="direction">方向，请保证是单位向量</param>
     /// <param name="distance">推动的距离</param>
-    async public UniTask PushToward(Vector2Int direction, int distance)
+    async public UniTask PushTowardAsync(Vector2Int direction, int distance)
     {
         Vector2Int destination = location;
         for (int i = 0; i < distance; i++)
@@ -151,14 +146,15 @@ public class GChess : GActor
         await MoveToDirectly(destination);
         DeactiveFreezeFoot();
     }
-    async public UniTask ThrowTo(Vector2Int destination)
+    async public UniTask ThrowToAsync(Vector2Int destination)
     {
         eBeForceMove.Invoke();
         Debug.Log("ThrowTo" + destination);
         moveComponent.RequestJumpMove(destination);
-        location = destination;
+        location = destination;        
         moveComponent.eFinishPath.AddListener(EnterLocation);
         DeactiveFreezeFoot();
+        await MyUniTaskExtensions.WaitUntilEvent(moveComponent.eFinishPath);
     }
     /// <summary>
     /// 不通过寻路径直走向终点
@@ -170,10 +166,11 @@ public class GChess : GActor
         moveComponent.RequestDirectMove(destination);
         location = destination;
         moveComponent.eFinishPath.AddListener(EnterLocation);
+        await MyUniTaskExtensions.WaitUntilEvent(moveComponent.eFinishPath);
     }
-    async public UniTask MoveTo(GFloor floor)
+    async public UniTask MoveToAsync(GFloor floor)
     {
-        MoveToAsync(floor.location);
+        await MoveToAsync(floor.location);
     }
     public void AbortMove()
     {
@@ -186,9 +183,9 @@ public class GChess : GActor
         if (navComponent)
         {
             moveComponent.eFinishPath.AddListener(EnterLocation);
-            await navComponent.MoveToWtihNavInfo(destination);
             location = destination;
             curMovement = 0;
+            await navComponent.MoveToWtihNavInfo(destination);            
         }
         else if (moveComponent)
         {
@@ -293,7 +290,7 @@ public class GChess : GActor
             list.Add(new Information("冻足", "脚被冻住，无法自己移动\n当自己或攻击发起者受到"+UIManager.instance.GetHighTempertureRichText()+"可以解除"));
         if(warm)
             list.Add(new Information("温暖", "抵抗下一次受到的"+UIManager.instance.GetLowTempertureRichText()));
-        if (elementComponent.state==ElementState.Frozen)
+        //if (elementComponent.state==ElementState.Frozen)
             list.Add(new Information("冰冻", "无法行动，可通过"+UIManager.instance.GetHighTempertureRichText()+"解除"));
         return list;
     }

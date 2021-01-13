@@ -7,7 +7,7 @@ using UnityEngine;
 /// 在AIPreTurn和AIPostTurn遍历所有的AIChess,并让他们行动
 /// 需要在上一个AI执行完之后才继续下一个AI的执行，因此需要进行异步处理
 /// </summary>
-public class AIManager : Manager<AIManager>
+public class AIManager : SingletonMonoBehaviour<AIManager>
 {
     [HideInInspector]
     public List<CAICompoment> AIs = new List<CAICompoment>();

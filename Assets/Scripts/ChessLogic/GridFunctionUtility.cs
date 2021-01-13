@@ -135,8 +135,8 @@ static class GridFunctionUtility
         GChess[] targets = GridManager.instance.GetChesses(1);
         foreach (var t in targets)
         {
-            if (t.elementComponent.state == ElementState.Frozen)
-                continue;
+            //if (t.elementComponent.state == ElementState.Frozen)
+            //    continue;
             minY = Mathf.Min(minY, t.location.y);
             maxY = Mathf.Max(minY, t.location.y);
         }

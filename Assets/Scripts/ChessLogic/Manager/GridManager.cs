@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 [ExecuteInEditMode]
-public class GridManager : Manager<GridManager>
+public class GridManager : SingletonMonoBehaviour<GridManager>
 {
     public Vector2Int size;
     public Grid grid;
@@ -18,6 +18,21 @@ public class GridManager : Manager<GridManager>
         base.Awake();
         floors = new GFloor[size.x, size.y];
         chesses = new List<GChess>();
+        
+    }
+    private void Start()
+    {
+        if (Application.isPlaying)
+        {
+            foreach (GChess t in FindObjectsOfType<GChess>())
+            {
+                AddChess(t);
+            }
+            foreach (GFloor t in FindObjectsOfType<GFloor>())
+            {
+                AddFloor(t);
+            }
+        }
     }
     /// <summary>
     /// 判断location是否在size的范围内
@@ -51,16 +66,6 @@ public class GridManager : Manager<GridManager>
     {
         return chesses.ToArray();
     }
-    public bool CheckAllPlayerFrozen()
-    {
-        GChess[] temp = GetChesses(GameManager.instance.playerTeam);
-        foreach(GChess t in temp)
-        {
-            if(t.elementComponent.state!=ElementState.Frozen)
-                return false;
-        }
-        return true;
-    }
     public GChess[] GetChessesInRange(Vector2Int[] range)
     {
         return chesses.FindAll(x=>range.Contains(x.location)).ToArray();
@@ -68,10 +73,12 @@ public class GridManager : Manager<GridManager>
     public void AddChess(GChess chess)
     {
         chesses.Add(chess);
+        chess.GAwake();
     }
     public void RemoveChess(GChess chess)
     {
         chesses.Remove(chess);
+        chess.GEnd();
     }
     /// <summary>
     /// 如果查询位置超出size大小则会数组越界
@@ -94,6 +101,7 @@ public class GridManager : Manager<GridManager>
             Debug.LogError("同一位置多个Floor");
         }
         floors[floor.location.x, floor.location.y] = floor;
+        floor.GAwake();
     }
     public void RemoveFloor(GFloor floor)
     {
@@ -102,6 +110,7 @@ public class GridManager : Manager<GridManager>
             Debug.LogError("移除错误的Floor");
         }
         floors[floor.location.x, floor.location.y] = null;
+        floor.GEnd();
     }
     public Vector3 GetChessPosition3D(Vector2Int location)
     {
@@ -292,7 +301,7 @@ public class GridManager : Manager<GridManager>
     {
         return chesses.Where(t =>
         {
-            return t.elementComponent.state != ElementState.Frozen && t.countInActiveChess&&t.teamID==1;
+            return true;//t.elementComponent.state != ElementState.Frozen && t.countInActiveChess&&t.teamID==1;
         }).ToList();
     }
 

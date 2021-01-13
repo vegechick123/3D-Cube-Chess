@@ -7,9 +7,9 @@ public class GPlayerChess : GChess
 {
     public List<PlayerSkill> skills;
     protected CAgentComponent agentComponent;
-    protected override void Awake()
+    public override void GAwake()
     {
-        base.Awake();
+        base.GAwake();
         agentComponent = GetComponent<CAgentComponent>();
         if (agentComponent)
         {
@@ -27,7 +27,7 @@ public class GPlayerChess : GChess
         if (curMovement > 0&&!unableAct&&!hasActed&&!freezeFoot)
         {
             navComponent.GenNavInfo();
-            MoveCommand moveCommand = new MoveCommand(navComponent.GetMoveRange, this, MoveTo);
+            MoveCommand moveCommand = new MoveCommand(navComponent.GetMoveRange, this, MoveToAsync);
             moveCommand.CreateFloorHUD(new Color(0, 1, 0, 0.8f));
             PlayerControlManager.instance.GenMoveCommand(moveCommand);
 
@@ -50,15 +50,6 @@ public class GPlayerChess : GChess
     protected void HideUI()
     {
         UIManager.instance.CleanSkillButton();
-    }
-    protected override void OnDestroy()
-    {
-        for (int i = 0; i < skills.Count; i++)
-        {
-            Destroy(skills[i]);
-            skills[i] = null;
-        }
-        base.OnDestroy();
     }
     async public override UniTask MoveToAsync(Vector2Int destination)
     {

@@ -6,9 +6,9 @@ public class GAIChess : GChess
 {
     public AISkill skill;
     protected CAICompoment aiCompoment;
-    protected override void Awake()
+    public override void GAwake()
     {
-        base.Awake();
+        base.GAwake();
         aiCompoment = GetComponent<CAICompoment>();
         skill = Instantiate(skill);
         skill.owner = this;
@@ -17,12 +17,6 @@ public class GAIChess : GChess
     {
         base.OnGameStart();
         healthBar.Show();
-    }
-    protected override void OnDestroy()
-    {        
-        Destroy(skill);
-        skill = null;
-        base.OnDestroy();
     }
     public override void DisableAction()
     {

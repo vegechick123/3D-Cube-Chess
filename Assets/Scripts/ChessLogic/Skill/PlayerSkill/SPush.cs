@@ -19,8 +19,9 @@ public class SPush : PlayerSkill
 
         TakeEffect(() =>
         {
-            chess.PushToward(direction, distance);
+            _ = chess.PushTowardAsync(direction, distance);
             chess.ElementReaction(element);
+            GridManager.instance.GetFloor(chess.location).ElementReaction(element);
         },
         owner.location, chess.location);
     }

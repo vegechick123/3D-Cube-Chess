@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnvironmentManager : Manager<EnvironmentManager>
+public class EnvironmentManager : SingletonMonoBehaviour<EnvironmentManager>
 {
     
     public int stormNum;

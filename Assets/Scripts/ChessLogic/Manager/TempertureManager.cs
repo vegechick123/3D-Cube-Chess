@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class TempertureManager : Manager<TempertureManager>
+public class TempertureManager : SingletonMonoBehaviour<TempertureManager>
 {
     public int globalTempature;
     [HideInInspector]

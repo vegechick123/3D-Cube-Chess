@@ -8,7 +8,7 @@ public class GWaterFloor : GFloor
     public override void OnChessEnter(GChess chess)
     {
         base.OnChessEnter(chess);
-        chess.DieImmediately();
+        chess.Die();
         var particle = GameObject.Instantiate(prefabFoam, GridManager.instance.GetChessPosition3D(location), prefabFoam.transform.rotation);
     }
 }

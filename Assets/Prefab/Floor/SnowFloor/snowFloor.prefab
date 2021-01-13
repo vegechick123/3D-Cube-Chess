@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3209586274630107967}
   - component: {fileID: 6559753714414813673}
   - component: {fileID: 3827328053624267188}
+  - component: {fileID: 923969859918841468}
+  - component: {fileID: -1366060163710561508}
   m_Layer: 0
   m_Name: snowFloor
   m_TagString: Untagged
@@ -49,8 +51,10 @@ MonoBehaviour:
   render: {fileID: 0}
   meshFilter: {fileID: 0}
   originMaterial: {fileID: 0}
+  elementComponent: {fileID: 0}
   title: 
   info: 
+  transitable: 1
 --- !u!65 &6559753714414813673
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -77,8 +81,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actor: {fileID: 0}
-  BurningState: {fileID: 0}
-  NormalState: {fileID: 11400000, guid: ceb48a1822fda6e49a73bc06579a1bd3, type: 2}
-  ColdState: {fileID: 0}
-  FrozenState: {fileID: 11400000, guid: 4c64e192fb711134e9e2e9f166db48f2, type: 2}
-  state: 3
+--- !u!114 &923969859918841468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4433733748461419789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1465209106, guid: c8d0ad23af520fe46aabe2b1fecf6462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"declarations":{"collection":{"$content":[],"$version":"A"},"$version":"A"}}'
+    _objectReferences: []
+--- !u!114 &-1366060163710561508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4433733748461419789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1999370065, guid: dcd2196c4e9166f499793f2007fcda35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"nest":{"source":"Macro","macro":null,"embed":null}}'
+    _objectReferences: []

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : Manager<AudioManager>
+public class AudioManager : SingletonMonoBehaviour<AudioManager>
 {
     public AudioClip backgroundMusic;
 

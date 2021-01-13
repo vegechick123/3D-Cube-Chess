@@ -76,6 +76,27 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1366060163710561508, guid: 80f79acd801d5274ebd243e216898377,
+        type: 3}
+      propertyPath: _data._objectReferences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1366060163710561508, guid: 80f79acd801d5274ebd243e216898377,
+        type: 3}
+      propertyPath: _data._json
+      value: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
+      objectReference: {fileID: 0}
+    - target: {fileID: -1366060163710561508, guid: 80f79acd801d5274ebd243e216898377,
+        type: 3}
+      propertyPath: _data._objectReferences.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 34ba27fbbc2d9bd4c8d522b48fe99100,
+        type: 2}
+    - target: {fileID: 923969859918841468, guid: 80f79acd801d5274ebd243e216898377,
+        type: 3}
+      propertyPath: _data._json
+      value: '{"declarations":{"collection":{"$content":[],"$version":"A"},"$version":"A"}}'
+      objectReference: {fileID: 0}
     - target: {fileID: 4433733748461419777, guid: 80f79acd801d5274ebd243e216898377,
         type: 3}
       propertyPath: m_LocalPosition.x

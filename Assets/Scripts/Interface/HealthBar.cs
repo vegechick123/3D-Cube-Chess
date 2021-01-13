@@ -7,7 +7,7 @@ using System;
 public class HealthBar:IChessUI
 {
     // Start is called before the first frame update
-    bool bReleased;
+   // bool bReleased;
     GChess owner;  
     public GameObject healthBarObject;
     public HealthBar(GChess chess)
@@ -24,7 +24,7 @@ public class HealthBar:IChessUI
     }
     public void Release()
     {
-        bReleased = true;
+        //eleased = true;
         GameObject.Destroy(healthBarObject);
     }
     public void Hide()

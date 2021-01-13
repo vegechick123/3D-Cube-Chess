@@ -15,6 +15,7 @@ public class SElementAttack : PlayerSkill
     public void Cast(GChess chess)
     {
         chess.ElementReaction(element);
+        //GridManager.instance.GetFloor(chess.location).ElementReaction(element);
         GridManager.instance.GetFloor(chess.location).ElementReaction(element);
     }
 }

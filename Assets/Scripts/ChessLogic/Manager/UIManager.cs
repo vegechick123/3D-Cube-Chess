@@ -13,7 +13,7 @@ public enum TextTag
     LowTemperture,
     Warm
 };
-public class UIManager : Manager<UIManager>
+public class UIManager : SingletonMonoBehaviour<UIManager>
 {
     public GameObject prefabFloorHDU;
     public GameObject prefabArrowFloorHUD;

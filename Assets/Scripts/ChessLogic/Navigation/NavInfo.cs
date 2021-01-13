@@ -18,12 +18,11 @@ public class NavInfo
         Queue<Vector2Int> queue = new Queue<Vector2Int>();
         int index = Array.FindIndex(range, t => t == destination);
         if (index == -1) return null;
-        queue.Enqueue(range[index]);
         while (prev[index] != -1)
         {
-            index = prev[index];
             queue.Enqueue(range[index]);
-        }
+            index = prev[index];
+        } 
         Vector2Int[] res = queue.ToArray();
         Array.Reverse(res);
         return res;

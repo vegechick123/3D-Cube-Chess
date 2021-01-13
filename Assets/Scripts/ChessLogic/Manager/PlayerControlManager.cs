@@ -9,7 +9,7 @@ using UnityEngine.UI;
 /// <summary>
 /// 用以
 /// </summary>
-public class PlayerControlManager : Manager<PlayerControlManager>
+public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
 {
 	[NonSerialized]
 	public GChess selectedChess;

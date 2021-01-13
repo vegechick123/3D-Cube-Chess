@@ -40,10 +40,10 @@ public class CAICompoment : Component
             foreach (GChess curTarget in targets)
                 if (AIChess.skill.GetRange().InRange(curTarget.location))
                 {
-                    if(curTarget.elementComponent.state==ElementState.Frozen)
-                    {
-                        continue;
-                    }
+                    //if(curTarget.elementComponent.state==ElementState.Frozen)
+                    //{
+                    //    continue;
+                    //}
                     target = curTarget;
                     desination = location;
                     break;

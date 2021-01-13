@@ -19,8 +19,8 @@ public class EnemySpawnManager : MonoBehaviour
         int cntNum = AIManager.instance.AIs.Count;
         foreach(CAICompoment t in AIManager.instance.AIs)
         {
-            if (t.actor.elementComponent.state == ElementState.Frozen)
-                cntNum--;
+            //if (t.actor.elementComponent.state == ElementState.Frozen)
+            //    cntNum--;
         }
         int maxEnemyNum = maxEnemyOverNum + GridManager.instance.GetPlayerActiveChesses().Count;
         int spawnnum = Mathf.Min(num, maxEnemyNum - cntNum);

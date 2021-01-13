@@ -212,7 +212,6 @@ GameObject:
   - component: {fileID: 692677325199323230}
   - component: {fileID: 2705273894603116935}
   - component: {fileID: 6401638338488556242}
-  - component: {fileID: 5143365115725764857}
   m_Layer: 0
   m_Name: PlayerChess
   m_TagString: Untagged
@@ -266,12 +265,6 @@ MonoBehaviour:
   meshFilter: {fileID: 0}
   originMaterial: {fileID: 0}
   elementComponent: {fileID: 0}
-  fireParticle: {fileID: 7250412730907975987, guid: 5cfe79246d0fafa45bd6d549f089ec65,
-    type: 3}
-  fireSoundEffect: {fileID: 8300000, guid: c6639e5c0b4c8654fb12b778cf3ec99d, type: 3}
-  iceParticle: {fileID: 4898306076701040203, guid: bb94e0effad1f394a888bbe809e13560,
-    type: 3}
-  iceSoundEffect: {fileID: 8300000, guid: d9f801a851749384d809b7510f9ff9a6, type: 3}
   title: 
   info: 
   freezeFoot: 0
@@ -370,11 +363,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actor: {fileID: 0}
-  BurningState: {fileID: 11400000, guid: 85dc8f9b3d5a08b4d9044dd37bb81d59, type: 2}
-  NormalState: {fileID: 11400000, guid: a67a031cbeb472a4aa64265ec211713a, type: 2}
-  ColdState: {fileID: 11400000, guid: 09663489e01488549a3bac78a62dfeab, type: 2}
-  FrozenState: {fileID: 11400000, guid: e7256f7b7b884c64d9dcc4335eb5f1e0, type: 2}
-  state: 1
 --- !u!114 &6401638338488556242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2386,15 +2374,3 @@ MonoBehaviour:
     - {x: 0.57735026, y: 0.57735026, z: -0.57735026}
     - {x: -0.57735026, y: 0.57735026, z: 0.57735026}
     - {x: -0.57735026, y: 0.57735026, z: -0.57735026}
---- !u!114 &5143365115725764857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6460747280885505425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2247e288b7708ba448f180a73aaefdf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

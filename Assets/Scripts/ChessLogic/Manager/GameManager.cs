@@ -8,8 +8,7 @@ using UnityEngine.Events;
 /// <summary>
 /// 控制游戏流程的单例类
 /// </summary>
-// TODO :GameManager需要重构成可拔插流程
-public class GameManager : Manager<GameManager>
+public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     
     [NonSerialized]
@@ -22,6 +21,7 @@ public class GameManager : Manager<GameManager>
     [NonSerialized]
     public bool bEnd;
 
+
     public UnityEvent eRoundStart = new UnityEvent();
     public UnityEvent ePlayerTurnBegin = new UnityEvent();
     public UnityEvent ePlayerTurnEnd = new UnityEvent();
@@ -33,9 +33,11 @@ public class GameManager : Manager<GameManager>
     public GameObject startButton;
     public GameObject winUI;
     public bool autoStart = false;
+    private TurnManager turnManager;
     protected override void Awake()
     {
         base.Awake();
+        turnManager = GetComponent<TurnManager>();
     }
     public void Start()
     {
@@ -53,16 +55,9 @@ public class GameManager : Manager<GameManager>
     {
         bEnd = false;
         startButton.SetActive(false);
+        turnManager.StartExcute(); ;
         eGameStart.Invoke();
-        RoundStart();
     }
-    protected void RoundStart()
-    {
-        curRound++;
-        eRoundStart.Invoke();
-        //AIPreTurnStart();
-    }
-
 
     public void GameWin()
     {

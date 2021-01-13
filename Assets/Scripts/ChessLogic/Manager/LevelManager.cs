@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
-public class LevelManager : Manager<LevelManager>
+public class LevelManager : SingletonMonoBehaviour<LevelManager>
 {
     public void LoadLevel(int index)
     {

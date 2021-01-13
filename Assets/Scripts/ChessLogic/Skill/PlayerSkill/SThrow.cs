@@ -13,16 +13,16 @@ public class SThrow : PlayerSkill
     {
         return GetRangeWithLength(length);
     }
-    public void Cast(GChess chess,GFloor floor)
+    public void Cast(GChess chess, GFloor floor)
     {
         Vector2Int direction = chess.location - owner.location;
         Vector2Int origin = chess.location;
-        chess.ThrowTo(floor.location);   
+        _ = chess.ThrowToAsync(floor.location);
         TakeEffect(() =>
         {
             chess.ElementReaction(element);
         },
-        GridManager.instance.GetFloorPosition3D(origin)+new Vector3(0,0.5f,0), GridManager.instance.GetFloorPosition3D(floor.location) + new Vector3(0, 0.5f, 0));
+        GridManager.instance.GetFloorPosition3D(origin) + new Vector3(0, 0.5f, 0), GridManager.instance.GetFloorPosition3D(floor.location) + new Vector3(0, 0.5f, 0));
     }
     public override bool ConditionCheck(int index, object[] parameters)
     {

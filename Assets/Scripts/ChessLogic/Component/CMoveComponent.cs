@@ -77,8 +77,6 @@ public class CMoveComponent : Component
             path = new Queue<Vector2Int>();
             foreach (var location in pathArr)
             {
-                if (location == actor.location)
-                    continue;
                 path.Enqueue(location);
             }
             if (path.Count == 0)
