@@ -13,11 +13,6 @@ public class GAIChess : GChess
         skill = Instantiate(skill);
         skill.owner = this;
     }
-    public override void OnGameStart()
-    {
-        base.OnGameStart();
-        healthBar.Show();
-    }
     public override void DisableAction()
     {
         base.DisableAction();

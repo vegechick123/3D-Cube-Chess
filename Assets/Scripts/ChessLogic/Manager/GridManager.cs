@@ -261,8 +261,7 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
         res.transform.position = GridManager.instance.GetChessPosition3D(location);
         GChess chess = res.GetComponent<GChess>();
         chess.location = location;
-        chess.OnGameAwake();
-        chess.OnGameStart();
+        AddChess(chess);
         chess.render.GetComponent<Animator>().Play("Birth");
         return chess;
     }

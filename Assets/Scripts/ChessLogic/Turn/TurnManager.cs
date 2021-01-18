@@ -9,15 +9,18 @@ public class TurnManager : MonoBehaviour
     [SerializeField]
     protected List<Turn> turnList;
 
+    private bool bStart;
     protected int currentTurnIndex = -1;
     protected Turn currentTurn { get { return turnList[currentTurnIndex]; } }
     public void StartExcute()
     {
+        if(bStart)
+        {
+            Debug.LogError("TurnManager : 重复开始");
+            return;
+        }
+        bStart = true;
         TurnLoopAsync();
-    }
-    private void Start()
-    {
-        StartExcute();
     }
 
     async void TurnLoopAsync()

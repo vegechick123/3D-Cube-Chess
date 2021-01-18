@@ -54,20 +54,11 @@ public class GChess : GActor
 
         navComponent = GetComponent<CNavComponent>();
         moveComponent = GetComponent<CMoveComponent>();
-        outline = GetComponent<Outline>();        
-        healthBar = new HealthBar(this);
-        healthBar.Hide();
-    }
-    public override void OnGameStart()
-    {
-        base.OnGameStart();
-        OnBirth();
-    }
-    protected virtual void OnBirth()
-    {
+        outline = GetComponent<Outline>();
         curHealth = health;
         curMovement = movement;
-        healthBar.Refresh();
+        healthBar = new HealthBar(this);
+        healthBar.Hide();
     }
 
     public virtual void OnTurnEnter()

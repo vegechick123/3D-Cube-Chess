@@ -31,8 +31,6 @@ public abstract class GActor : MonoBehaviour, IGetInfo
     /// </summary>
     private void Awake()
     {
-        GameManager.instance.eGameAwake.AddListener(OnGameAwake);
-        GameManager.instance.eGameStart.AddListener(OnGameStart);
         GameManager.instance.eGameEnd.AddListener(OnGameEnd);
        
     }
@@ -79,24 +77,6 @@ public abstract class GActor : MonoBehaviour, IGetInfo
     public void CreateFloatTextOnHead(TextTag tag)
     {
         UIManager.instance.CreateFloatText(transform.position+Vector3.up, tag);
-    }
-    virtual public void OnGameAwake()
-    {
-        var arr = GetComponents<Component>();
-        foreach (Component c in arr)
-        {
-            c.OnGameAwake();
-        }
-
-    }
-    virtual public void OnGameStart()
-    {
-        var arr = GetComponents<Component>();
-        foreach (Component c in arr)
-        {
-            c.OnGameStart();
-        }
-
     }
     virtual protected void OnGameEnd()
     {
