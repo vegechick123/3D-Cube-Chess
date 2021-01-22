@@ -182,6 +182,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!1 &126963513533915823
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5517651371840386782}
+  - component: {fileID: 5017374838760100692}
+  m_Layer: 5
+  m_Name: SelectChessView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5517651371840386782
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126963513533915823}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 9062127572593376764}
+  m_Father: {fileID: 9062127573679785311}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5017374838760100692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126963513533915823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288cecd5c3f106349acee4084778d18a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabSkillButton: {fileID: 5831139469554272609, guid: 9836bfeb2703d584393e230fdb897aac,
+    type: 3}
+  skillBar: {fileID: 9062127572593376763}
 --- !u!1 &279980966972112290
 GameObject:
   m_ObjectHideFlags: 0
@@ -3946,17 +3998,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9062127572593376763}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3478694662686669264}
-  m_Father: {fileID: 9062127573679785311}
-  m_RootOrder: 1
+  m_Father: {fileID: 5517651371840386782}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -66, y: -124}
+  m_AnchoredPosition: {x: 284.00003, y: -124}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &9062127572593376766
@@ -4292,15 +4344,12 @@ MonoBehaviour:
     type: 3}
   prefabHealthBar: {fileID: 2138914560124234569, guid: f35b7ac6d97dc384a8b072ee6eb8e091,
     type: 3}
-  prefabSkillButton: {fileID: 5831139469554272609, guid: 9836bfeb2703d584393e230fdb897aac,
-    type: 3}
   prefabFloatText: {fileID: 5573141058737394236, guid: ccdac9b97f418484ab0afb5a8bb3d272,
     type: 3}
   prefabImage: {fileID: 3992963152474904336, guid: 52f12c0660fd8d84cb571cb1ef651578,
     type: 3}
   prefabMessage: {fileID: 2977903599976896404, guid: 92986d21e715e9045ad0c0a521df400c,
     type: 3}
-  skillBar: {fileID: 9062127572593376763}
   tempertureColorGradient:
     serializedVersion: 2
     key0: {r: 0, g: 0.7019608, b: 1, a: 1}
@@ -4335,6 +4384,7 @@ MonoBehaviour:
       m_Calls: []
   panelContainer: {fileID: 4285201786467132987}
   mainUICanvans: {fileID: 9062127573679785310}
+  selectChessView: {fileID: 5017374838760100692}
   mouseFollowText: {fileID: 4874030541096934074}
   overTileClip: {fileID: 8300000, guid: 19254ad72f24c54468aa4ad5c37c805c, type: 3}
   textTags:
@@ -5186,7 +5236,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 6997441917827872125}
-  - {fileID: 9062127572593376764}
+  - {fileID: 5517651371840386782}
   - {fileID: 9062127573109408954}
   - {fileID: 4285201786467132987}
   - {fileID: 4492443909805796605}

@@ -33,22 +33,10 @@ public class GPlayerChess : GChess
 
         }
         outline.AddReference();
-        ShowUI();
-        if (unableAct)
-            UIManager.instance.DisableSkillButton();
     }
     protected virtual void OnDeselect()
     {
         outline.RemoveReference();
-        HideUI();
-    }
-    protected void ShowUI()
-    {        
-        UIManager.instance.SwitchSkillButton(skills.ToArray());
-    }
-    protected void HideUI()
-    {
-        UIManager.instance.CleanSkillButton();
     }
     async public override UniTask MoveToAsync(Vector2Int destination)
     {

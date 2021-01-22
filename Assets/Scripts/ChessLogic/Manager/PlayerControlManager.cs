@@ -23,7 +23,12 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
 	public UnityEvent<GFloor> eClickFloor = new EventWrapper<GFloor>();
 	[NonSerialized]
 	public UnityEvent<GActor> eClickActor = new EventWrapper<GActor>();
+	[NonSerialized]
 	public UnityEvent<Vector2Int> eOverTile = new EventWrapper<Vector2Int>();
+	[NonSerialized]
+	public UnityEvent<GPlayerChess> eSelectChess = new EventWrapper<GPlayerChess>();
+	[NonSerialized]
+	public UnityEvent eDeselect = new UnityEvent();
 	Vector2Int curTile= Vector2Int.down;
 	public UnityEvent eRightMouseClick = new UnityEvent();
 	public Button turnEndButton;
@@ -52,6 +57,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
 			DeSelect();
 		selectedChess = target;
 		selectedChess.GetComponent<CAgentComponent>().eSelect.Invoke();
+		eSelectChess.Invoke(selectedChess as GPlayerChess);
 	}
 	public void PlayerTurnEnter(PlayerTurn playerTurn)
     {
@@ -77,6 +83,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
 		selectedChess = null;
 		temp.GetComponent<CAgentComponent>().eDeselect.Invoke();
 		TerminateMoveCommand();
+		eDeselect.Invoke();
 		
 	}
     protected override void Awake()
@@ -185,7 +192,6 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
 			}
 			UIManager.instance.eRefreshFloorHUD.Invoke();
 			selectedChess.hasActed = true;
-			DeSelect();
 		});
     }
 	protected void TerminateSkillCommand()

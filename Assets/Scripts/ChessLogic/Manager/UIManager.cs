@@ -18,20 +18,16 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     public GameObject prefabFloorHDU;
     public GameObject prefabArrowFloorHUD;
     public GameObject prefabHealthBar;
-    public GameObject prefabSkillButton;
     public GameObject prefabFloatText;
 
     public GameObject prefabImage;
     public GameObject prefabMessage;
-    [NonSerialized]
-    public GameObject[] skillButtons;
-
-    public GameObject skillBar;
+    
     public Gradient tempertureColorGradient;
     public UnityEvent eRefreshFloorHUD = new UnityEvent();
     public Transform panelContainer;
     public Canvas mainUICanvans;
-
+    public SelectChessView selectChessView;
     public MouseFollowText mouseFollowText; 
 
     protected List<GameObject> alivePanels = new List<GameObject>();
@@ -48,6 +44,8 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     {
         base.Awake();
         PlayerControlManager.instance.eOverTile.AddListener(OverTile);
+        PlayerControlManager.instance.eSelectChess.AddListener(selectChessView.Bind);
+        PlayerControlManager.instance.eDeselect.AddListener(selectChessView.UnBind);
     }
     public void RefreshTemperture()
     {
@@ -182,50 +180,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
         return gameObject;
     }
 
-    public void CleanSkillButton()
-    {
-        if (skillButtons != null)
-            foreach (GameObject gameObject in skillButtons)
-            {
-                Destroy(gameObject);
-            }
-    }
-    public GameObject CreatButtonFromSkill(PlayerSkill skill)
-    {
-        GameObject gameObject = Instantiate(prefabSkillButton, skillBar.transform);
-        gameObject.GetComponent<Image>().sprite = skill.icon;
-        gameObject.GetComponent<Button>().onClick.AddListener(skill.CreateCommand);
-        gameObject.GetComponent<SkillButton>().skill = skill;
-        return gameObject;
-    }
-    public GameObject[] CreatButtonFromSkill(PlayerSkill[] skills)
-    {
-        GameObject[] gameObjects = new GameObject[skills.Length];
-        for (int i = 0; i < skills.Length; i++)
-        {
-            gameObjects[i] = CreatButtonFromSkill(skills[i]);
-        }
-        return gameObjects;
-    }
-    public void SwitchSkillButton(PlayerSkill[] skills)
-    {
-        CleanSkillButton();
-        skillButtons = CreatButtonFromSkill(skills);
-    }
-    public void DisableSkillButton()
-    {
-        foreach (GameObject t in skillButtons)
-        {
-            t.GetComponent<Button>().interactable = false;
-        }
-    }
-    public void ActiveSkillButton()
-    {
-        foreach (GameObject t in skillButtons)
-        {
-            t.GetComponent<Button>().interactable = true;
-        }
-    }
+    
 
     public string GetHighTempertureRichText()
     {

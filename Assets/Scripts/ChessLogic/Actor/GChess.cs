@@ -33,7 +33,7 @@ public class GChess : GActor
     public UnityEvent eLocationChange = new UnityEvent();
     [HideInInspector]
     public UnityEvent eBeForceMove = new UnityEvent();
-    protected UnityEvent eMovementChange = new UnityEvent();
+    public UnityEvent eMovementChange = new UnityEvent();
     [HideInInspector]
     public CNavComponent navComponent;
     [HideInInspector]
