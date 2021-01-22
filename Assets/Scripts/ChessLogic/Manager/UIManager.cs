@@ -164,7 +164,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     }
     public GameObject CreateFloorHUD(Vector2Int location, Color color)
     {
-        GameObject gameObject = GameObject.Instantiate(prefabFloorHDU, GridManager.instance.GetFloorPosition3D(location) + new Vector3(0, 0.51f, 0), Quaternion.identity);
+        GameObject gameObject = GameObject.Instantiate(prefabFloorHDU, GridManager.instance.GetChessPosition3D(location) , Quaternion.identity);
         gameObject.GetComponent<MeshRenderer>().material.SetColor("_Color", color);
         return gameObject;
     }

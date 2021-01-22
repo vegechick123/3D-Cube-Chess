@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
-static class GridFunctionUtility
+static class GridExtensions
 {/// <summary>
 /// 判断location是否在range范围内
 /// </summary>
@@ -159,5 +159,33 @@ static class GridFunctionUtility
         return t;
     }
 
+    public static List<Vector2Int> BFS(Vector2Int source,Func<Vector2Int,bool> func,out Dictionary<Vector2Int, int> distance)
+    {
+        Queue<Vector2Int> queue= new Queue<Vector2Int>();
+        List<Vector2Int> res = new List<Vector2Int>();
+        queue.Enqueue(source);
+        distance=new Dictionary<Vector2Int, int>();
+        distance[source] = 0;
+        Vector2Int[] dir = new Vector2Int[] { new Vector2Int(0, 1), new Vector2Int(1, 0), new Vector2Int(0, -1), new Vector2Int(-1, 0) };
+        while (queue.Count!=0)
+        {
+            var node = queue.Dequeue();
+            res.Add(node);
+            foreach (Vector2Int curDir in dir)
+            {
+                Vector2Int loc = node + curDir;
+                if (!func(loc))
+                    continue;
+                if (distance.ContainsKey(loc))
+                    continue;
+                else
+                {
+                    queue.Enqueue(loc);
+                    distance[loc]=distance[node]+1;
+                }
+            }
+        }
+        return res;
+    }
 }
 

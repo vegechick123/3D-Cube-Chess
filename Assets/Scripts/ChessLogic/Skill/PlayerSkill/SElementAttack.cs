@@ -12,10 +12,9 @@ public class SElementAttack : PlayerSkill
     {
         return GetRangeWithLength(length);
     }
-    public void Cast(GChess chess)
+    public void Cast(GActor actor)
     {
-        chess.ElementReaction(element);
-        //GridManager.instance.GetFloor(chess.location).ElementReaction(element);
-        GridManager.instance.GetFloor(chess.location).ElementReaction(element);
+        GridManager.instance.GetFloor(actor.location)?.ElementReaction(element);
+        GridManager.instance.GetChess(actor.location)?.ElementReaction(element);
     }
 }

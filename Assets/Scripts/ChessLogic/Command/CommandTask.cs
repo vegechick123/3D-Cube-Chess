@@ -89,6 +89,9 @@ public class CommandTask
             case true when t == typeof(GFloor):
                 PlayerControlManager.instance.eClickFloor.AddListener(SetParameters<GFloor>);
                 break;
+            case true when t == typeof(GActor):
+                PlayerControlManager.instance.eClickFloor.AddListener(SetParameters<GActor>);
+                break;
             default:
                 Debug.LogError("意外之外的输入类型");
                 break;
@@ -107,6 +110,9 @@ public class CommandTask
                 break;
             case true when t == typeof(GFloor):
                 PlayerControlManager.instance.eClickFloor.RemoveListener(SetParameters<GFloor>);
+                break;
+            case true when t == typeof(GActor):
+                PlayerControlManager.instance.eClickFloor.RemoveListener(SetParameters<GActor>);
                 break;
             default:
                 Debug.LogError("意外之外的输入类型");

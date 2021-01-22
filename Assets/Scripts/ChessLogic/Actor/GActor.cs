@@ -20,6 +20,7 @@ public abstract class GActor : MonoBehaviour, IGetInfo
     public Material originMaterial;
     [HideInInspector]
     public CElementComponent elementComponent;
+    [HideInInspector]
     public UnityEvent<Element> eElementReaction = new EventWrapper<Element>();
 
 
@@ -77,6 +78,10 @@ public abstract class GActor : MonoBehaviour, IGetInfo
     public void CreateFloatTextOnHead(TextTag tag)
     {
         UIManager.instance.CreateFloatText(transform.position+Vector3.up, tag);
+    }
+    public void CreateFloatTextOnHead(string text,Color color)
+    {
+        UIManager.instance.CreateFloatText(transform.position + Vector3.up, text,color);
     }
     virtual protected void OnGameEnd()
     {

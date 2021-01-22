@@ -37,7 +37,7 @@ public class RangeCommand : CommandTask
     }
     protected override bool SetCondition<T1>(T1 pa)
     {
-        if (!GridFunctionUtility.InRange(GetRange(), pa.location))
+        if (!GridExtensions.InRange(GetRange(), pa.location))
         {
             Debug.Log("OutRange");
             return false;

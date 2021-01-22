@@ -16,7 +16,6 @@ public class SWarmFire: PlayerSkill
         TakeEffect(() =>
         {
             chess.ElementReaction(Element.Fire);
-            chess.Warm();
         },
         owner.location, chess.location);        
     }

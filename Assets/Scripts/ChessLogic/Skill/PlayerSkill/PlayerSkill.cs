@@ -11,6 +11,7 @@ public abstract class PlayerSkill : Skill
 {
     public Sprite icon;
     public string[] cursorHints;
+    public int cost = 0;
     public void CreateCommand()
     {
        

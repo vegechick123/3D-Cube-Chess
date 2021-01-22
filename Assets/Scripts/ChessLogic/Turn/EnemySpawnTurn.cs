@@ -15,7 +15,7 @@ public class EnemySpawnTurn : Turn
 
     async public override UniTask TurnBehaviourAsync()
     {
-        Vector2Int yRange = GridFunctionUtility.GetPlayerChessyRange();
+        Vector2Int yRange = GridExtensions.GetPlayerChessyRange();
         yRange.x = Mathf.Max(0, yRange.x - spawnDistance);
         yRange.y = Mathf.Min(GridManager.instance.size.y - 1, yRange.y + spawnDistance);
 
@@ -72,7 +72,7 @@ public class EnemySpawnTurn : Turn
         Vector2Int t = new Vector2Int();
         do
         {
-            t = GridFunctionUtility.GetRandomLocation(yRange);
+            t = GridExtensions.GetRandomLocation(yRange);
         } while (!GridManager.instance.CheckTransitability(t));
         return t;
     }

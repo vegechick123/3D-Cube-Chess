@@ -4073,6 +4073,7 @@ GameObject:
   - component: {fileID: 78017934252510240}
   - component: {fileID: 3764162669613646345}
   - component: {fileID: 8101385692740835943}
+  - component: {fileID: 7063634952761657562}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -4112,9 +4113,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eRoundStart:
-    m_PersistentCalls:
-      m_Calls: []
-  eRoundEnd:
     m_PersistentCalls:
       m_Calls: []
   ePlayerTurnBegin:
@@ -4226,15 +4224,8 @@ MonoBehaviour:
   eGameEnd:
     m_PersistentCalls:
       m_Calls: []
-  audioPlayerTurnBegin: {fileID: 0}
-  audioPlayerTurnEnd: {fileID: 8300000, guid: 65021696269e868429a4a2686c46d27f, type: 3}
-  audioGameWin: {fileID: 8300000, guid: 997cab67232e4a44e9c69e981d96bc39, type: 3}
-  audioGameEnd: {fileID: 8300000, guid: ff9516d14e3195348bf8d7c02c744328, type: 3}
   startButton: {fileID: 5758263680207569701}
   winUI: {fileID: 4854215335543739678}
-  snowWeatherParticle: {fileID: 6168436030280943445}
-  BrightColor: {r: 0.3820755, g: 0.8791877, b: 1, a: 0}
-  sun: {fileID: 9062127573283725504}
   autoStart: 0
 --- !u!114 &9062127573002030755
 MonoBehaviour:
@@ -4522,6 +4513,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7063634952761657562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9062127573002030753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c2ca0c3e88b81e4185c7b4ce9631f0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnList:
+  - {fileID: 11400000, guid: 2f4748ff5304fc04d9eb319705312fb9, type: 2}
+  - {fileID: 11400000, guid: 1331f06e49bdf2d4189ade72447824f6, type: 2}
+  - {fileID: 11400000, guid: 47d72272f696dc14ebac9c8c4bf30427, type: 2}
+  - {fileID: 11400000, guid: c3187f4cb063f1d428efa579219567de, type: 2}
 --- !u!1 &9062127573095887822
 GameObject:
   m_ObjectHideFlags: 0
@@ -5612,12 +5620,6 @@ PrefabInstance:
 --- !u!4 &6168436030280943444 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7765470426369339249, guid: 37c91efbc83e18b4eb35d619ca9a298f,
-    type: 3}
-  m_PrefabInstance: {fileID: 4494260198991882277}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &6168436030280943445 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7765470426369339248, guid: 37c91efbc83e18b4eb35d619ca9a298f,
     type: 3}
   m_PrefabInstance: {fileID: 4494260198991882277}
   m_PrefabAsset: {fileID: 0}

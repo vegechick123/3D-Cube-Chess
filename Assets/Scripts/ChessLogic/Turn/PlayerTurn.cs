@@ -16,11 +16,19 @@ public class PlayerTurn : Turn
     {
         base.OnEnterTurn();
         bEnd = false;
+        foreach(GPlayerChess chess in GridManager.instance.playerChesses)
+        {
+            chess.OnTurnEnter();
+        }
         PlayerControlManager.instance.PlayerTurnEnter(this);
     }
     public override void OnExitTurn()
     {
         base.OnExitTurn();
+        foreach (GPlayerChess chess in GridManager.instance.playerChesses)
+        {
+            chess.OnTurnExit();
+        }
         bEnd = true;
     }
     public void EndTurn()

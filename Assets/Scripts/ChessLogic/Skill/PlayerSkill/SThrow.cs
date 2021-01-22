@@ -22,7 +22,7 @@ public class SThrow : PlayerSkill
         {
             chess.ElementReaction(element);
         },
-        GridManager.instance.GetFloorPosition3D(origin) + new Vector3(0, 0.5f, 0), GridManager.instance.GetFloorPosition3D(floor.location) + new Vector3(0, 0.5f, 0));
+        GridManager.instance.GetChessPosition3D(origin), GridManager.instance.GetChessPosition3D(floor.location) + new Vector3(0, 0.5f, 0));
     }
     public override bool ConditionCheck(int index, object[] parameters)
     {

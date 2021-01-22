@@ -18,13 +18,13 @@ public class GPlayerChess : GChess
         }
         for( int i=0;i<skills.Count; i++)
         {
-            skills[i] = Instantiate(skills[i]) as PlayerSkill;
+            skills[i] = Instantiate(skills[i]);
             skills[i].owner = this;
         }
     }
     protected virtual void OnSelect()
     {
-        if (curMovement > 0&&!unableAct&&!hasActed&&!freezeFoot)
+        if (curMovement > 0&&!unableAct&&!freezeFoot)
         {
             navComponent.GenNavInfo();
             MoveCommand moveCommand = new MoveCommand(navComponent.GetMoveRange, this, MoveToAsync);
@@ -34,7 +34,7 @@ public class GPlayerChess : GChess
         }
         outline.AddReference();
         ShowUI();
-        if (unableAct||hasActed)
+        if (unableAct)
             UIManager.instance.DisableSkillButton();
     }
     protected virtual void OnDeselect()
@@ -43,8 +43,7 @@ public class GPlayerChess : GChess
         HideUI();
     }
     protected void ShowUI()
-    {
-        
+    {        
         UIManager.instance.SwitchSkillButton(skills.ToArray());
     }
     protected void HideUI()
@@ -74,3 +73,4 @@ public class GPlayerChess : GChess
         return res;
     }
 }
+

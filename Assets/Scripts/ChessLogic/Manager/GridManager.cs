@@ -12,13 +12,29 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
     public Grid grid;
     public Transform chessContainer;
     protected GFloor[,] floors;
+    protected float floorYOffest = -0.5f;
+    protected float chessYOffest = 0.5f;
     protected List<GChess> chesses;
+    public List<GPlayerChess> playerChesses
+    {
+        get
+        {
+            return (chesses.FindAll((x) => x is GPlayerChess).Cast<GPlayerChess>().ToList());
+        }
+    }
+    public List<GAIChess> aiChesses
+    {
+        get
+        {
+            return (chesses.FindAll((x) => x is GAIChess).Cast<GAIChess>().ToList());
+        }
+    }
     protected override void Awake()
     {
         base.Awake();
         floors = new GFloor[size.x, size.y];
         chesses = new List<GChess>();
-        
+
     }
     private void Start()
     {
@@ -68,7 +84,16 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
     }
     public GChess[] GetChessesInRange(Vector2Int[] range)
     {
-        return chesses.FindAll(x=>range.Contains(x.location)).ToArray();
+        return chesses.FindAll(x => range.Contains(x.location)).ToArray();
+    }
+    public List<GFloor> GetFloorsInRange(Vector2Int[] range)
+    {
+        List<GFloor> res = new List<GFloor>();
+        foreach (Vector2Int location in range)
+        {
+            res.Add(GridManager.instance.GetFloor(location));
+        }
+        return res;
     }
     public void AddChess(GChess chess)
     {
@@ -114,13 +139,13 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
     }
     public Vector3 GetChessPosition3D(Vector2Int location)
     {
-        return grid.GetCellCenterWorld(new Vector3Int(location.x, location.y, 0)) + new Vector3(0, 0, 0);
+        return grid.GetCellCenterWorld(new Vector3Int(location.x, location.y, 0)) + new Vector3(0, chessYOffest, 0);
     }
     public bool CheckTransitability(Vector2Int location)
     {
         if (!InRange(location))
             return false;
-        if(GetChess(location)||!GetFloor(location).transitable)
+        if (GetChess(location) || !GetFloor(location).transitable)
         {
             return false;
         }
@@ -128,7 +153,7 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
     }
     public Vector3 GetFloorPosition3D(Vector2Int location)
     {
-        return grid.GetCellCenterWorld(new Vector3Int(location.x, location.y, 0)) - new Vector3(0, 0.5f, 0);
+        return grid.GetCellCenterWorld(new Vector3Int(location.x, location.y, 0)) + new Vector3(0, floorYOffest, 0);
     }
     public NavInfo GetNavInfo(Vector2Int location, int movement, int teamID = -1)
     {
@@ -160,7 +185,7 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
                     vis.Add(loc);
 
                 GFloor floor = GetFloor(loc);
-               // GChess chess = GetChess(loc);
+                // GChess chess = GetChess(loc);
                 if (!floor || !CheckTransitability(loc))
                 {
                     continue;
@@ -171,14 +196,6 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
                     res.Enqueue(loc);
                     prev.Enqueue(node.Item3);
                     occupy.Enqueue(false);
-                    //if (!chess)
-                    //{
-                    //    occupy.Enqueue(false);
-                    //}
-                    //else
-                    //{
-                    //    occupy.Enqueue(true);
-                    //}
                 }
             }
         }
@@ -217,7 +234,7 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
             }
         return res.ToArray();
     }
-    public Vector2Int[] GetFourRayRange(Vector2Int origin,int maxLength,int beginDistance=1)
+    public Vector2Int[] GetFourRayRange(Vector2Int origin, int maxLength, int beginDistance = 1)
     {
         Queue<Vector2Int> res = new Queue<Vector2Int>();
         Vector2Int[] dir = new Vector2Int[4];
@@ -227,7 +244,7 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
         dir[3] = new Vector2Int(0, -1);
         for (int i = 0; i < 4; i++)
         {
-            Vector2Int[] temp = GetOneRayRange(origin, dir[i],maxLength,beginDistance);
+            Vector2Int[] temp = GetOneRayRange(origin, dir[i], maxLength, beginDistance);
             foreach (Vector2Int t in temp)
             {
                 res.Enqueue(t);
@@ -238,13 +255,13 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
     public Vector2Int[] GetOneRayRange(Vector2Int origin, Vector2Int dir, int maxLength, int beginDistance = 1)
     {
         Queue<Vector2Int> res = new Queue<Vector2Int>();
-        for (int d = 1; d<=maxLength; d++)
+        for (int d = 1; d <= maxLength; d++)
         {
             Vector2Int nowpos = d * dir + origin;
             GChess t = GetChess(nowpos);
-            if (!InRange(nowpos) ||t!=null)
+            if (!InRange(nowpos) || t != null)
             {
-                if(t!=null&&d>=beginDistance)
+                if (t != null && d >= beginDistance)
                 {
                     res.Enqueue(nowpos);
                 }
@@ -274,7 +291,7 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
         int t = TempertureManager.instance.GetTempatureAt(location);
         string info = string.Empty;
         info += "回合结束时，";
-        if(t>0)
+        if (t > 0)
         {
             info += "留在这里的角色会受到";
             if (t >= 2)
@@ -284,13 +301,13 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
             }
             info += UIManager.instance.GetHighTempertureRichText();
         }
-        else if(t==0)
+        else if (t == 0)
         {
             info = "温度正好";
         }
         else
         {
-            info += "留在这里的角色会受到" +UIManager.instance.GetLowTempertureRichText();
+            info += "留在这里的角色会受到" + UIManager.instance.GetLowTempertureRichText();
         }
         list.Add(new Information("区域温度：" + t, info));
         list.AddRange(EnvironmentManager.instance.GetInfos(location));
@@ -300,7 +317,7 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
     {
         return chesses.Where(t =>
         {
-            return true;//t.elementComponent.state != ElementState.Frozen && t.countInActiveChess&&t.teamID==1;
+            return true;
         }).ToList();
     }
 

@@ -17,9 +17,12 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
 	protected SelectCommand selectCommand;
 	protected RangeCommand moveCommand;
 	protected CommandTask skillCommand;
-
+	[NonSerialized]
 	public UnityEvent<GChess> eClickChess = new EventWrapper<GChess>();
+	[NonSerialized]
 	public UnityEvent<GFloor> eClickFloor = new EventWrapper<GFloor>();
+	[NonSerialized]
+	public UnityEvent<GActor> eClickActor = new EventWrapper<GActor>();
 	public UnityEvent<Vector2Int> eOverTile = new EventWrapper<Vector2Int>();
 	Vector2Int curTile= Vector2Int.down;
 	public UnityEvent eRightMouseClick = new UnityEvent();
@@ -122,9 +125,11 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
             {
 				case GChess chess:
 					eClickChess.Invoke(chess);
+					eClickActor.Invoke(chess);
 					break;
 				case GFloor floor:
 					eClickFloor.Invoke(floor);
+					eClickActor.Invoke(floor);
 					break;
 
 			}

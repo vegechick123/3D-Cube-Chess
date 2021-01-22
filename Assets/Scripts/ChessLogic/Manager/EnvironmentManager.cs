@@ -26,7 +26,7 @@ public class EnvironmentManager : SingletonMonoBehaviour<EnvironmentManager>
     {
         if (stormAudio && stormNum > 0)
             GetComponent<AudioSource>().PlayOneShot(stormAudio, stormAudioAmplitude);
-        Vector2Int yRange = GridFunctionUtility.GetPlayerChessyRange();
+        Vector2Int yRange = GridExtensions.GetPlayerChessyRange();
         yRange.x = Mathf.Max(0, yRange.x - stormAroundDistance);
         yRange.y = Mathf.Min(GridManager.instance.size.y - 1, yRange.y + stormAroundDistance);
         for (int i = 0; i < stormNum; i++)
@@ -34,14 +34,14 @@ public class EnvironmentManager : SingletonMonoBehaviour<EnvironmentManager>
             Vector2Int location;
             do
             {
-                 location= GridFunctionUtility.GetRandomLocation(yRange);
+                 location= GridExtensions.GetRandomLocation(yRange);
             }
             while (stormLocation.Contains(location));
             stormLocation.Add(location);
         }
         foreach (var location in stormLocation)
         {
-            GameObject t = GridFunctionUtility.CreateParticleAt(prefabStorm, location);
+            GameObject t = GridExtensions.CreateParticleAt(prefabStorm, location);
             Material mat = t.GetComponent<MeshRenderer>().material;
             Color color = mat.GetColor("_Color");
             mat.SetColor("_Color", Color.yellow);

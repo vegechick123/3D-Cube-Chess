@@ -12,7 +12,7 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] protected float[] probability;
     public IEnumerator SpawnEnemy()
     {
-        Vector2Int yRange = GridFunctionUtility.GetPlayerChessyRange();
+        Vector2Int yRange = GridExtensions.GetPlayerChessyRange();
         yRange.x = Mathf.Max(0, yRange.x - spawnDistance);
         yRange.y = Mathf.Min(GridManager.instance.size.y-1, yRange.y + spawnDistance);
         
@@ -69,7 +69,7 @@ public class EnemySpawnManager : MonoBehaviour
         Vector2Int t = new Vector2Int();
         do
         {
-            t = GridFunctionUtility.GetRandomLocation(yRange);
+            t = GridExtensions.GetRandomLocation(yRange);
         } while (!GridManager.instance.CheckTransitability(t));
         return t;
     }

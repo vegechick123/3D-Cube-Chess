@@ -17,10 +17,7 @@ public class GChess : GActor
     public GameObject prefabFreezenFootVFX;
 
     public GameObject prefabFreezenFootBrokenVFX;
-    protected bool warm;
 
-    protected GameObject warmVFX;
-    public GameObject prefabWarmVFX;
     public bool unableAct { get; protected set; }
     public bool hasActed=false;
     public int health = 3;
@@ -32,8 +29,9 @@ public class GChess : GActor
     public int curMovement;
 
     public int teamID;
-
+    [HideInInspector]
     public UnityEvent eLocationChange = new UnityEvent();
+    [HideInInspector]
     public UnityEvent eBeForceMove = new UnityEvent();
     protected UnityEvent eMovementChange = new UnityEvent();
     [HideInInspector]
@@ -106,7 +104,7 @@ public class GChess : GActor
         Debug.Log("Chess:" + gameObject + "Die");
         //gameObject.SetActive(false);
         if (deathParticle != null)
-            GridFunctionUtility.CreateParticleAt(deathParticle,this);
+            GridExtensions.CreateParticleAt(deathParticle,this);
         GridManager.instance.RemoveChess(this);
         Destroy(gameObject,3f);
     }
@@ -209,21 +207,6 @@ public class GChess : GActor
     {
         unableAct = false;
     }
-    public override void ElementReaction(Element element)
-    {
-        if(element==Element.Ice&&warm)
-        {
-            DeactiveWarm();
-            return;
-        }
-        base.ElementReaction(element);
-        if(element==Element.Fire)
-        {
-            DeactiveFreezeFoot();
-        }
-        if (melt&&element == Element.Fire)
-            Damage(1);
-    }
     public void FaceToward(Vector3 dir)
     {
         transform.rotation = Quaternion.LookRotation(dir.normalized, Vector3.up);
@@ -237,7 +220,7 @@ public class GChess : GActor
         if (freezeFoot)
             return;
         if(prefabFreezenFootVFX!=null)
-            freezenFootVFX = GridFunctionUtility.CreateParticleAt(prefabFreezenFootVFX, this);
+            freezenFootVFX = GridExtensions.CreateParticleAt(prefabFreezenFootVFX, this);
         freezeFoot = true;
     }
     public void DeactiveFreezeFoot()
@@ -248,41 +231,15 @@ public class GChess : GActor
         freezeFoot = false;
         Destroy(freezenFootVFX);
         if(prefabFreezenFootBrokenVFX!=null)
-            GridFunctionUtility.CreateParticleAt(prefabFreezenFootBrokenVFX, this);
+            GridExtensions.CreateParticleAt(prefabFreezenFootBrokenVFX, this);
         freezenFootVFX = null;
-    }
-    public void Warm()
-    {
-        if (warm)
-            return;
-        if (prefabWarmVFX != null)
-        {
-            warmVFX = GridFunctionUtility.CreateParticleAt(prefabWarmVFX, this);
-            warmVFX.transform.parent = render.transform;
-        }
-        warm = true;
-    }
-    public void DeactiveWarm()
-    {
-        if (!warm)
-            return;
-        warm = false;
-        if(warmVFX!=null)
-        Destroy(warmVFX);
-        warmVFX = null;
-        
     }
     override public List<IGetInfo> GetInfos()
     {
         List<IGetInfo> list = new List<IGetInfo>();
         list.AddRange(base.GetInfos());
         list.Add(this);
-        if (freezeFoot)
-            list.Add(new Information("冻足", "脚被冻住，无法自己移动\n当自己或攻击发起者受到"+UIManager.instance.GetHighTempertureRichText()+"可以解除"));
-        if(warm)
-            list.Add(new Information("温暖", "抵抗下一次受到的"+UIManager.instance.GetLowTempertureRichText()));
-        //if (elementComponent.state==ElementState.Frozen)
-            list.Add(new Information("冰冻", "无法行动，可通过"+UIManager.instance.GetHighTempertureRichText()+"解除"));
+        
         return list;
     }
     public virtual void MouseEnter()
