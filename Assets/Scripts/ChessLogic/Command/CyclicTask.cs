@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
-public class SelectCommand : CommandTask
+public class CyclicTask : InputTask
 {
     // Start is called before the first frame update
-    public SelectCommand(GActor obj, Action<GChess> action) : base(obj, action)
+    public CyclicTask(Action<GActor[]> action,int cnt) : base(action,cnt)
     {
         
     }
-    protected override bool SetCondition<T1>(T1 pa)
+    protected override bool SetCondition(GActor pa)
     {
         if (!pa.GetComponent<CAgentComponent>())
             return false;
@@ -19,9 +19,13 @@ public class SelectCommand : CommandTask
     }
     protected override void Finish()
     {
-        task.GetType().GetMethod("Invoke").Invoke(task, parameters);
+        task.Invoke(parameters);
         eTaskComplete.Invoke();
         curID = 0;
         RefreshInputMode();
+    }
+    public static CyclicTask CreateSelectTask()
+    {
+        return new CyclicTask((t)=> { PlayerControlManager.instance.Select(t[0] as GChess); },1);
     }
 }

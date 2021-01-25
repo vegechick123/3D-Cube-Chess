@@ -19,7 +19,6 @@ public class GChess : GActor
     public GameObject prefabFreezenFootBrokenVFX;
 
     public bool unableAct { get; protected set; }
-    public bool hasActed=false;
     public int health = 3;
     //[HideInInspector]
     public int curHealth { get; protected set; }
@@ -62,12 +61,10 @@ public class GChess : GActor
     public virtual void OnTurnEnter()
     {
         curMovement = movement;
-        hasActed = false;
     }
     public virtual void OnTurnExit()
     {
         curMovement = movement;
-        hasActed = false;
     }
     public void Recover(int value)
     {
@@ -250,5 +247,4 @@ public class GChess : GActor
     {
         outline.enabled = false;
     }
-
 }

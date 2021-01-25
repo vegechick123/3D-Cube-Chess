@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public abstract class Skill: ScriptableObject,IGetInfo
     protected UnityEvent eFinish=new UnityEvent();
     public string title;
     public string info;
+    protected bool ready { get; set; }
     public string GetInfo()
     {
         return info;
@@ -46,4 +48,7 @@ public abstract class Skill: ScriptableObject,IGetInfo
     {
         return GridManager.instance.GetCircleRange(owner.location,length);
     }
+    public abstract  UniTask ProcessAsync();
+    
 }
+

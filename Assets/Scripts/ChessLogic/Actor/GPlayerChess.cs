@@ -27,10 +27,7 @@ public class GPlayerChess : GChess
         if (curMovement > 0&&!unableAct&&!freezeFoot)
         {
             navComponent.GenNavInfo();
-            MoveCommand moveCommand = new MoveCommand(navComponent.GetMoveRange, this, MoveToAsync);
-            moveCommand.CreateFloorHUD(new Color(0, 1, 0, 0.8f));
-            PlayerControlManager.instance.GenMoveCommand(moveCommand);
-
+            PlayerControlManager.instance.PreemptMoveTask(this);
         }
         outline.AddReference();
     }
@@ -59,6 +56,12 @@ public class GPlayerChess : GChess
         res+=base.GetTitle();
         res += "</color>";
         return res;
+    }
+    public async UniTask PerformSkill(PlayerSkill skill)
+    {
+        PlayerControlManager.instance.bProcessing = true;
+        await skill.ProcessAsync();
+        PlayerControlManager.instance.bProcessing = false;
     }
 }
 

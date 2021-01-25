@@ -62,4 +62,9 @@ public class SCloseAttack : AISkill
     {
         return new Vector2Int[] { direction + owner.location };
     }
+
+    public override UniTask ProcessAsync()
+    {
+        throw new NotImplementedException();
+    }
 }

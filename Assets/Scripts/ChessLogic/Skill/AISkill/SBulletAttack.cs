@@ -43,4 +43,9 @@ public class SBulletAttack : AISkill
     {
         return GridManager.instance.GetOneRayRange(owner.location, direction, maxLength);
     }
+
+    public override UniTask ProcessAsync()
+    {
+        throw new System.NotImplementedException();
+    }
 }

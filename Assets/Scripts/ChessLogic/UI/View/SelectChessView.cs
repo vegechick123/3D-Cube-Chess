@@ -41,7 +41,7 @@ public class SelectChessView : MonoBehaviour
     {
         GameObject gameObject = Instantiate(prefabSkillButton, skillBar.transform);
         gameObject.GetComponent<Image>().sprite = skill.icon;
-        gameObject.GetComponent<Button>().onClick.AddListener(skill.CreateCommand);
+        gameObject.GetComponent<Button>().onClick.AddListener(()=>PlayerControlManager.instance.PreemptSkillTask(skill));
         gameObject.GetComponent<SkillButton>().skill = skill;
         return gameObject.GetComponent<SkillButton>();
     }

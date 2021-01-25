@@ -12,43 +12,51 @@ public abstract class PlayerSkill : Skill
     public Sprite icon;
     public string[] cursorHints;
     public int cost = 0;
-    public void CreateCommand()
-    {
-       
-        PlayerControlManager.instance.PreemptSkillCommand(this);
-        return;
-    }
-    public Delegate GetCastAction()
-    {
-        //return null;
-        MethodInfo methodInfo = this.GetType().GetMethod("Cast");
-
-        if (methodInfo == null)
-        {
-            Debug.LogError(this.GetType().ToString() + "类没有实现Cast方法");
-            return null;
-        }
-
-        Type[] types = (from parameters in methodInfo.GetParameters()
-                        select parameters.ParameterType).ToArray();
-        Type p = Expression.GetActionType(types);
-        Delegate action = Delegate.CreateDelegate(p, this, methodInfo);
-        return action;
-    }
+    protected GActor[] inputParams;
     public string GetCursorHint(int index)
     {
         if (index >= cursorHints.Length)
             return string.Empty;
-        return cursorHints[index]; 
+        return cursorHints[index];
     }
-    /// <summary>
-    /// 检测是否接受输入的参数
-    /// </summary>
-    /// <param name="index">表示第几个参数，下标从零开始</param>
-    /// <param name="parameter">输入的参数对象</param>
-    /// <returns></returns>
-    public virtual bool ConditionCheck(int index, object[] parameters)
+    public abstract RangeTask GetPlayerInput();
+    public abstract Vector2Int[] GetSelectRange();
+    protected RangeTask GetInputTargets(params SkillTarget[] targetType)
     {
-        return true;
+        Func<int, GActor, bool> checker =
+            (index, target) =>
+            {
+                switch (targetType[index])
+                {
+                    case SkillTarget.Chess:
+                        return target is GChess;
+                    case SkillTarget.Floor:
+                        return target is GFloor;
+                    case SkillTarget.Actor:
+                        return true;
+                    case SkillTarget.PlayerChess:
+                        return target is GPlayerChess;
+                    case SkillTarget.ExceptSelfChess:
+                        return target is GChess && target != owner;
+                    case SkillTarget.EnemyChess:
+                        return target is GAIChess;
+                    case SkillTarget.EmptyFloor:
+                        return target is GFloor && GridManager.instance.GetChess(target.location) == null;
+                    default:
+                        throw new NotImplementedException();
+                }
+            };
+        return new RangeTask(GetSelectRange,(t)=>inputParams=t,targetType.Length,checker);
     }
+    public enum SkillTarget
+    {
+        Chess,
+        Floor,
+        Actor,
+        PlayerChess,
+        ExceptSelfChess,
+        EnemyChess,
+        EmptyFloor,
+    }
+
 }
