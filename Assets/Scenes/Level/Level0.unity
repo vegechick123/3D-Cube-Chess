@@ -3129,18 +3129,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aecba622dc2cb194f9117d42a2c68844, type: 3}
---- !u!114 &1575927974 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9062127573002030754, guid: 8fe2e4b0e90cf0a4a8c37cf41f42851c,
-    type: 3}
-  m_PrefabInstance: {fileID: 9062127573196128336}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fcc2cde1d65f1341bf2b68ece288b04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1615434842
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4842,16 +4830,6 @@ PrefabInstance:
         type: 3}
       propertyPath: tempertureColorGradient.ctime1
       value: 26214
-      objectReference: {fileID: 0}
-    - target: {fileID: 9062127573109408955, guid: 8fe2e4b0e90cf0a4a8c37cf41f42851c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1575927974}
-    - target: {fileID: 9062127573109408955, guid: 8fe2e4b0e90cf0a4a8c37cf41f42851c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayerTurnExit
       objectReference: {fileID: 0}
     - target: {fileID: 9062127573283725504, guid: 8fe2e4b0e90cf0a4a8c37cf41f42851c,
         type: 3}

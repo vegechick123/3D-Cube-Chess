@@ -4306,7 +4306,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcc2cde1d65f1341bf2b68ece288b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectAudio: {fileID: 8300000, guid: b32cf2064aa0d1d40b5db7a7fa45a015, type: 3}
   eRightMouseClick:
     m_PersistentCalls:
       m_Calls: []
@@ -4778,8 +4777,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9062127573002030756}
-        m_MethodName: PlayerTurnEnd
+      - m_Target: {fileID: 9062127573002030754}
+        m_MethodName: PlayerTurnExit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

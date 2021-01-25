@@ -48,7 +48,7 @@ public abstract class Skill: ScriptableObject,IGetInfo
     {
         return GridManager.instance.GetCircleRange(owner.location,length);
     }
-    public abstract  UniTask ProcessAsync();
+    public abstract  UniTask ProcessAsync(GActor[] inputParams);
     
 }
 

@@ -12,7 +12,6 @@ public abstract class PlayerSkill : Skill
     public Sprite icon;
     public string[] cursorHints;
     public int cost = 0;
-    protected GActor[] inputParams;
     public string GetCursorHint(int index)
     {
         if (index >= cursorHints.Length)
@@ -46,7 +45,7 @@ public abstract class PlayerSkill : Skill
                         throw new NotImplementedException();
                 }
             };
-        return new RangeTask(GetSelectRange,(t)=>inputParams=t,targetType.Length,checker);
+        return new RangeTask(GetSelectRange,(t)=>_=(owner as GPlayerChess).PerformSkill(this,t),targetType.Length,checker);
     }
     public enum SkillTarget
     {

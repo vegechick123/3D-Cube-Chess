@@ -57,11 +57,11 @@ public class GPlayerChess : GChess
         res += "</color>";
         return res;
     }
-    public async UniTask PerformSkill(PlayerSkill skill)
+    public async UniTask PerformSkill(PlayerSkill skill,GActor[] inputParams)
     {
-        PlayerControlManager.instance.bProcessing = true;
-        await skill.ProcessAsync();
-        PlayerControlManager.instance.bProcessing = false;
+        PlayerControlManager.instance.BeginProcess();
+        await skill.ProcessAsync(inputParams);
+        PlayerControlManager.instance.EndProcess();
     }
 }
 
