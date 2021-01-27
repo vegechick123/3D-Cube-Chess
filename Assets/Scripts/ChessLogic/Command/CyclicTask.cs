@@ -26,6 +26,6 @@ public class CyclicTask : InputTask
     }
     public static CyclicTask CreateSelectTask()
     {
-        return new CyclicTask((t)=> { PlayerControlManager.instance.Select(t[0] as GChess); },1);
+        return new CyclicTask((t)=> { PlayerControlManager.instance.SwitchToSelected(t[0] as GPlayerChess); },1);
     }
 }

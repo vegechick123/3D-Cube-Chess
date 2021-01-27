@@ -18,7 +18,7 @@ public abstract class Skill: ScriptableObject,IGetInfo
         return info;
     }
 
-    public abstract Vector2Int[] GetRange();
+
 
     //protected abstract (Vector2Int, Vector2Int) GetVFXLocation();
     public string GetTitle()
@@ -47,8 +47,6 @@ public abstract class Skill: ScriptableObject,IGetInfo
     protected Vector2Int[] GetRangeWithLength(int length)
     {
         return GridManager.instance.GetCircleRange(owner.location,length);
-    }
-    public abstract  UniTask ProcessAsync(GActor[] inputParams);
-    
+    }    
 }
 

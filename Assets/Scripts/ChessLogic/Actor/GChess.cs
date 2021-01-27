@@ -170,7 +170,6 @@ public class GChess : GActor
         {
             moveComponent.eFinishPath.AddListener(EnterLocation);
             location = destination;
-            curMovement = 0;
             await navComponent.MoveToWtihNavInfo(destination);            
         }
         else if (moveComponent)

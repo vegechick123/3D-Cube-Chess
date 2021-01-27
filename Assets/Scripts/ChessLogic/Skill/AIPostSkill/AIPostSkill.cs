@@ -9,7 +9,7 @@ using UnityEngine.Events;
 /// 所有的AI技能都应当是非指向性技能
 /// CAIComponent会在AIPreTurn调用Decide，然后在AIPostTurn调用Perform
 /// </summary>
-public abstract class AISkill : Skill
+public abstract class AIPostSkill : Skill
 {
     /// <summary>
     /// 这是获取技能影响范围的函数
@@ -17,20 +17,18 @@ public abstract class AISkill : Skill
     /// </summary>
     /// <returns></returns>
     public abstract Vector2Int[] GetAffectRange();
+    public abstract Vector2Int[] GetTargetRange();
     /// <summary>
     /// 根据选中的目标作出相应的决定，并存储决定
     /// </summary>
     /// <param name="target">CAIComponent选中的目标</param>
-    public abstract void Decide(GChess target);
-    public virtual void PreCast()
+    public abstract UniTask Decide(GChess target);
+    public virtual void Abort()
     {
 
     }
     /// <summary>
     /// 根据Decide函数设定的值进行行动
     /// </summary>
-    async public virtual UniTask Perform()
-    {
-        await MyUniTaskExtensions.WaitUntilEvent(eFinish);
-    }
+    public abstract UniTask ProcessAsync();
 }

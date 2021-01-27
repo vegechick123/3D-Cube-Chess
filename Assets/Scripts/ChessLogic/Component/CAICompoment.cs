@@ -12,10 +12,7 @@ using Cysharp.Threading.Tasks;
 /// </summary>
 public class CAICompoment : Component
 {
-    protected GAIChess AIChess { get { return actor as GAIChess; } }
-    public GChess target;//目标Chess
-    protected Vector2Int desination;//目标移动位置
-    protected FloorHUD floorHUD;//用以显示AI技能的影响范围
+    protected GAIChess aiChess { get { return actor as GAIChess; } }
     protected override void Awake()
     {
         base.Awake();
@@ -24,96 +21,13 @@ public class CAICompoment : Component
     /// <summary>
     /// AI根据移动范围以及技能释放范围决定
     /// </summary>
-    public void Visit()
+    protected AIPostSkill GetSkill()
     {
-        target = null;
-        desination = AIChess.location;
-        AIChess.navComponent.GenNavInfo();
-        Vector2Int[] moveRange = AIChess.navComponent.GetMoveRangeWithoutOccupy();
-        System.Random r = new System.Random();
-        moveRange = moveRange.OrderBy(x => r.Next()).ToArray();
-        var originLocation = AIChess.location;
-        foreach (Vector2Int location in moveRange)
-        {
-            AIChess.location = location;//暂时更改location以供skill.GetRange来判断
-            GChess[] targets = GridManager.instance.GetChesses(GameManager.instance.playerTeam);
-            foreach (GChess curTarget in targets)
-                if (AIChess.skill.GetRange().InRange(curTarget.location))
-                {
-                    //if(curTarget.elementComponent.state==ElementState.Frozen)
-                    //{
-                    //    continue;
-                    //}
-                    target = curTarget;
-                    desination = location;
-                    break;
-                }
-        }
-        AIChess.location = originLocation;
-    }
-    /// <summary>
-    /// 实施移动，并调用AISkill.Decide
-    /// </summary>
-    async public UniTask PerformMove()
-    {
-        if (AIChess.location == desination)
-        {
-            return;
-        }
-        else
-        {
-            if (target != null)
-            {
-                await AIChess.MoveToAsync(desination);
-                AIChess.skill.Decide(target);
-            }
-        }
-    }
-    /// <summary>
-    /// 移动完成的回调函数，通知AIManager进行下一步操作
-    /// </summary>
-    /// <summary>
-    /// 显示技能范围
-    /// </summary>
-    public void PrepareSkill()
-    {
-        if (target != null)
-        {
-            (actor as GChess).FaceToward((target.location - actor.location).Normalized());
-            floorHUD = new FloorHUD(GetSkill().GetAffectRange, new Color(1, 0, 0, 0.8f));
-            AIChess.skill.PreCast();
-        }
-        else
-            Debug.Log("Target Miss");
-    }
-    /// <summary>
-    /// 释放技能
-    /// </summary>
-    async public UniTask PerformSkill()
-    {
-        if(floorHUD!=null)
-        {
-            floorHUD.Release();
-            floorHUD = null;
-        }
-        if (target != null)
-        {
-            await AIChess.skill.Perform();
-        }
-        
-    }
-    protected AISkill GetSkill()
-    {
-        return (actor as GAIChess).skill;
+        return (actor as GAIChess).postSkill;
     }
     public void CancelSkill()
     {
-        if (floorHUD!=null)
-        {
-            floorHUD.Release();
-            floorHUD = null;
-        }
-        target = null;
+        aiChess.postSkill.Abort();
     }
     private void OnDestroy()
     {
@@ -121,5 +35,49 @@ public class CAICompoment : Component
         if(AIManager.instance)
             AIManager.instance.AIs.Remove(this);
         CancelSkill();
+    }
+    public async UniTask PreAction()
+    {
+        GChess target;
+        Vector2Int? destination;
+        (target, destination) = DecideTargetAndDestination();
+        if (destination != null)
+            await aiChess.MoveToAsync(destination.Value);
+        if(target!=null)
+        {
+            aiChess.FaceToward((target.location - actor.location).Normalized());
+            if (aiChess.preSkill != null)
+                await aiChess.preSkill.ProcessAsync(target);
+            await aiChess.postSkill.Decide(target);
+        }
+    }
+    public async UniTask PostAction()
+    {
+        if (aiChess.postSkill == null)
+            return;
+        await aiChess.postSkill.ProcessAsync();
+    }
+    protected (GChess,Vector2Int?) DecideTargetAndDestination()
+    {
+        GChess target = null;
+        Vector2Int? destination = null;
+        Vector2Int[] moveRange = aiChess.navComponent.GetMoveRangeWithoutOccupy();
+        System.Random r = new System.Random();
+        moveRange = moveRange.OrderBy(x => r.Next()).ToArray();
+        var originLocation = aiChess.location;
+        foreach (Vector2Int location in moveRange)
+        {
+            aiChess.location = location;//暂时更改location以供skill.GetRange来判断
+            GChess[] targets = GridManager.instance.GetChesses(GameManager.instance.playerTeam);
+            foreach (GChess curTarget in targets)
+                if (aiChess.postSkill.GetTargetRange().InRange(curTarget.location))
+                {
+                    target = curTarget;
+                    destination = location;
+                    break;
+                }
+        }
+        aiChess.location = originLocation;
+        return (target, destination);
     }
 }

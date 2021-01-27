@@ -6,6 +6,7 @@ using System.Reflection.Emit;
 using System.Linq;
 using System.Linq.Expressions;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public abstract class PlayerSkill : Skill
 {
@@ -57,5 +58,5 @@ public abstract class PlayerSkill : Skill
         EnemyChess,
         EmptyFloor,
     }
-
+    public abstract UniTask ProcessAsync(GActor[] inputParams);
 }

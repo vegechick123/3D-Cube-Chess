@@ -8,8 +8,8 @@ using UnityEngine.UI;
 enum InputState
 {
     None,
-    Select,
-    Move,
+    ReadyToSelect,
+    Selected,
     Skill,
 }
 /// <summary>
@@ -21,6 +21,8 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
     public GChess selectedChess;
     protected CyclicTask selectTask;
     protected RangeTask curTask;
+    protected PlayerSkill selectedSkill;
+    private InputState inputState = InputState.None;
     [NonSerialized]
     public UnityEvent<GChess> eClickChess = new EventWrapper<GChess>();
     [NonSerialized]
@@ -43,7 +45,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
     [NonSerialized]
     public bool bProcessing=false;
     private PlayerTurn currentPlayerTurn;
-    private InputState inputState=InputState.None;
+
     
     private Queue<PlayerSkillCaller> asyncQueue;
     //尝试选中target
@@ -59,13 +61,16 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
             return false;
         }
     }
-    public void Select(GChess target)
+    protected void Select(GChess target)
     {
+        if (target == selectedChess)
+            return;
         if (selectedChess != null)
             DeSelect();
         selectedChess = target;
         selectedChess.GetComponent<CAgentComponent>().eSelect.Invoke();
         eSelectChess.Invoke(selectedChess as GPlayerChess);
+
     }
     public void PlayerTurnEnter(PlayerTurn playerTurn)
     {
@@ -82,7 +87,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
         TerminateInputTask();
     }
     //取消选中
-    public void DeSelect()
+    protected void DeSelect()
     {
         if (!selectedChess)
             return;
@@ -90,7 +95,6 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
         selectedChess = null;
         temp.GetComponent<CAgentComponent>().eDeselect.Invoke();
         eDeselect.Invoke();
-        ToSelectState();
     }
     protected override void Awake()
     {
@@ -154,70 +158,152 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
         }
     }
 
-    public void PreemptMoveTask(GPlayerChess chess)
-    {
-        ToSelectState();
-        inputState = InputState.Move;
-        curTask = RangeTask.CreateMoveCommand(chess);
-        curTask.CreateFloorHUD(new Color(0, 1, 0, 0.8f));
-        curTask.Begin();
-    }
-    public void PreemptSkillTask(PlayerSkill skill)
-    {
-        ToSelectState();
-        inputState = InputState.Skill;
-        curTask = skill.GetPlayerInput();
-        curTask.CreateFloorHUD(new Color(0, 1, 1, 0.8f));
-        GPlayerChess temp = selectedChess as GPlayerChess;
-        curTask.Begin();
-    }
-    void ToSelectState()
+
+
+
+
+    public void SwitchToNone()
     {
         switch (inputState)
         {
+            case InputState.Skill:
+                selectedSkill = null;                
+                goto case InputState.Selected;
+            case InputState.Selected:
+                selectTask.bPaused = true;
+                curTask.Abort();
+                curTask = null;
+                DeSelect();
+                break;
+            case InputState.None:
+                return;
+            case InputState.ReadyToSelect:
+                selectTask.bPaused = true;
+                break;
+            default:
+                Debug.LogError("ErrorState");
+                break;
+        };
+        inputState = InputState.None;
+    }
+    public void SwitchToReadySelect()
+    {
+        switch (inputState)
+        {
+            case InputState.Skill:
+                selectedSkill = null;
+                selectTask.bPaused = false;
+                goto case InputState.Selected;
+            case InputState.Selected:
+                curTask.Abort();
+                curTask = null;
+                DeSelect();
+                break;
             case InputState.None:
                 selectTask.bPaused = false;
                 break;
-            case InputState.Select:
+            case InputState.ReadyToSelect:
+                return;
+            default:
+                Debug.LogError("ErrorState");
                 break;
-            case InputState.Move:
-                curTask.Abort();
-                curTask = null;                
-                break;
+        };
+        inputState = InputState.ReadyToSelect;
+    }
+    public void SwitchToSelected(GPlayerChess chess)
+    {
+        switch (inputState)
+        {
             case InputState.Skill:
+                selectedSkill = null;
+                selectTask.bPaused = false;
                 curTask.Abort();
                 curTask = null;
-                selectTask.bPaused = false;
                 break;
-        }
-        inputState = InputState.Select;
+            case InputState.Selected:
+                if (chess == selectedChess)
+                    return;
+                else
+                {
+                    curTask.Abort();
+                    curTask = null;
+                    Select(chess);
+                    break;
+                }
+            case InputState.ReadyToSelect:
+                Select(chess);
+                break;
+            default:
+                Debug.LogError("ErrorState");
+                break;
+        };
+        curTask = RangeTask.CreateMoveCommand(chess);
+        curTask.CreateFloorHUD(new Color(0, 1, 0, 0.8f));
+        curTask.Begin();
+        inputState = InputState.Selected;
+        
     }
+    public void SwitchToSkill(PlayerSkill skill)
+    {
+        switch(inputState)
+        {
+            case InputState.Selected:
+                curTask.Abort();
+                curTask = null;
+                break;
+            case InputState.Skill:
+                if (skill == selectedSkill)
+                    return;
+                else
+                {
+                    curTask.Abort();
+                    curTask = null;
+                }
+                break;
+            default:
+                Debug.LogError("ErrorState");
+                break;
+        };
+        curTask = skill.GetPlayerInput();
+        curTask.CreateFloorHUD(new Color(0, 1, 1, 0.8f));
+        curTask.Begin();
+        inputState = InputState.Skill;
+    }
+
+
     public void CancelCurrentCommand()
     {
         switch (inputState)
         {
-            case InputState.None:
-                break;
-            case InputState.Select:
-                break;
-            case InputState.Move:
-                DeSelect();
+            case InputState.Selected:
+                SwitchToReadySelect();
                 break;
             case InputState.Skill:
-                PreemptMoveTask(selectedChess as GPlayerChess);                
+                SwitchToSelected(selectedChess as GPlayerChess);                
                 break;
         }
     }
     protected void TerminateInputTask()
     {
-        DeSelect();
-        inputState = InputState.None;
-        selectTask.bPaused = true;
+        SwitchToNone();
     }
     protected void StartInputTask()
     {
-        ToSelectState();
+        SwitchToReadySelect();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void AddMoveInfo(MoveInfo info)
     {

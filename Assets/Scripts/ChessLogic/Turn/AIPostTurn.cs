@@ -10,10 +10,10 @@ public class AIPostTurn : Turn
     {
         foreach (var AI in AIManager.instance.AIs)
         {
-            if ((AI.actor as GChess).unableAct || AI.target == null)
+            if ((AI.actor as GChess).unableAct)
                 continue;
             GameObject t = UIManager.instance.CreateFloorHUD(AI.location, Color.yellow);
-            await AI.PerformSkill();            
+            await AI.PostAction();            
             Destroy(t);            
         }        
     }

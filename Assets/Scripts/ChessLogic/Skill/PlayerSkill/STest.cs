@@ -11,12 +11,6 @@ public class STest : PlayerSkill
     {
         return GetInputTargets(SkillTarget.Floor);
     }
-
-    public override Vector2Int[] GetRange()
-    {
-        throw new System.NotImplementedException();
-    }
-
     public override Vector2Int[] GetSelectRange()
     {
         return GetRangeWithLength(5);

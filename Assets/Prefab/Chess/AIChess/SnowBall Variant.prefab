@@ -159,5 +159,11 @@ PrefabInstance:
       propertyPath: info
       value: "\u4F1A\u53D1\u5C04\u96EA\u7403\u6765\u51B0\u51BB\u88AB\u51FB\u4E2D\u7684\u89D2\u8272"
       objectReference: {fileID: 0}
+    - target: {fileID: 8714642836675817614, guid: 5b44f9dc04bbba44084b0c2c25cbfb2d,
+        type: 3}
+      propertyPath: postSkill
+      value: 
+      objectReference: {fileID: 11400000, guid: 90f0c07064ebc42438d4331a81844009,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b44f9dc04bbba44084b0c2c25cbfb2d, type: 3}

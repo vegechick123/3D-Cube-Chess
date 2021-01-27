@@ -48,11 +48,11 @@ public abstract class GActor : MonoBehaviour, IGetInfo
         elementComponent = GetComponent<CElementComponent>();
 
         originMaterial = render.material;
-        Debug.Log($"GActor:{this} Begin");
+        //Debug.Log($"GActor:{this} Begin");
     }
     virtual public void GEnd()
     {
-        Debug.Log($"GActor:{this} End");
+        //Debug.Log($"GActor:{this} End");
     }
     //TODO 把更多逻辑放到ElementComponet里
     public virtual void ElementReaction(Element element)

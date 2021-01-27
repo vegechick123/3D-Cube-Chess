@@ -27,7 +27,7 @@ public class GPlayerChess : GChess
         if (curMovement > 0&&!unableAct&&!freezeFoot)
         {
             navComponent.GenNavInfo();
-            PlayerControlManager.instance.PreemptMoveTask(this);
+            //PlayerControlManager.instance.SwitchToSelected(this);
         }
         outline.AddReference();
     }

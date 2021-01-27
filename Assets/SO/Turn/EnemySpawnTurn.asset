@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemySpawnTurn
   m_EditorClassIdentifier: 
   maxEnemyOverNum: 2
-  num: 2
+  num: 1
   spawnDistance: 5
   prefabEnemy:
   - {fileID: 5627392609549917297, guid: 270fd838fd13a3c41ab022e168dfae91, type: 3}

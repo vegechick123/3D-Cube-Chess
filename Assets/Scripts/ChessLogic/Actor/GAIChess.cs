@@ -4,23 +4,28 @@ using UnityEngine;
 
 public class GAIChess : GChess
 {
-    public AISkill skill;
+    public AIPreSkill preSkill;
+    public AIPostSkill postSkill;
     protected CAICompoment aiCompoment;
     public override void GAwake()
     {
         base.GAwake();
         aiCompoment = GetComponent<CAICompoment>();
-        skill = Instantiate(skill);
-        skill.owner = this;
+        if (preSkill != null)
+        {
+            preSkill = Instantiate(preSkill);
+            preSkill.owner = this;
+        }
+        if (postSkill != null)
+        {
+            postSkill = Instantiate(postSkill);
+            postSkill.owner = this;
+        }
     }
     public override void DisableAction()
     {
         base.DisableAction();
         aiCompoment.CancelSkill();
-    }
-    public override void ActiveAction()
-    {
-        base.ActiveAction();
     }
     public override string GetTitle()
     {

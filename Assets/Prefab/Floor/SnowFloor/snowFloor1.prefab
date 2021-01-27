@@ -157,6 +157,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: snowFloor1
       objectReference: {fileID: 0}
+    - target: {fileID: 6559753714414813673, guid: 80f79acd801d5274ebd243e216898377,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80f79acd801d5274ebd243e216898377, type: 3}
 --- !u!4 &3867374241662248112 stripped

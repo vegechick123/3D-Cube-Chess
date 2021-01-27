@@ -20,11 +20,7 @@ public class EnemySpawnTurn : Turn
         yRange.y = Mathf.Min(GridManager.instance.size.y - 1, yRange.y + spawnDistance);
 
         int cntNum = AIManager.instance.AIs.Count;
-        foreach (CAICompoment t in AIManager.instance.AIs)
-        {
-            //if (t.actor.elementComponent.state == ElementState.Frozen)
-            //    cntNum--;
-        }
+
         int maxEnemyNum = maxEnemyOverNum + GridManager.instance.GetPlayerActiveChesses().Count;
         int spawnnum = Mathf.Min(num, maxEnemyNum - cntNum);
 
