@@ -19,7 +19,7 @@ public class STest : PlayerSkill
     public async override UniTask ProcessAsync(GActor[] inputParams)
     {
         Debug.Log(inputParams[0].location+"Begin");
-        await UniTask.Delay(TimeSpan.FromSeconds(5f));
+        await Shoot(inputParams[0].location);        
         Debug.Log(inputParams[0].location + "End");
     }
 }

@@ -19,7 +19,7 @@ public class GPlayerChess : GChess
         for( int i=0;i<skills.Count; i++)
         {
             skills[i] = Instantiate(skills[i]);
-            skills[i].owner = this;
+            skills[i].Init(this);
         }
     }
     protected virtual void OnSelect()
@@ -27,7 +27,6 @@ public class GPlayerChess : GChess
         if (curMovement > 0&&!unableAct&&!freezeFoot)
         {
             navComponent.GenNavInfo();
-            //PlayerControlManager.instance.SwitchToSelected(this);
         }
         outline.AddReference();
     }

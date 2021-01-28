@@ -13,9 +13,15 @@ MonoBehaviour:
   m_Name: IceBulletAttack
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  skillVFX: {fileID: 11400000, guid: cced2bf9d4f980943b7d3045dfbf0cfa, type: 2}
+  skillVFX: {fileID: 11400000, guid: 682496960e3a7a84b835dc5e6d2b8909, type: 2}
   title: 
   info: 
+  eBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  eEnd:
+    m_PersistentCalls:
+      m_Calls: []
   maxLength: 7
   damage: 1
   beginDistance: 2

@@ -21,9 +21,4 @@ public class PlayerSkillCaller
     {
         task = Excute();
     }
-    //public static PlayerSkillCaller CreateFromSkillAndParams(PlayerSkill skill, GActor[] inputParams)
-    //{
-    //    PlayerSkillCaller res = new PlayerSkillCaller();
-    //    res.task=Pla
-    //}
 }

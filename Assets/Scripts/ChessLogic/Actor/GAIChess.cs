@@ -14,12 +14,12 @@ public class GAIChess : GChess
         if (preSkill != null)
         {
             preSkill = Instantiate(preSkill);
-            preSkill.owner = this;
+            preSkill.Init(this);
         }
         if (postSkill != null)
         {
             postSkill = Instantiate(postSkill);
-            postSkill.owner = this;
+            postSkill.Init(this);
         }
     }
     public override void DisableAction()
