@@ -11,21 +11,36 @@ public class SelectChessView : MonoBehaviour
     public GameObject prefabSkillButton;
     public GameObject skillBar;
     protected GPlayerChess selectedChess;
+    protected bool skillActive = true;
+    private void Awake()
+    {
+        PlayerControlManager.instance.eProcessStart.AddListener(() => skillActive = false);
+        PlayerControlManager.instance.eProcessEnd.AddListener(() => skillActive = true);
+    }
     public void Bind(GPlayerChess selectedChess)
     {
         this.selectedChess = selectedChess;
         SwitchSkillButton(selectedChess.skills);
+        Refresh();
+        selectedChess.APAttribute.AddListener(Refresh);
+        PlayerControlManager.instance.eProcessStart.AddListener(Refresh);
+        PlayerControlManager.instance.eProcessEnd.AddListener(Refresh);
     }
     public void UnBind()
     {
+        selectedChess.APAttribute.RemoveListener(Refresh);
+        PlayerControlManager.instance.eProcessStart.RemoveListener(Refresh);
+        PlayerControlManager.instance.eProcessEnd.RemoveListener(Refresh);
         CleanSkillButton();
     }
-    public void RefreshSkill()
+    public void Refresh()
     {
         foreach (SkillButton t in skillButtons)
         {
-
-            t.button.interactable = t.skill.cost>=selectedChess.curMovement;
+            if (!skillActive)
+                t.button.interactable = false;
+            else
+                t.button.interactable = t.skill.CanPerform();
         }
     }
     public void CleanSkillButton()
@@ -41,7 +56,7 @@ public class SelectChessView : MonoBehaviour
     {
         GameObject gameObject = Instantiate(prefabSkillButton, skillBar.transform);
         gameObject.GetComponent<Image>().sprite = skill.icon;
-        gameObject.GetComponent<Button>().onClick.AddListener(()=>PlayerControlManager.instance.SwitchToSkill(skill));
+        gameObject.GetComponent<Button>().onClick.AddListener(() => PlayerControlManager.instance.SwitchToSkill(skill));
         gameObject.GetComponent<SkillButton>().skill = skill;
         return gameObject.GetComponent<SkillButton>();
     }
@@ -56,21 +71,6 @@ public class SelectChessView : MonoBehaviour
     }
     public void SwitchSkillButton(List<PlayerSkill> skills)
     {
-        CleanSkillButton();
         skillButtons = CreatButtonFromSkill(skills);
-    }
-    public void DisableSkillButton()
-    {
-        foreach (SkillButton t in skillButtons)
-        {
-            t.button.interactable = false;
-        }
-    }
-    public void ActiveSkillButton()
-    {
-        foreach (SkillButton t in skillButtons)
-        {
-            t.button.interactable = true;
-        }
     }
 }

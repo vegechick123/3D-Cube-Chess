@@ -42,8 +42,27 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
     public Button undoMoveButton;
     public EventSystem eventSystem;
     public GraphicRaycaster raycaster;
+
     [NonSerialized]
-    public bool bProcessing=false;
+    public bool m_bProcessing = false;
+    public bool bProcessing
+    {
+        get { return m_bProcessing; }
+        set
+        {
+            m_bProcessing = value;
+            if (m_bProcessing)
+                eProcessStart.Invoke();
+            else
+                eProcessEnd.Invoke();
+        }
+    }
+
+    [HideInInspector]
+    public UnityEvent eProcessStart;
+    [HideInInspector]
+    public UnityEvent eProcessEnd;
+
     private PlayerTurn currentPlayerTurn;
 
 
@@ -166,7 +185,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
         switch (inputState)
         {
             case InputState.Skill:
-                selectedSkill = null;                
+                selectedSkill = null;
                 goto case InputState.Selected;
             case InputState.Selected:
                 selectTask.bPaused = true;
@@ -185,7 +204,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
         };
         inputState = InputState.None;
     }
-    public void SwitchToReadySelect()
+    public void SwitchToReadyToSelect()
     {
         switch (inputState)
         {
@@ -240,24 +259,16 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
         curTask.CreateFloorHUD(new Color(0, 1, 0, 0.8f));
         curTask.Begin();
         inputState = InputState.Selected;
-        
+
     }
     public void SwitchToSkill(PlayerSkill skill)
     {
-        switch(inputState)
+        switch (inputState)
         {
             case InputState.Selected:
+            case InputState.Skill:
                 curTask.Abort();
                 curTask = null;
-                break;
-            case InputState.Skill:
-                if (skill == selectedSkill)
-                    return;
-                else
-                {
-                    curTask.Abort();
-                    curTask = null;
-                }
                 break;
             default:
                 Debug.LogError("ErrorState");
@@ -276,10 +287,10 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
         switch (inputState)
         {
             case InputState.Selected:
-                SwitchToReadySelect();
+                SwitchToReadyToSelect();
                 break;
             case InputState.Skill:
-                SwitchToSelected(selectedChess as GPlayerChess);                
+                SwitchToSelected(selectedChess as GPlayerChess);
                 break;
         }
     }
@@ -289,10 +300,16 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
     }
     protected void StartInputTask()
     {
-        SwitchToReadySelect();
+        SwitchToReadyToSelect();
     }
 
-
+    public async void PerformChessSkill(GPlayerChess chess, PlayerSkill skill, GActor[] inputParams)
+    {
+        SwitchToSelected(chess);
+        bProcessing = true;
+        await chess.PerformSkill(skill, inputParams);
+        bProcessing = false;
+    }
 
     public void AddMoveInfo(MoveInfo info)
     {
@@ -314,18 +331,8 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
         if (moveInfoSta.Count == 0)
             undoMoveButton.interactable = false;
     }
-    public void AddPlayerSkillCaller(PlayerSkill skill,GActor[] inputParams)
+    public void AddPlayerSkillCaller(PlayerSkill skill, GActor[] inputParams)
     {
 
-    }
-    public void BeginProcess()
-    {
-        bProcessing = true;
-        TerminateInputTask();
-    }
-    public void EndProcess()
-    {
-        bProcessing = false;
-        StartInputTask();
     }
 }

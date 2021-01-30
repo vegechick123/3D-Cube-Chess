@@ -24,7 +24,7 @@ MonoBehaviour:
       m_Calls: []
   icon: {fileID: 21300000, guid: 4121d18f7ac0ffc4bb764a5c931c1fd2, type: 3}
   cursorHints: []
-  cost: 0
+  cost: 1
   element: 3
   selectRange: 3
   affectRange: 1

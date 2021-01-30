@@ -94,6 +94,8 @@ public class InputTask
     }
     virtual public void Abort()
     {
+        if (bDone)
+            return;
         OnTaskEnd();
         eTaskAbort.Invoke();
     }
@@ -108,9 +110,9 @@ public class InputTask
     /// </summary>
     virtual protected void Finish()
     {
-        task.Invoke(parameters);
         eTaskComplete.Invoke();
         OnTaskEnd();
+        task.Invoke(parameters);        
     }
     virtual public void SetPaused(bool t)
     {

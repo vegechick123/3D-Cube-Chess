@@ -51,7 +51,7 @@ public abstract class PlayerSkill : Skill
                         throw new NotImplementedException();
                 }
             };
-        var res=new RangeTask(GetSelectRange,(t)=>_=(owner as GPlayerChess).PerformSkill(this,t),targetType.Length,checker);
+        var res = new RangeTask(GetSelectRange, (t) => PlayerControlManager.instance.PerformChessSkill(owner as GPlayerChess, this, t), targetType.Length, checker);
         res.eTaskAbort.AddListener(OnCancel);
         return res;
     }
@@ -68,6 +68,16 @@ public abstract class PlayerSkill : Skill
         ExceptSelfChess,
         EnemyChess,
         EmptyFloor,
+    }
+    public virtual bool CanPerform()
+    {
+        return owner.curAP >= cost;
+    }
+    public async UniTask CallProcessAsync(GActor[] inputParams)
+    {
+        owner.curAP -= cost;
+        await ProcessAsync(inputParams);
+        eEnd.Invoke();
     }
     public abstract UniTask ProcessAsync(GActor[] inputParams);
 }

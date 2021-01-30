@@ -54,9 +54,7 @@ public class GPlayerChess : GChess
     }
     public async UniTask PerformSkill(PlayerSkill skill,GActor[] inputParams)
     {
-        PlayerControlManager.instance.BeginProcess();
-        await skill.ProcessAsync(inputParams);
-        PlayerControlManager.instance.EndProcess();
+        await skill.CallProcessAsync(inputParams);
     }
 }
 

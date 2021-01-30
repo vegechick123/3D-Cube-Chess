@@ -13,6 +13,7 @@ public class CNavComponent : Component
 
     [HideInInspector]
     public CAgentComponent agentComponent;
+    protected int curMovement { get { return (actor as GChess).curMovement; } }
     protected override void Awake()
     {
         base.Awake();
