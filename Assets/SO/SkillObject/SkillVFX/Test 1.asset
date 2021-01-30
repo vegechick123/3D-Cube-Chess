@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9da22c8f017004499dca5a936fa9ca5, type: 3}
-  m_Name: Test
+  m_Name: Test 1
   m_EditorClassIdentifier: 
   prefabBeginParticle: {fileID: 6101803014006105634, guid: 443252956763a8b479f3b3aec984ae05,
     type: 3}
-  prefabProjectileParticle: {fileID: 5030364563990790324, guid: 68cbfa60b634bcd4089c9aeb58937961,
+  prefabProjectileParticle: {fileID: 7625280640010324387, guid: ab4635cd0a3dc0d49867f29359ea34b0,
     type: 3}
-  instant: 0
-  speed: 5
+  instant: 1
+  speed: 0

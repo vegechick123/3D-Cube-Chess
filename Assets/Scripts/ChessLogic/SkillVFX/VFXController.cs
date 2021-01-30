@@ -46,6 +46,12 @@ public class VFXController : MonoBehaviour
         visualEffect.Stop();
         finish = true;
     }
+    public void InitInstantProjectile(Vector3 origin, Vector3 target)
+    {
+        visualEffect.SetVector3("origin_position", origin);
+        visualEffect.SetVector3("target_position", target);
+        finish = true;
+    }
     public void InitProjectile(Vector3 origin, Vector3 target, float speed)
     {
         bProjectile = true;

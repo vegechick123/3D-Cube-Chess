@@ -9,11 +9,9 @@ using UnityEngine.VFX;
 public class SkillVFX : ScriptableObject
 {
     public GameObject prefabBeginParticle;
-    public GameObject prefabShootParticle;
-    public float speed;
     public GameObject prefabProjectileParticle;
-    public GameObject prefabHitParticle;
-
+    public bool instant;
+    public float speed;
     private Vector3 origin { get { return GridManager.instance.GetChessPosition3DCenter(skill.owner.location); } }
     private Vector3 destination;
     private VFXController beginParticle;
@@ -48,26 +46,23 @@ public class SkillVFX : ScriptableObject
             beginParticle.visualEffect.SetVector3("origin_position", origin);
         }
     }
-    public void CreateShootParticle()
-    {
-        if (prefabShootParticle)
-            Instantiate(prefabShootParticle, origin, Quaternion.identity);
-    }
     public async UniTask CreateProjectileParticle()
     {
         if (prefabProjectileParticle)
         {
             GameObject go = Instantiate(prefabProjectileParticle);
             VFXController t = go.AddComponent<VFXController>();
-            var p = MyUniTaskExtensions.WaitUntilEvent(t.eHit);
-            t.InitProjectile(origin, destination, speed);
-            await p;
+            if (instant)
+            {
+                t.InitInstantProjectile(origin, destination);
+            }
+            else
+            {
+                var p = MyUniTaskExtensions.WaitUntilEvent(t.eHit);
+                t.InitProjectile(origin, destination, speed);
+                await p;
+            }
         }
-    }
-    public void CreateHitParticle()
-    {
-        if (prefabHitParticle)
-            Instantiate(prefabHitParticle, destination, Quaternion.identity);
     }
     VFXController CreateVFXWithAutoDestory(GameObject prefab)
     {

@@ -38,9 +38,7 @@ public abstract class Skill: ScriptableObject,IGetInfo
     protected async virtual UniTask Shoot(Vector2Int location)
     {
         skillVFX.SetTarget(location);
-        skillVFX.CreateShootParticle();
         await skillVFX.CreateProjectileParticle();
-        skillVFX.CreateHitParticle();
     }
 }
 

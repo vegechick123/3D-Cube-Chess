@@ -184,8 +184,8 @@ MonoBehaviour:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
       m_SerializableObject: 1
-    min: -Infinity
-    max: Infinity
+    min: 0
+    max: 1
     descendantCount: 0
   - name: octave
     path: octave
@@ -197,8 +197,8 @@ MonoBehaviour:
         m_SerializableType: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
       m_SerializableObject: 4
-    min: -Infinity
-    max: Infinity
+    min: 1
+    max: 8
     descendantCount: 0
   - name: scale
     path: scale
@@ -250,7 +250,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: -920
     y: -88
-    width: 1885
+    width: 1889
     height: 1202
 --- !u!114 &4
 MonoBehaviour:
@@ -5153,12 +5153,14 @@ MonoBehaviour:
   m_Category: 
   m_Min:
     m_Type:
-      m_SerializableType: 
+      m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
     m_SerializableObject: 
   m_Max:
     m_Type:
-      m_SerializableType: 
-    m_SerializableObject: 
+      m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+    m_SerializableObject: 1
   m_IsOutput: 0
   m_Tooltip: 
   m_Nodes:
@@ -5166,9 +5168,9 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 180}
       inputSlot: {fileID: 53}
-    position: {x: -228, y: 224}
+    position: {x: -243, y: 252}
     expandedSlots: []
-    expanded: 1
+    expanded: 0
 --- !u!114 &180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5230,12 +5232,14 @@ MonoBehaviour:
   m_Category: 
   m_Min:
     m_Type:
-      m_SerializableType: 
-    m_SerializableObject: 
+      m_SerializableType: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+    m_SerializableObject: 1
   m_Max:
     m_Type:
-      m_SerializableType: 
-    m_SerializableObject: 
+      m_SerializableType: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+    m_SerializableObject: 8
   m_IsOutput: 0
   m_Tooltip: 
   m_Nodes:
@@ -5322,7 +5326,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 273}
       inputSlot: {fileID: 57}
-    position: {x: -216, y: 258}
+    position: {x: -213, y: 315}
     expandedSlots: []
     expanded: 0
 --- !u!114 &273
