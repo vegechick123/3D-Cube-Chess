@@ -12,12 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9da22c8f017004499dca5a936fa9ca5, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  prefabBeginParticle: {fileID: 0}
-  prefabShootParticle: {fileID: 7250412730907975987, guid: 5cfe79246d0fafa45bd6d549f089ec65,
+  prefabBeginParticle: {fileID: 6101803014006105634, guid: 443252956763a8b479f3b3aec984ae05,
     type: 3}
+  prefabShootParticle: {fileID: 0}
   speed: 5
-  aspect: 1
-  prefabProjectileParticle: {fileID: 7626863233938880488, guid: bda4ef69d7364dc489b2bc500123e2c8,
+  prefabProjectileParticle: {fileID: 5030364563990790324, guid: 68cbfa60b634bcd4089c9aeb58937961,
     type: 3}
-  prefabHitParticle: {fileID: 7250412730907975987, guid: 5cfe79246d0fafa45bd6d549f089ec65,
-    type: 3}
+  prefabHitParticle: {fileID: 0}

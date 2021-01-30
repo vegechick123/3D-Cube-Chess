@@ -46,8 +46,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
     public bool bProcessing=false;
     private PlayerTurn currentPlayerTurn;
 
-    
-    private Queue<PlayerSkillCaller> asyncQueue;
+
     //尝试选中target
     public bool TrySelect(GChess target)
     {
@@ -264,7 +263,8 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
                 Debug.LogError("ErrorState");
                 break;
         };
-        curTask = skill.GetPlayerInput();
+        selectTask.bPaused = true;
+        curTask = skill.CallGetPlayerInput();
         curTask.CreateFloorHUD(new Color(0, 1, 1, 0.8f));
         curTask.Begin();
         inputState = InputState.Skill;
@@ -291,17 +291,6 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
     {
         SwitchToReadySelect();
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -141,6 +141,10 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
     {
         return grid.GetCellCenterWorld(new Vector3Int(location.x, location.y, 0)) + new Vector3(0, chessYOffest, 0);
     }
+    public Vector3 GetChessPosition3DCenter(Vector2Int location)
+    {
+        return GetChessPosition3D (location)+new Vector3(0, grid.cellSize.y/2, 0);
+    }
     public bool CheckTransitability(Vector2Int location)
     {
         if (!InRange(location))

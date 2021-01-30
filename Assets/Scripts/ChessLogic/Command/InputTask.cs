@@ -26,6 +26,7 @@ public class InputTask
     public UnityEvent eTaskComplete = new UnityEvent();
     //会在任务成功完成或调用Abort终止时调用
     public UnityEvent eTaskEnd = new UnityEvent();
+    public UnityEvent eTaskAbort = new UnityEvent();
     public InputTask(Action<GActor[]> action, int count, Func<int, GActor, bool> _checker = null)
     {
         task = action;
@@ -94,6 +95,7 @@ public class InputTask
     virtual public void Abort()
     {
         OnTaskEnd();
+        eTaskAbort.Invoke();
     }
     virtual protected void OnTaskEnd()
     {

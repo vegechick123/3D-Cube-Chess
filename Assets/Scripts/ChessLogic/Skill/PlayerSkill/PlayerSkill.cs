@@ -19,6 +19,11 @@ public abstract class PlayerSkill : Skill
             return string.Empty;
         return cursorHints[index];
     }
+    public RangeTask CallGetPlayerInput()
+    {
+        eBegin.Invoke();
+        return GetPlayerInput();
+    }
     public abstract RangeTask GetPlayerInput();
     public abstract Vector2Int[] GetSelectRange();
     protected RangeTask GetInputTargets(params SkillTarget[] targetType)
@@ -46,7 +51,13 @@ public abstract class PlayerSkill : Skill
                         throw new NotImplementedException();
                 }
             };
-        return new RangeTask(GetSelectRange,(t)=>_=(owner as GPlayerChess).PerformSkill(this,t),targetType.Length,checker);
+        var res=new RangeTask(GetSelectRange,(t)=>_=(owner as GPlayerChess).PerformSkill(this,t),targetType.Length,checker);
+        res.eTaskAbort.AddListener(OnCancel);
+        return res;
+    }
+    protected virtual void OnCancel()
+    {
+        eEnd.Invoke();
     }
     public enum SkillTarget
     {

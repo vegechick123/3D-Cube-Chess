@@ -3,25 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.VFX;
+
 [CreateAssetMenu]
 public class SkillVFX : ScriptableObject
 {
     public GameObject prefabBeginParticle;
     public GameObject prefabShootParticle;
     public float speed;
-    public float aspect;
     public GameObject prefabProjectileParticle;
     public GameObject prefabHitParticle;
 
-    private Vector3 origin { get { return GridManager.instance.GetChessPosition3D(skill.owner.location); }}
+    private Vector3 origin { get { return GridManager.instance.GetChessPosition3DCenter(skill.owner.location); } }
     private Vector3 destination;
-    private GameObject beginParticle;
+    private VFXController beginParticle;
     private Skill skill;
     public void Init(Skill skill)
     {
         this.skill = skill;
         skill.eBegin.AddListener(CreateBeginParticle);
-        skill.eEnd.AddListener(()=>Destroy(beginParticle));        
+        skill.eEnd.AddListener(() =>
+        {
+            beginParticle.Stop();
+            beginParticle = null;
+        });
     }
     public void SetTarget(Vector2Int destination)
     {
@@ -35,11 +40,13 @@ public class SkillVFX : ScriptableObject
     {
         if (beginParticle)
         {
-            Debug.LogWarning("重复创建粒子特效");
-            Destroy(beginParticle);
+            Debug.LogError("已存在beginParticle");
         }
-        if(prefabBeginParticle)
-            beginParticle = Instantiate(prefabBeginParticle, origin, Quaternion.identity);
+        if (prefabBeginParticle)
+        {
+            beginParticle = CreateVFXWithAutoDestory(prefabBeginParticle);
+            beginParticle.visualEffect.SetVector3("origin_position", origin);
+        }
     }
     public void CreateShootParticle()
     {
@@ -51,9 +58,9 @@ public class SkillVFX : ScriptableObject
         if (prefabProjectileParticle)
         {
             GameObject go = Instantiate(prefabProjectileParticle);
-            Projectile t = go.AddComponent<Projectile>();
+            VFXController t = go.AddComponent<VFXController>();
             var p = MyUniTaskExtensions.WaitUntilEvent(t.eHit);
-            t.Init(origin, destination, speed, aspect);
+            t.InitProjectile(origin, destination, speed);
             await p;
         }
     }
@@ -62,5 +69,9 @@ public class SkillVFX : ScriptableObject
         if (prefabHitParticle)
             Instantiate(prefabHitParticle, destination, Quaternion.identity);
     }
-    
+    VFXController CreateVFXWithAutoDestory(GameObject prefab)
+    {
+        GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+        return go.AddComponent<VFXController>();
+    }
 }
