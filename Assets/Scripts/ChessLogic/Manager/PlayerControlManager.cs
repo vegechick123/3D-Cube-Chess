@@ -308,7 +308,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
     {
         MoveInfo t = moveInfoSta.Pop();
         t.owner.Teleport(t.origin);
-        t.owner.curMovement = t.owner.movement;
+        t.owner.curAP = t.owner.maxAP;
         t.owner.render.transform.rotation = t.originRotation;
         t.owner.AbortMove();
         if (moveInfoSta.Count == 0)

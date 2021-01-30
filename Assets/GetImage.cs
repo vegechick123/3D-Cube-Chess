@@ -19,14 +19,14 @@ public class GetImage : MonoBehaviour
     public void Init(GChess chess)
     {
         originScale=transform.localScale;
-        float numController = chess.health;
+        float numController = chess.maxHealth;
         bloodContainer.GetComponent<RectTransform>().localScale = new Vector3(1/ numController, 1, 1);
         //bloodFramework.GetComponent<RectTransform>().localScale = new Vector3(width,1,1);
         this.chess = chess;
-        blood = new GameObject[chess.health];
-        for (int i = 0; i < chess.health; i++)
+        blood = new GameObject[chess.maxHealth];
+        for (int i = 0; i < chess.maxHealth; i++)
         {
-            blood[chess.health-1-i] = CreateImage(chess);
+            blood[chess.maxHealth-1-i] = CreateImage(chess);
         }
     }
     public GameObject CreateImage(GChess chess)
@@ -45,7 +45,7 @@ public class GetImage : MonoBehaviour
     public void Refresh()
     {
             
-        int health = chess.health;
+        int health = chess.maxHealth;
         for (int i = 0; i < health; i++)
         {
             if(i<chess.curHealth)

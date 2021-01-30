@@ -19,12 +19,15 @@ public class SkillVFX : ScriptableObject
     public void Init(Skill skill)
     {
         this.skill = skill;
-        skill.eBegin.AddListener(CreateBeginParticle);
-        skill.eEnd.AddListener(() =>
+        if (prefabBeginParticle != null)
         {
-            beginParticle.Stop();
-            beginParticle = null;
-        });
+            skill.eBegin.AddListener(CreateBeginParticle);
+            skill.eEnd.AddListener(() =>
+            {
+                beginParticle.Stop();
+                beginParticle = null;
+            });
+        }
     }
     public void SetTarget(Vector2Int destination)
     {

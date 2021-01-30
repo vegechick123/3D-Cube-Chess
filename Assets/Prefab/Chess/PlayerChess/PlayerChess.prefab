@@ -267,20 +267,14 @@ MonoBehaviour:
   elementComponent: {fileID: 0}
   title: 
   info: 
-  freezeFoot: 0
-  eFreezeFootBroken:
-    m_PersistentCalls:
-      m_Calls: []
-  prefabFreezenFootVFX: {fileID: 6647800468150081859, guid: 182a20edaafcbcd4990cae16eec25bd4,
-    type: 3}
-  prefabFreezenFootBrokenVFX: {fileID: 7626863233938880488, guid: 53cb52ed4d7bd30449b71d5a7c29602c,
-    type: 3}
-  prefabWarmVFX: {fileID: 7626863233938880488, guid: 8277774494f426a44ae364b9218b2ab4,
-    type: 3}
-  hasActed: 0
-  health: 3
-  movement: 4
-  curMovement: 0
+  healthAttribute:
+    m_value: 0
+    m_minValue: 0
+    m_maxValue: 4
+  APAttribute:
+    m_value: 0
+    m_minValue: 0
+    m_maxValue: 6
   teamID: 1
   eLocationChange:
     m_PersistentCalls:
@@ -292,11 +286,8 @@ MonoBehaviour:
   moveComponent: {fileID: 0}
   outline: {fileID: 0}
   deathParticle: {fileID: 0}
-  immuniateEnvironmentColdness: 0
-  melt: 0
-  countInActiveChess: 1
   skills:
-  - {fileID: 11400000, guid: ee2f28bc5d3c3fb42af9c134102a47c2, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &6460747280885505439
 MonoBehaviour:
@@ -363,6 +354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actor: {fileID: 0}
+  conductive: 0
 --- !u!114 &6401638338488556242
 MonoBehaviour:
   m_ObjectHideFlags: 0

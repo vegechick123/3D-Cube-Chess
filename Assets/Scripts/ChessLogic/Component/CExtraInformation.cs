@@ -14,4 +14,5 @@ public class CExtraInformation : Component,IGetInfo
     {
         return info;
     }
+
 }

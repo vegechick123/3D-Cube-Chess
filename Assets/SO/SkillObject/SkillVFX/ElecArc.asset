@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9da22c8f017004499dca5a936fa9ca5, type: 3}
-  m_Name: Test 1
+  m_Name: ElecArc
   m_EditorClassIdentifier: 
   prefabBeginParticle: {fileID: 6101803014006105634, guid: 443252956763a8b479f3b3aec984ae05,
     type: 3}

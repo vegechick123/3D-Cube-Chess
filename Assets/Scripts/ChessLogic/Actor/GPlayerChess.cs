@@ -24,10 +24,6 @@ public class GPlayerChess : GChess
     }
     protected virtual void OnSelect()
     {
-        if (curMovement > 0&&!unableAct&&!freezeFoot)
-        {
-            navComponent.GenNavInfo();
-        }
         outline.AddReference();
     }
     protected virtual void OnDeselect()
