@@ -5,18 +5,20 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Skill/PlayerSkill/SApplyElementInRange")]
 public class SApplyElementInRange : PlayerSkill
 {
+    public SkillTarget targetType;
     public Element element;
     public int selectRange;
-    public int affectRange;    
+    public int affectRange;
+     
     public override RangeTask GetPlayerInput()
     {
-        return GetInputTargets(SkillTarget.Actor);
+        return GetInputTargets(targetType);
     }
 
     public override Vector2Int[] GetSelectRange()
     {
         return GridManager.instance.GetCircleRange(owner.location,selectRange);
-    }
+    }                                              
 
     public override async UniTask ProcessAsync(GActor[] inputParams)
     {

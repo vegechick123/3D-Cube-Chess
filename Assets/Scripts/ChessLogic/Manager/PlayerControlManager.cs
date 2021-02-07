@@ -239,15 +239,11 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
                 curTask = null;
                 break;
             case InputState.Selected:
-                if (chess == selectedChess)
-                    return;
-                else
-                {
-                    curTask.Abort();
-                    curTask = null;
-                    Select(chess);
-                    break;
-                }
+                curTask.Abort();
+                curTask = null;
+                Select(chess);
+                break;
+
             case InputState.ReadyToSelect:
                 Select(chess);
                 break;
@@ -255,7 +251,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
                 Debug.LogError("ErrorState");
                 break;
         };
-        curTask = RangeTask.CreateMoveCommand(chess);
+        curTask = CreateMoveCommand(chess);
         curTask.CreateFloorHUD(new Color(0, 1, 0, 0.8f));
         curTask.Begin();
         inputState = InputState.Selected;
@@ -302,13 +298,20 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
     {
         SwitchToReadyToSelect();
     }
+    public async void CallChessToMove(GPlayerChess chess, Vector2Int location)
+    {
+        bProcessing = true;
+        await chess.MoveToAsync(location);
+        bProcessing = false;
+        SwitchToSelected(chess);
+    }
 
     public async void PerformChessSkill(GPlayerChess chess, PlayerSkill skill, GActor[] inputParams)
-    {
-        SwitchToSelected(chess);
+    {        
         bProcessing = true;
         await chess.PerformSkill(skill, inputParams);
         bProcessing = false;
+        SwitchToSelected(chess);
     }
 
     public void AddMoveInfo(MoveInfo info)
@@ -331,8 +334,17 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
         if (moveInfoSta.Count == 0)
             undoMoveButton.interactable = false;
     }
-    public void AddPlayerSkillCaller(PlayerSkill skill, GActor[] inputParams)
-    {
 
+    public static RangeTask CreateMoveCommand(GPlayerChess chess)
+    {
+        Action<GActor[]> t = (o) =>
+        {
+            PlayerControlManager.instance.CallChessToMove(chess, o[0].location);
+        };
+        Func<int, GActor, bool> checker = (index, target) =>
+        {
+            return !GridManager.instance.GetChess(target.location);
+        };
+        return new RangeTask(chess.navComponent.GetMoveRange, t, 1, checker);
     }
 }

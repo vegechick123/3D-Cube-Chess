@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4308434994863623715}
   - component: {fileID: 1583869180865650447}
   - component: {fileID: 1825516589754720572}
-  - component: {fileID: 1066098571959662460}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -100,102 +99,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!82 &1066098571959662460
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1437423721766917126}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &8714642836675817610
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,25 +168,16 @@ MonoBehaviour:
   meshFilter: {fileID: 0}
   originMaterial: {fileID: 0}
   elementComponent: {fileID: 0}
-  fireParticle: {fileID: 7250412730907975987, guid: 5cfe79246d0fafa45bd6d549f089ec65,
-    type: 3}
-  fireSoundEffect: {fileID: 8300000, guid: c6639e5c0b4c8654fb12b778cf3ec99d, type: 3}
-  iceParticle: {fileID: 4898306076701040203, guid: bb94e0effad1f394a888bbe809e13560,
-    type: 3}
-  iceSoundEffect: {fileID: 8300000, guid: d9f801a851749384d809b7510f9ff9a6, type: 3}
   title: "\u96EA\u4EBA"
   info: "\u8FD1\u6218\u653B\u51FB\uFF0C\u4F1A\u5728\u53D1\u8D77\u653B\u51FB\u524D\u963B\u6B62\u76EE\u6807\u79FB\u52A8"
-  freezeFoot: 0
-  eFreezeFootBroken:
-    m_PersistentCalls:
-      m_Calls: []
-  prefabFreezenFootVFX: {fileID: 0}
-  prefabFreezenFootBrokenVFX: {fileID: 0}
-  prefabWarmVFX: {fileID: 0}
-  hasActed: 0
-  health: 2
-  movement: 5
-  curMovement: 0
+  healthAttribute:
+    m_value: 4
+    m_minValue: 0
+    m_maxValue: 4
+  APAttribute:
+    m_value: 4
+    m_minValue: 0
+    m_maxValue: 4
   teamID: 0
   eLocationChange:
     m_PersistentCalls:
@@ -296,10 +190,8 @@ MonoBehaviour:
   outline: {fileID: 0}
   deathParticle: {fileID: 7626863233938880488, guid: 53cb52ed4d7bd30449b71d5a7c29602c,
     type: 3}
-  immuniateEnvironmentColdness: 1
-  melt: 1
-  countInActiveChess: 1
-  skill: {fileID: 11400000, guid: 0420491c75df51b40b7c2ffed7f8a96d, type: 2}
+  preSkill: {fileID: 0}
+  postSkill: {fileID: 0}
 --- !u!114 &8714642836675817612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,7 +220,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actor: {fileID: 0}
-  target: {fileID: 0}
 --- !u!114 &5790514922615186940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,11 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actor: {fileID: 0}
-  BurningState: {fileID: 0}
-  NormalState: {fileID: 11400000, guid: 4380615ddcd777940986061903ac7dae, type: 2}
-  ColdState: {fileID: 11400000, guid: 09663489e01488549a3bac78a62dfeab, type: 2}
-  FrozenState: {fileID: 11400000, guid: e7256f7b7b884c64d9dcc4335eb5f1e0, type: 2}
-  state: 1
+  conductive: 0
 --- !u!114 &-4054101956480028014
 MonoBehaviour:
   m_ObjectHideFlags: 0

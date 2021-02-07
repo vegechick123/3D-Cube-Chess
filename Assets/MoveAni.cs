@@ -18,10 +18,8 @@ public class MoveAni : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-        var particle=GameObject.Instantiate(prefabParticle,animator.transform.position,prefabParticle.transform.rotation);
+        Instantiate(prefabParticle,animator.transform.position,prefabParticle.transform.rotation);
         CAnimationMoveComponent t = animator.GetComponentInParent<CAnimationMoveComponent>();
-        if(audioClip)
-            animator.GetComponent<AudioSource>().PlayOneShot(audioClip,amplitude);
         t.OneMoveComplete();
     }
 

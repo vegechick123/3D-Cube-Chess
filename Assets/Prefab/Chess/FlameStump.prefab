@@ -289,8 +289,6 @@ GameObject:
   - component: {fileID: 692677325199323230}
   - component: {fileID: 2705273894603116935}
   - component: {fileID: 6790343332139969614}
-  - component: {fileID: 2620826903213347602}
-  - component: {fileID: 7155919960248587934}
   m_Layer: 0
   m_Name: FlameStump
   m_TagString: Untagged
@@ -344,26 +342,16 @@ MonoBehaviour:
   meshFilter: {fileID: 0}
   originMaterial: {fileID: 0}
   elementComponent: {fileID: 0}
-  fireParticle: {fileID: 7250412730907975987, guid: 5cfe79246d0fafa45bd6d549f089ec65,
-    type: 3}
-  fireSoundEffect: {fileID: 8300000, guid: c6639e5c0b4c8654fb12b778cf3ec99d, type: 3}
-  iceParticle: {fileID: 4898306076701040203, guid: bb94e0effad1f394a888bbe809e13560,
-    type: 3}
-  iceSoundEffect: {fileID: 8300000, guid: d9f801a851749384d809b7510f9ff9a6, type: 3}
   title: "\u706B\u70AC\u6811\u6869"
   info: "\u53D7\u5230<color=yellow>\u9AD8\u6E29</color>\u540E\u4F1A\u88AB\u70B9\u71C3\u5347\u9AD8\u9644\u8FD1\u7684\u6E29\u5EA6"
-  freezeFoot: 0
-  eFreezeFootBroken:
-    m_PersistentCalls:
-      m_Calls: []
-  prefabFreezenFootVFX: {fileID: 0}
-  prefabFreezenFootBrokenVFX: {fileID: 0}
-  prefabWarmVFX: {fileID: 7626863233938880488, guid: 8277774494f426a44ae364b9218b2ab4,
-    type: 3}
-  hasActed: 0
-  health: 3
-  movement: 0
-  curMovement: 0
+  healthAttribute:
+    m_value: 0
+    m_minValue: 0
+    m_maxValue: 0
+  APAttribute:
+    m_value: 0
+    m_minValue: 0
+    m_maxValue: 0
   teamID: 1
   eLocationChange:
     m_PersistentCalls:
@@ -375,9 +363,6 @@ MonoBehaviour:
   moveComponent: {fileID: 0}
   outline: {fileID: 0}
   deathParticle: {fileID: 0}
-  immuniateEnvironmentColdness: 1
-  melt: 0
-  countInActiveChess: 0
   skills: []
 --- !u!114 &6460747280885505439
 MonoBehaviour:
@@ -444,11 +429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actor: {fileID: 0}
-  BurningState: {fileID: 11400000, guid: c10bd916dd07ffc4f9d8b7569667ba9e, type: 2}
-  NormalState: {fileID: 0}
-  ColdState: {fileID: 0}
-  FrozenState: {fileID: 11400000, guid: 329ce2ca810310b498d5b176d05ff21a, type: 2}
-  state: 3
+  conductive: 0
 --- !u!114 &6790343332139969614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4494,45 +4475,3 @@ MonoBehaviour:
     - {x: -0.57735026, y: 0.57735026, z: -0.57735026}
     - {x: 0, y: 1, z: 0}
     - {x: -0.57735026, y: 0.57735026, z: -0.57735026}
---- !u!114 &2620826903213347602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6460747280885505425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2247e288b7708ba448f180a73aaefdf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7155919960248587934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6460747280885505425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd765f12e731e9547b23baed53aaa3a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actor: {fileID: 0}
-  eOnBurning:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  eOnFrozen:
-    m_PersistentCalls:
-      m_Calls: []

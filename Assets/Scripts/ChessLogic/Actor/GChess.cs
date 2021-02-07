@@ -14,8 +14,8 @@ public class GChess : GActor
 
     public int maxAP { get { return APAttribute.maxValue; } }
     public int curAP { get { return APAttribute.value; } set { APAttribute.value = value; } }
-    static public int recoverAP=4;
-    static public int moveCost=2;
+    static public int recoverAP=6;
+    static public int moveCost=1;
     [HideInInspector]
     public int curMovement { get { return APAttribute.value/moveCost; } }
 
@@ -41,7 +41,7 @@ public class GChess : GActor
         outline = GetComponent<Outline>();
         curHealth = maxHealth;
         healthBar = new HealthBar(this);
-        healthBar.Hide();
+        //healthBar.Hide();
     }
 
     public virtual void OnTurnEnter()

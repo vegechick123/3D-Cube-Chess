@@ -45,20 +45,4 @@ public class RangeTask : InputTask
         }
         return true;
     }
-    public static RangeTask CreateMoveCommand(GPlayerChess chess)
-    {
-        Action<GActor[]> t = (o) =>
-        {
-            _ = MoveTaskAsync(chess, o[0].location);
-        };
-        Func<int, GActor,bool> checker = (index, target) =>
-         {
-             return !GridManager.instance.GetChess(target.location);
-         };
-        return new RangeTask(chess.navComponent.GetMoveRange, t, 1, checker);
-    }
-    static async UniTask MoveTaskAsync(GChess chess, Vector2Int location)
-    {
-        await chess.MoveToAsync(location);
-    }
 }
