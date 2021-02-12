@@ -22,7 +22,7 @@ public class EnemySpawnManager : MonoBehaviour
             //if (t.actor.elementComponent.state == ElementState.Frozen)
             //    cntNum--;
         }
-        int maxEnemyNum = maxEnemyOverNum + GridManager.instance.GetPlayerActiveChesses().Count;
+        int maxEnemyNum = maxEnemyOverNum + 1;
         int spawnnum = Mathf.Min(num, maxEnemyNum - cntNum);
         
         for (int i=0;i<spawnnum;i++)

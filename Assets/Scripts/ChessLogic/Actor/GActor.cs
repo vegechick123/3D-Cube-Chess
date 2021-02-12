@@ -14,6 +14,7 @@ public abstract class GActor : MonoBehaviour, IGetInfo
     public Vector2Int location;
     [HideInInspector]
     public MeshRenderer render;
+    public Animator animator { get { return render.GetComponent<Animator>(); } }
     [HideInInspector]
     public MeshFilter meshFilter;
     [HideInInspector]

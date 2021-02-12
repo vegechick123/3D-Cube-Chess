@@ -143,7 +143,7 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
     }
     public Vector3 GetChessPosition3DCenter(Vector2Int location)
     {
-        return GetChessPosition3D (location)+new Vector3(0, grid.cellSize.y/2, 0);
+        return GetChessPosition3D(location) + new Vector3(0, grid.cellSize.y / 2, 0);
     }
     public bool CheckTransitability(Vector2Int location)
     {
@@ -279,7 +279,7 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
     public GChess InstansiateChessAt(GameObject prefab, Vector2Int location)
     {
         var res = Instantiate(prefab, chessContainer);
-        res.transform.position = GridManager.instance.GetChessPosition3D(location);
+        res.transform.position = GetChessPosition3D(location);
         GChess chess = res.GetComponent<GChess>();
         chess.location = location;
         AddChess(chess);
@@ -317,12 +317,45 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
         list.AddRange(EnvironmentManager.instance.GetInfos(location));
         return list;
     }
-    public List<GChess> GetPlayerActiveChesses()
+    static public List<Vector2Int> GetLineRange(Vector2Int origin, Vector2Int target, bool containOrigin = false)
     {
-        return chesses.Where(t =>
-        {
-            return true;
-        }).ToList();
-    }
+        List<Vector2Int> result = new List<Vector2Int>();
+        //if (containOrigin) result.Add(origin);
 
+        Vector2Int delta = target - origin;
+        Vector2Int deltaSign = new Vector2Int(Math.Sign(delta.x), Math.Sign(delta.y));
+        Vector2Int absDelta = new Vector2Int(Math.Abs(delta.x), Math.Abs(delta.y));
+        bool swapXY = false;
+        if (absDelta.y > absDelta.x)
+        {
+            swapXY = true;
+            absDelta = absDelta.SwapXY();
+        }
+        int d = -absDelta.y + absDelta.x;//这里的d为实际上d的两倍
+        int y = 0;
+        for (int x = 1; x <= absDelta.x; ++x)
+        {
+            if (d != 0)
+            {
+                if (!swapXY)
+                    result.Add(origin + new Vector2Int(x, y) * deltaSign);
+                else
+                    result.Add(origin + new Vector2Int(x, y).SwapXY() * deltaSign);
+            }
+            d += -2 * absDelta.y;
+            if (d <= 0)
+            {
+                if (d != 0)
+                {
+                    if (!swapXY)
+                        result.Add(origin + new Vector2Int(x, y + 1) * deltaSign);
+                    else
+                        result.Add(origin + new Vector2Int(x, y + 1).SwapXY() * deltaSign);
+                }
+                d += 2 * absDelta.x;
+                ++y;
+            }
+        }
+        return result;
+    }
 }

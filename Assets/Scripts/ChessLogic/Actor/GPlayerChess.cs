@@ -54,7 +54,21 @@ public class GPlayerChess : GChess
     }
     public async UniTask PerformSkill(PlayerSkill skill,GActor[] inputParams)
     {
+
+        waitShoot = true;
+        animator.SetTrigger("PerformSkill");
+        await UniTask.WaitWhile(() => waitShoot);
+        animator.SetBool("ReadySkill",false);
         await skill.CallProcessAsync(inputParams);
     }
+    public void PrepareSkill(PlayerSkill skill)
+    {
+        render.GetComponent<Animator>().SetBool("ReadySkill",true);
+    }
+    public void CancelSkill()
+    {
+        render.GetComponent<Animator>().SetBool("ReadySkill", false);
+    }
+
 }
 

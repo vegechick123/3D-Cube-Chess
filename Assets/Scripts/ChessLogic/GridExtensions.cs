@@ -75,6 +75,10 @@ static class GridExtensions
     {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
     }
+    public static Vector2Int SwapXY(this Vector2Int a)
+    {
+        return new Vector2Int(a.y, a.x);
+    }
     public static Vector3 Divide(this Vector3 a, Vector3 b)
     {
         return new Vector3(a.x / b.x, a.y / b.y, a.z / b.z);

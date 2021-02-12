@@ -21,7 +21,7 @@ public class EnemySpawnTurn : Turn
 
         int cntNum = AIManager.instance.AIs.Count;
 
-        int maxEnemyNum = maxEnemyOverNum + GridManager.instance.GetPlayerActiveChesses().Count;
+        int maxEnemyNum = maxEnemyOverNum;
         int spawnnum = Mathf.Min(num, maxEnemyNum - cntNum);
 
         for (int i = 0; i < spawnnum; i++)

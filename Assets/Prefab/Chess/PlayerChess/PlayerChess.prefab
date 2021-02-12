@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6453711488344649110}
   - component: {fileID: 2038935726374653030}
   - component: {fileID: 5999705316579949028}
+  - component: {fileID: 5878148797642441850}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -41,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 426927053157780311}
-  m_Mesh: {fileID: -2432090755550338912, guid: 1ec505ff6c38cc74fa20921195f6e961, type: 3}
+  m_Mesh: {fileID: -5495902117074765545, guid: 937284a145218774892b903a9fa57309, type: 3}
 --- !u!23 &6453711488344649110
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -60,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5dc8dac3fa411da4f83b1f57063253be, type: 2}
+  - {fileID: 2100000, guid: 9368488d7e8bb1347ad6cff05fe29039, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -196,6 +197,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5878148797642441850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426927053157780311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b862c25e68d303042b2d21247884e409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6460747280885505425
 GameObject:
   m_ObjectHideFlags: 0

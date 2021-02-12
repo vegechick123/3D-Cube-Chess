@@ -33,6 +33,7 @@ public class GChess : GActor
 
     public GameObject deathParticle;
     public HealthBar healthBar;
+    protected bool waitShoot;
     public override void GAwake()
     {
         base.GAwake();
@@ -194,5 +195,9 @@ public class GChess : GActor
     public virtual void MouseExit()
     {
         outline.enabled = false;
+    }
+    public void AnimationShoot()
+    {
+        waitShoot = false;
     }
 }

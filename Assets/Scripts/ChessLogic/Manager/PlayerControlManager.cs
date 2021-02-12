@@ -18,7 +18,7 @@ enum InputState
 public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
 {
     [NonSerialized]
-    public GChess selectedChess;
+    public GPlayerChess selectedChess;
     protected CyclicTask selectTask;
     protected RangeTask curTask;
     protected PlayerSkill selectedSkill;
@@ -85,7 +85,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
             return;
         if (selectedChess != null)
             DeSelect();
-        selectedChess = target;
+        selectedChess = target as GPlayerChess;
         selectedChess.GetComponent<CAgentComponent>().eSelect.Invoke();
         eSelectChess.Invoke(selectedChess as GPlayerChess);
 
@@ -186,6 +186,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
         {
             case InputState.Skill:
                 selectedSkill = null;
+                selectedChess.CancelSkill();
                 goto case InputState.Selected;
             case InputState.Selected:
                 selectTask.bPaused = true;
@@ -210,6 +211,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
         {
             case InputState.Skill:
                 selectedSkill = null;
+                selectedChess.CancelSkill();
                 selectTask.bPaused = false;
                 goto case InputState.Selected;
             case InputState.Selected:
@@ -234,6 +236,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
         {
             case InputState.Skill:
                 selectedSkill = null;
+                selectedChess.CancelSkill();
                 selectTask.bPaused = false;
                 curTask.Abort();
                 curTask = null;
@@ -272,6 +275,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
         };
         selectTask.bPaused = true;
         curTask = skill.CallGetPlayerInput();
+        selectedChess.PrepareSkill(skill);
         curTask.CreateFloorHUD(new Color(0, 1, 1, 0.8f));
         curTask.Begin();
         inputState = InputState.Skill;
