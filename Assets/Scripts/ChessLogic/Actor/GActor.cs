@@ -27,15 +27,10 @@ public abstract class GActor : MonoBehaviour, IGetInfo
 
     public string title;
     public string info;
-    
+
     /// <summary>
     /// 禁用Awake
     /// </summary>
-    private void Awake()
-    {
-        GameManager.instance.eGameEnd.AddListener(OnGameEnd);
-       
-    }
     virtual public void GAwake()
     {
         render = GetComponent<MeshRenderer>();
@@ -58,31 +53,15 @@ public abstract class GActor : MonoBehaviour, IGetInfo
     //TODO 把更多逻辑放到ElementComponet里
     public virtual void ElementReaction(Element element)
     {
-        if (elementComponent)
-        {
-            switch (element)
-            {
-                case Element.Fire:
-                    CreateFloatTextOnHead(TextTag.HighTemperture);
-                    break;
-                case Element.Ice:
-                    CreateFloatTextOnHead(TextTag.LowTemperture);
-                    break;
-                    
-                default:
-                    break;
-            }
-            elementComponent.OnHitElement(element);
-            eElementReaction.Invoke(element);
-        }
+        eElementReaction.Invoke(element);
     }
     public void CreateFloatTextOnHead(TextTag tag)
     {
-        UIManager.instance.CreateFloatText(transform.position+Vector3.up, tag);
+        UIManager.instance.CreateFloatText(transform.position + Vector3.up, tag);
     }
-    public void CreateFloatTextOnHead(string text,Color color)
+    public void CreateFloatTextOnHead(string text, Color color)
     {
-        UIManager.instance.CreateFloatText(transform.position + Vector3.up, text,color);
+        UIManager.instance.CreateFloatText(transform.position + Vector3.up, text, color);
     }
     virtual protected void OnGameEnd()
     {

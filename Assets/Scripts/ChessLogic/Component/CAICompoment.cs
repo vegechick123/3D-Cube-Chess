@@ -13,6 +13,7 @@ using Cysharp.Threading.Tasks;
 public class CAICompoment : Component
 {
     protected GAIChess aiChess { get { return actor as GAIChess; } }
+    public bool postSkillReady=false;
     protected override void Awake()
     {
         base.Awake();
@@ -48,14 +49,15 @@ public class CAICompoment : Component
             aiChess.FaceToward((target.location - actor.location).Normalized());
             if (aiChess.preSkill != null)
                 await aiChess.preSkill.ProcessAsync(target);
-            await aiChess.postSkill.Decide(target);
+            postSkillReady =  await aiChess.postSkill.Decide(target);
         }
     }
     public async UniTask PostAction()
     {
-        if (aiChess.postSkill == null)
+        if (aiChess.postSkill == null||!postSkillReady)
             return;
         await aiChess.postSkill.ProcessAsync();
+        postSkillReady = false;
     }
     protected (GChess,Vector2Int?) DecideTargetAndDestination()
     {

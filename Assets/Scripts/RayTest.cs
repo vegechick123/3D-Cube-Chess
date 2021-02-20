@@ -5,12 +5,16 @@ using UnityEngine;
 public class RayTest : Component
 {
     FloorHUD hud;
-    Vector2Int targetLocation;
+    Vector2Int targetLocation=Vector2Int.zero;
     private void Start()
     {
         hud = new FloorHUD(() =>
         {
-            return GridManager.GetLineRange(actor.location, targetLocation).ToArray();
+            List<Vector2Int> res = GridManager.instance.GetRayRange(actor.location, targetLocation);
+            if (res != null)
+                return res.ToArray();
+            else
+                return new Vector2Int[0];
         }, Color.yellow);
         PlayerControlManager.instance.eOverTile.AddListener(ChangeHUD);
     }

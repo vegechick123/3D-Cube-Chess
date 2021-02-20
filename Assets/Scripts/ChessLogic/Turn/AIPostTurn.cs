@@ -13,8 +13,8 @@ public class AIPostTurn : Turn
             if ((AI.actor as GChess).unableAct)
                 continue;
             GameObject t = UIManager.instance.CreateFloorHUD(AI.location, Color.yellow);
-            await AI.PostAction();            
-            Destroy(t);            
-        }        
+            await AI.PostAction();
+            Destroy(t);
+        }
     }
 }

@@ -22,7 +22,7 @@ public abstract class AIPostSkill : Skill
     /// 根据选中的目标作出相应的决定，并存储决定
     /// </summary>
     /// <param name="target">CAIComponent选中的目标</param>
-    public abstract UniTask Decide(GChess target);
+    public abstract UniTask<bool> Decide(GChess target);
     public virtual void Abort()
     {
 
@@ -31,4 +31,18 @@ public abstract class AIPostSkill : Skill
     /// 根据Decide函数设定的值进行行动
     /// </summary>
     public abstract UniTask ProcessAsync();
+
+    private GChess lockTarget;  
+    public bool IsLockAt(GChess target)
+    {
+        return lockTarget==target;
+    }
+    protected void LockAt(GChess target)
+    {
+        lockTarget = target;
+    }
+    protected void ReleaseLock()
+    {
+        lockTarget = null;
+    }
 }

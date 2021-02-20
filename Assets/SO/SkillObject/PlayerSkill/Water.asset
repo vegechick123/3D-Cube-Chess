@@ -26,6 +26,6 @@ MonoBehaviour:
   cursorHints: []
   cost: 1
   targetType: 2
-  element: 2
+  element: 4
   selectRange: 3
-  affectRange: 1
+  affectRange: 3

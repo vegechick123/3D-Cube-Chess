@@ -29,7 +29,25 @@ public class PlayerTurn : Turn
         {
             chess.OnTurnExit();
         }
+        foreach (GFloor floor in GridManager.instance.GetAllFloors())
+        {
+            floor.OnPlayerTurnEnd();
+        }
         bEnd = true;
+    }
+    async public UniTask BeforeMoveReaction(GPlayerChess chess, Vector2Int location)
+    {
+        foreach(GAIChess ai in GridManager.instance.aiChesses)
+        {
+            if(ai?.bDead==false)
+            {
+                if(ai.aiCompoment.postSkillReady&&ai.postSkill.IsLockAt(chess))
+                {
+                    await ai.aiCompoment.PostAction();   
+                }
+
+            }
+        }
     }
     public void EndTurn()
     {

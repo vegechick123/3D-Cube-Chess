@@ -26,6 +26,6 @@ public class SpawnChess : PlayerSkill
         Vector2Int targetLocation = inputParams[0].location;
         await Shoot(targetLocation);        
         GridManager.instance.InstansiateChessAt(prefabChess.gameObject,targetLocation);
-        ElementSystem.ApplyElementAt(targetLocation,element);
+        ElementSystem.ApplyElementAtAsync(targetLocation,element);
     }
 }

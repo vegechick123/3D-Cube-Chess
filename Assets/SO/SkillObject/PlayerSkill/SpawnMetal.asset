@@ -26,7 +26,7 @@ MonoBehaviour:
   cursorHints: []
   cost: 1
   selectRange: 3
-  prefabChess: {fileID: 5627392609549917301, guid: db2c8869f6bd47e4abfef0af639e8d42,
+  prefabChess: {fileID: 6636968429683534848, guid: 080531ba3e22bb14890d0ed3e3819a2d,
     type: 3}
   damage: 0
   affectRange: 0

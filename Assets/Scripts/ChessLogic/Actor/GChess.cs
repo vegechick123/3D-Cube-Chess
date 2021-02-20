@@ -16,9 +16,10 @@ public class GChess : GActor
     public int curAP { get { return APAttribute.value; } set { APAttribute.value = value; } }
     static public int recoverAP=6;
     static public int moveCost=1;
+    public bool bDead=false;
     [HideInInspector]
     public int curMovement { get { return APAttribute.value/moveCost; } }
-
+    public Modifier[] modifiers;
     public int teamID;
     [HideInInspector]
     public UnityEvent eLocationChange = new UnityEvent();
@@ -32,6 +33,7 @@ public class GChess : GActor
     public Outline outline;
 
     public GameObject deathParticle;
+
     public HealthBar healthBar;
     protected bool waitShoot;
     public override void GAwake()
@@ -42,6 +44,10 @@ public class GChess : GActor
         outline = GetComponent<Outline>();
         curHealth = maxHealth;
         healthBar = new HealthBar(this);
+        foreach(Modifier modifier in modifiers)
+        {
+            modifier.Init(this);
+        }
         //healthBar.Hide();
     }
 
@@ -70,11 +76,14 @@ public class GChess : GActor
     public void Die()
     {
         render.GetComponent<Animator>().Play("Death");
-        Debug.Log("Chess:" + gameObject + "Die");
+        foreach (Modifier modifier in modifiers)
+            modifier.OnDeath();
+        bDead = true;        
         if (deathParticle != null)
             GridExtensions.CreateParticleAt(deathParticle,this);
         GridManager.instance.RemoveChess(this);
         Destroy(gameObject,3f);
+        Debug.Log("Chess:" + gameObject + "Die");
     }
     #region 位移相关
     /// <summary>

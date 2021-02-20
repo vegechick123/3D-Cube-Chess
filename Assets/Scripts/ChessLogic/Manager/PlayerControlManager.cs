@@ -302,9 +302,10 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
     {
         SwitchToReadyToSelect();
     }
-    public async void CallChessToMove(GPlayerChess chess, Vector2Int location)
+    public async void CallChessToMoveAsync(GPlayerChess chess, Vector2Int location)
     {
         bProcessing = true;
+        await currentPlayerTurn.BeforeMoveReaction(chess,location);
         await chess.MoveToAsync(location);
         bProcessing = false;
         SwitchToSelected(chess);
@@ -343,7 +344,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
     {
         Action<GActor[]> t = (o) =>
         {
-            PlayerControlManager.instance.CallChessToMove(chess, o[0].location);
+            PlayerControlManager.instance.CallChessToMoveAsync(chess, o[0].location);
         };
         Func<int, GActor, bool> checker = (index, target) =>
         {

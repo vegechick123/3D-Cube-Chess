@@ -4,36 +4,32 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BulletAttack", menuName = "Skills/AISkill/BulletAttack")]
-public class SBulletAttack : AIPostSkill
+[CreateAssetMenu(menuName = "Skills/AISkill/LockShoot")]
+public class SLockShoot : AIPostSkill
 {
     public int maxLength = 3;
     public int damage;
     public int beginDistance = 1;
     public Element element;
-    protected Vector2Int direction;
+    protected GChess target = null;
     public override Vector2Int[] GetTargetRange()
     {
         return GridManager.instance.GetFourRayRange(owner.location, maxLength, beginDistance);
     }
     public override async UniTask<bool> Decide(GChess target)
     {
-        if (target == null)
-        {
-            direction = Vector2Int.zero;
+        if (!target)
             return false;
-        }
-        direction = target.location - owner.location;
-        direction = direction.Normalized();
+        this.target = target;
         return true;
     }
     async public override UniTask ProcessAsync()
     {
-        if (direction == Vector2Int.zero)
-            return;
         Vector2Int[] range = GetAffectRange();
-        Vector2Int targetPosition = range[range.Length - 1];
-        GChess chess = GridManager.instance.GetChess(targetPosition);
+        Vector2Int targetLocation = range[range.Length - 1];
+        await Shoot(targetLocation);
+        
+        GChess chess = GridManager.instance.GetChess(targetLocation);        
         if (chess != null)
         {
             chess.ElementReaction(element);
@@ -47,7 +43,7 @@ public class SBulletAttack : AIPostSkill
 
     public override Vector2Int[] GetAffectRange()
     {
-        return GridManager.instance.GetOneRayRange(owner.location, direction, maxLength);
+        return GridManager.instance.GetRayRange(owner.location, target.location).ToArray();
     }
 
 }

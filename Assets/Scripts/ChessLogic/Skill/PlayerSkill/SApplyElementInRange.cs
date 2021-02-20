@@ -7,6 +7,7 @@ public class SApplyElementInRange : PlayerSkill
 {
     public SkillTarget targetType;
     public Element element;
+    public int damage;
     public int selectRange;
     public int affectRange;
      
@@ -24,6 +25,6 @@ public class SApplyElementInRange : PlayerSkill
     {
         Vector2Int targetLocation = inputParams[0].location;
         await Shoot(targetLocation);
-        ElementSystem.ApplyElementAt(targetLocation,element);
+        await ElementSystem.ApplyElementAtAsync(GridManager.instance.GetCircleRange(targetLocation,affectRange),element,damage);
     }
 }

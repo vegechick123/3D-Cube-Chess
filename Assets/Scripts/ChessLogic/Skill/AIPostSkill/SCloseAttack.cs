@@ -13,9 +13,12 @@ public class SCloseAttack : AIPostSkill
     {
         return GetRangeWithLength(1);
     }
-    public override async UniTask Decide(GChess target)
+    public override async UniTask<bool> Decide(GChess target)
     {
+        if (target == null)
+            return false;
         direction = target.location-owner.location;
+        return true;
     }
     async public override UniTask ProcessAsync()
     {

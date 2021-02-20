@@ -95,6 +95,18 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
         }
         return res;
     }
+    public List<GFloor>GetAllFloors()
+    {
+        List<GFloor> result= new List<GFloor>();
+        for(int i=0;i<size.x;i++)
+            for (int j = 0; j < size.y; j++)
+            {
+                GFloor target = GetFloor(new Vector2Int(i, j));
+                if (target != null)
+                    result.Add(target);
+            }
+        return result;
+    }
     public void AddChess(GChess chess)
     {
         chesses.Add(chess);
@@ -354,6 +366,20 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
                 }
                 d += 2 * absDelta.x;
                 ++y;
+            }
+        }
+        return result;
+    }
+    public List<Vector2Int> GetRayRange(Vector2Int origin, Vector2Int target, bool containOrigin = false)
+    {
+        List<Vector2Int> result = new List<Vector2Int>(); ;
+        foreach (Vector2Int location in GetLineRange(origin, target, containOrigin))
+        {
+
+            result.Add(location);
+            if (GetChess(location))
+            {
+                return result;
             }
         }
         return result;

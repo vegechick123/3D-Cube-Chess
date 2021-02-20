@@ -41,4 +41,3 @@ public abstract class Skill: ScriptableObject,IGetInfo
         await skillVFX.CreateProjectileParticle();
     }
 }
-

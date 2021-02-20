@@ -6,7 +6,7 @@ public class GAIChess : GChess
 {
     public AIPreSkill preSkill;
     public AIPostSkill postSkill;
-    protected CAICompoment aiCompoment;
+    public CAICompoment aiCompoment;
     public override void GAwake()
     {
         base.GAwake();
