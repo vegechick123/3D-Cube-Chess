@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18133bae348ee3541a8a620a80af0c78, type: 3}
+  m_Name: SwapLocation
+  m_EditorClassIdentifier: 
+  owner: {fileID: 0}
+  skillVFX: {fileID: 11400000, guid: cfae9387aec878445ad790e2b886eeee, type: 2}
+  title: "\u6362\u4F4D"
+  info: 
+  eBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  eEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  icon: {fileID: 5946551882310926714, guid: cb95beb56b7af6647a834d2c6d88871e, type: 3}
+  cursorHints: []
+  cost: 2
+  infinite: 0
+  useCount: 3
+  range: 5

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417f6b51ad7696745aa31a95963882d2, type: 3}
+  m_Name: AIFireBall
+  m_EditorClassIdentifier: 
+  owner: {fileID: 0}
+  skillVFX: {fileID: 11400000, guid: 682496960e3a7a84b835dc5e6d2b8909, type: 2}
+  title: 
+  info: 
+  eBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  eEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  maxLength: -1
+  damage: 1
+  beginDistance: 1
+  element: 0
+  willLockTarget: 1

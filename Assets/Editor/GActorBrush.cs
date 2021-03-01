@@ -26,7 +26,8 @@ public class GActorBrush : PrefabRandomBrush
 
         if (!existPrefabObjectInCell)
         {
-           
+            if (!GridManager.instance.InRange(new Vector2Int(position.x, position.y)))
+                return;
             int index=-1;
             if(probability.Length==0)
                 index= Mathf.Clamp(Mathf.FloorToInt(GetPerlinValue(position, m_PerlinScale, k_PerlinOffset) * m_Prefabs.Length), 0, m_Prefabs.Length - 1);

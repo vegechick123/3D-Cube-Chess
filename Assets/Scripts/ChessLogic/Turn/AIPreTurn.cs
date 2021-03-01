@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AIPreTurn", menuName = "Turn/AIPreTurn")]
+[CreateAssetMenu(menuName = "Turn/AIPreTurn")]
 public class AIPreTurn : Turn
 {
     async public override UniTask TurnBehaviourAsync()

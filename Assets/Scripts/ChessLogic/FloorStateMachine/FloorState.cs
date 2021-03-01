@@ -9,12 +9,13 @@ public enum FloorStateEnum
     WaterCover,
     OilCover,
     FireCover,
+    Empty
 }
 public class FloorStateMachine
 {
     public GFloor floor;
     public FloorState currentState;
-
+    public FloorStateEnum currentStateEnum;
     public FloorStateMachine(GFloor owner)
     {
         floor = owner;
@@ -25,6 +26,9 @@ public class FloorStateMachine
             currentState.Exit();
         currentState = newState;
         currentState.Enter();
+        GChess chessOnFloor = GridManager.instance.GetChess(floor.location);
+        if (chessOnFloor)
+            currentState.OnChessEnter(chessOnFloor);
     }
     public void SetState(FloorStateEnum state)
     {
@@ -42,8 +46,12 @@ public class FloorStateMachine
             case FloorStateEnum.FireCover:
                 SetState(new FireCover(this));
                 break;
+            case FloorStateEnum.Empty:
+                SetState(new Empty(this));
+                break;
         }
     }
+
 }
 public class FloorState
 {
@@ -68,6 +76,45 @@ public class FloorState
     }
     public virtual void OnHitElement(Element element) { }
     async public virtual UniTask OnTurnEndAsync() { }
+    public virtual void Ignite()
+    {
+
+    }
+    public virtual bool IsBurning()
+    {
+        return false;
+    }
+    public virtual bool IsWet()
+    {
+        return false;
+    }
+    public virtual void BurningUp()
+    {
+        stateMachine.SetState(FloorStateEnum.Empty);
+    }
+}
+
+class Empty : FloorState
+{
+    public Empty(FloorStateMachine owner) : base(owner)
+    {
+
+    }
+    public override void OnChessEnter(GChess chess)
+    {
+        chess.TryFall();
+    }
+    public override void Enter()
+    {
+        floor.transitable = false;
+        floor.render.enabled = false;
+    }
+    public override void Exit()
+    {
+        floor.transitable = true;
+        floor.render.enabled = true;
+    }
+
 }
 class NoneCover : FloorState
 {
@@ -75,10 +122,13 @@ class NoneCover : FloorState
     {
 
     }
-    async public override void OnHitElement(Element element)
+    public override void OnHitElement(Element element)
     {
         switch (element)
         {
+            case Element.Fire:
+                stateMachine.SetState(FloorStateEnum.FireCover);
+                break;
             case Element.Water:
                 stateMachine.SetState(FloorStateEnum.WaterCover);
                 break;
@@ -89,9 +139,14 @@ class NoneCover : FloorState
                 break;
         }
     }
+    public override void Ignite()
+    {
+        stateMachine.SetState(FloorStateEnum.FireCover);
+    }
 }
 class WaterCover : FloorState
 {
+
     public WaterCover(FloorStateMachine owner) : base(owner)
     {
 
@@ -99,6 +154,11 @@ class WaterCover : FloorState
     public override void Enter()
     {
         stateMachine.floor.render.material.color = Color.blue;
+
+    }
+    public override void Exit()
+    {
+        stateMachine.floor.render.material= stateMachine.floor.render.sharedMaterial;
     }
     public override void OnHitElement(Element element)
     {
@@ -114,6 +174,10 @@ class WaterCover : FloorState
                 break;
         }
     }
+    public override bool IsWet()
+    {
+        return true;
+    }
 }
 class OilCover : FloorState
 {
@@ -124,7 +188,7 @@ class OilCover : FloorState
     public override void Enter()
     {
         stateMachine.floor.render.material.color = Color.black;
-        stateMachine.floor.combustible = true;
+        stateMachine.floor.explosive = true;
     }
     public override void OnHitElement(Element element)
     {
@@ -142,7 +206,7 @@ class OilCover : FloorState
     public override void Exit()
     {
         stateMachine.floor.render.material.color = Color.black;
-        stateMachine.floor.combustible = false;
+        stateMachine.floor.explosive = false;
     }
 }
 class FireCover : FloorState
@@ -155,6 +219,10 @@ class FireCover : FloorState
     public override void Enter()
     {
         stateMachine.floor.render.material.color = Color.red;
+    }
+    public override void Exit()
+    {
+        stateMachine.floor.render.material = stateMachine.floor.originMaterial;
     }
     public FireCover(FloorStateMachine owner) : base(owner)
     {
@@ -171,12 +239,19 @@ class FireCover : FloorState
         {
             case Element.Ice:
             case Element.Water:
-                stateMachine.SetState(new NoneCover(stateMachine));
+                stateMachine.SetState(FloorStateEnum.NoneCover);
                 break;
             case Element.Oil:
                 Boom(0);
                 break;
-
         }
+    }
+    public override bool IsBurning()
+    {
+        return true;
+    }
+    public override void Ignite()
+    {
+        stateMachine.SetState(FloorStateEnum.Empty);
     }
 }

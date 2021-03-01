@@ -33,10 +33,15 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
     public UnityEvent<Vector2Int> eOverTile = new EventWrapper<Vector2Int>();
     [NonSerialized]
     public UnityEvent<GPlayerChess> eSelectChess = new EventWrapper<GPlayerChess>();
+
     [NonSerialized]
     public UnityEvent eDeselect = new UnityEvent();
     Vector2Int curTile = Vector2Int.down;
+    [NonSerialized]
     public UnityEvent eRightMouseClick = new UnityEvent();
+    [NonSerialized]
+    public UnityEvent eSkillPerformEnd = new UnityEvent();
+    
     public Button turnEndButton;
     public Stack<MoveInfo> moveInfoSta = new Stack<MoveInfo>();
     public Button undoMoveButton;
@@ -316,6 +321,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
         bProcessing = true;
         await chess.PerformSkill(skill, inputParams);
         bProcessing = false;
+        eSkillPerformEnd.Invoke();
         SwitchToSelected(chess);
     }
 

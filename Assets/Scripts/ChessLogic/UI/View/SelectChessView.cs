@@ -23,12 +23,14 @@ public class SelectChessView : MonoBehaviour
         SwitchSkillButton(selectedChess.skills);
         Refresh();
         selectedChess.APAttribute.AddListener(Refresh);
+        selectedChess.eSkillChange.AddListener(ReCreateSkillButton);
         PlayerControlManager.instance.eProcessStart.AddListener(Refresh);
         PlayerControlManager.instance.eProcessEnd.AddListener(Refresh);
     }
     public void UnBind()
     {
         selectedChess.APAttribute.RemoveListener(Refresh);
+        selectedChess.eSkillChange.RemoveListener(ReCreateSkillButton);
         PlayerControlManager.instance.eProcessStart.RemoveListener(Refresh);
         PlayerControlManager.instance.eProcessEnd.RemoveListener(Refresh);
         CleanSkillButton();
@@ -72,5 +74,11 @@ public class SelectChessView : MonoBehaviour
     public void SwitchSkillButton(List<PlayerSkill> skills)
     {
         skillButtons = CreatButtonFromSkill(skills);
+    }
+    void ReCreateSkillButton()
+    {
+        CleanSkillButton();
+        SwitchSkillButton(selectedChess.skills); 
+        Refresh();
     }
 }

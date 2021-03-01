@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47288475b2b6e2f4db72a6db3e9e9522, type: 3}
+  m_Name: Teleport
+  m_EditorClassIdentifier: 
+  owner: {fileID: 0}
+  skillVFX: {fileID: 11400000, guid: cfae9387aec878445ad790e2b886eeee, type: 2}
+  title: "\u4F20\u9001"
+  info: "\u5C06\u4E00\u4E2A\u5355\u4F4D\u4F20\u9001\u53E6\u4E00\u4E2A\u7A7A\u5730\u4E0A"
+  eBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  eEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  icon: {fileID: 21300000, guid: 767eb3bed2604f943a0790ae28d33e1f, type: 3}
+  cursorHints: []
+  cost: 2
+  infinite: 0
+  useCount: 2
+  range: 4

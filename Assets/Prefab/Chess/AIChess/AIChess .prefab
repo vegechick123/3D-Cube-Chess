@@ -175,9 +175,13 @@ MonoBehaviour:
     m_minValue: 0
     m_maxValue: 4
   APAttribute:
-    m_value: 4
+    m_value: 8
     m_minValue: 0
-    m_maxValue: 4
+    m_maxValue: 8
+  bDead: 0
+  lockMove: 0
+  floatInAir: 0
+  modifiers: []
   teamID: 0
   eLocationChange:
     m_PersistentCalls:
@@ -192,6 +196,8 @@ MonoBehaviour:
     type: 3}
   preSkill: {fileID: 0}
   postSkill: {fileID: 0}
+  chooseActedEnemy: 0
+  targetTeam: 1
 --- !u!114 &8714642836675817612
 MonoBehaviour:
   m_ObjectHideFlags: 0

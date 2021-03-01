@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using UnityEngine;
@@ -11,13 +12,22 @@ public class AIManager : SingletonMonoBehaviour<AIManager>
 {
     [HideInInspector]
     public List<CAICompoment> AIs = new List<CAICompoment>();
-    private EnemySpawnManager enemySpawn;
-
-    public GameObject curAI;
+    [SerializeField]
+    protected List<GChess> markedEnemy;
+    public GChess GetSpeceficTarget(int index)
+    {
+        return markedEnemy[index];
+    }
     protected override void Awake()
     {
         base.Awake();
-        enemySpawn = GetComponent<EnemySpawnManager>();
+        GridManager.instance.eGridChange.AddListener(RefrshLockState);
     }
-    
+    public void RefrshLockState()
+    {
+        foreach(CAICompoment ai in AIs)
+        {
+            ai.aiChess.RefreshLockState();
+        }
+    }
 }

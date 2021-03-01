@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class ElementSystem : MonoBehaviour
 {
-    async public static UniTask ApplyElementAtAsync(Vector2Int location, Element element)
+    async public static UniTask ApplyElementAtAsync(Vector2Int location, Element element, int damage = 0)
     {
-        await ApplyElementAtAsync(new Vector2Int[] { location }, element);
+        await ApplyElementAtAsync(new Vector2Int[] { location }, element,damage);
     }
     async public static UniTask ApplyElementAtAsync(Vector2Int[] location, Element element, int damage = 0)
     {
@@ -120,10 +120,11 @@ public class ElementSystem : MonoBehaviour
         List<GFloor> res = new List<GFloor>();
         foreach (Vector2Int loc in source)
         {
-            if (GridManager.instance.GetFloor(loc)?.combustible == true && GridManager.instance.GetFloor(loc)?.readyToBurst == false)
+            res.Add(GridManager.instance.GetFloor(loc));
+            if (GridManager.instance.GetFloor(loc)?.explosive==true&& GridManager.instance.GetFloor(loc)?.readyToBurst == false)
             {
                 queue.Enqueue(new Vector2Int(loc.x, loc.y));
-                res.Add(GridManager.instance.GetFloor(loc));
+                
             }
         }
         HashSet<Vector2Int> vis = new HashSet<Vector2Int>();
@@ -143,7 +144,7 @@ public class ElementSystem : MonoBehaviour
             {
                 GFloor t;
                 t = GridManager.instance.GetFloor(new Vector2Int(loc.x, loc.y));
-                if (t?.combustible == true && t?.readyToBurst == false)
+                if (t?.explosive == true && t?.readyToBurst == false)
                     res.Add(t);
                 else
                     continue;

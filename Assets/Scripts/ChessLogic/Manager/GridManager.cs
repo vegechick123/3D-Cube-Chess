@@ -11,10 +11,12 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
     public Vector2Int size;
     public Grid grid;
     public Transform chessContainer;
+    [NonSerialized]
+    public UnityEvent eGridChange=new UnityEvent();
     protected GFloor[,] floors;
     protected float floorYOffest = -0.5f;
     protected float chessYOffest = 0.5f;
-    protected List<GChess> chesses;
+    public List<GChess> chesses { get; protected set; }
     public List<GPlayerChess> playerChesses
     {
         get
@@ -95,10 +97,10 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
         }
         return res;
     }
-    public List<GFloor>GetAllFloors()
+    public List<GFloor> GetAllFloors()
     {
-        List<GFloor> result= new List<GFloor>();
-        for(int i=0;i<size.x;i++)
+        List<GFloor> result = new List<GFloor>();
+        for (int i = 0; i < size.x; i++)
             for (int j = 0; j < size.y; j++)
             {
                 GFloor target = GetFloor(new Vector2Int(i, j));
@@ -107,15 +109,30 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
             }
         return result;
     }
+    public List<GFloor> GetAdjacentFloor(Vector2Int location)
+    {
+        List<GFloor> result = new List<GFloor>();
+        Vector2Int[] dir = new Vector2Int[] { new Vector2Int(0, 1), new Vector2Int(0, -1), new Vector2Int(-1, 0), new Vector2Int(1, 0) };
+        for (int i = 0; i < 4; i++)
+        {
+            Vector2Int curLocation = location + dir[i];
+            GFloor target = GetFloor(curLocation);
+            if (target != null)
+                result.Add(target);
+        }
+        return result;
+    }
     public void AddChess(GChess chess)
     {
         chesses.Add(chess);
         chess.GAwake();
+        eGridChange.Invoke();
     }
     public void RemoveChess(GChess chess)
     {
         chesses.Remove(chess);
         chess.GEnd();
+        eGridChange.Invoke();
     }
     /// <summary>
     /// 如果查询位置超出size大小则会数组越界
@@ -268,14 +285,27 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
         }
         return res.ToArray();
     }
-    public Vector2Int[] GetOneRayRange(Vector2Int origin, Vector2Int dir, int maxLength, int beginDistance = 1)
+    public Vector2Int[] GetRangeWithRangeType(Vector2Int origin, int maxLength, SkillRangeType rangeType,int beginDistance = 1)
+    {
+        switch (rangeType)
+        {
+            case SkillRangeType.Circle:
+                return GetCircleRange(origin, maxLength);
+            case SkillRangeType.Square:
+                return null;
+            case SkillRangeType.FourRay:
+                return GetFourRayRange(origin,maxLength,beginDistance);
+        }
+        return null;
+    }
+    public Vector2Int[] GetOneRayRange(Vector2Int origin, Vector2Int dir, int maxLength=-1, int beginDistance = 1,bool stopWhenMeetChess=true)
     {
         Queue<Vector2Int> res = new Queue<Vector2Int>();
-        for (int d = 1; d <= maxLength; d++)
+        for (int d = 1; d <= maxLength||maxLength==-1; d++)
         {
             Vector2Int nowpos = d * dir + origin;
             GChess t = GetChess(nowpos);
-            if (!InRange(nowpos) || t != null)
+            if (!InRange(nowpos) || (stopWhenMeetChess&&t != null))
             {
                 if (t != null && d >= beginDistance)
                 {
@@ -287,6 +317,10 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
                 res.Enqueue(nowpos);
         }
         return res.ToArray();
+    }
+    public Vector2Int[] GetOneLineRange(Vector2Int origin, Vector2Int dir, int maxLength = -1, int beginDistance = 1)
+    {
+        return GetOneRayRange(origin, dir, maxLength, 1, false);
     }
     public GChess InstansiateChessAt(GameObject prefab, Vector2Int location)
     {
@@ -326,7 +360,6 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
             info += "留在这里的角色会受到" + UIManager.instance.GetLowTempertureRichText();
         }
         list.Add(new Information("区域温度：" + t, info));
-        list.AddRange(EnvironmentManager.instance.GetInfos(location));
         return list;
     }
     static public List<Vector2Int> GetLineRange(Vector2Int origin, Vector2Int target, bool containOrigin = false)
@@ -383,5 +416,10 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
             }
         }
         return result;
+    }
+    public void ChessEnterLocation(GChess chess)
+    {
+        GetFloor(chess.location).OnChessEnter(chess);
+        eGridChange.Invoke();
     }
 }

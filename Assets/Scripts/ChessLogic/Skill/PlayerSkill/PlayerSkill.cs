@@ -13,6 +13,8 @@ public abstract class PlayerSkill : Skill
     public Sprite icon;
     public string[] cursorHints;
     public int cost = 0;
+    public bool infinite = false;
+    public int useCount=1;
     public string GetCursorHint(int index)
     {
         if (index >= cursorHints.Length)

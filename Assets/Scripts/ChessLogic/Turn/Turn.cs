@@ -6,7 +6,7 @@ using Cysharp.Threading.Tasks;
 public abstract class Turn : ScriptableObject
 {
     protected TurnManager turnManager;
-    public void Init(TurnManager turnManager)
+    public virtual void Init(TurnManager turnManager)
     {
         this.turnManager = turnManager;
     }

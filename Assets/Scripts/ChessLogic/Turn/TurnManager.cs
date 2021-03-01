@@ -11,6 +11,7 @@ public class TurnManager : MonoBehaviour
 
     private bool bStart;
     protected int currentTurnIndex = -1;
+    public int currentRound=0;
     protected Turn currentTurn { get { return turnList[currentTurnIndex]; } }
     public void StartExcute()
     {
@@ -45,8 +46,10 @@ public class TurnManager : MonoBehaviour
         if (currentTurnIndex >= turnList.Count)
         {
             currentTurnIndex = 0;
+            currentRound++;
             GameManager.instance.eRoundStart.Invoke();
         }
+        while (!currentTurn&& currentTurnIndex < turnList.Count) currentTurnIndex++;
         currentTurn.Init(this);
         currentTurn.OnEnterTurn();
         Debug.Log(currentTurn + "OnEnter");

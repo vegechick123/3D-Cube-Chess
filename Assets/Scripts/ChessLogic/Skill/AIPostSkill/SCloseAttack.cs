@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(fileName = "CloseAttack", menuName = "Skills/AISkill/CloseAttack")]
+[CreateAssetMenu(menuName = "Skill/AISkill/CloseAttack")]
 public class SCloseAttack : AIPostSkill
 {
+    public int damage;
+    public Element element; 
     protected Vector2Int direction; 
     public override Vector2Int[] GetTargetRange()
     {
@@ -22,9 +24,9 @@ public class SCloseAttack : AIPostSkill
     }
     async public override UniTask ProcessAsync()
     {
-        
-        GChess chess = GridManager.instance.GetChess(owner.location + direction);
-        Debug.Log(chess ? "Empty":chess.ToString());
+        await ElementSystem.ApplyElementAtAsync(owner.location+direction,element,damage);
+        GChess chess = GridManager.instance.GetChess(owner.location + direction);;
+        Debug.Log(chess ? chess.ToString(): "Empty");
     }
     
     public override Vector2Int[] GetAffectRange()

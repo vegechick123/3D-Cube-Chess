@@ -24,8 +24,8 @@ public class SpawnChess : PlayerSkill
     public override async UniTask ProcessAsync(GActor[] inputParams)
     {
         Vector2Int targetLocation = inputParams[0].location;
-        await Shoot(targetLocation);        
-        GridManager.instance.InstansiateChessAt(prefabChess.gameObject,targetLocation);
-        ElementSystem.ApplyElementAtAsync(targetLocation,element);
+        await Shoot(targetLocation);                
+        await ElementSystem.ApplyElementAtAsync(GridManager.instance.GetCircleRange(targetLocation,affectRange),element, damage);
+        GridManager.instance.InstansiateChessAt(prefabChess.gameObject, targetLocation);
     }
 }

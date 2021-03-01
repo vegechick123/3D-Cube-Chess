@@ -170,13 +170,17 @@ MonoBehaviour:
   title: 
   info: 
   healthAttribute:
-    m_value: 3
+    m_value: 1
     m_minValue: 0
-    m_maxValue: 3
+    m_maxValue: 1
   APAttribute:
     m_value: 0
     m_minValue: 0
     m_maxValue: 0
+  bDead: 0
+  lockMove: 0
+  floatInAir: 0
+  modifiers: []
   teamID: 0
   eLocationChange:
     m_PersistentCalls:

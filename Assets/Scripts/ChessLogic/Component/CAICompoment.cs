@@ -12,8 +12,14 @@ using Cysharp.Threading.Tasks;
 /// </summary>
 public class CAICompoment : Component
 {
-    protected GAIChess aiChess { get { return actor as GAIChess; } }
-    public bool postSkillReady=false;
+    public GAIChess aiChess { get { return actor as GAIChess; } }
+    [NonSerialized]
+    public bool postSkillReady = false;
+    protected AIPreferTargetModifier targetModifier { get { return GetComponent<AIPreferTargetModifier>(); } }
+    public GChess[] GetPreferTarget()
+    {
+        return new GChess[0];
+    }
     protected override void Awake()
     {
         base.Awake();
@@ -30,10 +36,10 @@ public class CAICompoment : Component
     {
         aiChess.postSkill.Abort();
     }
-    private void OnDestroy()
+    public void AIDie()
     {
         Debug.Log(gameObject + "AIDestory");
-        if(AIManager.instance)
+        if (AIManager.instance)
             AIManager.instance.AIs.Remove(this);
         CancelSkill();
     }
@@ -44,42 +50,75 @@ public class CAICompoment : Component
         (target, destination) = DecideTargetAndDestination();
         if (destination != null)
             await aiChess.MoveToAsync(destination.Value);
-        if(target!=null)
+        if (target != null)
         {
             aiChess.FaceToward((target.location - actor.location).Normalized());
             if (aiChess.preSkill != null)
                 await aiChess.preSkill.ProcessAsync(target);
-            postSkillReady =  await aiChess.postSkill.Decide(target);
+            postSkillReady = await aiChess.postSkill.Decide(target);
         }
     }
     public async UniTask PostAction()
     {
-        if (aiChess.postSkill == null||!postSkillReady)
+        if (aiChess.postSkill == null || !postSkillReady)
             return;
         await aiChess.postSkill.ProcessAsync();
         postSkillReady = false;
     }
-    protected (GChess,Vector2Int?) DecideTargetAndDestination()
+    protected (GChess, Vector2Int?) DecideTargetAndDestination()
     {
         GChess target = null;
         Vector2Int? destination = null;
         Vector2Int[] moveRange = aiChess.navComponent.GetMoveRangeWithoutOccupy();
         System.Random r = new System.Random();
         moveRange = moveRange.OrderBy(x => r.Next()).ToArray();
+        GChess[] allTargets = GridManager.instance.GetChesses(aiChess.targetTeam);
+        allTargets = allTargets.OrderBy(x => r.Next()).ToArray();
+        List<GChess> targets = new List<GChess>();
+        if (targetModifier?.enable == true)
+        {
+            targets.AddRange(targetModifier.GetPreferTarget());
+        }
+        targets.AddRange(allTargets);
+        foreach (GChess curTarget in targets)
+        {
+            Vector2Int? result = DecideDestinationByTarget(curTarget, moveRange);
+            if (result != null)
+            {
+                target = curTarget;
+                destination = result;
+                break;
+            }
+        }
+        return (target, destination);
+    }
+    protected Vector2Int? DecideDestinationByTarget(GChess target, Vector2Int[] moveRange)
+    {
         var originLocation = aiChess.location;
-        foreach (Vector2Int location in moveRange)
+        List<Vector2Int> finalMoveRange = new List<Vector2Int>();
+        if (targetModifier?.enable == true)
+        {
+            Vector2Int[] temp = targetModifier.GetPreferLocation(target);
+            foreach (Vector2Int location in temp)
+            {
+                if (moveRange.Contains(location) || location == aiChess.location)
+                    finalMoveRange.Add(location);
+            }
+        }
+        finalMoveRange.AddRange(moveRange);
+        finalMoveRange.Add(aiChess.location);
+        foreach (Vector2Int location in finalMoveRange)
         {
             aiChess.location = location;//暂时更改location以供skill.GetRange来判断
-            GChess[] targets = GridManager.instance.GetChesses(GameManager.instance.playerTeam);
-            foreach (GChess curTarget in targets)
-                if (aiChess.postSkill.GetTargetRange().InRange(curTarget.location))
-                {
-                    target = curTarget;
-                    destination = location;
-                    break;
-                }
+
+
+            if (aiChess.postSkill.GetTargetRange().InRange(target.location))
+            {
+                aiChess.location = originLocation;
+                return location;
+            }
         }
         aiChess.location = originLocation;
-        return (target, destination);
+        return null;
     }
 }

@@ -32,16 +32,16 @@ public abstract class AIPostSkill : Skill
     /// </summary>
     public abstract UniTask ProcessAsync();
 
-    private GChess lockTarget;  
+    public GChess lockTarget { get; private set; }  
     public bool IsLockAt(GChess target)
     {
         return lockTarget==target;
     }
-    protected void LockAt(GChess target)
+    public void LockAt(GChess target)
     {
         lockTarget = target;
     }
-    protected void ReleaseLock()
+    public void ReleaseLock()
     {
         lockTarget = null;
     }

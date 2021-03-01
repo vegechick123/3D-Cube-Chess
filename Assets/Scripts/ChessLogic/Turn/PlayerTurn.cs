@@ -33,6 +33,10 @@ public class PlayerTurn : Turn
         {
             floor.OnPlayerTurnEnd();
         }
+        foreach (GChess chess in GridManager.instance.chesses)
+        {
+            chess.OnPlayerTurnEnd();
+        }
         bEnd = true;
     }
     async public UniTask BeforeMoveReaction(GPlayerChess chess, Vector2Int location)

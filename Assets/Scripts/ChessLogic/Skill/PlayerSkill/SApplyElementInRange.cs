@@ -2,6 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public enum SkillRangeType
+{
+    Circle,
+    Square,
+    FourRay
+}
 [CreateAssetMenu(menuName = "Skill/PlayerSkill/SApplyElementInRange")]
 public class SApplyElementInRange : PlayerSkill
 {
@@ -10,7 +16,7 @@ public class SApplyElementInRange : PlayerSkill
     public int damage;
     public int selectRange;
     public int affectRange;
-     
+    public SkillRangeType rangeType=SkillRangeType.Circle; 
     public override RangeTask GetPlayerInput()
     {
         return GetInputTargets(targetType);
@@ -18,7 +24,7 @@ public class SApplyElementInRange : PlayerSkill
 
     public override Vector2Int[] GetSelectRange()
     {
-        return GridManager.instance.GetCircleRange(owner.location,selectRange);
+        return GridManager.instance.GetRangeWithRangeType(owner.location,selectRange,rangeType);
     }                                              
 
     public override async UniTask ProcessAsync(GActor[] inputParams)

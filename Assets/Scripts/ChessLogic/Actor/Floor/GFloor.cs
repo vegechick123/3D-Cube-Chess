@@ -8,15 +8,20 @@ using Ludiq;
 public class GFloor : GActor
 {
     public bool transitable = true;
-
+    public bool wooden = false;
+    public bool inflammable=false;
     [NonSerialized]
-    public bool combustible = false;//可燃的
+    public bool explosive = false;//易爆
     [NonSerialized]
     public bool readyToBurst = false;//用来BFS
-    protected FloorStateMachine floorStateMachine;
+
+    public FloorStateMachine floorStateMachine;
+    public FloorState state{ get { return floorStateMachine.currentState; } }
     public FloorStateEnum defaultState;
-    private void Awake()
+
+    public override void GAwake()
     {
+        base.GAwake();
         floorStateMachine = new FloorStateMachine(this);
         floorStateMachine.SetState(defaultState);
     }

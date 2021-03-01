@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9368488d7e8bb1347ad6cff05fe29039, type: 2}
+  - {fileID: 2100000, guid: 56fe6f8d29d391b4082648feff5f6bef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -288,6 +288,10 @@ MonoBehaviour:
     m_value: 0
     m_minValue: 0
     m_maxValue: 6
+  bDead: 0
+  lockMove: 0
+  floatInAir: 0
+  modifiers: []
   teamID: 1
   eLocationChange:
     m_PersistentCalls:
