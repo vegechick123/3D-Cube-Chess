@@ -1,27 +1,28 @@
-﻿using System.Collections;
+﻿using Cysharp.Threading.Tasks;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class GChest : GPlayerChess
+public class GChest : GChess
 {
     public int turnCount;
     public List<PlayerSkill> storeSkills;
-    public override void OnPlayerTurnEnd()
+    bool complete;
+    ChestSkill chestSkill = ScriptableObject.CreateInstance<ChestSkill>();
+    public UnityEvent eOpen = new UnityEvent();
+    async public UniTask Open()
     {
-        if (turnCount > 0)
-        {
-            turnCount--;
-            if (turnCount == 0)
-                CreateSkillFromStoreSkills();
-        }
+        await UniTask.Delay(TimeSpan.FromSeconds(1.0f));
+        eOpen.Invoke();
     }
-    void CreateSkillFromStoreSkills()
+    public void Close()
     {
-        skills.Clear();
-        for(int i=0;i<storeSkills.Count;i++)
-        {
-            AddSkill(SAddSkill.CreateFromSkill(storeSkills[i]));
-        }
-
+        
+    }
+    async public UniTask AssignSkill(PlayerSkill skill,GPlayerChess target, PlayerSkill replaceSkill)
+    {
+        await chestSkill.AssignSkill(target, skill,replaceSkill);
     }
 }

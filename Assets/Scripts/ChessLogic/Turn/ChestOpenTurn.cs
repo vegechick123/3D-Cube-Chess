@@ -1,12 +1,16 @@
-﻿using Cysharp.Threading.Tasks;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
+using Cysharp.Threading.Tasks;
+using UnityEngine.Events;
 
 public class ChestOpenTurn : Turn
 {
-    public override UniTask TurnBehaviourAsync()
+    [NonSerialized]
+    public UnityEvent<GChest> eChestOpen= new EventWrapper<GChest>();
+    public async override UniTask TurnBehaviourAsync()
     {
-        throw new System.NotImplementedException();
+        foreach(GChest target in GridManager.instance.chests)
+        {
+            await PlayerControlManager.instance.OpenChestAsync(target);
+        }
     }
 }

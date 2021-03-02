@@ -1157,6 +1157,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5017374838760100692, guid: 8fe2e4b0e90cf0a4a8c37cf41f42851c,
+        type: 3}
+      propertyPath: skillBar
+      value: 
+      objectReference: {fileID: 828019464}
     - target: {fileID: 5171458465412384251, guid: 8fe2e4b0e90cf0a4a8c37cf41f42851c,
         type: 3}
       propertyPath: spawnDatas.Array.data[0].spawnChesses.Array.size
@@ -2913,6 +2918,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03e8912677627bb4ebb275e053785b62, type: 3}
+--- !u!224 &828019464 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 9062127572593376764, guid: 8fe2e4b0e90cf0a4a8c37cf41f42851c,
+    type: 3}
+  m_PrefabInstance: {fileID: 224734381}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &835243827
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -24,6 +24,13 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
             return (chesses.FindAll((x) => x is GPlayerChess).Cast<GPlayerChess>().ToList());
         }
     }
+    public List<GChest> chests
+    {
+        get
+        {
+            return (chesses.FindAll((x) => x is GChest).Cast<GChest>().ToList());
+        }
+    }
     public List<GAIChess> aiChesses
     {
         get

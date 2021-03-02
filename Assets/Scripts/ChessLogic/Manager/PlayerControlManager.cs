@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Cysharp.Threading.Tasks;
 enum InputState
 {
     None,
@@ -30,6 +31,8 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
     [NonSerialized]
     public UnityEvent<GActor> eClickActor = new EventWrapper<GActor>();
     [NonSerialized]
+    public UnityEvent<GActor> eSelectMessage = new EventWrapper<GActor>();
+    [NonSerialized]
     public UnityEvent<Vector2Int> eOverTile = new EventWrapper<Vector2Int>();
     [NonSerialized]
     public UnityEvent<GPlayerChess> eSelectChess = new EventWrapper<GPlayerChess>();
@@ -41,7 +44,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
     public UnityEvent eRightMouseClick = new UnityEvent();
     [NonSerialized]
     public UnityEvent eSkillPerformEnd = new UnityEvent();
-    
+
     public Button turnEndButton;
     public Stack<MoveInfo> moveInfoSta = new Stack<MoveInfo>();
     public Button undoMoveButton;
@@ -92,7 +95,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
             DeSelect();
         selectedChess = target as GPlayerChess;
         selectedChess.GetComponent<CAgentComponent>().eSelect.Invoke();
-        eSelectChess.Invoke(selectedChess as GPlayerChess);
+        eSelectChess.Invoke(selectedChess);
 
     }
     public void PlayerTurnEnter(PlayerTurn playerTurn)
@@ -162,27 +165,33 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
 
         if (Input.GetMouseButtonDown(0) && bHit)
         {
-            switch (hitResult)
-            {
-                case GChess chess:
-                    eClickChess.Invoke(chess);
-                    eClickActor.Invoke(chess);
-                    break;
-                case GFloor floor:
-                    eClickFloor.Invoke(floor);
-                    eClickActor.Invoke(floor);
-                    break;
-
-            }
+            OnClickActor(hitResult);
         }
         if (Input.GetMouseButtonDown(1))
         {
             eRightMouseClick.Invoke();
+            eSelectMessage.Invoke(null);
         }
     }
 
 
+    void OnClickActor(GActor target)
+    {
+        switch (target)
+        {
+            case GChess chess:
+                eClickChess.Invoke(chess);
+                eClickActor.Invoke(chess);
+                eSelectMessage.Invoke(chess);
+                break;
+            case GFloor floor:
+                eClickFloor.Invoke(floor);
+                eClickActor.Invoke(floor);
+                eSelectMessage.Invoke(floor);
+                break;
 
+        }
+    }
 
 
     public void SwitchToNone()
@@ -295,7 +304,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
                 SwitchToReadyToSelect();
                 break;
             case InputState.Skill:
-                SwitchToSelected(selectedChess as GPlayerChess);
+                SwitchToSelected(selectedChess);
                 break;
         }
     }
@@ -310,14 +319,14 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
     public async void CallChessToMoveAsync(GPlayerChess chess, Vector2Int location)
     {
         bProcessing = true;
-        await currentPlayerTurn.BeforeMoveReaction(chess,location);
+        await currentPlayerTurn.BeforeMoveReaction(chess, location);
         await chess.MoveToAsync(location);
         bProcessing = false;
         SwitchToSelected(chess);
     }
 
     public async void PerformChessSkill(GPlayerChess chess, PlayerSkill skill, GActor[] inputParams)
-    {        
+    {
         bProcessing = true;
         await chess.PerformSkill(skill, inputParams);
         bProcessing = false;
@@ -346,11 +355,71 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
             undoMoveButton.interactable = false;
     }
 
+    public async UniTask<T> GetNextClickChessAsync<T>() where T : GChess
+    {
+        GActor temp;
+        do
+        {
+            temp = await MyUniTaskExtensions.WaitUntilEvent(eSelectMessage) as T;
+        } while (temp != null && temp is T);
+        return temp as T;
+    }
+    public async UniTask<PlayerSkill> GetSkillAsync(List<PlayerSkill> candidateSkills)
+    {
+        UIManager.instance.skillDisplayView.SwitchSkillButton(candidateSkills);
+        PlayerSkill result = await MyUniTaskExtensions.WaitUntilEvent(UIManager.instance.skillDisplayView.eClickSkill);
+        UIManager.instance.skillDisplayView.CleanSkillButton();
+        return result; 
+    }
+    public async UniTask OpenChestAsync(GChest chest)
+    {
+        int stage = 0;
+        PlayerSkill addSkill=null;
+        GPlayerChess target = null;
+        PlayerSkill replaceSkill = null;
+        while (0<=stage&&stage<=2)
+        {
+            switch(stage)
+            {
+                case 0:
+                    addSkill = await GetSkillAsync(chest.storeSkills);
+                    if (addSkill == null)
+                        stage--;
+                    else
+                        stage++;
+                    break;
+                case 1:
+                    target = await GetNextClickChessAsync<GPlayerChess>();
+                    if (target == null)
+                        stage--;
+                    else
+                        stage++;
+                    break;
+                case 2:
+                    replaceSkill = await GetSkillAsync(target.skills);
+                    if (target == null)
+                        stage--;
+                    else
+                        stage++;
+                    break;
+
+            }
+        }
+        if(stage==-1)
+        {
+            chest.Close();
+        }
+        else if(stage == 3)
+        {
+            await chest.AssignSkill(addSkill,target,replaceSkill);
+            chest.Close();
+        }
+    }
     public static RangeTask CreateMoveCommand(GPlayerChess chess)
     {
         Action<GActor[]> t = (o) =>
         {
-            PlayerControlManager.instance.CallChessToMoveAsync(chess, o[0].location);
+            instance.CallChessToMoveAsync(chess, o[0].location);
         };
         Func<int, GActor, bool> checker = (index, target) =>
         {

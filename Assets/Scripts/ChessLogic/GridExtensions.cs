@@ -98,6 +98,16 @@ static class GridExtensions
         };
         a.AddListener(p);
     }
+    public static void AddListenerForOnce<T>(this UnityEvent<T> a, UnityAction<T> t)
+    {
+        UnityAction<T> p = null;
+        p = (T x) =>
+        {
+            t(x);
+            a.RemoveListener(p);
+        };
+        a.AddListener(p);
+    }
     public static void DestoryAll(this GameObject[] gameObjects)
     {
         foreach (var t in gameObjects)

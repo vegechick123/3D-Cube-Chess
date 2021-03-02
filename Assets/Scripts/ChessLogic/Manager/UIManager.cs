@@ -28,6 +28,7 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
     public Transform panelContainer;
     public Canvas mainUICanvans;
     public SelectChessView selectChessView;
+    public SkillDisplayView skillDisplayView;
     public MouseFollowText mouseFollowText; 
 
     protected List<GameObject> alivePanels = new List<GameObject>();
