@@ -7,22 +7,30 @@ using UnityEngine.Events;
 
 public class GChest : GChess
 {
-    public int turnCount;
+    public int roundCount;
     public List<PlayerSkill> storeSkills;
+    public SkillVFX chestSkillVFX;
     bool complete;
-    ChestSkill chestSkill = ScriptableObject.CreateInstance<ChestSkill>();
+    ChestSkill chestSkill;
+    [NonSerialized]
     public UnityEvent eOpen = new UnityEvent();
-    async public UniTask Open()
+    protected override void Awake()
     {
-        await UniTask.Delay(TimeSpan.FromSeconds(1.0f));
+        base.Awake();
+        chestSkill = ScriptableObject.CreateInstance<ChestSkill>();
+        chestSkill.skillVFX = chestSkillVFX;
+        chestSkill.Init(this);
+    }
+    public void Open()
+    {
         eOpen.Invoke();
     }
     public void Close()
     {
-        
+
     }
-    async public UniTask AssignSkill(PlayerSkill skill,GPlayerChess target, PlayerSkill replaceSkill)
+    async public UniTask AssignSkill(PlayerSkill skill, GPlayerChess target, PlayerSkill replaceSkill)
     {
-        await chestSkill.AssignSkill(target, skill,replaceSkill);
+        await chestSkill.AssignSkill(target, skill, replaceSkill);
     }
 }

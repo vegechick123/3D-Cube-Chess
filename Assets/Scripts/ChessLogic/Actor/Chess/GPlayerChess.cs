@@ -7,10 +7,25 @@ using UnityEngine.Events;
 
 public class GPlayerChess : GChess
 {
+    public bool persistentSave = true;
+    [NonSerialized]
+    public GameObject prefabPrototype = null;
     public List<PlayerSkill> skills;
     [NonSerialized]
-    public UnityEvent eSkillChange= new UnityEvent();
+    public UnityEvent eSkillChange = new UnityEvent();
     protected CAgentComponent agentComponent;
+    bool useSaveData = false;
+    public void InitWithSaveData(PlayerChessData data)
+    {
+        Debug.Assert(data.prototype == prefabPrototype);
+        useSaveData = true;
+        skills.Clear();
+        foreach (PlayerSkillData skillData in data.skills)
+        {
+            skills.Add(PlayerSkill.CreateInstanceFromSaveData(skillData));
+        }
+
+    }
     public override void GAwake()
     {
         base.GAwake();
@@ -20,9 +35,15 @@ public class GPlayerChess : GChess
             agentComponent.eSelect.AddListener(OnSelect);
             agentComponent.eDeselect.AddListener(OnDeselect);
         }
-        for( int i=0;i<skills.Count; i++)
+        if (!useSaveData)
         {
-            skills[i] = Instantiate(skills[i]);
+            for (int i = 0; i < skills.Count; i++)
+            {
+                skills[i] = skills[i].CreateCopy();
+            }
+        }
+        for (int i = 0; i < skills.Count; i++)
+        {
             skills[i].Init(this);
         }
     }
@@ -47,7 +68,7 @@ public class GPlayerChess : GChess
         await base.MoveToAsync(destination);
         spendMoveCost(distance);
         t.destinationRotation = render.transform.rotation;
-         
+
     }
     public virtual void OnPerformSkill(Skill skill)
     {
@@ -55,23 +76,23 @@ public class GPlayerChess : GChess
     }
     public override string GetTitle()
     {
-        string res= "<color=yellow>";
-        res+=base.GetTitle();
+        string res = "<color=yellow>";
+        res += base.GetTitle();
         res += "</color>";
         return res;
     }
-    public async UniTask PerformSkill(PlayerSkill skill,GActor[] inputParams)
+    public async UniTask PerformSkill(PlayerSkill skill, GActor[] inputParams)
     {
 
         waitShoot = true;
         animator.SetTrigger("PerformSkill");
         await UniTask.WaitWhile(() => waitShoot);
-        animator.SetBool("ReadySkill",false);
+        animator.SetBool("ReadySkill", false);
         await skill.CallProcessAsync(inputParams);
-        if(!skill.infinite)
+        if (!skill.infinite)
         {
             skill.useCount--;
-            if(skill.useCount<=0)
+            if (skill.useCount <= 0)
             {
                 RemoveSkill(skill);
             }
@@ -80,7 +101,7 @@ public class GPlayerChess : GChess
     }
     public void PrepareSkill(PlayerSkill skill)
     {
-        render.GetComponent<Animator>().SetBool("ReadySkill",true);
+        render.GetComponent<Animator>().SetBool("ReadySkill", true);
     }
     public void CancelSkill()
     {
@@ -88,7 +109,7 @@ public class GPlayerChess : GChess
     }
     public void AddSkill(PlayerSkill skill)
     {
-        PlayerSkill copy = Instantiate(skill);
+        PlayerSkill copy = skill.CreateCopy();
         skills.Add(copy);
         copy.Init(this);
         eSkillChange.Invoke();
@@ -98,6 +119,15 @@ public class GPlayerChess : GChess
         skills.Remove(skill);
         eSkillChange.Invoke();
     }
-
+    public PlayerChessData GetSaveData()
+    {
+        PlayerChessData res = new PlayerChessData();
+        res.prototype = prefabPrototype;
+        foreach (PlayerSkill skill in skills)
+        {
+            res.skills.Add(skill.GetSaveData());
+        }
+        return res;
+    }
 }
 

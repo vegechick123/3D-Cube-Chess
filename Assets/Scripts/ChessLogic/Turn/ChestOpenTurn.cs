@@ -1,7 +1,8 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.Events;
-
+[CreateAssetMenu(menuName = "Turn/ChestOpenTurn")]
 public class ChestOpenTurn : Turn
 {
     [NonSerialized]
@@ -10,7 +11,8 @@ public class ChestOpenTurn : Turn
     {
         foreach(GChest target in GridManager.instance.chests)
         {
-            await PlayerControlManager.instance.OpenChestAsync(target);
+            if(target.roundCount==turnManager.currentRound)
+                await PlayerControlManager.instance.OpenChestAsync(target);
         }
     }
 }

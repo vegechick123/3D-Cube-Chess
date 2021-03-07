@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: b0406c4da182b6342ad7091306e35d22
+guid: dea0115563000304884d977674f04666
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - owner: {instanceID: 0}
-  - skillVFX: {fileID: 11400000, guid: 682496960e3a7a84b835dc5e6d2b8909, type: 2}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -10,6 +10,8 @@ using Cysharp.Threading.Tasks;
 
 public abstract class PlayerSkill : Skill
 {
+    [NonSerialized]
+    public PlayerSkill prototype;
     public Sprite icon;
     public string[] cursorHints;
     public int cost = 0;
@@ -82,4 +84,26 @@ public abstract class PlayerSkill : Skill
         eEnd.Invoke();
     }
     public abstract UniTask ProcessAsync(GActor[] inputParams);
+    public PlayerSkill CreateCopy()
+    {
+        PlayerSkill res = Instantiate(this);
+        if (prototype == null)
+            res.prototype = this;
+        else
+            res.prototype = prototype;
+        return res;
+    }
+    public PlayerSkillData GetSaveData()
+    {
+        PlayerSkillData res = new PlayerSkillData();
+        res.prototype = prototype;
+        res.useCount = useCount;
+        return res;
+    }
+    public static PlayerSkill CreateInstanceFromSaveData(PlayerSkillData data)
+    {
+        PlayerSkill result =data.prototype.CreateCopy();
+        result.useCount =data.useCount;
+        return result;
+    }
 }

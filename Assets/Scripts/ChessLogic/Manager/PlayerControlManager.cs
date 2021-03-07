@@ -361,7 +361,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
         do
         {
             temp = await MyUniTaskExtensions.WaitUntilEvent(eSelectMessage) as T;
-        } while (temp != null && temp is T);
+        } while (temp != null && !(temp is T));
         return temp as T;
     }
     public async UniTask<PlayerSkill> GetSkillAsync(List<PlayerSkill> candidateSkills)
@@ -373,6 +373,7 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
     }
     public async UniTask OpenChestAsync(GChest chest)
     {
+        chest.Open();
         int stage = 0;
         PlayerSkill addSkill=null;
         GPlayerChess target = null;

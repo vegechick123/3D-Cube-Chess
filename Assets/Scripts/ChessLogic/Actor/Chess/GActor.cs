@@ -36,7 +36,7 @@ public abstract class GActor : MonoBehaviour, IGetInfo
         
         //Debug.Log($"GActor:{this} Begin");
     }
-    void Awake()
+    protected virtual void Awake()
     {
         render = GetComponent<MeshRenderer>();
         if (render == null)
@@ -44,11 +44,14 @@ public abstract class GActor : MonoBehaviour, IGetInfo
             render = GetComponentInChildren<MeshRenderer>();
 
         }
-        meshFilter = render.GetComponent<MeshFilter>();
-
+        if (render != null)
+        {
+            meshFilter = render.GetComponent<MeshFilter>();
+            originMaterial = render.sharedMaterial;
+        }
         elementComponent = GetComponent<CElementComponent>();
 
-        originMaterial = render.sharedMaterial;
+        
     }
     virtual public void GEnd()
     {

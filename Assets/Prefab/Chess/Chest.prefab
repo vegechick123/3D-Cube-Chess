@@ -94,9 +94,9 @@ MonoBehaviour:
   moveComponent: {fileID: 0}
   outline: {fileID: 0}
   deathParticle: {fileID: 0}
-  skills: []
-  turnCount: 0
+  roundCount: 0
   storeSkills: []
+  chestSkillVFX: {fileID: 11400000, guid: 682496960e3a7a84b835dc5e6d2b8909, type: 2}
 --- !u!114 &1276061866126194179
 MonoBehaviour:
   m_ObjectHideFlags: 0

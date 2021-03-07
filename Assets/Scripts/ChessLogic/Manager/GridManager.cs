@@ -12,7 +12,7 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
     public Grid grid;
     public Transform chessContainer;
     [NonSerialized]
-    public UnityEvent eGridChange=new UnityEvent();
+    public UnityEvent eGridChange = new UnityEvent();
     protected GFloor[,] floors;
     protected float floorYOffest = -0.5f;
     protected float chessYOffest = 0.5f;
@@ -49,6 +49,7 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
     {
         if (Application.isPlaying)
         {
+            InitialSpawn();
             foreach (GChess t in FindObjectsOfType<GChess>())
             {
                 AddChess(t);
@@ -100,7 +101,7 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
         List<GFloor> res = new List<GFloor>();
         foreach (Vector2Int location in range)
         {
-            res.Add(GridManager.instance.GetFloor(location));
+            res.Add(GetFloor(location));
         }
         return res;
     }
@@ -292,7 +293,7 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
         }
         return res.ToArray();
     }
-    public Vector2Int[] GetRangeWithRangeType(Vector2Int origin, int maxLength, SkillRangeType rangeType,int beginDistance = 1)
+    public Vector2Int[] GetRangeWithRangeType(Vector2Int origin, int maxLength, SkillRangeType rangeType, int beginDistance = 1)
     {
         switch (rangeType)
         {
@@ -301,18 +302,18 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
             case SkillRangeType.Square:
                 return null;
             case SkillRangeType.FourRay:
-                return GetFourRayRange(origin,maxLength,beginDistance);
+                return GetFourRayRange(origin, maxLength, beginDistance);
         }
         return null;
     }
-    public Vector2Int[] GetOneRayRange(Vector2Int origin, Vector2Int dir, int maxLength=-1, int beginDistance = 1,bool stopWhenMeetChess=true)
+    public Vector2Int[] GetOneRayRange(Vector2Int origin, Vector2Int dir, int maxLength = -1, int beginDistance = 1, bool stopWhenMeetChess = true)
     {
         Queue<Vector2Int> res = new Queue<Vector2Int>();
-        for (int d = 1; d <= maxLength||maxLength==-1; d++)
+        for (int d = 1; d <= maxLength || maxLength == -1; d++)
         {
             Vector2Int nowpos = d * dir + origin;
             GChess t = GetChess(nowpos);
-            if (!InRange(nowpos) || (stopWhenMeetChess&&t != null))
+            if (!InRange(nowpos) || (stopWhenMeetChess && t != null))
             {
                 if (t != null && d >= beginDistance)
                 {
@@ -335,10 +336,19 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
         res.transform.position = GetChessPosition3D(location);
         GChess chess = res.GetComponent<GChess>();
         chess.location = location;
+        if (chess is GPlayerChess)
+        {
+            GPlayerChess playerChess = chess as GPlayerChess;
+            GameObject originPrefab = prefab.GetComponent<GPlayerChess>().prefabPrototype;
+            if (originPrefab == null)
+                originPrefab = prefab;
+            playerChess.prefabPrototype = originPrefab;
+        }
         AddChess(chess);
         chess.render.GetComponent<Animator>().Play("Birth");
         return chess;
     }
+
     public List<IGetInfo> GetEnvironmentInformation(Vector2Int location)
     {
 
@@ -428,5 +438,15 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
     {
         GetFloor(chess.location).OnChessEnter(chess);
         eGridChange.Invoke();
+    }
+    public void InitialSpawn()
+    {
+        GFixSpawner[] fixSpawners = FindObjectsOfType<GFixSpawner>();
+        GDataSpawner[] dataSpawners = FindObjectsOfType<GDataSpawner>();
+        foreach (GFixSpawner t in fixSpawners)
+            t.SpawnFixProtype();
+        SaveData data = SaveLoadManager.instance.currentData;
+        for (int i = 0; i < data.playerChessDatas.Count; i++)
+            dataSpawners[i].Spawn(data.playerChessDatas[i]);
     }
 }

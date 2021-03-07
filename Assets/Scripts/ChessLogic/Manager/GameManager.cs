@@ -71,7 +71,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         Debug.Log("You Lose");
         GameEnd();
     }
-    //TODO :删除，并将对应动作用动画表现
     void GameEnd()
     {
         bEnd = true;

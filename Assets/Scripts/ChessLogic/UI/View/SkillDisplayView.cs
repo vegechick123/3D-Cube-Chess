@@ -13,10 +13,11 @@ public class SkillDisplayView : MonoBehaviour
     public Button cancelButton;
     public GameObject prefabSkillButton;
     public Transform skillBar;
-    public UnityEvent<PlayerSkill> eClickSkill;
+    public UnityEvent<PlayerSkill> eClickSkill= new EventWrapper<PlayerSkill>();
     private void Awake()
     {
-        cancelButton.onClick.AddListener(()=>OnSkillClick(null));
+        if(cancelButton!=null)
+            cancelButton.onClick.AddListener(()=>OnSkillClick(null));
     }
     public virtual SkillButton CreatButtonFromSkill(PlayerSkill skill)
     {

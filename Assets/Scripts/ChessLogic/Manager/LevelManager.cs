@@ -6,17 +6,34 @@ using UnityEngine.Video;
 
 public class LevelManager : SingletonMonoBehaviour<LevelManager>
 {
-    public void LoadLevel(int index)
+    static int startMenuIndex = 0;
+    public static int firstLevel = 1;
+    public void NewGame()
     {
-        SceneManager.LoadScene(index);
+        SaveLoadManager.instance.CleanCurrentSaveData();
+        SaveLoadManager.instance.Save();
+        SceneManager.LoadScene(firstLevel);
     }
-    public void Reload()
+    public void LoadGame()
     {
-        LoadLevel(SceneManager.GetActiveScene().buildIndex);
+        SaveLoadManager.instance.LoadSaveData();
+        SaveData data= SaveLoadManager.instance.currentData;
+        SceneManager.LoadScene(data.levelIndex);
+    }
+    public void LoadNextLevel()
+    {
+        int index = GetNextLevelIndex();
+        SaveLoadManager.instance.RecordNewData(index);
+        SaveLoadManager.instance.Save();
+        SceneManager.LoadScene(index);
     }
     public void ReturnMenu()
     {
-        LoadLevel(0);
+        SaveLoadManager.instance.CleanCurrentSaveData();
+        SceneManager.LoadScene(startMenuIndex);
     }
-
+    int GetNextLevelIndex()
+    {
+        return SceneManager.GetActiveScene().buildIndex+1;
+    }
 }
