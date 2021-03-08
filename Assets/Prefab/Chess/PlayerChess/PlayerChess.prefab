@@ -306,6 +306,7 @@ MonoBehaviour:
   persistentSave: 1
   skills:
   - {fileID: 11400000, guid: a061f7008e0f8a447a93abd7b7f5b4aa, type: 2}
+  maxSkillsCount: 2
 --- !u!114 &6460747280885505439
 MonoBehaviour:
   m_ObjectHideFlags: 0

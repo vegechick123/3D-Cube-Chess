@@ -366,9 +366,11 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
     }
     public async UniTask<PlayerSkill> GetSkillAsync(List<PlayerSkill> candidateSkills)
     {
+        UIManager.instance.skillDisplayView.gameObject.SetActive(true);
         UIManager.instance.skillDisplayView.SwitchSkillButton(candidateSkills);
         PlayerSkill result = await MyUniTaskExtensions.WaitUntilEvent(UIManager.instance.skillDisplayView.eClickSkill);
         UIManager.instance.skillDisplayView.CleanSkillButton();
+        UIManager.instance.skillDisplayView.gameObject.SetActive(false);
         return result; 
     }
     public async UniTask OpenChestAsync(GChest chest)
@@ -394,7 +396,14 @@ public class PlayerControlManager : SingletonMonoBehaviour<PlayerControlManager>
                     if (target == null)
                         stage--;
                     else
+                    {
                         stage++;
+                        if(!target.skillContainFull)
+                        {
+                            replaceSkill = null;
+                            stage++;
+                        }
+                    }
                     break;
                 case 2:
                     replaceSkill = await GetSkillAsync(target.skills);

@@ -8,6 +8,9 @@ public class ChestSkill : Skill
     public async UniTask AssignSkill(GPlayerChess target, PlayerSkill skill, PlayerSkill replaceSkill)
     {
         await Shoot(target.location);
-        target.AddSkill(skill);
+        if (replaceSkill == null)
+            target.AddSkill(skill);
+        else
+            target.ReplaceSkill(skill, replaceSkill);
     }
 }

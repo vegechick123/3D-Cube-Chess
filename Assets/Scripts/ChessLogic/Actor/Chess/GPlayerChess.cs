@@ -15,6 +15,8 @@ public class GPlayerChess : GChess
     public UnityEvent eSkillChange = new UnityEvent();
     protected CAgentComponent agentComponent;
     bool useSaveData = false;
+    public int maxSkillsCount;
+    public bool skillContainFull { get { return maxSkillsCount <= skills.Count; }}
     public void InitWithSaveData(PlayerChessData data)
     {
         Debug.Assert(data.prototype == prefabPrototype);
@@ -106,6 +108,14 @@ public class GPlayerChess : GChess
     public void CancelSkill()
     {
         render.GetComponent<Animator>().SetBool("ReadySkill", false);
+    }
+    public void ReplaceSkill(PlayerSkill addskill, PlayerSkill removeskill)
+    {
+        int index=skills.IndexOf(removeskill);
+        Destroy(skills[index]);
+        skills[index]=addskill.CreateCopy();
+        skills[index].Init(this);
+        eSkillChange.Invoke();
     }
     public void AddSkill(PlayerSkill skill)
     {

@@ -8,6 +8,7 @@ public class SelectChessView : SkillDisplayView
 {
     protected GPlayerChess selectedChess;
     protected bool skillActive = true;
+    public APDisplay aPDisplay;
     private void Awake()
     {
         PlayerControlManager.instance.eProcessStart.AddListener(() => skillActive = false);
@@ -22,9 +23,11 @@ public class SelectChessView : SkillDisplayView
         selectedChess.eSkillChange.AddListener(ReCreateSkillButton);
         PlayerControlManager.instance.eProcessStart.AddListener(Refresh);
         PlayerControlManager.instance.eProcessEnd.AddListener(Refresh);
+        aPDisplay.Bind(selectedChess);
     }
     public void UnBind()
     {
+        aPDisplay.UnBind();
         selectedChess.APAttribute.RemoveListener(Refresh);
         selectedChess.eSkillChange.RemoveListener(ReCreateSkillButton);
         PlayerControlManager.instance.eProcessStart.RemoveListener(Refresh);
