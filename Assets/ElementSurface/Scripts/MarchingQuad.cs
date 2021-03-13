@@ -3,42 +3,74 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MarchingQuad
+namespace ElementSurface
 {
-    public class MarchingQuad : MonoBehaviour
+    public class MarchingQuad : SingletonMonoBehaviour<MarchingQuad>
     {
         public Texture2D[] texture = new Texture2D[14];
         public BigGrid grid;
+        public Vector2Int size;
         public int[,] testValue = { { 0, 1, 2 }, { 1, 1, 3 }, { 2, 2, 3 } };
-        private void Awake()
+        protected override void Awake()
+        {
+            base.Awake();
+            Create();
+        }
+        public void Create()
         {
             SmallGrid.tex = texture;
-            SmallGrid.painter = GetComponent<ElementSurfaceController>();
-            
+            SmallGrid.painter = GetComponent<SurfaceRenderTextureController>();
+
             grid = new BigGrid();
-            grid.Init(testValue);
+            grid.Init(size);
             grid.UpdateTexture();
         }
         private void Update()
         {
             grid.FrameUpdate();
         }
+        public void SetType(Vector2Int location,int type)
+        {
+            grid.grid[location.x, location.y].activeType = type;
+        }
+        public void SetTypeAndUpdateTexture(Vector2Int location, int type)
+        {
+            SetType(location, type);
+            grid.UpdateTexture();
+        }
+        public static int ElementTotype(FloorStateEnum element)
+        {
+            switch (element)
+            {
+                case FloorStateEnum.FireCover:
+                    return 1;
+                case FloorStateEnum.WaterCover:
+                    return 2;
+                case FloorStateEnum.OilCover:
+                    return 3;
+                case FloorStateEnum.NoneCover:
+                    return 0;
+                    
+            }
+            throw new Exception();
+
+        }
     }
     public class BigGrid
     {
         public MiddleGrid[,] grid;
         public int length;
-        public void Init(int[,] t)
+        public void Init(Vector2Int size)
         {
-            length = 3 * t.GetLength(0);
+            length = 3 * size.x;
             SmallGrid.size = 1.0f / length;
-            grid = new MiddleGrid[t.GetLength(0), t.GetLength(1)];
+            grid = new MiddleGrid[size.x, size.y];
             for (int i = 0; i < grid.GetLength(0); i++)
                 for (int j = 0; j < grid.GetLength(1); j++)
                 {
                     Vector2 center = new Vector2(3 * j + 1.5f, 3 * i + 1.5f) / length;
                     grid[i, j] = new MiddleGrid(center);
-                    grid[i, j].activeType = t[i, j];
+                    grid[i, j].activeType = 0;
                 }
 
         }
@@ -239,7 +271,7 @@ namespace MarchingQuad
     public struct SmallGrid
     {
         public MiddleGrid parent;
-        public static ElementSurfaceController painter;
+        public static SurfaceRenderTextureController painter;
         public static Texture2D[] tex;
         public static float size;
         public static Color[] typeColor=new Color[] {new Color(1,0,0,0), new Color(0, 1, 0, 0) , new Color(0, 0, 1, 0) , new Color(0, 0, 0, 1) };

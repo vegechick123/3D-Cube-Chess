@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ElementSurface;
 public enum FloorStateEnum
 {
     NoneCover,
@@ -20,7 +21,7 @@ public class FloorStateMachine
     {
         floor = owner;
     }
-    public void SetState(FloorState newState)
+    void SetState(FloorState newState)
     {
         if (currentState != null)
             currentState.Exit();
@@ -32,6 +33,7 @@ public class FloorStateMachine
     }
     public void SetState(FloorStateEnum state)
     {
+        currentStateEnum = state;
         switch (state)
         {
             case FloorStateEnum.NoneCover:
@@ -63,6 +65,7 @@ public class FloorState
     }
     public virtual void Enter()
     {
+        MarchingQuad.instance.SetTypeAndUpdateTexture(floor.location, MarchingQuad.ElementTotype(stateMachine.currentStateEnum));
     }
     public virtual void Exit()
     {
@@ -106,6 +109,7 @@ class Empty : FloorState
     }
     public override void Enter()
     {
+        base.Enter();
         floor.transitable = false;
         floor.render.enabled = false;
     }
@@ -153,12 +157,8 @@ class WaterCover : FloorState
     }
     public override void Enter()
     {
-        stateMachine.floor.render.material.color = Color.blue;
+        base.Enter();
 
-    }
-    public override void Exit()
-    {
-        stateMachine.floor.render.material= stateMachine.floor.render.sharedMaterial;
     }
     public override void OnHitElement(Element element)
     {
@@ -187,7 +187,7 @@ class OilCover : FloorState
     }
     public override void Enter()
     {
-        stateMachine.floor.render.material.color = Color.black;
+        base.Enter();
         stateMachine.floor.explosive = true;
     }
     public override void OnHitElement(Element element)
@@ -205,7 +205,6 @@ class OilCover : FloorState
     }
     public override void Exit()
     {
-        stateMachine.floor.render.material.color = Color.black;
         stateMachine.floor.explosive = false;
     }
 }
@@ -218,12 +217,9 @@ class FireCover : FloorState
     }
     public override void Enter()
     {
-        stateMachine.floor.render.material.color = Color.red;
+        base.Enter();
     }
-    public override void Exit()
-    {
-        stateMachine.floor.render.material = stateMachine.floor.originMaterial;
-    }
+
     public FireCover(FloorStateMachine owner) : base(owner)
     {
 

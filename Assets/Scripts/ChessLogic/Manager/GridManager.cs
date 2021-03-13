@@ -43,7 +43,6 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
         base.Awake();
         floors = new GFloor[size.x, size.y];
         chesses = new List<GChess>();
-
     }
     private void Start()
     {

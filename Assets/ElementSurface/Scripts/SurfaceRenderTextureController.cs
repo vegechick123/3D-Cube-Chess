@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElementSurfaceController : MonoBehaviour
+public class SurfaceRenderTextureController : MonoBehaviour
 {
     Material elementSurfaceMaterial;
     RenderTexture splatControl;
@@ -26,14 +26,8 @@ public class ElementSurfaceController : MonoBehaviour
         RenderTexture.active = null;
         brushMaterial = new Material(brushShader);
         
-        //Graphics.SetRenderTarget(splatControl);
-        //Graphics.DrawTexture(new Rect(0, 0, 100, 100), brushTexture);
     }
-    private void Update()
-    {
-
-        //Paint(new Vector2(0.5f, 0.5f), color,64);
-    }
+    
     public void Paint(Vector2 uv, Color color, float brushSize, Texture2D brushTexture)
     {
         brushMaterial.SetTexture("_MainTex", brushTexture);
@@ -50,10 +44,10 @@ public class ElementSurfaceController : MonoBehaviour
     }
     private void OnGUI()
     {
-        GL.PushMatrix();
-        GL.LoadPixelMatrix(0, Screen.width, Screen.height, 0);
-        Graphics.DrawTexture(new Rect(0, 0, 100, 100), splatControl);
-        GL.PopMatrix();
+        //GL.PushMatrix();
+        //GL.LoadPixelMatrix(0, Screen.width, Screen.height, 0);
+        //Graphics.DrawTexture(new Rect(0, 0, 100, 100), splatControl);
+        //GL.PopMatrix();
     }
 
 }
