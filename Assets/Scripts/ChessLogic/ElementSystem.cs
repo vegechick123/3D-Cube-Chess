@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElementSystem : MonoBehaviour
+public static class ElementSystem
 {
     async public static UniTask ApplyElementAtAsync(Vector2Int location, Element element, int damage = 0)
     {
@@ -19,7 +19,7 @@ public class ElementSystem : MonoBehaviour
             }
         if (element == Element.Thunder)
         {
-            //List<GActor> targets = FindCuductive(location);
+            //List<GActor> targets = OldFindCuductive(location);
             //foreach (GActor target in targets)
             //{
             //    target.ElementReaction(Element.Thunder);
@@ -56,7 +56,8 @@ public class ElementSystem : MonoBehaviour
             };
         }
     }
-    public static List<GActor> FindCuductive(Vector2Int source)
+    [Obsolete]
+    public static List<GActor> OldFindCuductive(Vector2Int source)
     {
         Queue<Vector3Int> queue = new Queue<Vector3Int>();
         List<GActor> res = new List<GActor>();

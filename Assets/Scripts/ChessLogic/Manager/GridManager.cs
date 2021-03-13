@@ -445,8 +445,16 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
         GDataSpawner[] dataSpawners = FindObjectsOfType<GDataSpawner>();
         foreach (GFixSpawner t in fixSpawners)
             t.SpawnFixProtype();
-        SaveData data = SaveLoadManager.instance.currentData;
-        for (int i = 0; i < data.playerChessDatas.Count; i++)
-            dataSpawners[i].Spawn(data.playerChessDatas[i]);
+        if(!SaveLoadManager.instance)
+        {
+            Debug.LogWarning("无存储机制运行");
+        }
+        else
+        {
+            SaveData data = SaveLoadManager.instance.currentData;
+            for (int i = 0; i < data.playerChessDatas.Count; i++)
+                dataSpawners[i].Spawn(data.playerChessDatas[i]);
+        }
+        
     }
 }
