@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SurfaceRenderTextureController : MonoBehaviour
+public class SurfaceRenderTexturePainter : MonoBehaviour
 {
     Material elementSurfaceMaterial;
     public RenderTexture splatControl;
@@ -35,13 +35,13 @@ public class SurfaceRenderTextureController : MonoBehaviour
         RenderTexture.active = null;
     }
     
-    public void Paint(Vector2 uv,  float brushSize, Material material)
+    public void Paint(Vector2 uv,  float brushSize, Material material,Texture2D tex=null)
     {
         Graphics.SetRenderTarget(splatControl);
         GL.PushMatrix();
         GL.LoadPixelMatrix(0, textureWidth, textureHeight, 0);
         Vector2 center = uv * textureSize;
-        Graphics.DrawTexture(new Rect(center - (Vector2)textureSize * brushSize , 2 * (Vector2)textureSize * brushSize), Texture2D.whiteTexture, material); ;
+        Graphics.DrawTexture(new Rect(center - (Vector2)textureSize * brushSize , 2 * (Vector2)textureSize * brushSize), tex?tex:Texture2D.whiteTexture, material); ;
         
         GL.PopMatrix();
         Graphics.SetRenderTarget(Camera.main.targetTexture);

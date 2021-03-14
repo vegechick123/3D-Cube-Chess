@@ -5021,26 +5021,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1663188229}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2b2ebf4817b5ff49a04279c30f80169, type: 3}
+  m_Script: {fileID: 11500000, guid: b9f4331ff8860e746b23ab7fd71fe812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texture:
-  - {fileID: 2800000, guid: de257d3e4d25e3944b18c8b0b22a6e98, type: 3}
-  - {fileID: 2800000, guid: ab874f924fbfd734f803a7f09ad11bfa, type: 3}
-  - {fileID: 2800000, guid: c5c520a93c0f2ac4fb3176e39391183c, type: 3}
-  - {fileID: 2800000, guid: 6b9e55db253a3b64b919a0db1a6d9680, type: 3}
-  - {fileID: 2800000, guid: 1221626a109aa7343a594df2bab54e58, type: 3}
-  - {fileID: 2800000, guid: dcf956d5ce96fd24fb4957d1e1eb8643, type: 3}
-  - {fileID: 2800000, guid: 851c5bdbbb7d21a499e3477d54942988, type: 3}
-  - {fileID: 2800000, guid: 3ec9ec7ae5ad58748bf1d1780d5e863e, type: 3}
-  - {fileID: 2800000, guid: 132b10027b9c37144a3fa2f5a251ed0e, type: 3}
-  - {fileID: 2800000, guid: 4bd513d10c423c34988f0fab49b300f0, type: 3}
-  - {fileID: 2800000, guid: 6d308701fabb82b46bb4c47c2542b8b7, type: 3}
-  - {fileID: 2800000, guid: 041aa595633d36c4d8c82fada8890820, type: 3}
-  - {fileID: 2800000, guid: 777efee85b146eb4eb80110692c2653f, type: 3}
-  - {fileID: 2800000, guid: 299ccd082cdb65c4cbd33b254ac95517, type: 3}
+  texture: {fileID: 2800000, guid: 0fb5227b0d7b50346b9b5968ac3347a0, type: 3}
   size: {x: 10, y: 10}
-  brushShader: {fileID: 4800000, guid: b2eab055da542cb4fb5eea8a68a0e918, type: 3}
+  brushShader: {fileID: 4800000, guid: 3e2c26aca7edb0748b210f45518cfda6, type: 3}
 --- !u!114 &1663188233
 MonoBehaviour:
   m_ObjectHideFlags: 0

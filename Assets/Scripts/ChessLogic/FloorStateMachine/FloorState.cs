@@ -65,7 +65,7 @@ public class FloorState
     }
     public virtual void Enter()
     {
-        MarchingQuad.instance.SetTypeAndUpdateTexture(floor.location, MarchingQuad.ElementTotype(stateMachine.currentStateEnum));
+        ElementGrid.instance.SetType(floor.location, ElementGrid.ElementTotype(stateMachine.currentStateEnum));
     }
     public virtual void Exit()
     {

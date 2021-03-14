@@ -19,7 +19,7 @@ namespace ElementSurface
         public void Create()
         {
             SmallGrid.tex = texture;
-            SmallGrid.painter = GetComponent<SurfaceRenderTextureController>();
+            SmallGrid.painter = GetComponent<SurfaceRenderTexturePainter>();
             SmallGrid.brushShader = brushShader;
             grid = new BigGrid();
             grid.Init(size);
@@ -275,7 +275,7 @@ namespace ElementSurface
     public struct SmallGrid
     {
         public MiddleGrid parent;
-        public static SurfaceRenderTextureController painter;
+        public static SurfaceRenderTexturePainter painter;
         public static Texture2D[] tex;
         public static float size;
         public static Shader brushShader;
