@@ -10,7 +10,7 @@ namespace ElementSurface
         public Texture2D[] texture = new Texture2D[14];
         public BigGrid grid;
         public Vector2Int size;
-        public int[,] testValue = { { 0, 1, 2 }, { 1, 1, 3 }, { 2, 2, 3 } };
+        public Shader brushShader;
         protected override void Awake()
         {
             base.Awake();
@@ -20,22 +20,27 @@ namespace ElementSurface
         {
             SmallGrid.tex = texture;
             SmallGrid.painter = GetComponent<SurfaceRenderTextureController>();
-
+            SmallGrid.brushShader = brushShader;
             grid = new BigGrid();
             grid.Init(size);
             grid.UpdateTexture();
         }
         private void Update()
         {
+            SmallGrid.painter.ClearTexture();
             grid.FrameUpdate();
         }
-        public void SetType(Vector2Int location,int type)
+        public void SetType(Vector2Int location, int type)
         {
             grid.grid[location.x, location.y].activeType = type;
         }
         public void SetTypeAndUpdateTexture(Vector2Int location, int type)
         {
             SetType(location, type);
+            grid.UpdateTexture();
+        }
+        public void UpdateAllTexture()
+        {
             grid.UpdateTexture();
         }
         public static int ElementTotype(FloorStateEnum element)
@@ -50,7 +55,7 @@ namespace ElementSurface
                     return 3;
                 case FloorStateEnum.NoneCover:
                     return 0;
-                    
+
             }
             throw new Exception();
 
@@ -87,11 +92,11 @@ namespace ElementSurface
         }
         int[] GetCode(int i, int j)
         {
-            int activeType = grid[i,j].activeType;
+            int activeType = grid[i, j].activeType;
             if (activeType == 0)
                 return new int[] { 0, 0, 0, 0 };
             int[] dx = { 1, 0, -1, 0 };
-            int[] dy = { 0, 1, 0, -1};
+            int[] dy = { 0, 1, 0, -1 };
             int[] ans = new int[4];
             for (int ki = 0; ki < 4; ki++)
             {
@@ -103,9 +108,9 @@ namespace ElementSurface
                 {
                     nowi += dy[currentBegin];
                     nowj += dx[currentBegin];
-                    if(SaveGetGrid(nowi,nowj)?.activeType==activeType)
+                    if (SaveGetGrid(nowi, nowj)?.activeType == activeType)
                     {
-                        res |= (1<<(3 - kj));
+                        res |= (1 << (3 - kj));
                     }
                     currentBegin++;
                     currentBegin %= 4;
@@ -151,8 +156,7 @@ namespace ElementSurface
                 for (int j = 0; j < 3; j++)
                 {
                     SmallGrid copy = this[i, j];
-                    copy.center = center + SmallGrid.size * new Vector2(j - 1, i - 1);
-                    copy.parent = this;
+                    copy.Create(this, center, i, j);
                     this[i, j] = copy;
                 }
             }
@@ -274,12 +278,21 @@ namespace ElementSurface
         public static SurfaceRenderTextureController painter;
         public static Texture2D[] tex;
         public static float size;
-        public static Color[] typeColor=new Color[] {new Color(1,0,0,0), new Color(0, 1, 0, 0) , new Color(0, 0, 1, 0) , new Color(0, 0, 0, 1) };
+        public static Shader brushShader;
+        public static Color[] typeColor = new Color[] { new Color(1, 0, 0, 0), new Color(0, 1, 0, 0), new Color(0, 0, 1, 0), new Color(0, 0, 0, 1) };
         public Vector2 center;
         public int type;
-        public int texType;     
+        public int texType;
+        public float changeTime; 
+        Material brushMaterial;
+        float time;
         //public Color color=Color.red;
-
+        public void Create(MiddleGrid parent, Vector2 center, int i, int j)
+        {
+            this.center = center + size * new Vector2(j - 1, i - 1);
+            this.parent = parent;
+            brushMaterial = new Material(brushShader);
+        }
         public int GetTextureType(int code)
         {
             if ((code & 8) == 0)
@@ -352,11 +365,18 @@ namespace ElementSurface
         }
         public void UpdateTexture(int code, int rotation)
         {
+            time = 0;
+            brushMaterial.SetTexture("_Last", tex[texType]);
             texType = GetTextureType(code, rotation);
+            brushMaterial.SetTexture("_New", tex[1]);
+            brushMaterial.SetColor("_Color", typeColor[parent.activeType]);
         }
         public void FrameUpdate()
         {
-            painter.Paint(center, typeColor[parent.activeType], size / 2f, tex[texType]);
+            time += Time.deltaTime;
+            time = Mathf.Min(time, 1);
+            brushMaterial.SetColor("_Lerp", typeColor[parent.activeType]);
+            painter.Paint(center, size, brushMaterial);
         }
     }
 }

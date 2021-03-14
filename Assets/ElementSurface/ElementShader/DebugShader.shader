@@ -1,11 +1,10 @@
-﻿Shader "Unlit/BrushShader"
+﻿Shader "Unlit/SurfaceDebugShader"
 {
     
     SubShader
     {
         
         Tags{ "RenderType" = "Opaque" "RenderPipeline" = "UniversalRenderPipeline" }
-        Blend One One
         Pass
         {
 
@@ -32,12 +31,8 @@
             #pragma vertex vert
 		    // This line defines the name of the fragment shader. 
             #pragma fragment frag
-            sampler2D _NoiseTex;
-            sampler2D _Last;
-            sampler2D _New;
-            float size;            
             float4 _Color;
-            float _Lerp;
+            sampler2D _MainTex;
             v2f vert(Attributes v)
             {
                 float3 v0 = v.positionOS.xyz;
@@ -51,11 +46,10 @@
             // The fragment shader definition.            
             half4 frag(v2f i) : SV_Target
             {                
-                float s = tex2D(_New,i.uv).r;
-                float noise4 = tex2D(_NoiseTex,i.scrPos.xy/i.scrPos.w)*_Color;
+                float s = dot(tex2D(_MainTex,i.uv),_Color);
                 //float origin = tex2D(_RenderTexture,i.scrPos.xy/i.scrPos.w).r;
                 //float4 backColor=;
-                return _Color*s;
+                return half4(s,s,s,1);
             }
 		    ENDHLSL
         }

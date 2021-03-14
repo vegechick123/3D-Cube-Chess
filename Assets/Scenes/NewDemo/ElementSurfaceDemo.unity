@@ -279,6 +279,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03e8912677627bb4ebb275e053785b62, type: 3}
+--- !u!4 &63519666 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9062127574259360961, guid: 8fe2e4b0e90cf0a4a8c37cf41f42851c,
+    type: 3}
+  m_PrefabInstance: {fileID: 224734381}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &81933438
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1689,7 +1695,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 224734382}
+    m_TransformParent: {fileID: 1123938115}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 3df168b292ef703469c3d767ccd13e2e,
         type: 3}
@@ -1709,7 +1715,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3df168b292ef703469c3d767ccd13e2e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3df168b292ef703469c3d767ccd13e2e,
         type: 3}
@@ -1729,7 +1735,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3df168b292ef703469c3d767ccd13e2e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 64
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3df168b292ef703469c3d767ccd13e2e,
         type: 3}
@@ -3477,6 +3483,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03e8912677627bb4ebb275e053785b62, type: 3}
+--- !u!1 &1123938114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1123938115}
+  m_Layer: 0
+  m_Name: Environment
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1123938115
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123938114}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1663188230}
+  m_Father: {fileID: 63519666}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1130342578
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4969,6 +5006,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 461578088}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1663188230 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3df168b292ef703469c3d767ccd13e2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 461578088}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1663188231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4983,7 +5026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texture:
   - {fileID: 2800000, guid: de257d3e4d25e3944b18c8b0b22a6e98, type: 3}
-  - {fileID: 2800000, guid: 9ac2e2da52b47c5438ae6a669e094b37, type: 3}
+  - {fileID: 2800000, guid: ab874f924fbfd734f803a7f09ad11bfa, type: 3}
   - {fileID: 2800000, guid: c5c520a93c0f2ac4fb3176e39391183c, type: 3}
   - {fileID: 2800000, guid: 6b9e55db253a3b64b919a0db1a6d9680, type: 3}
   - {fileID: 2800000, guid: 1221626a109aa7343a594df2bab54e58, type: 3}
@@ -4997,6 +5040,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 777efee85b146eb4eb80110692c2653f, type: 3}
   - {fileID: 2800000, guid: 299ccd082cdb65c4cbd33b254ac95517, type: 3}
   size: {x: 10, y: 10}
+  brushShader: {fileID: 4800000, guid: b2eab055da542cb4fb5eea8a68a0e918, type: 3}
 --- !u!114 &1663188233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5009,10 +5053,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5378d111ff37914fb0ca86f0ce0c7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  splatControl: {fileID: 0}
   brushSize: 64
   brushShader: {fileID: 4800000, guid: b2eab055da542cb4fb5eea8a68a0e918, type: 3}
-  color: {r: 0, g: 0, b: 0, a: 0}
   threshold: 0
+  debugEnalble: 1
+  debugColor: {r: 1, g: 0, b: 0, a: 0}
+  debugShader: {fileID: 4800000, guid: b88e69b475bb58f469392440f0c0d2b3, type: 3}
 --- !u!1001 &1746988484
 PrefabInstance:
   m_ObjectHideFlags: 0
