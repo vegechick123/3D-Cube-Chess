@@ -15,17 +15,48 @@ public class CMoveComponent : Component
     public float speed = 1f;
     private float limit = 0.1f;
     private float throwTime = 2f / 3;
-    Queue<Vector2Int> path= new Queue<Vector2Int>();
-    protected Vector3 lastPositon;
+    Queue<Vector2Int> path = new Queue<Vector2Int>();
+    protected Vector3 lastPosition;
     private Vector3 m_curTargetPosition;
-    protected Vector3 curTargetPosition { get { return m_curTargetPosition; } set { lastPositon = transform.position; m_curTargetPosition = value; } }
+    protected Vector3 curTargetPosition { get { return m_curTargetPosition; } set { lastPosition = transform.position; m_curTargetPosition = value; } }
 
-    [HideInInspector]
+    [NonSerialized]
+    public UnityEvent<Vector2Int> ePassBy = new EventWrapper<Vector2Int>();
+    [NonSerialized]
     public UnityEvent eFinishPath = new UnityEvent();
     private float curTime = 0f;
+
+    Vector2Int m_lastLocation;
+    Vector2Int lastLocation
+    {
+        get
+        {
+            return m_lastLocation;
+        }
+        set
+        {            
+            
+            m_lastLocation = value;
+            lastPosition = GridManager.instance.GetChessPosition3D(value);
+        }
+    }
+    Vector2Int m_curTargetLocation;
+    Vector2Int curTargetLocation
+    {
+        get
+        {
+            return m_curTargetLocation;
+        }
+        set
+        {
+            lastLocation = m_curTargetLocation; 
+            m_curTargetLocation = value;
+            m_curTargetPosition = GridManager.instance.GetChessPosition3D(value);
+        }
+    }
     public virtual void AbortMove()
     {
-        lastPositon = transform.position;
+        lastPosition = transform.position;
         curTargetPosition = transform.position;
         state = MoveState.Idle;
     }
@@ -62,8 +93,8 @@ public class CMoveComponent : Component
         //t *= speed/2;
         t /= throwTime;
         float height = 3;
-        Vector3 targetPosition = Vector3.Lerp(lastPositon, curTargetPosition, t);
-        targetPosition.y = height*2*t * (1-t) + curTargetPosition.y;
+        Vector3 targetPosition = Vector3.Lerp(lastPosition, curTargetPosition, t);
+        targetPosition.y = height * 2 * t * (1 - t) + curTargetPosition.y;
         transform.position = targetPosition;
     }
     virtual public bool RequestMove(Vector2Int[] pathArr)
@@ -86,7 +117,7 @@ public class CMoveComponent : Component
             }
 
             state = MoveState.Moving;
-            curTargetPosition = GridManager.instance.GetChessPosition3D(path.Dequeue());
+            curTargetLocation = path.Dequeue();
             return true;
         }
     }
@@ -104,8 +135,8 @@ public class CMoveComponent : Component
         {
             curTime = 0f;
             state = MoveState.Throwing;
-            curTargetPosition = GridManager.instance.GetChessPosition3D(destination);
-            lastPositon = transform.position;
+            curTargetLocation = destination;
+            lastPosition = transform.position;
             return true;
         }
     }
@@ -113,10 +144,11 @@ public class CMoveComponent : Component
     {
         curTime = 0;
         transform.position = curTargetPosition;
+        ePassBy.Invoke(curTargetLocation);
         //达到最终终点
         if (path.Count == 0)
         {
-            lastPositon = curTargetPosition;
+            lastPosition = curTargetPosition;
             curTargetPosition = transform.position;
             state = MoveState.Idle;
             eFinishPath.Invoke();
@@ -124,7 +156,9 @@ public class CMoveComponent : Component
         }
         else
         {
-            curTargetPosition = GridManager.instance.GetChessPosition3D(path.Dequeue());
+            Vector2Int next = path.Dequeue();
+            //cur
+            curTargetLocation = next;
             return true;
         }
     }
@@ -135,7 +169,7 @@ public class CMoveComponent : Component
         {
             NextPosition();
         }
-        else if (state == MoveState.Throwing&&curTime>throwTime)
+        else if (state == MoveState.Throwing && curTime > throwTime)
         {
             NextPosition();
         }

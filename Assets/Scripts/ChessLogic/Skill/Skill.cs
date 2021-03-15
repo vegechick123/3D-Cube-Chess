@@ -35,9 +35,11 @@ public abstract class Skill: ScriptableObject,IGetInfo
     {
         return GridManager.instance.GetCircleRange(owner.location,length);
     }
-    protected async virtual UniTask Shoot(Vector2Int location)
+    protected async virtual UniTask Shoot(Vector2Int location,VFXObserver vfxObserver=null)
     {
         skillVFX.SetTarget(location);
+        skillVFX.SetObserver(vfxObserver);
         await skillVFX.CreateProjectileParticle();
     }
+
 }

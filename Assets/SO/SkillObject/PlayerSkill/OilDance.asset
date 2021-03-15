@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b61e8684e8a219e429075f7279fb4815, type: 3}
-  m_Name: Rain 1
+  m_Name: OilDance
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   skillVFX: {fileID: 11400000, guid: 682496960e3a7a84b835dc5e6d2b8909, type: 2}
@@ -28,7 +28,7 @@ MonoBehaviour:
   infinite: 0
   useCount: 3
   targetType: 2
-  element: 0
+  element: 4
   damage: 0
   selectRange: 3
   affectRange: 2

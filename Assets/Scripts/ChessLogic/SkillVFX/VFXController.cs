@@ -13,7 +13,10 @@ public class VFXController : MonoBehaviour
     public bool finish = false;
     public VisualEffect visualEffect;
     public bool bProjectile=false;
+    public VFXObserver observer = null;
     static float waitTime = 5f;
+    float speed;
+    int currentTile = 0;
     private void Awake()
     {
         visualEffect = GetComponent<VisualEffect>();
@@ -32,6 +35,11 @@ public class VFXController : MonoBehaviour
                     eHit.Invoke();
                     visualEffect.SendEvent("OnHit");
                     Stop();
+                }
+                if((currentTime*speed-0.75f)>currentTile)
+                {
+                    observer?.eEnterTile.Invoke(currentTile);
+                    currentTile++;
                 }
                 visualEffect.SetFloat("t", currentTime / totalTime);
             }
@@ -58,6 +66,7 @@ public class VFXController : MonoBehaviour
         visualEffect.SetVector3("origin_position",origin);
         visualEffect.SetVector3("target_position", target);
         visualEffect.SendEvent("OnShoot");
+        this.speed = speed;
         totalTime = (target - origin).magnitude/speed;        
     }
 

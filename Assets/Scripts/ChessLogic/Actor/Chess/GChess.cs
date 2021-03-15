@@ -22,7 +22,7 @@ public class GChess : GActor
     public bool floatInAir = false;
     [HideInInspector]
     public int curMovement { get { return APAttribute.value * movePerAp+remainMove; } }
-    public Modifier[] modifiers;
+    public List<Modifier> modifiers;
     public int teamID;
     [HideInInspector]
     public UnityEvent eLocationChange = new UnityEvent();
@@ -39,7 +39,7 @@ public class GChess : GActor
 
     public HealthBar healthBar;
     protected bool waitShoot;
-    public void spendMoveCost(int distance)
+    public void SpendMoveCost(int distance)
     {
         distance -= remainMove;
         remainMove = 0;
@@ -52,10 +52,17 @@ public class GChess : GActor
         base.GAwake();
         navComponent = GetComponent<CNavComponent>();
         moveComponent = GetComponent<CMoveComponent>();
+        moveComponent.ePassBy.AddListener((t) =>
+        {
+            foreach(Modifier m in modifiers)
+            {
+                m.OnPassFloor(GridManager.instance.GetFloor(t));
+            }
+        });
         outline = GetComponent<Outline>();
         curHealth = maxHealth;
         healthBar = new HealthBar(this);
-        for (int i = 0; i < modifiers.Length; i++)
+        for (int i = 0; i < modifiers.Count; i++)
             modifiers[i] = Instantiate(modifiers[i]);
         foreach (Modifier modifier in modifiers)
         {
@@ -113,7 +120,7 @@ public class GChess : GActor
     /// </summary>
     /// <param name="direction">方向，请保证是单位向量</param>
     /// <param name="distance">推动的距离</param>
-    async public UniTask PushTowardAsync(Vector2Int direction, int distance)
+    async public UniTask PushTowardAsync(Vector2Int direction, int distance=1)
     {
         Vector2Int destination = location;
         for (int i = 0; i < distance; i++)
@@ -233,5 +240,11 @@ public class GChess : GActor
     public virtual void OnPlayerTurnEnd()
     {
 
+    }
+    public void AddModifier(Modifier modifier)
+    {
+        modifier = Instantiate(modifier);
+        modifier.Init(this);
+        modifiers.Add(modifier);
     }
 }

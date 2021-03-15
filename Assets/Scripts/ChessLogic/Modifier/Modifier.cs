@@ -14,4 +14,8 @@ public class Modifier : ScriptableObject
     {
 
     }
+    public virtual void OnPassFloor(GFloor floor)
+    {
+
+    }
 }

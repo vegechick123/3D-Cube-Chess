@@ -9,27 +9,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b61e8684e8a219e429075f7279fb4815, type: 3}
+  m_Script: {fileID: 11500000, guid: 38d472772358e6543b108e12359ef1f5, type: 3}
   m_Name: WaterBullet
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   skillVFX: {fileID: 11400000, guid: 682496960e3a7a84b835dc5e6d2b8909, type: 2}
   title: "\u6C34\u5F39"
-  info: 
+  info: "\u671D\u7740\u76EE\u6807\u5730\u70B9\u53D1\u5C04\u6C34\u5F39\uFF0C\u5BF9\u7ECF\u8FC7\u7684\u5730\u9762\u65BD\u52A0\u6C34"
   eBegin:
     m_PersistentCalls:
       m_Calls: []
   eEnd:
     m_PersistentCalls:
       m_Calls: []
-  icon: {fileID: 21300000, guid: 05283a8eef40c2f43b0b613b340ae4a8, type: 3}
+  icon: {fileID: 3149075925031394334, guid: db71ec65640dcce438b16123a35a646c, type: 3}
   cursorHints: []
-  cost: 1
-  infinite: 1
-  useCount: 3
+  cost: 0
+  infinite: 0
+  useCount: 1
   targetType: 2
   element: 2
-  damage: 2
-  selectRange: -1
+  damage: 1
+  selectRange: 5
   affectRange: 0
-  rangeType: 2

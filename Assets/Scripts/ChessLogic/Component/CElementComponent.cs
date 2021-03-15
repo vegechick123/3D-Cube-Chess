@@ -20,7 +20,6 @@ public class CElementComponent : Component
 
     // Start is called before the first frame update    
 
-    public bool conductive = false;
     public virtual void OnHitElement(Element element)
     {
         switch (element)

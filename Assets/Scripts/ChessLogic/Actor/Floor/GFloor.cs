@@ -11,6 +11,8 @@ public class GFloor : GActor
     public bool wooden = false;
     public bool inflammable=false;
     [NonSerialized]
+    public bool conductive = false;//导电
+    [NonSerialized]
     public bool explosive = false;//易爆
     [NonSerialized]
     public bool readyToBurst = false;//用来BFS
@@ -38,5 +40,8 @@ public class GFloor : GActor
     {
         floorStateMachine.currentState.OnPlayerTurnEnd();
     }
-
+    public GChess GetChessAbove()
+    {
+        return GridManager.instance.GetChess(location);
+    }
 }

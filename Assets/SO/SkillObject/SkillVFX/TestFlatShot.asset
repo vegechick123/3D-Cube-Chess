@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9da22c8f017004499dca5a936fa9ca5, type: 3}
-  m_Name: TestVFXSO
+  m_Name: TestFlatShot
   m_EditorClassIdentifier: 
   prefabBeginParticle: {fileID: 0}
-  prefabProjectileParticle: {fileID: 5030364563990790324, guid: 68cbfa60b634bcd4089c9aeb58937961,
+  prefabProjectileParticle: {fileID: 5030364563990790324, guid: 8d23722cb9b59bd41860849f590cc533,
     type: 3}
   instant: 0
   speed: 5

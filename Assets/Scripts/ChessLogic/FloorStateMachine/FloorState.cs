@@ -158,7 +158,12 @@ class WaterCover : FloorState
     public override void Enter()
     {
         base.Enter();
-
+        floor.conductive = true;
+    }
+    public override void Exit()
+    {
+        base.Exit();
+        floor.conductive = false;
     }
     public override void OnHitElement(Element element)
     {
@@ -169,6 +174,9 @@ class WaterCover : FloorState
                 break;
             case Element.Oil:
                 stateMachine.SetState(FloorStateEnum.OilCover);
+                break;
+            case Element.Thunder:
+                stateMachine.floor.CreateFloatTextOnHead("电击", new Color(0.5f, 0, 0.5f));
                 break;
             case Element.None:
                 break;

@@ -68,7 +68,7 @@ public class GPlayerChess : GChess
         navComponent.GenNavInfo();
         int distance = navComponent.navInfo.GetPath(destination).Length;
         await base.MoveToAsync(destination);
-        spendMoveCost(distance);
+        SpendMoveCost(distance);
         t.destinationRotation = render.transform.rotation;
 
     }

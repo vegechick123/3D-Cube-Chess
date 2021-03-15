@@ -85,9 +85,9 @@ namespace ElementSurface
             brushMaterial.SetTexture("_MainTex", tex);
             ChangeType(0);
         }
-        void ChangeType(int newType)
+        void ChangeType(int newType,float initialTime = 0f)
         {
-            time = 0.2f;
+            time = initialTime;
             brushMaterial.SetColor("_OldColor", typeColor[activeType]);
             m_activeType = newType;
             brushMaterial.SetColor("_NewColor", typeColor[activeType]);
@@ -95,10 +95,14 @@ namespace ElementSurface
         }
         public void FrameUpdate()
         {
-            time += Time.deltaTime*0.5f;
-            time = Mathf.Min(time, 1);
-            brushMaterial.SetFloat("_Lerp", time);
+            time += Time.deltaTime;
+            brushMaterial.SetFloat("_Lerp", GetLerp(time));
             painter.Paint(center, size, brushMaterial,tex);
+        }
+        public float GetLerp(float t)
+        {
+
+            return 1-Mathf.Exp(-t);
         }
     }
 }

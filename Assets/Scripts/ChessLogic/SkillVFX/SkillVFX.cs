@@ -16,6 +16,7 @@ public class SkillVFX : ScriptableObject
     private Vector3 destination;
     private VFXController beginParticle;
     private Skill skill;
+    VFXObserver vfXObserver = null;
     public void Init(Skill skill)
     {
         this.skill = skill;
@@ -37,6 +38,10 @@ public class SkillVFX : ScriptableObject
     {
         this.destination = destination;
     }
+    public void SetObserver(VFXObserver observer)
+    {
+        vfXObserver=observer;
+    }
     public void CreateBeginParticle()
     {
         if (beginParticle)
@@ -55,6 +60,7 @@ public class SkillVFX : ScriptableObject
         {
             GameObject go = Instantiate(prefabProjectileParticle);
             VFXController t = go.AddComponent<VFXController>();
+            t.observer = vfXObserver;
             if (instant)
             {
                 t.InitInstantProjectile(origin, destination);
@@ -65,11 +71,17 @@ public class SkillVFX : ScriptableObject
                 t.InitProjectile(origin, destination, speed);
                 await p;
             }
+
         }
+            
     }
     VFXController CreateVFXWithAutoDestory(GameObject prefab)
     {
         GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity);
         return go.AddComponent<VFXController>();
     }
+}
+public class VFXObserver
+{
+    public UnityEvent<int> eEnterTile= new EventWrapper<int>();
 }
