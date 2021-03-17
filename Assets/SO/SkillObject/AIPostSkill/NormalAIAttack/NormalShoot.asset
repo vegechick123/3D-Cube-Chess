@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a0659f4fbf682d489a2c8093c1a766c, type: 3}
-  m_Name: SpawnMetal
+  m_Script: {fileID: 11500000, guid: 417f6b51ad7696745aa31a95963882d2, type: 3}
+  m_Name: NormalShoot
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   skillVFX: {fileID: 11400000, guid: 682496960e3a7a84b835dc5e6d2b8909, type: 2}
-  title: "\u9668\u77F3"
+  title: 
   info: 
   eBegin:
     m_PersistentCalls:
@@ -22,14 +22,11 @@ MonoBehaviour:
   eEnd:
     m_PersistentCalls:
       m_Calls: []
-  icon: {fileID: 21300000, guid: fa0cefcf48a8bb648a18e284cac82642, type: 3}
-  cursorHints: []
-  cost: 2
-  infinite: 0
-  useCount: 3
-  selectRange: 3
-  prefabChess: {fileID: 6636968429683534848, guid: 080531ba3e22bb14890d0ed3e3819a2d,
-    type: 3}
-  damage: 1
-  affectRange: 1
+  maxLength: -1
+  damage: 3
+  beginDistance: 1
   element: 5
+  willLockTarget: 1
+  willRetarget: 0
+  affectRange: 0
+  attackType: 0

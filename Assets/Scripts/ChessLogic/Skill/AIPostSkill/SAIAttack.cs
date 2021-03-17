@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -8,23 +9,26 @@ public enum SkillAttackType
     flatShot,
     projectile
 }
-[CreateAssetMenu(menuName = "Skills/AISkill/LockReaction")]
-public class SAIAttack : AIPostSkill
+[CreateAssetMenu(menuName = "Skill/AISkill/AIAttack")]
+public class SAIAttack : AIPostSkill,IRetargetable
 {
     public int maxLength = -1;
     public int damage;
     public int beginDistance = 1;
     public Element element;
     public bool willLockTarget;
+    public int affectRange = 0;
     protected Vector2Int direction;
     protected Vector2Int offset;
-    public SkillAttackType attackType=SkillAttackType.flatShot;
+    protected GChess target; 
+    public SkillAttackType attackType=SkillAttackType.flatShot; 
     public override Vector2Int[] GetTargetRange()
     {
         return GridManager.instance.GetFourRayRange(owner.location, maxLength, beginDistance);
     }
     public override async UniTask<bool> Decide(GChess target)
     {
+        this.target = target;
         if (attackType == SkillAttackType.flatShot)
         {
             if (target == null)
@@ -35,7 +39,7 @@ public class SAIAttack : AIPostSkill
             direction = target.location - owner.location;
             direction = direction.Normalized();
         }
-        else if(attackType == SkillAttackType.flatShot)
+        else if(attackType == SkillAttackType.projectile)
         {
             if (target == null)
             {
@@ -54,7 +58,7 @@ public class SAIAttack : AIPostSkill
         Vector2Int[] range = GetAffectRange();
         Vector2Int targetLocation = range[range.Length - 1];
         await Shoot(targetLocation);
-        await ElementSystem.ApplyElementAtAsync(targetLocation, element, damage);
+        await ElementSystem.ApplyElementAtAsync(GridManager.instance.GetCircleRange(targetLocation,affectRange), element, damage);
         if (willLockTarget)
             ReleaseLock();
     }
@@ -70,5 +74,16 @@ public class SAIAttack : AIPostSkill
         }
         return null;
     }
-
+    public void Retarget()
+    {
+        if (attackType == SkillAttackType.projectile)
+        {            
+            offset = target.location - owner.location;
+        }
+        else throw new Exception();
+    }
+}
+public interface IRetargetable
+{
+    void Retarget();
 }

@@ -6,8 +6,7 @@ using UnityEngine;
 public class SpawnChess : PlayerSkill
 {
     public int selectRange;
-    [SerializeField]
-    public GChess prefabChess;
+    public GameObject prefabChess;
     public int damage=0;
     public int affectRange=0;
     public Element element=Element.None;

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1276061866126194182}
   - component: {fileID: 1276061866126194177}
   - component: {fileID: 5196121434916426270}
-  - component: {fileID: 1276061866126194179}
   - component: {fileID: 1276061866126194181}
   - component: {fileID: 4719973281839897538}
   - component: {fileID: 7896855978869209627}
@@ -97,25 +96,6 @@ MonoBehaviour:
   roundCount: 0
   storeSkills: []
   chestSkillVFX: {fileID: 11400000, guid: 682496960e3a7a84b835dc5e6d2b8909, type: 2}
---- !u!114 &1276061866126194179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1276061866126194189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e8fe98ae5230fd4babdf3314662dd5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actor: {fileID: 0}
-  eSelect:
-    m_PersistentCalls:
-      m_Calls: []
-  eDeselect:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1276061866126194181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,9 +125,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actor: {fileID: 0}
   speed: 5
-  eFinishPath:
-    m_PersistentCalls:
-      m_Calls: []
   animator: {fileID: 0}
 --- !u!114 &7896855978869209627
 MonoBehaviour:
@@ -162,7 +139,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actor: {fileID: 0}
-  conductive: 0
 --- !u!114 &1210171754618433870
 MonoBehaviour:
   m_ObjectHideFlags: 0

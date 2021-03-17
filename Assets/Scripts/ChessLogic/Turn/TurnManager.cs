@@ -13,6 +13,8 @@ public class TurnManager : MonoBehaviour
     protected int currentTurnIndex = -1;
     public int currentRound=0;
     protected Turn currentTurn { get { return turnList[currentTurnIndex]; } }
+    [NonSerialized]
+    public UnityEvent ePlayerTurnEnd= new UnityEvent();
     public void StartExcute()
     {
         if(bStart)

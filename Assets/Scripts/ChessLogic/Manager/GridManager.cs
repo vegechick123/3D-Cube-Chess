@@ -354,28 +354,28 @@ public class GridManager : SingletonMonoBehaviour<GridManager>
         List<IGetInfo> list = new List<IGetInfo>();
         if (location == Vector2Int.down)
             return list;
-        int t = TempertureManager.instance.GetTempatureAt(location);
-        string info = string.Empty;
-        info += "回合结束时，";
-        if (t > 0)
-        {
-            info += "留在这里的角色会受到";
-            if (t >= 2)
-            {
-                info += t;
-                info += "点";
-            }
-            info += UIManager.instance.GetHighTempertureRichText();
-        }
-        else if (t == 0)
-        {
-            info = "温度正好";
-        }
-        else
-        {
-            info += "留在这里的角色会受到" + UIManager.instance.GetLowTempertureRichText();
-        }
-        list.Add(new Information("区域温度：" + t, info));
+        //int t = TempertureManager.instance.GetTempatureAt(location);
+        //string info = string.Empty;
+        //info += "回合结束时，";
+        //if (t > 0)
+        //{
+        //    info += "留在这里的角色会受到";
+        //    if (t >= 2)
+        //    {
+        //        info += t;
+        //        info += "点";
+        //    }
+        //    info += UIManager.instance.GetHighTempertureRichText();
+        //}
+        //else if (t == 0)
+        //{
+        //    info = "温度正好";
+        //}
+        //else
+        //{
+        //    info += "留在这里的角色会受到" + UIManager.instance.GetLowTempertureRichText();
+        //}
+        //list.Add(new Information("区域温度：" + t, info));
         return list;
     }
     static public List<Vector2Int> GetLineRange(Vector2Int origin, Vector2Int target, bool containOrigin = false)

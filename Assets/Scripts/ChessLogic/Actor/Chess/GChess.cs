@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -20,19 +21,30 @@ public class GChess : GActor
     public bool bDead = false;
     public bool lockMove = false;
     public bool floatInAir = false;
-    [HideInInspector]
-    public int curMovement { get { return APAttribute.value * movePerAp+remainMove; } }
+    [NonSerialized]
+    public ReferenceAttribute unableTomove = new ReferenceAttribute();
+    public int curMovement
+    {
+        get
+        {
+            if (unableTomove.exist)
+                return 0;
+            return APAttribute.value * movePerAp + remainMove;
+        }
+    }
     public List<Modifier> modifiers;
     public int teamID;
-    [HideInInspector]
+    [NonSerialized]
     public UnityEvent eLocationChange = new UnityEvent();
-    [HideInInspector]
+    [NonSerialized]
     public UnityEvent eBeForceMove = new UnityEvent();
-    [HideInInspector]
+    [NonSerialized]
+    public UnityEvent eDie = new UnityEvent();
+    [NonSerialized]
     public CNavComponent navComponent;
-    [HideInInspector]
+    [NonSerialized]
     public CMoveComponent moveComponent;
-    [HideInInspector]
+    [NonSerialized]
     public Outline outline;
 
     public GameObject deathParticle;
@@ -44,8 +56,8 @@ public class GChess : GActor
         distance -= remainMove;
         remainMove = 0;
         int APCost = (distance + 1) / movePerAp;
-        remainMove = APCost * movePerAp  - distance;
-        curAP -=APCost;
+        remainMove = APCost * movePerAp - distance;
+        curAP -= APCost;
     }
     public override void GAwake()
     {
@@ -54,7 +66,7 @@ public class GChess : GActor
         moveComponent = GetComponent<CMoveComponent>();
         moveComponent.ePassBy.AddListener((t) =>
         {
-            foreach(Modifier m in modifiers)
+            foreach (Modifier m in modifiers)
             {
                 m.OnPassFloor(GridManager.instance.GetFloor(t));
             }
@@ -66,7 +78,7 @@ public class GChess : GActor
             modifiers[i] = Instantiate(modifiers[i]);
         foreach (Modifier modifier in modifiers)
         {
-            modifier.Init(this);
+            modifier.InitByOwner(this);
         }
         //healthBar.Hide();
     }
@@ -99,7 +111,7 @@ public class GChess : GActor
     /// </summary>
     public void TryFall()
     {
-        if(!floatInAir)
+        if (!floatInAir)
             Die();
     }
     public void Die()
@@ -109,8 +121,13 @@ public class GChess : GActor
         if (deathParticle != null)
             GridExtensions.CreateParticleAt(deathParticle, this);
         GridManager.instance.RemoveChess(this);
+        eDie.Invoke();
         foreach (Modifier modifier in modifiers)
+        {
             modifier.OnDeath();
+            modifier.OnEnd();
+            Destroy(modifier);
+        }
         Destroy(gameObject, 3f);
         Debug.Log("Chess:" + gameObject + "Die");
     }
@@ -120,7 +137,7 @@ public class GChess : GActor
     /// </summary>
     /// <param name="direction">方向，请保证是单位向量</param>
     /// <param name="distance">推动的距离</param>
-    async public UniTask PushTowardAsync(Vector2Int direction, int distance=1)
+    async public UniTask PushTowardAsync(Vector2Int direction, int distance = 1)
     {
         Vector2Int destination = location;
         for (int i = 0; i < distance; i++)
@@ -239,12 +256,23 @@ public class GChess : GActor
     }
     public virtual void OnPlayerTurnEnd()
     {
-
+        List<Modifier> copy = new List<Modifier>(modifiers);
+        foreach (Modifier modifier in copy)
+            modifier.OnPlayerTurn();
     }
-    public void AddModifier(Modifier modifier)
+    public void AddModifier(Modifier modifier, GChess caster = null)
     {
+        if (caster == null)
+            caster = this;
         modifier = Instantiate(modifier);
-        modifier.Init(this);
+        modifier.InitByCaster(caster);
+        modifier.InitByOwner(this);
         modifiers.Add(modifier);
+    }
+    public void RemoveModifier(Modifier modifier)
+    {
+        modifier.OnEnd();
+        Destroy(modifier);
+        modifiers.Remove(modifier);
     }
 }

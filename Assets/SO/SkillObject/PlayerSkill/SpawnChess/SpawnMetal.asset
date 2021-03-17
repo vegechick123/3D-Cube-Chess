@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30cadaf4cc652a4449b869454364bec2, type: 3}
-  m_Name: CloseAttack
+  m_Script: {fileID: 11500000, guid: 7a0659f4fbf682d489a2c8093c1a766c, type: 3}
+  m_Name: SpawnMetal
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   skillVFX: {fileID: 11400000, guid: 682496960e3a7a84b835dc5e6d2b8909, type: 2}
-  title: 
+  title: "\u9668\u77F3"
   info: 
   eBegin:
     m_PersistentCalls:
@@ -22,5 +22,14 @@ MonoBehaviour:
   eEnd:
     m_PersistentCalls:
       m_Calls: []
+  icon: {fileID: 21300000, guid: fa0cefcf48a8bb648a18e284cac82642, type: 3}
+  cursorHints: []
+  cost: 2
+  infinite: 0
+  useCount: 3
+  selectRange: 3
+  prefabChess: {fileID: 4906501959051697511, guid: 7b74b53f449a52245bd02792faebfa4a,
+    type: 3}
   damage: 1
-  element: 4
+  affectRange: 1
+  element: 5

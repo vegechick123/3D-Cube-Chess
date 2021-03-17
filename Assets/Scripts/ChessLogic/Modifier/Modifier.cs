@@ -1,20 +1,39 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Modifier : ScriptableObject
 {
-    [HideInInspector]
-    public GChess chess;
-    public void Init(GChess owner)
+    [NonSerialized]
+    public GChess owner;
+    [NonSerialized]
+    public GChess caster;
+    public virtual void InitByCaster(GChess caster)
     {
-        chess = owner;
+        this.caster = caster;
+    }
+    public virtual void InitByOwner(GChess owner)
+    {
+        this.owner = owner;
     }
     public virtual void OnDeath()
     {
 
     }
     public virtual void OnPassFloor(GFloor floor)
+    {
+
+    }
+    protected void EndModifier()
+    {
+        owner.RemoveModifier(this);
+    }
+    public virtual void OnEnd()
+    {
+        
+    }
+    public virtual void OnPlayerTurn()
     {
 
     }

@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c944bfe6224a80948a12bc428ef069f7, type: 3}
-  m_Name: Test1
+  m_Script: {fileID: 11500000, guid: 306ac495d21b7d14c9269927cdb1fb3b, type: 3}
+  m_Name: AddRetarget
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  skillVFX: {fileID: 11400000, guid: 682496960e3a7a84b835dc5e6d2b8909, type: 2}
+  skillVFX: {fileID: 11400000, guid: cfae9387aec878445ad790e2b886eeee, type: 2}
   title: 
   info: 
   eBegin:
@@ -22,6 +22,4 @@ MonoBehaviour:
   eEnd:
     m_PersistentCalls:
       m_Calls: []
-  icon: {fileID: 21300000, guid: 4121d18f7ac0ffc4bb764a5c931c1fd2, type: 3}
-  cursorHints: []
-  cost: 0
+  addBuff: {fileID: 11400000, guid: bbe3c03ab551e764f9a6c3966bcc0036, type: 2}

@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e3d779d22f32d94ba5875a1b0362960, type: 3}
-  m_Name: IceBulletAttack
+  m_Script: {fileID: 11500000, guid: 417f6b51ad7696745aa31a95963882d2, type: 3}
+  m_Name: AIFireBall
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   skillVFX: {fileID: 11400000, guid: 682496960e3a7a84b835dc5e6d2b8909, type: 2}
@@ -22,7 +22,11 @@ MonoBehaviour:
   eEnd:
     m_PersistentCalls:
       m_Calls: []
-  maxLength: 7
+  maxLength: -1
   damage: 1
-  beginDistance: 2
-  element: 1
+  beginDistance: 1
+  element: 0
+  willLockTarget: 1
+  willRetarget: 0
+  affectRange: 0
+  attackType: 0

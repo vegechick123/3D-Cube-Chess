@@ -9,4 +9,9 @@ public class Damp : Modifier
         base.OnPassFloor(floor);
         ElementSystem.ApplyElementAtAsync(floor.location, Element.Water);
     }
+    public override void OnPlayerTurn()
+    {
+        base.OnPlayerTurn();
+        EndModifier();
+    }
 }

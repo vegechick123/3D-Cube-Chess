@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(menuName = "Skill/AIPreSkill/AIPrePathBullet")]
-public class AIPrePathBullet : AIPreSkill
+public class SAIPrePathBullet : AIPreSkill
 {
     public Element element;
     public async override UniTask ProcessAsync(GChess target)
@@ -19,7 +19,7 @@ public class AIPrePathBullet : AIPreSkill
             }
         });
         await Shoot(targetLocation, vfxObserver);
-        target.AddModifier(CreateInstance<Damp>());
+        target.AddModifier(CreateInstance<Damp>(),owner);
         await ElementSystem.ApplyElementAtAsync(targetLocation, element);
     }
 }
