@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 417f6b51ad7696745aa31a95963882d2, type: 3}
-  m_Name: SpiderAttack
+  m_Name: CloseAttack
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   skillVFX: {fileID: 11400000, guid: cfae9387aec878445ad790e2b886eeee, type: 2}
@@ -27,6 +27,5 @@ MonoBehaviour:
   beginDistance: 1
   element: 5
   willLockTarget: 0
-  willRetarget: 0
   affectRange: 0
   attackType: 0

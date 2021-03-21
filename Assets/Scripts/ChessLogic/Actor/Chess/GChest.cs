@@ -10,10 +10,14 @@ public class GChest : GChess
     public int roundCount;
     public List<PlayerSkill> storeSkills;
     public SkillVFX chestSkillVFX;
-    bool complete;
+    public bool complete;
     ChestSkill chestSkill;
     [NonSerialized]
     public UnityEvent eOpen = new UnityEvent();
+    public bool canOpen
+    {
+        get { return !complete; }
+    }
     protected override void Awake()
     {
         base.Awake();
@@ -27,7 +31,7 @@ public class GChest : GChess
     }
     public void Close()
     {
-
+        complete = true;
     }
     async public UniTask AssignSkill(PlayerSkill skill, GPlayerChess target, PlayerSkill replaceSkill)
     {

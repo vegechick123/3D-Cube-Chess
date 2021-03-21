@@ -121,4 +121,15 @@ public class CAICompoment : Component
         aiChess.location = originLocation;
         return null;
     }
+    public List<GChess> GetPotentialTarget()
+    {
+        List<GChess> allTargets = GridManager.instance.GetChesses(aiChess.targetTeam).ToList();
+        allTargets.RemoveAll((t) =>
+        {
+            bool result = false;
+            result |= (t as GChest).canOpen;
+            return result;
+        });
+        return allTargets;
+    }
 }

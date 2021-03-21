@@ -7,12 +7,12 @@ public class AISpecificTarget : AIPreferTargetModifier
     public int effectiveRoundCount = -1;
     public List<int> speceficTargetID;
     public List<Vector2Int> speceficLocationOffset;
-    public override GChess[] GetPreferTarget()
+    public override List<GChess> GetPreferTarget()
     {
         GChess[] result = new GChess[speceficTargetID.Count];
         for (int i = 0; i < result.Length; i++)
             result[i] = AIManager.instance.GetSpeceficTarget(speceficTargetID[i]);
-        return result;
+        return new List<GChess>(result);
     }
     public override Vector2Int[] GetPreferLocation(GChess target)
     {

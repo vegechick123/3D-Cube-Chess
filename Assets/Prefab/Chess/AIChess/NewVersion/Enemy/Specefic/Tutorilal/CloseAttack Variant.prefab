@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enable: 1
   effectiveRoundCount: 3
-  speceficTargetID: 00000000
+  speceficTargetID: 0000000001000000
   speceficLocationOffset:
   - {x: 1, y: 0}
 --- !u!1001 &4750033391789027529

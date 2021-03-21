@@ -5,9 +5,9 @@ using UnityEngine;
 public abstract class AIPreferTargetModifier : MonoBehaviour
 {
     public bool enable=true; 
-    public virtual GChess[] GetPreferTarget()
+    public virtual List<GChess> GetPreferTarget()
     {
-        return new GChess[0];
+        return new List<GChess>();
     }
     public virtual Vector2Int[] GetPreferLocation(GChess target)
     {

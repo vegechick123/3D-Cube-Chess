@@ -30,4 +30,5 @@ public class AIManager : SingletonMonoBehaviour<AIManager>
             ai.aiChess.RefreshLockState();
         }
     }
+    
 }

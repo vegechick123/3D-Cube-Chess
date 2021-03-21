@@ -47,7 +47,6 @@ public class GChess : GActor
     [NonSerialized]
     public Outline outline;
 
-    public GameObject deathParticle;
 
     public HealthBar healthBar;
     protected bool waitShoot;
@@ -118,8 +117,6 @@ public class GChess : GActor
     {
         render.GetComponent<Animator>().Play("Death");
         bDead = true;
-        if (deathParticle != null)
-            GridExtensions.CreateParticleAt(deathParticle, this);
         GridManager.instance.RemoveChess(this);
         eDie.Invoke();
         foreach (Modifier modifier in modifiers)
