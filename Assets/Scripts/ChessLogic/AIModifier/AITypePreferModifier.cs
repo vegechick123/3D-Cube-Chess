@@ -12,12 +12,13 @@ public class AITypePreferModifier : AIPreferTargetModifier
     public PreferType preferType;
     public override List<GChess> GetPreferTarget()
     {
+        List<GChess> res;
         switch (preferType)
         {
             case PreferType.Chest:
-                List<GChess> t = new List<GChess>();
-                t.AddRange(GridManager.instance.chests.FindAll((t) => t.complete));
-                return t;
+                res = new List<GChess>();
+                res.AddRange(GridManager.instance.chests.FindAll((t) => t.complete));
+                return res;
             case PreferType.PlayerChess:
                 
                 break;

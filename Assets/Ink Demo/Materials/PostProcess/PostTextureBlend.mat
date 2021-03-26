@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PostTextureBlend
+  m_Shader: {fileID: 4800000, guid: d62b3f93c2c813944a6e13743c648b96, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BlendTexture:
+        m_Texture: {fileID: 2800000, guid: 88c659da9503e024cae7679b84f0e34c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _BlendStrength: 1
+    m_Colors:
+    - _PaperBrightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _PaperColor: {r: 1, g: 1, b: 1, a: 1}
+    - _PaperDarkColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}

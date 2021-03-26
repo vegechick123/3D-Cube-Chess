@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bottom
+  m_Shader: {fileID: -6465566751694194690, guid: 486000b05c3276f44b20cee97f9a0d86,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_4ED9CC0:
+        m_Texture: {fileID: 10307, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_55082786:
+        m_Texture: {fileID: 2800000, guid: 88c659da9503e024cae7679b84f0e34c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_77D1F83E:
+        m_Texture: {fileID: 2800000, guid: 88c659da9503e024cae7679b84f0e34c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_89F3E058:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_DD15F5E7:
+        m_Texture: {fileID: 2800000, guid: 884b8d77ba6ef314ca80f3ebafd0a980, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightShadowNoise:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_1B0D38ED_Out_0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_5091AD65_Out_0:
+        m_Texture: {fileID: 2800000, guid: 88c659da9503e024cae7679b84f0e34c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - LightShadowStrength: 0.77
+    - Vector1_65D35E9E: 1
+    - Vector1_6B3CDD35: 1
+    - Vector1_6B72C9DA: 1
+    - Vector1_D292C1AF: 0
+    - Vector1_DC623760: 0.15
+    - _InkStrength: 0.437
+    - _LightShadowStrength: 0
+    - _ShadowNoiseStrength: 0
+    m_Colors:
+    - Color_13F33E4D: {r: 0, g: 0, b: 0, a: 0}
+    - Color_AD4A155A: {r: 0, g: 0, b: 0, a: 0}
+    - Color_F826B84: {r: 0.8584906, g: 0.59527415, b: 0.59527415, a: 0}
+    - _InkSize: {r: 1, g: 1, b: 0, a: 0}
+    - _LightDir: {r: -0.5, g: -0.86, b: 0, a: 0}
