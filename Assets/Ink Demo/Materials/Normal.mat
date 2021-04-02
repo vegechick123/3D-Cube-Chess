@@ -57,12 +57,12 @@ Material:
     - Vector1_65D35E9E: 0.6
     - Vector1_6B3CDD35: 1
     - Vector1_6B72C9DA: 1
-    - Vector1_D292C1AF: 0.5
+    - Vector1_D292C1AF: 0
     - Vector1_DC623760: 0.15
-    - _InkFallOff: 0.279
-    - _InkStrength: 0.97
+    - _InkFallOff: 0.469
+    - _InkStrength: 0.83
     - _LightShadowStrength: 0
-    - _ShadowNoiseStrength: 0
+    - _ShadowNoiseStrength: 0.499
     m_Colors:
     - Color_13F33E4D: {r: 0, g: 0, b: 0, a: 0}
     - Color_AD4A155A: {r: 1, g: 0.111830756, b: 0, a: 0}
