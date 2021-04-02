@@ -59,8 +59,8 @@ Material:
     - Vector1_6B72C9DA: 1
     - Vector1_D292C1AF: 0.4
     - Vector1_DC623760: 0.15
-    - _InkFallOff: 0.5
-    - _InkStrength: 1.61
+    - _InkFallOff: 0
+    - _InkStrength: 1.5
     - _LightShadowStrength: 0
     - _ShadowNoiseStrength: 0
     m_Colors:
