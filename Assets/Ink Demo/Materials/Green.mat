@@ -61,14 +61,14 @@ Material:
     - Vector1_DC623760: 0.15
     - _InkFallOff: 0.5
     - _InkStrength: 1
-    - _LightShadowStrength: 0.27
+    - _LightShadowStrength: 0.462
     - _ShadowNoiseStrength: 1
     m_Colors:
     - Color_13F33E4D: {r: 0, g: 0, b: 0, a: 0}
     - Color_AD4A155A: {r: 0.05660379, g: 0.05660379, b: 0.05660379, a: 0}
     - Color_F826B84: {r: 0.88831484, g: 1, b: 0.8349056, a: 0}
-    - _BackGroundColor: {r: 0.4720541, g: 0.735849, b: 0.569589, a: 0}
-    - _InkColor: {r: 0.28195086, g: 0.4528302, b: 0.3246707, a: 0}
+    - _BackGroundColor: {r: 0.7372549, g: 0.72085464, b: 0.47058824, a: 0}
+    - _InkColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 0}
     - _InkSize: {r: 0.1, g: 0.1, b: 0, a: 0}
     - _LightDir: {r: -1.22, g: 2.19, b: 0.2, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
