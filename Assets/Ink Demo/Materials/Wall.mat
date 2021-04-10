@@ -70,8 +70,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Boolean_EE118A8F: 0
     - Vector1_65D35E9E: 1
-    - Vector1_6B3CDD35: 1
+    - Vector1_6B3CDD35: 9.14
     - Vector1_D292C1AF: 0
     - _AlphaClip: 0
     - _Blend: 0
@@ -83,14 +84,14 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _InkFallOff: 0.658
-    - _InkStrength: 1
-    - _LightShadowStrength: 0.166
+    - _InkFallOff: 0.65
+    - _InkStrength: 0.97
+    - _LightShadowStrength: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _ShadowNoiseStrength: 0
+    - _ShadowNoiseStrength: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -99,11 +100,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
+    - _BackGroundColor: {r: 0.894, g: 0.88348234, b: 0.8344, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _InkColor: {r: 0, g: 0, b: 0, a: 0}
+    - _InkTileAndOffset: {r: 1, g: 1, b: 1.07, a: -0.07}
     - _LightDir: {r: 0, g: 1, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

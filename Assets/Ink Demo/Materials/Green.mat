@@ -53,11 +53,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Boolean_EE118A8F: 0
     - LightShadowStrength: 0.18
     - Vector1_65D35E9E: 1
     - Vector1_6B3CDD35: 4.37
     - Vector1_6B72C9DA: 1
-    - Vector1_D292C1AF: 0.4
+    - Vector1_D292C1AF: 0.3
     - Vector1_DC623760: 0.15
     - _InkFallOff: 0.5
     - _InkStrength: 1
@@ -70,5 +71,6 @@ Material:
     - _BackGroundColor: {r: 0.7372549, g: 0.72085464, b: 0.47058824, a: 0}
     - _InkColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 0}
     - _InkSize: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - _InkTileAndOffset: {r: 1, g: 1, b: 0, a: 0}
     - _LightDir: {r: -1.22, g: 2.19, b: 0.2, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
