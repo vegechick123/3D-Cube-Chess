@@ -57,6 +57,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Boolean_EE118A8F: 0
     - Vector1_65D35E9E: 1
     - Vector1_6B3CDD35: 1
     - Vector1_D292C1AF: 0.5
@@ -86,11 +87,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BackGroundColor: {r: 0.41509432, g: 0.41509432, b: 0.41509432, a: 0}
+    - _BackGroundColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _InkColor: {r: 0, g: 0, b: 0, a: 0}
+    - _InkTileAndOffset: {r: 3.69, g: 1.43, b: 0.81, a: 0}
     - _LightDir: {r: 0, g: 1, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
